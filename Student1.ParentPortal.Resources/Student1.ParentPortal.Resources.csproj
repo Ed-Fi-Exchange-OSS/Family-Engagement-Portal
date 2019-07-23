@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83DE7B70-2FEA-4A7B-B8A6-587107F0C511}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Student1.ParentPortal.Resources</RootNamespace>
+    <AssemblyName>Student1.ParentPortal.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\NoCacheAttribute.cs" />
+    <Compile Include="ExtensionMethods\EmailExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\ArrayExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\DateExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\OperatorComparrisonExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\TypeExtensionMethods.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\Alerts\AdaAbsencesThresholdAlertProvider.cs" />
+    <Compile Include="Providers\Alerts\UnreadMessagesAlertProvider.cs" />
+    <Compile Include="Providers\Alerts\CourseThresholdAlertProvider.cs" />
+    <Compile Include="Providers\Alerts\BehaviorThresholdAlertProvider.cs" />
+    <Compile Include="Providers\Alerts\AssignmentThresholdAlertProvider.cs" />
+    <Compile Include="Providers\Alerts\AbsencesThresholdAlertProvider.cs" />
+    <Compile Include="Providers\Alerts\IAlertProvider.cs" />
+    <Compile Include="Providers\Cache\InMemoryCacheProvider.cs" />
+    <Compile Include="Providers\Cache\ICacheProvider.cs" />
+    <Compile Include="Providers\ClassPeriodName\CoreClassPeriodNameProvider.cs" />
+    <Compile Include="Providers\ClassPeriodName\IClassPeriodNameProvider.cs" />
+    <Compile Include="Providers\ClassPeriodName\YesPrepClassPeriodNameProvider.cs" />
+    <Compile Include="Providers\Configuration\ApplicationSettingsProvider.cs" />
+    <Compile Include="Providers\Configuration\CustomParametersProvider.cs" />
+    <Compile Include="Providers\Image\ConventionBasedImageProvider.cs" />
+    <Compile Include="Providers\Image\DemoImageProvider.cs" />
+    <Compile Include="Providers\Image\IImageProvider.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentImageAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentFeedbackAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherImageAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherCommunicationsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentCommunicationsAccessValidator.cs" />
+    <Compile Include="Providers\Messaging\ISMSMessagingProvider.cs" />
+    <Compile Include="Providers\Messaging\SMSMessagingProvider.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentAlertsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherCustomParametersAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentCustomParametersAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentTranslateAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherFeedbackAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherTranslateAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentTypesAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherTypesAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherTeachersAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherMeAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentMeAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentParentsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\SecurityContext.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\ParentStudentAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\TeacherStudentAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\IRoleResourceAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\RoleResourceValidator.cs" />
+    <Compile Include="Providers\Security\IIdentityProvider.cs" />
+    <Compile Include="Providers\Security\StaffIdeintityProvider.cs" />
+    <Compile Include="Providers\Security\ParentIdeintityProvider.cs" />
+    <Compile Include="Providers\Date\DemoDateProvider.cs" />
+    <Compile Include="Providers\Date\DateProvider.cs" />
+    <Compile Include="Providers\Date\IDateProvider.cs" />
+    <Compile Include="Providers\Translation\AzureTransaltionProvider.cs" />
+    <Compile Include="Providers\Translation\ITranslationProvider.cs" />
+    <Compile Include="Providers\Url\UrlProvider.cs" />
+    <Compile Include="Resources_Marker.cs" />
+    <Compile Include="Services\Alerts\AlertService.cs" />
+    <Compile Include="Services\Alerts\IAlertService.cs" />
+    <Compile Include="Providers\Security\DatabaseIdentityProvider.cs" />
+    <Compile Include="Providers\Messaging\EmailMessagingProvider.cs" />
+    <Compile Include="Providers\Messaging\IMessagingProvider.cs" />
+    <Compile Include="Services\Application\ApplicationService.cs" />
+    <Compile Include="Services\Communications\CommunicationsService.cs" />
+    <Compile Include="Services\Feedback\FeedbackService.cs" />
+    <Compile Include="Services\Parents\ParentsService.cs" />
+    <Compile Include="Services\SpotlightIntegrations\SpotlightIntegrationsService.cs" />
+    <Compile Include="Services\Teachers\TeachersService.cs" />
+    <Compile Include="Services\Students\StudentAssessmentService.cs" />
+    <Compile Include="Services\Students\StudentAssignmentService.cs" />
+    <Compile Include="Services\Students\StudentAttendanceService.cs" />
+    <Compile Include="Services\Students\StudentGraduationReadinessService.cs" />
+    <Compile Include="Services\Students\StudentBehaviorService.cs" />
+    <Compile Include="Services\Students\StudentCourseGradesService.cs" />
+    <Compile Include="Services\Students\StudentIndicatorService.cs" />
+    <Compile Include="Services\Students\StudentProgramService.cs" />
+    <Compile Include="Services\Students\StudentScheduleService.cs" />
+    <Compile Include="Services\Students\StudentsService.cs" />
+    <Compile Include="Services\Students\StudentSuccessTeamService.cs" />
+    <Compile Include="Services\Types\AddressTypesService.cs" />
+    <Compile Include="Services\Types\ElectronicMailTypesService.cs" />
+    <Compile Include="Services\Types\StateAbbreviationTypesService.cs" />
+    <Compile Include="Services\Types\MethodOfContactTypesService.cs" />
+    <Compile Include="Services\Types\TextMessageCarrierTypesService.cs" />
+    <Compile Include="Services\Types\TelephoneNumberTypesService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Student1.ParentPortal.Data\Student1.ParentPortal.Data.csproj">
+      <Project>{C3D8CCC7-8B36-4264-A087-25523E9CD739}</Project>
+      <Name>Student1.ParentPortal.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Student1.ParentPortal.Models\Student1.ParentPortal.Models.csproj">
+      <Project>{caecc2a8-96cd-4a7f-9085-abc5a98feef7}</Project>
+      <Name>Student1.ParentPortal.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

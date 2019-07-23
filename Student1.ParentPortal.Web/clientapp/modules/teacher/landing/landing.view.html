@@ -1,0 +1,44 @@
+﻿<main role="main" class="container">
+    <h1>{{'view.teacher.landing.title'  | translate}}, <span>{{'view.teacher.landing.subtitle' | translate}}</span></h1>
+    
+
+    <div class="card">
+        <div class="card-body">
+            <h4>{{'Filters'  | translate}}</h4>
+            <form>
+                <div class="row m-b-10">
+                    <div class="col-12 col-lg-4">
+                        <div class="form-group">
+                            <label for="studentNameInputs">{{'Student Name'  | translate}}: </label>
+                            <input ng-model="ctrl.search.name" type="text" class="form-control text-right" id="studentNameInputs">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="form-group">
+                            <label for="sectionsSelect"> {{'Sections'  | translate}}: </label>
+                            <select class="form-control" name="repeatSelect" id="sectionsSelect"
+                                    ng-model="ctrl.selectedSection"
+                                    ng-options="item as ( (item.localCourseCode? item.localCourseCode +  ' - ' : '') + item.courseTitle +  (item.classPeriodName ? ' (' + item.classPeriodName + ') ' : ' ')) for item in ctrl.sections"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-lg-4">
+                        <label for="sectionsSelect"> {{'Order by'  | translate}}: </label>
+                        <select class="form-control"
+                                ng-model="ctrl.selectedOrder"
+                                ng-change="ctrl.orderBy.sortBy();"
+                                ng-options="item as (item.displayName + ': ' + item.displayOrder) for item in ctrl.orderBy.properties"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group-append p-10 f-s-25 d-flex justify-content-center align-items-center btn btn-fill-search" ng-click="ctrl.getTeacherStudents()">
+                            <span>{{'Search' | translate }}</span><i class="ion ion-md-search"></i>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <span ng-if="ctrl.model.length>0">{{'Students' | translate }}: {{ctrl.model.length}}</span>
+    <student-card-grid model="ctrl.model" search="ctrl.search" orderby="ctrl.orderBy.expression"></student-card-grid>
+</main>

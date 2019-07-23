@@ -1,0 +1,30 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h4>Grades <span> transcript</span></h4>
+        <div class="table-responsive" ng-repeat="term in ctrl.model.transcript">
+            <h5 class="label label-pill label-primary">{{term.schoolYearTaken}} - {{term.gradeLevelTaken}} ({{term.sessionName}})</h5>
+            <table class="table table-xs">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Subject</th>
+                        <th style="min-width: 140px;">Grade Level</th>
+                        <th class="text-center">Credits Earned</th>
+                        <th class="text-center">Letter Grade</th>
+                        <th class="text-center">Numeric Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in term.courses">
+                        <td><div tooltip-placement="bottom" uib-tooltip="{{c.courseCode}}">{{c.courseTitle}}</div></td>
+                        <td>{{c.academicSubjectDescription}}</td>
+                        <td>{{c.gradeLevelTaken}}</td>
+                        <td class="text-center">{{c.creditsEarned}}</td>
+                        <td class="text-center">{{c.finalLetterGradeEarned}}</td>
+                        <td class="text-center">{{c.finalNumericGradeEarned}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

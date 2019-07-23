@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C3D8CCC7-8B36-4264-A087-25523E9CD739}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Student1.ParentPortal.Data</RootNamespace>
+    <AssemblyName>Student1.ParentPortal.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\EdFi25\AlertRepository.cs" />
+    <Compile Include="Models\EdFi25\ApplicationRepository.cs" />
+    <Compile Include="Models\EdFi25\CommunicationsRepository.cs" />
+    <Compile Include="Models\EdFi25\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EdFi25\FeedbackRepository.cs" />
+    <Compile Include="Models\EdFi25\ParentRepository.cs" />
+    <Compile Include="Models\EdFi25\StudentRepository.cs" />
+    <Compile Include="Models\EdFi25\StaffRepository.cs" />
+    <Compile Include="Models\EdFi25\ImageRepository.cs" />
+    <Compile Include="Models\EdFi25\SpotlightIntegrationRepository.cs" />
+    <Compile Include="Models\EdFi25\TypesRepository.cs" />
+    <Compile Include="Models\EdFi25\TeacherRepository.cs" />
+    <Compile Include="Models\EdFi31\ApplicationRepository.cs" />
+    <Compile Include="Models\EdFi31\AlertRepository.cs" />
+    <Compile Include="Models\EdFi31\CommunicationsRepository.cs" />
+    <Compile Include="Models\EdFi31\Database.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\EdFi31\FeedbackRepository.cs" />
+    <Compile Include="Models\EdFi31\ParentRepository.cs" />
+    <Compile Include="Models\EdFi31\SpotlightIntegrationRepository.cs" />
+    <Compile Include="Models\EdFi31\StaffRepository.cs" />
+    <Compile Include="Models\EdFi31\StudentRepository.cs" />
+    <Compile Include="Models\EdFi31\ImageRepository.cs" />
+    <Compile Include="Models\EdFi31\TypesRepository.cs" />
+    <Compile Include="Models\EdFi31\TeacherRepository.cs" />
+    <Compile Include="Models\IApplicationRepository.cs" />
+    <Compile Include="Models\IAlertRepository.cs" />
+    <Compile Include="Models\ICommunicationsRepository.cs" />
+    <Compile Include="Models\IFeedbackRepository.cs" />
+    <Compile Include="Models\ITeacherRepository.cs" />
+    <Compile Include="Models\IImageRepository.cs" />
+    <Compile Include="Models\ISpotlightIntegrationRepository.cs" />
+    <Compile Include="Models\ITypesRepository.cs" />
+    <Compile Include="Models\IStudentRepository.cs" />
+    <Compile Include="Models\IStaffRepository.cs" />
+    <Compile Include="Models\IParentRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources_Marker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Models\EdFi25\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="Models\EdFi25\EF.Reverse.POCO.ttinclude" />
+    <None Include="Models\EdFi31\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="Models\EdFi31\EF.Reverse.POCO.ttinclude" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\EdFi25\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EdFi31\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\EdFi25\1CreateParentPortalSupportingDatabaseSchema.sql" />
+    <Content Include="Scripts\EdFi25\2ODSExtensions.sql" />
+    <Content Include="Scripts\edFi31\1CreateParentPortalSupportingDatabaseSchema.sql" />
+    <Content Include="Scripts\edFi31\2ODSExtensions.sql" />
+    <Content Include="Scripts\edFi31\98Parent Portal QA Scripts.sql" />
+    <Content Include="Scripts\edFi31\99SampleDataNeededForDemo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Student1.ParentPortal.Models\Student1.ParentPortal.Models.csproj">
+      <Project>{caecc2a8-96cd-4a7f-9085-abc5a98feef7}</Project>
+      <Name>Student1.ParentPortal.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

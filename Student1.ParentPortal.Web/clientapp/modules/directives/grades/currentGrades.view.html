@@ -1,0 +1,67 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">{{'view.currentGrades.title' | translate}} <span>{{'view.currentGrades.subtitle' | translate}}</span></h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered grade-table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{'Course' | translate}}</th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.gp1' | translate}}">{{'view.currentGrades.gp1.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.gp2' | translate}}">{{'view.currentGrades.gp2.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.gp3' | translate}}">{{'view.currentGrades.gp3.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.ex1' | translate}}">{{'view.currentGrades.ex1.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.s1' | translate}}">{{'view.currentGrades.s1.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.gp4' | translate}}">{{'view.currentGrades.gp4.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.gp5' | translate}}">{{'view.currentGrades.gp5.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.gp6' | translate}}">{{'view.currentGrades.gp6.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.ex2' | translate}}">{{'view.currentGrades.ex2.abbr' | translate}}</div></th>
+                        <th scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.s2' | translate}}">{{'view.currentGrades.s2.abbr' | translate}}</div></th>
+                        <th ng-if="ctrl.hasFinalGrade()" scope="col" class="text-center"><div tooltip-placement="bottom" uib-tooltip="{{'view.currentGrades.finalGrade' | translate}}">{{'view.currentGrades.finalGrade.abbr' | translate}}</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in ctrl.model.currentCourses">
+                        <td>
+                            <div>{{c.classPeriodName}} - {{c.courseTitle}}</div>
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="image-container w-30px h-30px m-r-10">
+                                    <img ng-src="{{c.imageUrl}}" alt="">
+                                </div>
+                                <a ui-sref="app.communications({studentUsi: ctrl.studentUsi, recipientUniqueId: c.staffUniqueId, recipientTypeId: c.personTypeId})"> {{c.teacherName}} <i class="ion ion-md-chatboxes"></i></a>
+                            </div>
+                        </td>
+                        <td ng-repeat="g in c.gradesByGradingPeriod | limitTo:3" class="text-center">
+                            {{g.numericGradeEarned}} <br>
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + g.gradeInterpretation" model="g.gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                        <td class="text-center">
+                            <b>{{c.gradesByExam[0].numericGradeEarned}}</b> <br>
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + c.gradesByExam[0].gradeInterpretation" model="c.gradesByExam[0].gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                        <td class="text-center">
+                            <b>{{c.gradesBySemester[0].numericGradeEarned}}</b> <br>
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + c.gradesBySemester[0].gradeInterpretation" model="c.gradesBySemester[0].gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                        <td ng-repeat="g in c.gradesByGradingPeriod | limitTo:3:3" class="text-center">
+                            {{g.numericGradeEarned}}
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + g.gradeInterpretation" model="g.gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                        <td class="text-center">
+                            <b>{{c.gradesByExam[1].numericGradeEarned}}</b> <br>
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + c.gradesByExam[1].gradeInterpretation" model="c.gradesByExam[1].gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                        <td class="text-center">
+                            <b>{{c.gradesBySemester[1].numericGradeEarned}}</b> <br>
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + c.gradesBySemester[1].gradeInterpretation" model="c.gradesBySemester[1].gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                        <td class="text-center" ng-if="c.gradesByFinal.length > 0">
+                            {{c.gradesByFinal[0].numericGradeEarned}} <br>
+                            <interpretation-icon fontclass="f-s-25 border-0" tooltip-text="'view.studentDetail.grades.interpretation.' + c.gradesByFinal[0].gradeInterpretation" model="c.gradesByFinal[0].gradeInterpretation" types="ctrl.gradeThresholdTypes"></interpretation-icon>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="float-right mr-2" title="{{ctrl.model.externalLink.title}}" target="_blank" href="{{ctrl.model.externalLink.url}}">{{ctrl.model.externalLink.linkText}}</a>
+    </div>
+</div>

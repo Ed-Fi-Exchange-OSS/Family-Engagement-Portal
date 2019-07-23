@@ -1,0 +1,8 @@
+﻿<div class="btn-group dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tooltip-placement="bottom" uib-tooltip="{{'Choose a language' | translate}}">
+        <span class="flag-icon" ng-class="'flag-icon-'+ctrl.model.currentLang"></span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button" ng-repeat="l in ctrl.model.languages" ng-class="{'active':l.active}" ng-click="ctrl.changeLocale(l.id)"><span class="flag-icon m-r-10" ng-class="'flag-icon-'+l.flag"></span> {{l.language}}</button>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿
+    <table style="width: 100%; font-family: Arial;font-size: 13px;color: #555;background-color: #eeeeee;">
+        <tbody>
+            <tr>
+                <td style="padding:20px 0 30px 0">
+                    <table align="center" style="width:600px;">
+                        <tbody>
+                            <tr><td style="background-color:#dd4b39; height:15px;"></td></tr>
+                            <tr>
+                                <td style="background-color:#ffffff; padding:5px 20px">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="middle">
+                                                    <a style="color:#0084b4;text-decoration:none" href="{{StudentDetailUrl}}" title="Parent Portal" target="_blank">
+                                                        <img style="display:block; height:50px;" alt="logo" src="http://www.yesprep.org/sites/default/files/yesretinalogo.png">
+                                                    </a>
+                                                </td>
+                                                <td style="text-align:right" valign="middle">
+                                                    <a style="text-decoration:none; color:#ffffff; padding:6px 20px; border-radius:15px; display:inline-block; text-align:center; border:1px solid rgba(0,0,0,.1); background-color:#dd4b39;" href="{{StudentDetailUrl}}" title="Learn more" target="_blank"><span>Parent Portal</span> Alert</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color:#f9f9f9">
+                                    <h2 style="color:#666; text-align:center; margin:40px 80px; line-height:1.5em">
+                                        {{StudentAlertMessage}}
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color:#ffffff; padding:20px 20px 40px 20px">
+                                    <table style="width:100%; text-align:left; border-spacing:0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight:normal; padding:12px; vertical-align:middle; border-bottom:none; border-bottom-color:transparent">
+                                                    <a style="color:#0084b4;text-decoration:none" title="Go to the student detail" href="{{StudentDetailUrl}}" target="_blank">
+                                                        <img style="width:90px; border-radius: 50%!important;" src="{{StudentImageUrl}}">
+                                                    </a>
+                                                </td>
+                                                <td style="font-weight:normal;font-size: 13px;padding:12px;vertical-align:middle;border-bottom:none;width:100%;padding-left:0">
+                                                    <a style="color:#0084b4;text-decoration:none;font-weight:bold" title="Go to the student detail" href="{{StudentDetailUrl}}" target="_blank">
+                                                        {{StudentFullName}}
+                                                    </a>
+                                                    <span style="color:#777;display:block;margin-top:5px">#{{StudentLocalId}}</span>
+                                                </td>
+                                                <td style="font-weight:bold;font-size: 13px;padding:12px;vertical-align:middle;text-align:center;border-bottom:none;padding-right:20px; min-width:200px;">
+                                                    {{MetricTitle}}
+                                                    <span style="white-space:nowrap;color:#777;display:block;margin-top:5px" title="{{MetricValue}}">{{MetricValue}}</span>
+                                                </td>
+
+                                                <td style="text-align:right;font-weight:normal;padding:12px;vertical-align:middle;border-bottom:none">
+                                                    <a style="color:#555;text-decoration:none;padding:6px 12px;border-radius:2px;display:inline-block;text-align:center;border:1px solid rgba(0,0,0,.1);white-space:nowrap;background:#f9f9f9" title="Go to the student detail" href="{{StudentDetailUrl}}" target="_blank">
+                                                        ≫
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!--<h3 style="margin-top:25px">Why is this important?</h3>
+                                    If your student does not attend school they are not learning.-->
+                                    <h3 style="margin-top:20px;">What can I do as a parent?</h3>
+                                    {{WhatCanParentDo}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color:#ffffff; text-align:center;padding:40px; border-top:1px solid #eee">
+                                    <a style="color:#ffffff; text-decoration:none;padding:16px 20px;border-radius:4px;display:inline-block;text-align:center;border:1px solid rgba(0,0,0,.1);background-color:#dd4b39;font-size:1.1em" href="{{StudentDetailUrl}}" target="_blank">
+                                        Learn more in the <b>Parent Portal</b>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center; color:#333; padding:20px; background-color:#eeeeee">
+                                    <p style="color:#777;font-size:.9em">
+                                        This email was sent by <span>The Parent Portal</span> at Yes Prep Public Schools
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>

@@ -1,0 +1,1088 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CC99D6E0-0C81-40ED-870B-89CFCAD6146A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Student1.ParentPortal.Web</RootNamespace>
+    <AssemblyName>Student1.ParentPortal.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack, Version=1.7.3.4, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.1.7.3.4\lib\net47\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Connections.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Connections.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Connections.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Connections.Client.1.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Connections.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Connections.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Connections.Common.1.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Connections.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.SignalR.AspNet, Version=1.0.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.SignalR.AspNet.1.0.10\lib\net461\Microsoft.Azure.SignalR.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.SignalR.Common, Version=1.0.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.SignalR.AspNet.1.0.10\lib\net461\Microsoft.Azure.SignalR.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.SignalR.Protocols, Version=1.0.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.SignalR.Protocols.1.0.10\lib\netstandard2.0\Microsoft.Azure.SignalR.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.TraceSource, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.TraceSource.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.TraceSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.4.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.4.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.5.4.0\lib\net461\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.5.4.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.WsFederation, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.WsFederation.5.2.0\lib\net451\Microsoft.IdentityModel.Protocols.WsFederation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.4.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens.Saml, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.Saml.5.2.1\lib\net451\Microsoft.IdentityModel.Tokens.Saml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Xml, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Xml.5.2.1\lib\net451\Microsoft.IdentityModel.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.ActiveDirectory, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.ActiveDirectory.4.0.0\lib\net451\Microsoft.Owin.Security.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Jwt.4.0.0\lib\net451\Microsoft.Owin.Security.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.WebApi, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.WebApi.4.3.0\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.4.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.4.5.0\lib\netstandard2.0\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.4.5.0\lib\netstandard2.0\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.6\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.6\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.6\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="clientapp\app.config.js" />
+    <Content Include="clientapp\app.js" />
+    <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-2.png" />
+    <Content Include="clientapp\assets\img\demo\student\Female-Black_-_African_American-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\Female-Black_-_African_American-2.png" />
+    <Content Include="clientapp\assets\img\demo\student\Female-Native_Hawaiian_-_Pacific_Islander-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\Female-Native_Hawaiian_-_Pacific_Islander-2.png" />
+    <Content Include="clientapp\assets\img\demo\student\Female-White-2.png" />
+    <Content Include="clientapp\assets\img\demo\student\Male-American_Indian_-_Alaskan_Native-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\Male-American_Indian_-_Alaskan_Native-2.png" />
+    <Content Include="clientapp\assets\img\demo\student\Male-Asian-2.png" />
+    <Content Include="clientapp\assets\img\demo\student\Male-Black_-_African_American-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\male-white-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\Male-White-1.png" />
+    <Content Include="clientapp\assets\img\demo\student\Male-White-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-American_Indian_-_Alaskan_Native-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-American_Indian_-_Alaskan_Native-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Asian-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Asian-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Black_-_African_American-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Black_-_African_American-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Native_Hawaiian_-_Pacific_Islander-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Native_Hawaiian_-_Pacific_Islander-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Other-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-Other-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Female-White-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\female-white-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-Asian-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-Asian-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-Black_-_African_American-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-Black_-_African_American-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-Native_Hawaiian_-_Pacific_Islander-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-Native_Hawaiian_-_Pacific_Islander-2.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\male-white-1.png" />
+    <Content Include="clientapp\assets\img\demo\teacher\Male-White-2.png" />
+    <Content Include="clientapp\assets\img\favicon.ico" />
+    <Content Include="clientapp\assets\img\logo.png" />
+    <Content Include="clientapp\assets\img\profile-default.png" />
+    <Content Include="clientapp\assets\img\student\1.png" />
+    <Content Include="clientapp\assets\img\student\female-african-american-hs-3.png" />
+    <Content Include="clientapp\assets\img\student\553.png" />
+    <Content Include="clientapp\assets\img\student\29.png" />
+    <Content Include="clientapp\assets\img\student\male-african-american-hs.png" />
+    <Content Include="clientapp\assets\img\teacher\1.png" />
+    <Content Include="clientapp\assets\img\teacher\16.png" />
+    <Content Include="clientapp\assets\img\teacher\269.png" />
+    <Content Include="clientapp\assets\img\teacher\40.png" />
+    <Content Include="clientapp\assets\img\teacher\68.png" />
+    <Content Include="clientapp\assets\img\teacher\60.png" />
+    <Content Include="clientapp\assets\img\teacher\881.png" />
+    <Content Include="clientapp\assets\img\teacher\893.png" />
+    <Content Include="clientapp\assets\img\teacher\female-african-american.png" />
+    <Content Include="clientapp\assets\img\teacher\female-indian.png" />
+    <Content Include="clientapp\assets\img\teacher\female-white-2.png" />
+    <Content Include="clientapp\assets\img\teacher\67.png" />
+    <Content Include="clientapp\assets\img\teacher\female-white-4.png" />
+    <Content Include="clientapp\assets\img\teacher\female-white-5.png" />
+    <Content Include="clientapp\assets\img\teacher\36.png" />
+    <Content Include="clientapp\assets\img\teacher\38.png" />
+    <Content Include="clientapp\assets\img\teacher\female-white.png" />
+    <Content Include="clientapp\assets\img\teacher\63.png" />
+    <Content Include="clientapp\assets\img\teacher\58.png" />
+    <Content Include="clientapp\assets\img\teacher\59.png" />
+    <Content Include="clientapp\assets\img\teacher\54.png" />
+    <Content Include="clientapp\css\material-colors.css" />
+    <Content Include="clientapp\css\preloader.css" />
+    <Content Include="clientapp\css\StyleSheet.css" />
+    <Content Include="clientapp\languages\languages.module.js" />
+    <Content Include="clientapp\lib\angular-animate\angular-animate.js" />
+    <Content Include="clientapp\lib\angular-animate\angular-animate.min.js" />
+    <Content Include="clientapp\lib\angular-chart\angular-chart.min.js" />
+    <Content Include="clientapp\lib\angular-masonry\angular-masonry.js" />
+    <Content Include="clientapp\lib\angular-masonry\angular-masonry.min.js" />
+    <Content Include="clientapp\lib\angular-touch\angular-touch.min.js" />
+    <Content Include="clientapp\lib\angular-translate\angular-translate-storage-cookie.min.js" />
+    <Content Include="clientapp\lib\angular-translate\angular-translate-storage-local.min.js" />
+    <Content Include="clientapp\lib\angular-translate\angular-translate.min.js" />
+    <Content Include="clientapp\languages\en-us.js" />
+    <Content Include="clientapp\languages\es-mx.js" />
+    <Content Include="clientapp\lib\angular\angular-cookies.min.js" />
+    <Content Include="clientapp\lib\angular\angular-sanitize.min.js" />
+    <Content Include="clientapp\lib\angular\angular-ui-router.min.js" />
+    <Content Include="clientapp\lib\angular\angular.min.js" />
+    <Content Include="clientapp\lib\animate\animate.css" />
+    <Content Include="clientapp\lib\animate\animate.min.css" />
+    <Content Include="clientapp\lib\azureAD\adal-angular.js" />
+    <Content Include="clientapp\lib\azureAD\adal.js" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="clientapp\lib\chartjs\Chart.min.js" />
+    <Content Include="clientapp\lib\flag-icon-css\css\flag-icon.css" />
+    <Content Include="clientapp\lib\flag-icon-css\css\flag-icon.min.css" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ad.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ae.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\af.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ag.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ai.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\al.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\am.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ao.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\aq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ar.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\as.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\at.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\au.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\aw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ax.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\az.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ba.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\be.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\br.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bs.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\by.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\bz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ca.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ch.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ci.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ck.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\co.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cx.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\cz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\de.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\dj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\dk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\dm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\do.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\dz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ec.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ee.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\eg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\eh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\er.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\es-ct.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\es.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\et.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\eu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\fi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\fj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\fk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\fm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\fo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\fr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ga.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gb-eng.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gb-nir.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gb-sct.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gb-wls.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ge.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gs.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\gy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\hk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\hm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\hn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\hr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ht.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\hu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\id.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ie.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\il.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\im.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\in.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\io.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\iq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ir.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\is.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\it.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\je.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\jm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\jo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\jp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ke.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ki.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\km.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ky.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\kz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\la.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\li.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ls.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\lv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ly.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ma.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\md.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\me.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ml.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ms.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mx.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\my.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\mz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\na.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\nc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ne.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\nf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ng.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ni.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\nl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\no.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\np.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\nr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\nu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\nz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\om.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pa.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pe.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ph.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ps.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\pw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\py.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\qa.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\re.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ro.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\rs.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ru.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\rw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sa.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\se.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\si.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\so.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ss.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\st.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sx.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\sz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\td.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\th.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\to.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\tz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ua.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ug.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\um.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\un.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\us.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\uy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\uz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\va.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\vc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ve.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\vg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\vi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\vn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\vu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\wf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ws.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\xk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\ye.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\yt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\za.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\zm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\1x1\zw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ad.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ae.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\af.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ag.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ai.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\al.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\am.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ao.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\aq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ar.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\as.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\at.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\au.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\aw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ax.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\az.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ba.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\be.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\br.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bs.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\by.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\bz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ca.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ch.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ci.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ck.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\co.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cx.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\cz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\de.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\dj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\dk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\dm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\do.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\dz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ec.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ee.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\eg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\eh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\er.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\es-ct.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\es.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\et.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\eu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\fi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\fj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\fk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\fm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\fo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\fr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ga.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gb-eng.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gb-nir.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gb-sct.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gb-wls.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ge.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gs.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\gy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\hk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\hm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\hn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\hr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ht.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\hu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\id.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ie.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\il.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\im.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\in.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\io.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\iq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ir.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\is.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\it.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\je.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\jm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\jo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\jp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ke.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ki.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\km.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ky.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\kz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\la.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\li.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ls.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\lv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ly.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ma.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\md.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\me.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ml.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mo.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mp.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mq.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ms.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mx.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\my.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\mz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\na.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\nc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ne.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\nf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ng.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ni.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\nl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\no.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\np.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\nr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\nu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\nz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\om.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pa.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pe.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ph.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ps.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\pw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\py.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\qa.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\re.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ro.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\rs.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ru.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\rw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sa.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sb.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sd.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\se.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sh.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\si.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\so.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ss.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\st.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sx.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\sz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\td.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\th.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tj.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tl.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\to.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tr.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tv.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tw.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\tz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ua.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ug.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\um.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\un.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\us.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\uy.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\uz.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\va.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\vc.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ve.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\vg.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\vi.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\vn.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\vu.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\wf.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ws.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\xk.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\ye.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\yt.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\za.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\zm.svg" />
+    <Content Include="clientapp\lib\flag-icon-css\flags\4x3\zw.svg" />
+    <Content Include="clientapp\lib\imagesLoaded\imagesloaded.pkgd.min.js" />
+    <Content Include="clientapp\lib\jquery\jquery-3.3.1.min.js" />
+    <Content Include="clientapp\lib\masonry\masonry.pkgd.min.js" />
+    <Content Include="clientapp\lib\moment\angular-moment.min.js" />
+    <Content Include="clientapp\lib\moment\moment.min.js" />
+    <Content Include="clientapp\lib\popper\popper.min.js" />
+    <Content Include="clientapp\lib\shortcode\shortcode.min.css" />
+    <Content Include="clientapp\lib\toastr\toastr.min.css" />
+    <Content Include="clientapp\lib\toastr\toastr.min.js" />
+    <Content Include="clientapp\lib\ui-bootstrap\ui-bootstrap-tpls-3.0.6.min.js" />
+    <Content Include="clientapp\modules\alert\alert.module.js" />
+    <Content Include="clientapp\modules\alert\alert.view.html" />
+    <Content Include="clientapp\modules\directives\feedback\feedback.module.js" />
+    <Content Include="clientapp\modules\directives\feedback\feedback.view.html" />
+    <Content Include="clientapp\modules\directives\studentStaarAssessment\studentStaarAssessment.module.js" />
+    <Content Include="clientapp\modules\directives\studentStaarAssessment\studentStaarAssessment.view.html" />
+    <Content Include="clientapp\modules\filters\bold.filter.js" />
+    <Content Include="clientapp\modules\filters\recipientSearch.filter.js" />
+    <Content Include="clientapp\modules\privacypolicy\privacypolicy.module.js" />
+    <Content Include="clientapp\modules\privacypolicy\privacypolicy.view.html" />
+    <Content Include="clientapp\modules\directives\confirmButton\confirmButton.directive.js" />
+    <Content Include="clientapp\modules\directives\customOnChange\customOnChange.directive.js" />
+    <Content Include="clientapp\modules\directives\dataTable\dataTable.directive.js" />
+    <Content Include="clientapp\modules\directives\dataTable\dataTable.view.html" />
+    <Content Include="clientapp\modules\directives\addresses\addresses.module.js" />
+    <Content Include="clientapp\modules\directives\addresses\addresses.view.html" />
+    <Content Include="clientapp\modules\directives\forms\submitButton\submitButton.module.js" />
+    <Content Include="clientapp\modules\directives\forms\submitButton\submitButton.view.html" />
+    <Content Include="clientapp\modules\directives\indicator\indicator3.module.js" />
+    <Content Include="clientapp\modules\directives\indicator\indicator2.module.js" />
+    <Content Include="clientapp\modules\directives\indicator\indicator3.view.html" />
+    <Content Include="clientapp\modules\directives\indicator\indicator2.view.html" />
+    <Content Include="clientapp\modules\directives\interpretationIcon\interpretationIcon.module.js" />
+    <Content Include="clientapp\modules\directives\interpretationIcon\interpretationIcon.view.html" />
+    <Content Include="clientapp\modules\directives\ngEnter\ngEnter.directive.js" />
+    <Content Include="clientapp\modules\directives\personProfile\personProfile.module.js" />
+    <Content Include="clientapp\modules\directives\personProfile\personProfile.view.html" />
+    <Content Include="clientapp\modules\directives\validators\greaterThanZeroValidator.module.js" />
+    <Content Include="clientapp\modules\directives\studentAttendance\studentAttendance.module.js" />
+    <Content Include="clientapp\modules\directives\studentAttendance\studentAttendance.view.html" />
+    <Content Include="clientapp\modules\directives\studentCardGrid\studentCardGrid.view.html" />
+    <Content Include="clientapp\modules\directives\studentCardGrid\studentCardGrid.directive.js" />
+    <Content Include="clientapp\modules\directives\studentParentInfo\studentParentInfo.module.js" />
+    <Content Include="clientapp\modules\directives\studentParentInfo\studentParentInfo.view.html" />
+    <Content Include="clientapp\modules\directives\grades\currentGrades.module.js" />
+    <Content Include="clientapp\modules\directives\grades\currentGrades.view.html" />
+    <Content Include="clientapp\modules\directives\languageChooser\languageChooser.module.js" />
+    <Content Include="clientapp\modules\directives\languageChooser\languageChooser.view.html" />
+    <Content Include="clientapp\modules\directives\indicator\indicator.module.js" />
+    <Content Include="clientapp\modules\directives\indicator\indicator.view.html" />
+    <Content Include="clientapp\modules\directives\componentSkeleton\skeleton.module.js" />
+    <Content Include="clientapp\modules\directives\componentSkeleton\skeleton.view.html" />
+    <Content Include="clientapp\modules\directives\directives.module.js" />
+    <Content Include="clientapp\modules\directives\cardprogress\cardprogress.view.html" />
+    <Content Include="clientapp\modules\directives\disciplineIncidents\disciplineIncidents.module.js" />
+    <Content Include="clientapp\modules\directives\disciplineIncidents\disciplineIncidents.view.html" />
+    <Content Include="clientapp\modules\directives\grades\transcript.module.js" />
+    <Content Include="clientapp\modules\directives\grades\transcript.view.html" />
+    <Content Include="clientapp\modules\directives\studentAssessment\studentAssessment.module.js" />
+    <Content Include="clientapp\modules\directives\studentAssessment\studentAssessment.view.html" />
+    <Content Include="clientapp\modules\directives\studentCalendar\studentCalendar.module.js" />
+    <Content Include="clientapp\modules\directives\studentCalendar\studentCalendar.view.html" />
+    <Content Include="clientapp\modules\directives\missingAssignments\missingAssignments.module.js" />
+    <Content Include="clientapp\modules\directives\missingAssignments\missingAssignments.view.html" />
+    <Content Include="clientapp\modules\directives\preloader\preloader.module.js" />
+    <Content Include="clientapp\modules\directives\preloader\preloader.view.html" />
+    <Content Include="clientapp\modules\directives\studentCard\studentCard.module.js" />
+    <Content Include="clientapp\modules\directives\studentCard\studentCard.view.html" />
+    <Content Include="clientapp\modules\directives\studentProfile\studentProfile.module.js" />
+    <Content Include="clientapp\modules\directives\studentProfile\studentProfile.view.html" />
+    <Content Include="clientapp\modules\directives\studentSuccessTeam\popoverProfile.view.html" />
+    <Content Include="clientapp\modules\directives\studentSuccessTeam\studentSuccessTeam.module.js" />
+    <Content Include="clientapp\modules\directives\studentSuccessTeam\studentSuccessTeam.view.html" />
+    <Content Include="clientapp\modules\directives\emails\emails.module.js" />
+    <Content Include="clientapp\modules\directives\emails\emails.view.html" />
+    <Content Include="clientapp\modules\directives\switch\switch.module.js" />
+    <Content Include="clientapp\modules\directives\switch\switch.view.html" />
+    <Content Include="clientapp\modules\directives\telephone\telephone.module.js" />
+    <Content Include="clientapp\modules\directives\telephone\telephone.view.html" />
+    <Content Include="clientapp\modules\parent\landing\landing.module.js" />
+    <Content Include="clientapp\modules\parent\landing\landing.view.html" />
+    <Content Include="clientapp\modules\componentSkeleton\skeleton.module.js" />
+    <Content Include="clientapp\modules\componentSkeleton\skeleton.view.html" />
+    <Content Include="clientapp\modules\login\login.module.js" />
+    <Content Include="clientapp\modules\login\login.view.html" />
+    <Content Include="clientapp\modules\navbar\navbar.module.js" />
+    <Content Include="clientapp\modules\navbar\navbar.view.html" />
+    <Content Include="clientapp\modules\studentdetail\studentdetail.module.js" />
+    <Content Include="clientapp\modules\studentdetail\studentdetail.view.html" />
+    <Content Include="clientapp\modules\teacher\landing\landing.module.js" />
+    <Content Include="clientapp\modules\teacher\landing\landing.view.html" />
+    <Content Include="clientapp\modules\communications\communications.module.js" />
+    <Content Include="clientapp\modules\communications\communications.view.html" />
+    <Content Include="clientapp\modules\userProfile\userProfile.module.js" />
+    <Content Include="clientapp\modules\userProfile\userProfile.view.html" />
+    <Content Include="clientapp\services\api\apiApplication.js" />
+    <Content Include="clientapp\services\api\apiAlerts.js" />
+    <Content Include="clientapp\services\api\apiImage.js" />
+    <Content Include="clientapp\services\api\apiFeedback.js" />
+    <Content Include="clientapp\services\api\apiTranslate.js" />
+    <Content Include="clientapp\services\api\apiCommunications.js" />
+    <Content Include="clientapp\services\api\apiTypes.js" />
+    <Content Include="clientapp\services\api\api.js" />
+    <Content Include="clientapp\services\api\apiMe.js" />
+    <Content Include="clientapp\services\api\apiStudents.js" />
+    <Content Include="clientapp\services\api\apiParents.js" />
+    <Content Include="clientapp\services\api\apiTeachers.js" />
+    <Content Include="clientapp\services\appServicesModule.js" />
+    <Content Include="clientapp\services\userAuthenticationService.js" />
+    <Content Include="clientapp\services\signalRService.js" />
+    <Content Include="clientapp\services\customParams.js" />
+    <Content Include="clientapp\services\landingRouteService.js" />
+    <Content Include="index.html" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Templates\Email\FeedbackEmailTemplate.html" />
+    <Content Include="Templates\Email\AlertEmailTemplate.html" />
+    <Content Include="Templates\Email\UnreadMessageAlertEmailTemplate.html" />
+    <Content Include="Templates\SMS\AlertSMSTemplate.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\IoCConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CommunicationsController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\TranslateController.cs" />
+    <Compile Include="Controllers\ApplicationOfflineController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\TypesController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
+    <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\ParentsController.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\CustomParametersController.cs" />
+    <Compile Include="Filters\ActionExecutionTimerFilter.cs" />
+    <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Infrastructure\Cache\CacheInterceptor.cs" />
+    <Compile Include="Infrastructure\Cache\CacheKeyProvider.cs" />
+    <Compile Include="Infrastructure\SimpleInjectorAOPExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CustomAzureAdOAuthBearerAuthenticationProvider.cs" />
+    <Compile Include="Security\SecurityAuthorizeAttribute.cs" />
+    <Compile Include="Security\SecurityPrincipal.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="clientapp\lib\bootstrap\css\.DS_Store" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="clientapp\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.js.map" />
+    <Content Include="clientapp\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="clientapp\modules\directives\cardprogress\cardprogress.module.js" />
+    <Content Include="clientapp\app.config.authentication.azure.js" />
+    <Content Include="clientapp\lib\flag-icon-css\LICENSE" />
+    <Content Include="customizableParametersEdFi25.json" />
+    <Content Include="clientapp\modules\directives\studentCard\popoverNotifications.view.html" />
+    <Content Include="customizableParametersEdFi31.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Dev - ToolWise.net.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Student1.ParentPortal.Data\Student1.ParentPortal.Data.csproj">
+      <Project>{C3D8CCC7-8B36-4264-A087-25523E9CD739}</Project>
+      <Name>Student1.ParentPortal.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Student1.ParentPortal.Models\Student1.ParentPortal.Models.csproj">
+      <Project>{caecc2a8-96cd-4a7f-9085-abc5a98feef7}</Project>
+      <Name>Student1.ParentPortal.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Student1.ParentPortal.Resources.Azure\Student1.ParentPortal.Resources.Azure.csproj">
+      <Project>{E9AA4C1C-FCC4-4242-9B39-9CBE61ACF05D}</Project>
+      <Name>Student1.ParentPortal.Resources.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Student1.ParentPortal.Resources\Student1.ParentPortal.Resources.csproj">
+      <Project>{83DE7B70-2FEA-4A7B-B8A6-587107F0C511}</Project>
+      <Name>Student1.ParentPortal.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58562</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/Student1.ParentPortal.Web</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

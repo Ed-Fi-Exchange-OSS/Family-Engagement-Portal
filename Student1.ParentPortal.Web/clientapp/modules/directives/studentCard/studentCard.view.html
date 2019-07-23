@@ -1,0 +1,80 @@
+﻿<div class="card" ng-class="ctrl.cssClasses">
+    <div class="card-header text-right student-card-header">
+        <a class="btn btn-outline-mail" 
+           tooltip-placement="bottom"
+           ui-sref="app.communications({studentUsi:ctrl.model.studentUsi})">
+            <i class="ion ion-md-mail"></i>
+            <div ng-if="ctrl.model.unreadMessageCount > 0" class="bubble-counter blue">{{ctrl.model.unreadMessageCount}}</div>
+        </a>
+        <a class="btn btn-outline-notifications"
+           tooltip-placement="bottom"
+           uib-popover-template="'clientapp/modules/directives/studentCard/popoverNotifications.view.html'" 
+           popover-placement="bottom"
+           popover-trigger="'outsideClick'" 
+           popover-append-to-body="true" 
+           ng-click="ctrl.readAlerts(ctrl.model.studentUniqueId)"
+           ng-init="alerts = ctrl.model.alerts">
+            <i class="ion ion-md-notifications-outline"></i>
+            <div ng-if="ctrl.model.alerts.length > 0" class="bubble-counter orange">{{ctrl.model.alerts.length}}</div>
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="text-center">
+            <div class="image-container img-avatar img-size w-75px" ng-class="'img-avatar-' + ctrl.model.sexType"><img ng-src="{{ctrl.model.imageUrl}}"  alt="{{ctrl.model.name}} Profile Picture"></div>
+            <h2 class="m-t-15 m-b-2 d-flex justify-content-center align-items-center h-">{{ctrl.model.name}}</h2>
+            <p class="text-muted m-b-2">{{ctrl.model.gradeLevel|translate}}</p>
+            <p class="text-muted">{{ctrl.model.currentSchool}}</p>
+            <div class="row" ng-if="ctrl.model.externalLinks.length > 0">
+                <div class="col-12 p-t-10 p-b-10 d-flex flex-column align-items-center">
+                    <a class="d-flex" ng-repeat="link in ctrl.model.externalLinks" title="{{'Spotlight ' + link.urlType}}" target="_blank" href="{{link.url}}">{{'Spotlight ' + link.urlType}}</a>
+                </div>
+            </div>
+            <a ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi })" class="btn btn-block btn-outline-primary btn-rounded mt-3">{{'View Student Detail' | translate}}</a>
+         </div>
+    </div>
+            <div class="card-footer p-t-0 p-b-0 m-t-10">
+                <div class="row">
+                    <!--<div class="col-3 border-right-1 p-t-15 d-flex flex-column p-b-10">-->
+                     <div class="col-3 border-right-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10">
+                        <interpretation-icon model="ctrl.model.adaAbsentInterpretation"></interpretation-icon>
+                        <h3 class="text-ellipsis text-center" tooltip-placement="top" uib-tooltip="{{'Absence ADA' | translate}}">{{'Absences' | translate}}</h3>
+                        <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'attendance' })" tooltip-placement="bottom" uib-tooltip="{{'Absence ADA' | translate}}">
+                            <b>{{ctrl.model.adaAbsences}}</b>
+                        </a>
+                        <!--<a class="text-ellipsis text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'attendance' })" tooltip-placement="bottom" uib-tooltip="{{'Excused Absences' | translate}}">
+                            <interpretation-icon model="ctrl.model.excusedInterpretation"></interpretation-icon>
+                            <b>{{ctrl.model.excusedAbsences}}</b> {{'Abv Excused Absences' | translate}}
+                        </a>
+                        <a class="text-ellipsis text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'attendance' })" tooltip-placement="bottom" uib-tooltip="{{'Unexcused Absences' | translate}}">
+                            <interpretation-icon model="ctrl.model.unexcusedInterpretation"></interpretation-icon>
+                            <b>{{ctrl.model.unexcusedAbsences}}</b> {{'Abv Unexcused Absences' | translate}}
+                        </a>
+                        <a class="text-ellipsis text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'attendance' })" tooltip-placement="top" uib-tooltip="{{'Tardy Absences' | translate}}">
+                            <interpretation-icon model="ctrl.model.tardyInterpretation"></interpretation-icon>
+                            <b>{{ctrl.model.tardyAbsences}}</b> {{'Abv Tardy Absences' | translate}}
+                        </a>-->
+                    </div>
+                    <div class="col-3 border-right-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10">
+                        <interpretation-icon model="ctrl.model.ytdDisciplineInterpretation"></interpretation-icon>
+                        <h3 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{'Behavior Tooltip' | translate}}">{{'Behavior' | translate}}</h3>
+                        <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'behaviour-log' })">
+                            <b>{{ctrl.model.ytdDisciplineIncidentCount}}</b>
+                        </a>
+                    </div>
+                    <div class="col-3 border-right-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10">
+                        <interpretation-icon model="(ctrl.showStudentGPA(ctrl.model.gradeLevel)? ctrl.model.gpaInterpretation : ctrl.model.courseAverage.evaluation)"></interpretation-icon>
+                        <h3 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{(ctrl.showStudentGPA(ctrl.model.gradeLevel)? 'GPA' : 'Course Average') | translate}}">{{(ctrl.showStudentGPA(ctrl.model.gradeLevel)? 'GPA' : 'Abv Course Average') | translate}}</h3>
+                        <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'grades' })">
+                            <b>{{(ctrl.showStudentGPA(ctrl.model.gradeLevel) ? ctrl.model.ytdgpa + '/4.0' : (ctrl.model.courseAverage.gradeAverage | number:1) + '/100')}}</b>
+                        </a>
+                    </div>
+                    <div class="col-3 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10">
+                        <interpretation-icon model="ctrl.model.missingAssignmentsInterpretation"></interpretation-icon>
+                        <h3 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{'Missing Assignments' | translate}}">{{'Abv Missing Assignments' | translate}}</h3>
+                        <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'missing-assignments' })">
+                            <b>{{ctrl.model.missingAssignments}}</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>

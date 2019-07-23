@@ -1,0 +1,32 @@
+﻿<h3> {{'Emails'  | translate}}</h3>
+<div class="row align-items-center" ng-class="{'add-separator':!$last}" ng-repeat="e in ctrl.model">
+    <div class="col-md-6 m-b-10">
+        <label for="email{{$index}}">{{'view.emails.electronicMailAddress' | translate}}</label>
+        <input id="email{{$index}}" type="email" class="form-control"
+                ng-model="e.electronicMailAddress"
+                placeholder="{{'Electronic Email Address' | translate}}"
+                ng-minlength="5"
+                ng-maxlength="128"
+                maxlength="128"
+                ng-required="true"
+                aria-required="true" />
+    </div>
+    <div class="col-md-3 col-4 m-b-10">
+        <label for="emailType{{$index}}">{{'view.emails.electronicMailType' | translate}}</label>
+        <select id="emailType{{$index}}" class="form-control" ng-model="e.electronicMailTypeId" ng-options="et.electronicMailTypeId as et.shortDescription for et in ctrl.electronicMailTypes"></select>
+    </div>
+    <div class="col-md-2 col-4 mx-auto text-center m-b-10">
+        <label for="primaryEmail{{$index}}" tooltip-placement="bottom" uib-tooltip="{{'Check if this is your primary email' | translate}}">
+            <input id="primaryEmail{{$index}}" type="radio" name="primaryEmail" class="form-check-input" ng-checked="e.primaryEmailAddressIndicator" ng-click="ctrl.choosePrimaryMail(e)"/>
+            {{'Primary' | translate}}
+        </label>
+    </div>
+    <div class="col-md-1 col-4 m-b-10">
+        <button class="btn btn-danger" confirm-button="ctrl.delete($index)"><span class="visibly-hidden">Delete Email Row</span><i class="icon ion-md-trash" aria-hidden="true"></i></button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-info" tooltip-placement="bottom" uib-tooltip="{{'Add new electronic mail' | translate}}" ng-click="ctrl.add()"><i class="icon ion-md-add-circle" aria-hidden="true"></i></button>
+    </div>
+</div>

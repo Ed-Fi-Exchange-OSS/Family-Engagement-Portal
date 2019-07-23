@@ -1,0 +1,12 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h4>
+            {{title}}
+            <span class="float-right"><i class="icon ion-md-cloud-download f-s-30" ng-class="'text-'+status"></i></span>
+        </h4>
+        <h6 class="m-t-20 f-s-14">{{value}}% Complete</h6>
+        <div class="progress">
+            <div class="progress-bar progress-bar-animated" ng-class="'bg-'+status" role="progressbar" style="width: {{value*100/maxRange}}%" aria-valuenow="{{value}}" aria-valuemin="{{minRange}}" aria-valuemax="{{maxRange}}"></div>
+        </div>
+    </div>
+</div>

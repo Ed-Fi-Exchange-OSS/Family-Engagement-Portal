@@ -1,0 +1,26 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h3>{{'view.studentAttendance.title'  | translate}} <span>{{'view.studentAttendance.subtitle' | translate}}</span></h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>{{'Date'  | translate}}</th>
+                        <th>{{'Category'  | translate}}</th>
+                        <th>{{'Description'  | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="e in ctrl.model.absentAttendanceEvents" ng-if="$index < 2 || ctrl.showAll">
+                        <td>{{e.dateOfEvent | date: 'M/d/yy'}}</td>
+                        <td><span class="label label-good w-150px">{{e.eventDescription}}</span></td>
+                        <td>{{e.reason}}</td>
+                    </tr>
+                    <tr>
+                        <td class="link-text text-center" colspan="3" ng-if="ctrl.model.absentAttendanceEvents.length > 2" ng-click="ctrl.showAll = !ctrl.showAll;"> {{ (!ctrl.showAll ? 'See all' : 'Hide') | translate }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

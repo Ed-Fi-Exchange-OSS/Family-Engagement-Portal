@@ -1,0 +1,40 @@
+﻿<main role="main" class="container h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-xl-6">
+            <div ng-if="ctrl.isApplicationOffline" class="alert alert-danger align-middle"><i class="ion-md-alert f-s-20"></i> {{'view.login.app_online_status' | translate}}</div>
+            <div class="alert alert-danger"><i class="ion-md-information-circle f-s-20"></i> {{'view.login.app_pilot' | translate}}</div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right">
+                        <language-chooser></language-chooser>
+                    </div>
+                    <div class="text-center">
+                        <img src="clientapp/assets/img/logo.png" alt="District Logo" />
+                    </div>
+                    <h1 class=" text-center m-t-25">{{'view.login.app_name' | translate}}</h1>
+                    <h2 ng-if="!ctrl.isApplicationOffline" class="text-center m-t-10 f-s-16">
+                        {{'view.login.log_into_account' | translate}}
+                    </h2>
+                    <div ng-if="!ctrl.isApplicationOffline" class="text-center m-t-20">
+                        <!--<h5 class="m-b-30">{{'view.login.or_login_with' | translate}}</h5>-->
+                        <a href="#" ng-click="ctrl.loginSSO()" class="btn btn-primary">Login</a>
+                        <p class="m-t-30">
+                            <a href="#" ng-click="ctrl.logOutSSO()">{{'view.login.sign_out' | translate}}</a>
+                        </p>
+                        <p class="m-t-30" ng-if="ctrl.model.userInfo.isAuthenticated">
+                            {{'view.login.currentlyt_loged_in_as' | translate}}: {{ctrl.model.userInfo.userName}}
+                            <br />
+                            <a href="#" ng-click="ctrl.logOutSSO()" tooltip-placement="bottom" uib-tooltip="Expires ({{ctrl.model.tokenExpires | date:'medium'}})">{{'view.login.sign_out' | translate}}</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="m-t-30 text-left">
+                        <a ui-sref="app.privacypolicy"><i class="icon ion-md-lock"></i> {{'Privacy Policy' | translate}}</a>
+                    </span>
+                    <div class="float-right">{{ctrl.model.version}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

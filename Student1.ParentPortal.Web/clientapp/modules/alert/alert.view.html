@@ -1,0 +1,44 @@
+﻿<main role="main" class="container">
+    <form name="alertForm" novalidate>
+        <h1> <a ng-repeat="p in ctrl.urls" ui-sref="{{p.url}}">{{p.displayName | translate}}</a> > {{'Configure User Alerts'| translate}}</h1>
+        <div class="card">
+            <div class="card-body">
+                <h2>{{'General Alerts'  | translate}}</h2>
+                <div class="alert alert-info ng-binding">
+                    <i class="ion-md-information-circle f-s-20"></i> 
+                    {{'General Alerts Info' | translate}}
+                </div>
+                <div class="form-group">
+                    {{'view.alert.generalAlerts'  | translate}}  <switch label="Enable General Alerts" model="ctrl.model.alertsEnabled" ng-click="ctrl.changeAll()" ></switch>
+                </div>
+                <hr />
+                <h3 class="m-0">{{'Detail Alerts'  | translate}}</h3>
+                <div class="table-responsive">
+                    <table class="table table-xs table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{'Alert'  | translate}}</th>
+                                <th>{{'Threshold'  | translate}}</th>
+                                <th>{{'Enable'  | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="a in ctrl.model.alerts">
+                                <td class="align-middle">{{a.description}}</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li ng-repeat="t in a.thresholds" class="d-flex w-75">{{t.thresholdValue}} </li>
+                                    </ul>
+                                </td>
+                                <td class="align-middle"><switch label="{{a.description}}" model="a.enabled"></switch></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row p-b-50">
+            <div class="col"><submit-button promise-to-execute="ctrl.save()" form="alertForm" label="{{'Save'|translate}}" class="float-right"></submit-button></div>
+        </div>
+    </form>
+</main>

@@ -1,0 +1,82 @@
+﻿<div class="card profile-card">
+    <div class="card-header" ng-class="profile.color">
+        <h4>{{profile.p.name}}</h4>
+    </div>
+    <div class="profile-image">
+        <div class="image-container img-avatar success-team-member img-size w-100px h-100px">
+            <img alt="Student Picture" ng-src="{{profile.p.imageUrl}}" />
+        </div>
+    </div>
+    <div class="card-body">
+        <a ng-if="profile.p.email" href="mailto:{{profile.p.email}}">{{profile.p.email}}</a>
+        <span ng-if="profile.p.highlyQualifiedTeacher" class="badge danger m-b-10" tooltip-placement="bottom" uib-tooltip="{{'Highly Qualified' | translate}}">{{'Highly Qualified' | translate}}</span>
+        <br ng-if="profile.p.highlyQualifiedTeacher" />
+        <span ng-if="profile.p.emergencyContactStatus" class="badge danger m-b-10" tooltip-placement="bottom" uib-tooltip="{{'Emergency Contact' | translate}}">{{'Emergency Contact' | translate}}</span>
+        <a ng-if="profile.p.relationToStudent != 'Sibling' && profile.p.chatEnabled" ui-sref="app.communications({studentUsi: profile.p.studentUsi, recipientUniqueId: profile.p.uniqueId, recipientTypeId : profile.p.personTypeId, unreadMessageCount: profile.p.unreadMessageCount})" class="btn btn-outline-primary position-relative"><i class="ion ion-md-text"></i> <div ng-if="profile.p.unreadMessageCount > 0" class="bubble-counter blue">{{profile.p.unreadMessageCount}}</div> <span>{{'Message' | translate}}</span></a>
+        <hr ng-if="profile.p.addresses.length > 0 ||  profile.p.telephone.length  > 0 || profile.p.emails.length > 0" />
+        <!-- Contact Information Section -->
+        <h5 ng-if="profile.p.addresses.length > 0 ||  profile.p.telephone.length  > 0 || profile.p.emails.length > 0">{{'Contact Information' | translate}}</h5>
+        <div class="row">
+            <div class="col-12 d-flex align-items-stretch flex-wrap">
+                <address class="m-b-0">
+                    <div ng-repeat="t in profile.p.telephone">
+                        <i class="ion ion-md-call" ng-if="$first"></i> <a href="tel:{{t}}" ng-class="{'m-l-15':!$first}">{{t}}</a>
+                    </div>
+
+                    <div ng-class="{'m-t-8':$first}" ng-repeat="a in profile.p.addresses" class="text-truncate" tooltip-placement="bottom" uib-tooltip="{{a.streetNumberName}}, {{a.city}}, {{a.state}} {{a.postalCode}}">
+                        <i class="ion ion-md-pin"></i> {{a.streetNumberName}}<br />
+                        <span class="m-l-12">{{a.city}}, {{a.state}} {{a.postalCode}}</span>
+                    </div>
+
+                    <div ng-class="{'m-t-8':$first}" ng-repeat="e in profile.p.emails">
+                        <i class="ion ion-md-mail" ng-if="$first"></i>
+                        <a class="text-truncate popover-mail-limiter" href="mailto:{{e}}" tooltip-placement="bottom" uib-tooltip="{{e}}">{{e}}</a>
+                    </div>
+                </address>
+            </div>
+        </div>
+
+        <!-- Qualifications -->
+        <div ng-if="profile.p.yearsOfTeachingExperience || profile.p.highestCompletedLevelOfEducation || profile.p.languages.length">
+            <hr />
+            <h5>{{'Qualifications' | translate}}</h5>
+            <ul>
+                <li>{{profile.p.yearsOfTeachingExperience}} <span>{{'Years of Teaching Experience' | translate}}</span></li>
+                <li ng-if="profile.p.highestCompletedLevelOfEducation">{{'Education' | translate}}: <span>{{profile.p.highestCompletedLevelOfEducation}}</span></li>
+                <li ng-if="profile.p.languages.length">
+                    {{'Languages' | translate}}:
+                    <ul>
+                        <li ng-repeat="l in profile.p.languages">{{l}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Credentials Section -->
+        <hr ng-if="profile.p.credentials && profile.p.credentials.length" />
+        <h5 ng-if="profile.p.credentials && profile.p.credentials.length">{{'Credentials' | translate}}</h5>
+        <div class="text-left" ng-if="profile.p.credentials">
+            <ul>
+                <li ng-repeat="c in profile.p.credentials">{{c}}</li>
+            </ul>
+        </div>
+
+        <!-- Bio Section -->
+        <div ng-if="profile.p.shortBiography">
+            <hr />
+            <h5>{{'Short Biography' | translate}}</h5>
+            <div ng-bind-html="profile.p.shortBiography">
+            </div>
+        </div>
+
+        <!-- Sibling Grade Level Info Section -->
+        <div ng-if="profile.p.gradeLevel">
+            <hr>
+            <h5>{{'Education' | translate}}</h5>
+            <span class="d-block">{{profile.p.nameOfInstitution}}</span>
+            <ul>
+                <li class="text-left">{{profile.p.gradeLevel}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

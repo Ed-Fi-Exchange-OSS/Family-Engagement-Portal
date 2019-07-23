@@ -1,0 +1,33 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h3 class="card-title d-flex justify-content-between">
+            <div>{{'view.missingAssignments.title' | translate}} <span>{{'view.missingAssignments.subtitle' | translate}}</span></div>
+            <div>{{ctrl.model.missingAssignmentCount}}</div> 
+        </h3>
+        <div class="timeline-">
+            <ul class="timeline">
+                <li ng-repeat="s in ctrl.model.assignmentSections" ng-if="ctrl.showAll || ctrl.checkSectionDates(s)">
+                    <div>
+                        {{s.courseTitle}} - <a ui-sref="app.communications({studentUsi: ctrl.studentUsi, recipientUniqueId: s.staffUniqueId, recipientTypeId: s.personTypeId})">{{s.staffFullname}} <i class="ion ion-md-chatboxes"></i></a>
+                    </div>
+                    <ul class="timeline position-relative">
+                        <li ng-repeat="a in s.assignments" ng-if="ctrl.showAll || ctrl.checkDate(a.daysLate)">
+                            <div class="timeline-bullet" ng-class="ctrl.evalDaysLate(a.daysLate)"></div>
+                            <div class="timeline-panel f-s-14">
+                                {{'view.missingAssignments.assigned' | translate}} {{a.daysLate}} {{'view.missingAssignments.days' | translate}}
+                                <span class="m-t-5">{{a.assignmentTitle}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="text-center link-text" ng-click="ctrl.showAll = !ctrl.showAll" ng-if="ctrl.model.missingAssignmentCount > 0">
+                    {{ (!ctrl.showAll ? 'See all' : 'Hide') | translate }}
+                </li>
+                <li class="text-center" ng-if="ctrl.model.missingAssignmentCount == 0">
+                    {{'No missing assignments' | translate}}
+                </li>
+            </ul>
+        </div>
+        <a class="float-right mr-2" title="{{ctrl.model.externalLink.title}}" target="_blank" href="{{ctrl.model.externalLink.url}}">{{ctrl.model.externalLink.linkText}}</a>
+    </div>
+</div>

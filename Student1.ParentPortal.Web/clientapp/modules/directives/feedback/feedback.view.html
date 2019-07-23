@@ -1,0 +1,41 @@
+﻿<div id="feedback" ng-show="ctrl.model.feedback">
+    <div class="col-md-6 card">
+        <div class="header card-header">
+            <h1 class="m-0">{{'Help' | translate}}</h1> <span class="close" ng-click="ctrl.close()"><i class="ion ion-md-close"></i></span>
+        </div>
+        <div class="card-body">
+            <form name="feedbackForm" novalidate>
+                <div class="col-12 col-md-12 form-group" ng-class="{ 'invalid' : feedbackForm.subject.$invalid, 'valid': feedbackForm.subject.$valid }">
+                    <label for="subject">{{'view.feedback.subject'  | translate}}:</label>
+                    <input id="subject" name="subject" type="text"
+                           class="form-control"
+                           ng-model="ctrl.model.subject"
+                           required />
+                    <div class="form-feedback" ng-if="feedbackForm.subject.$error.required">*Required</div>
+                </div>
+                <div class="col-12 col-md-12 form-group" ng-class="{ 'invalid' : feedbackForm.issue.$invalid, 'valid': feedbackForm.issue.$valid }">
+                    <label for="issue">{{'view.feedback.type' | translate}}</label>
+                    <select id="issue" name="issue" class="form-control" required ng-model="ctrl.model.issue">
+                        <option value="null">-Select option-</option>
+                        <option value="Bug/System Issue">{{'view.feedback.bug' | translate}}</option>
+                        <option value="Comment">{{'view.feedback.comment' | translate}}</option>
+                        <option value="Data Problem">{{'view.feedback.dataProblem' | translate}}</option>
+                        <optiion value="Feature Request">{{'view.feedback.featureRequest' | translate}}</optiion>
+                        <option value="Question">{{'view.feedback.question' | translate}}</option>
+                        <option value="Privacy Issue">{{'view.feedback.privacyIssue' | translate}}</option>
+                        <option value="Unable to Login">{{'view.feedback.login' | translate}}</option>
+                    </select>
+                    <div class="form-feedback" ng-if="feedbackForm.issue.$error.required">*Required</div>
+                </div>
+                <div class="col-12 col-md-12 form-group" ng-class="{ 'invalid' : feedbackForm.description.$invalid, 'valid': feedbackForm.description.$valid }">
+                    <label for="description">{{'view.feedback.detailedDescription' | translate}}</label>
+                    <textarea id="description" name="description" class="w-100 form-control" required ng-model="ctrl.model.description" rows="4"></textarea>
+                    <div class="form-feedback" ng-if="feedbackForm.description.$error.required">*Required</div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="col"><submit-button promise-to-execute="ctrl.persistFeedback()" form="feedbackForm" label="{{'Send'|translate}}" class="float-right"></submit-button></div>
+        </div>
+    </div>
+</div>

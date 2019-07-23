@@ -1,0 +1,7 @@
+﻿<button class="btn" 
+        ng-disabled="ctrl.form.$invalid" 
+        ng-click="ctrl.executePromise()" 
+        ng-class="{'btn-danger': ctrl.form.$invalid, 'btn-success':ctrl.resolvingPromise, 'btn-info': ctrl.form.$valid && !ctrl.resolvingPromise}"
+        tooltip-placement="bottom" uib-tooltip="{{(ctrl.form.$invalid ? 'Invalid Form' : 'Ready to Save') | translate}}"
+        >
+    <i class="ion" ng-class="{'ion-md-checkmark-circle': ctrl.form.$valid, 'ion-md-close-circle':ctrl.form.$invalid, 'ion-md-refresh-circle':ctrl.resolvingPromise}"></i> <span>{{ctrl.label | translate}}</span></button>

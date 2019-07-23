@@ -1,0 +1,19 @@
+﻿<div class="card h-100 w-100 cursor-pointer">
+    <div class="card-body">
+        <div class="text-center m-t-10">
+            <interpretation-icon fontclass="f-s-50 icon-round-border-large" model="ctrl.interpretation"></interpretation-icon>
+            <h3 class="m-t-6" tooltip-placement="bottom" uib-tooltip="{{ctrl.tooltip}}">{{ctrl.indicatorTitle}}</h3>
+            <p class="f-s-12">{{ctrl.textualEvaluation | translate}}</p>
+            <!--<a href="#" class="btn btn-success btn-rounded p-l-30 p-r-30 m-t-5 m-b-10">View Detail</a>-->
+        </div>
+        <div class="row">
+            <div ng-repeat="i in ctrl.indicatorCategories" ng-class="{'border-right-1' : ctrl.isNotLast(i)}" ng-style="{'width' : ctrl.categoryWidth + '%', 'max-width' : ctrl.categoryWidth + '%', 'flex' : '0 0 '+ ctrl.categoryWidth + '%'}" class="col-4 p-t-15 d-flex justify-content-center align-items-center flex-column p-0">
+                <interpretation-icon model="i.interpretation"></interpretation-icon>
+                <h4 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{i.tooltip | translate}}">{{i.textDisplay | translate}}</h4>
+                <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'behaviour-log' })">
+                    <b>{{i.value}}</b>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

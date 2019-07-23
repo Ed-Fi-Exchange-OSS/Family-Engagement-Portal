@@ -1,0 +1,6 @@
+﻿<div masonry preserve-order masonry-options="{ gutter: 30 }" class="m-t-30">
+    <div class="masonry-brick masonry-student-card" ng-repeat="s in students = (ctrl.model | orderBy:ctrl.orderby.propertyName:ctrl.orderby.reverse)">
+        <student-card model="s" search="ctrl.search"></student-card>
+    </div>
+    <div class="alert alert-warning" ng-if="!students.length">* {{'view.studentCardGrid.noResultsWithFilters' | translate}}.</div>
+</div>

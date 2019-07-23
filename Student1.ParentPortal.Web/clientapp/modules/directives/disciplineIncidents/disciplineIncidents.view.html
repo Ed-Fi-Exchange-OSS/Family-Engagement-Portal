@@ -1,0 +1,24 @@
+﻿<div class="card">
+    <div class="card-body">
+        <h3>{{'view.disciplineIncidents.title'  | translate}} <span>{{'view.disciplineIncidents.subtitle' | translate}}</span></h3>
+        <div class="table-responsive">
+            <table class="table table-xs table-striped">
+                <thead>
+                    <tr>
+                        <th>{{'Date'  | translate}}</th>
+                        <th>{{'Description'  | translate}}</th>
+                        <th>{{'view.disciplineIncidents.actionsTaken'  | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="d in ctrl.model.disciplineIncidents">
+                        <td>{{d.incidentDate | date: 'M/d/yy'}}</td>
+                        <td>{{d.description}}</td>
+                        <td><ul><li ng-repeat="a in d.disciplineActionsTaken">{{a.description}}</li></ul></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="float-right mr-2" title="{{ctrl.model.externalLink.title}}" target="_blank" href="{{ctrl.model.externalLink.url}}">{{ctrl.model.externalLink.linkText}}</a>
+    </div>
+</div>

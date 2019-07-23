@@ -1,0 +1,18 @@
+﻿<h4>{{'view.studentParentInfo.title' | translate}} <span>{{'view.studentParentInfo.subtitle' | translate}}</span></h4>
+<div class="row">
+    <div class="col-lg-6 d-flex align-items-stretch" ng-repeat="p in ctrl.model">
+        <div class="card w-100">
+            <div class="card-body text-truncate">
+                <h5 class="inline-block p-b-5">{{p.name}}</h5> <span class="label label-outlined float-right">{{p.relationToStudent}}</span> 
+                <address class="m-b-0" ng-repeat="t in p.telephone">
+                    <i class="ion ion-md-call" ng-if="$first"></i> <a href="tel:{{t}}" ng-class="{'m-l-15':!$first}">{{t}}</a>
+                </address>
+                <address ng-class="{'m-t-8':$first}" ng-repeat="a in p.addresses" class="text-truncate" tooltip-placement="bottom" uib-tooltip="{{a.streetNumberName}}, {{a.city}}, {{a.state}} {{a.postalCode}}">
+                    <i class="ion ion-md-pin"></i> {{a.streetNumberName}}<br />
+                    <span class="m-l-12">{{a.city}}, {{a.state}} {{a.postalCode}}</span>
+                </address>
+                <address ng-class="{'m-t-8':$first}" ng-repeat="e in p.emails"><i class="ion ion-md-mail inline-block" ng-if="$first"></i> <a class="text-truncate inline-block w-100" href="mailto:{{e}}" tooltip-placement="bottom" uib-tooltip="{{e}}">{{e}}</a></address>
+            </div>
+        </div>
+    </div>
+</div>

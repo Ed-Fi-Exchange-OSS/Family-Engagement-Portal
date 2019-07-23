@@ -1,0 +1,43 @@
+﻿<h3> {{'Telephone numbers'  | translate}}</h3>
+<div class="row align-items-center" ng-class="{'add-separator':!$last}" ng-repeat="t in ctrl.model">
+    <div class="col-md-3 m-b-10">
+        <label for="telephoneNumber{{$index}}">{{'view.telephone.telephoneNumber' | translate}}</label>
+        <input id="telephoneNumber{{$index}}" type="text" class="form-control" name="telephoneNumber"
+               ng-model="t.telephoneNumber"
+               placeholder="{{'Telephone number' | translate}}"
+               ng-minlength="7"
+               ng-maxlength="24"
+               maxlength="24"
+               ng-required="true"
+               aria-required="true"
+               ng-class="{ 'invalid' : this.$invalid, 'valid': this.$valid }" />
+    </div>
+    <div class="col-md-3 m-b-10">
+        <label for="telephoneNumberTypeId{{$index}}">{{'view.telephone.telephoneNumberType' | translate}}</label>
+        <select id="telephoneNumberTypeId{{$index}}" class="form-control" ng-model="t.telephoneNumberTypeId" ng-options="tt.telephoneNumberTypeId as tt.shortDescription for tt in ctrl.telephoneTypes"></select>
+    </div>
+    <div class="col-md-1 col-1 mx-auto text-center m-b-10">
+        <label for="primaryMethodOfContact{{$index}}" tooltip-placement="bottom" uib-tooltip="{{'Check if this is the primary method of contact' | translate}}">
+            <input id="primaryMethodOfContact{{$index}}" type="radio" name="{{'primaryMethodOfContact'}}" class="form-check-input" ng-checked="t.primaryMethodOfContact" ng-click="ctrl.choosePrimaryeTelephone(t)" />
+            {{'Primary' | translate}}
+        </label>
+    </div>
+    <div class="col-md-1 col-1 mx-auto text-center m-b-10">
+        <label for="textCapable{{$index}}" tooltip-placement="bottom" uib-tooltip="{{'Check if this number supports text messages or SMS' | translate}}">
+            <input id="textCapable{{$index}}" type="checkbox" class="form-check-input" ng-model="t.textMessageCapabilityIndicator" ng-checked="t.textMessageCapabilityIndicator" />
+            {{'SMS Capable' | translate}}
+        </label>
+    </div>
+    <div class="col-md-3 m-b-10">
+        <label for="telCarrierType{{$index}}">{{'view.telephone.telephoneCarrierType' | translate}}</label>
+        <select id="telCarrierType{{$index}}" class="form-control" ng-model="t.telephoneCarrierTypeId" ng-options="tm.textMessageCarrierTypeId as tm.shortDescription for tm in ctrl.textMessageCarrierTypes"></select>
+    </div>
+    <div class="col-md-1 col-4 m-b-10">
+        <button class="btn btn-danger" confirm-button="ctrl.delete($index)"><span class="visibly-hidden">Delete telephone row</span><i class="icon ion-md-trash" aria-hidden="true"></i></button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-info" tooltip-placement="bottom" uib-tooltip="{{'Add new telephone' | translate}}" ng-click="ctrl.add()"><i class="icon ion-md-add-circle" aria-hidden="true"></i></button>
+    </div>
+</div>

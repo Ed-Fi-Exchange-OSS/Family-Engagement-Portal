@@ -1,0 +1,124 @@
+﻿<main role="main" class="container">
+    <h1><a ng-repeat="p in ctrl.urls" ui-sref="{{p.url}}">{{p.displayName | translate}}</a> > {{'view.communications.title'  | translate}}, <span>{{'view.communications.subtitle' | translate}}</span></h1>
+    <form name="userForm" novalidate>
+        <div class="card">
+            <div class="card-body">
+                <div class="row flex-nowrap overflow-hidden chat-row-container" ng-class="{'justify-content-end':ctrl.model.selectedRecipient}">
+                    <div class="chat-search-container col-12 col-sm-12 col-md-12 col-lg-4 border-right">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend" ng-click="ctrl.searchRecipients()">
+                                <div class="input-group-text"><i class="ion ion-md-search"></i></div>
+                            </div>
+                            <input type="text" class="form-control" ng-model="ctrl.searchValue" ng-change="ctrl.search()" placeholder="{{'Search' | translate}}">
+                        </div>
+                        <div class="text-center">
+                            <span class="link-text" ng-click="ctrl.expandRecipients()">{{('Expand' | translate)}}</span> | <span class="link-text" ng-click="ctrl.collapseRecipients()">{{('Collapse' | translate)}}</span>
+                        </div>
+                        <ul class="list-unstyled chat-recipients m-b-0">
+                            <!--Normal Recipients-->
+                            <li class="mb-2 clearfix person d-flex align-items-center position-relative" ng-repeat-start="sr in ctrl.filteredRecipients" ng-click="ctrl.selectStudentRecipient(sr)">
+                                <div class="position-relative rounded-circle w-45px h-45px m-r-10">
+                                    <div class="image-container image-container-45 position-relative">
+                                        <img alt="" ng-src="{{sr.imageUrl}}">
+                                    </div>
+                                    <div ng-if="sr.unreadMessageCount > 0" class="bubble-counter blue">{{sr.unreadMessageCount}}</div>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold" ng-bind-html="sr.fullName | bold:ctrl.searchValue"></span>
+                                    <span ng-repeat="relation in c.relationsToStudent" class="d-block f-s-8em">{{relation}}</span>
+                                </div>
+                                <i ng-if="!sr.show" class="ion ion-md-arrow-dropdown position-absolute right-20 f-s-20"></i>
+                                <i ng-if="sr.show" class="ion ion-md-arrow-dropup position-absolute right-20 f-s-20"></i>
+                            </li>
+                            <li ng-if="sr.show" ng-repeat-end class="p-l-30 mb-2 clearfix person d-flex align-items-center position-relative" ng-repeat="r in sr.recipients | recipient: ctrl.searchValue" ng-class="{'active':r.uniqueId == ctrl.model.selectedRecipient.uniqueId}" ng-click="ctrl.selectRecipient(r, sr)">
+                                <div class="position-relative rounded-circle w-45px h-45px m-r-10">
+                                    <div class="image-container image-container-45 position-relative">
+                                        <img alt="" ng-src="{{r.imageUrl}}">
+                                    </div>
+                                    <div ng-if="r.unreadMessageCount > 0" class="bubble-counter blue">{{r.unreadMessageCount}}</div>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold" ng-bind-html="r.fullName | bold:ctrl.searchValue"></span>
+                                    <span ng-repeat="relation in r.relationsToStudent" class="d-block f-s-8em">{{relation}}</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <div  ng-if="ctrl.recipientsLoading" class="d-flex align-items-center justify-content-center position-relative">
+                            <div class="section-loader">
+                                <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                        <div class="row mb-3">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="d-flex flex-row" ng-if="ctrl.model.selectedRecipient">
+                                    <i class="icon ion-md-arrow-round-back cursor-pointer d-ne-block d-lg-none l-h-3" ng-click="ctrl.back()"></i>
+                                    <div class="image-container image-container-45 m-r-10">
+                                        <img alt="" ng-src="{{ctrl.model.selectedRecipient.imageUrl}}">
+                                    </div>
+                                    <div>
+                                        <span class="font-weight-bold">{{ctrl.model.selectedRecipient.fullName}}</span>
+                                        <span class="d-block f-s-8em m-t--4" ng-repeat="relation in ctrl.model.selectedStudent.relationsToStudent">{{relation}}</span>
+                                        <span class="d-block f-s-8em m-t--4" ng-repeat="relation in ctrl.model.selectedRecipient.relationsToStudent">{{relation}}</span>
+                                        <span class="f-s-7em d-flex m-t--4">-> {{ctrl.model.selectedStudent.fullName}}</span>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                <select class="form-control d-inline w-100pc" name="repeatSelect" id="sectionsSelect" style="width:180px;"
+                                        ng-model="ctrl.selectedLanguage"
+                                        ng-change="ctrl.onLanguageChange()"
+                                        ng-options="item as (item.nativeName + ' - ' + item.name) for item in ctrl.languages"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="message-history" class="col-12 message-history">
+                                <div class="text-center cursor-pointer d-flex justify-content-center align-items-center" ng-if="ctrl.chatModel && !ctrl.chatModel.conversation.endOfMessageHistory"><a  class="btn btn-block btn-outline-primary btn-rounded" ng-click="ctrl.loadMore()">{{'view.communications.loadMore' | translate}}</a></div>
+                                <ul class="m-b-0 list-unstyled">
+                                    <li class="mb-3 clearfix" ng-class="{'text-right': m.senderUniqueId == ctrl.sender.uniqueId && m.senderTypeId == ctrl.sender.personTypeId }"  ng-repeat="m in ctrl.chatModel.conversation.messages">
+                                        <div class="d-inline-block">
+                                            <div class="d-flex flex-row align-items-center" ng-class="{'justify-content-end': m.senderUniqueId == ctrl.sender.uniqueId && m.senderTypeId == ctrl.sender.personTypeId }">
+                                                <div class="image-container image-container-45" ng-if="ctrl.model.selectedRecipient.imageUrl">
+                                                    <img ng-if="m.senderUniqueId != ctrl.sender.uniqueId && m.sernderTypeId != ctrl.sender.personTypeId" ng-src="{{ctrl.model.selectedRecipient.imageUrl}}" alt="avatar">
+                                                </div>
+                                                <span class="message-time">{{m.dateSent | amCalendar}}</span>
+                                                <div class="image-container image-container-45" ng-if="ctrl.sender.imageUrl">
+                                                    <img ng-if="m.senderUniqueId == ctrl.sender.uniqueId && m.senderTypeId == ctrl.sender.personTypeId" ng-src="{{ctrl.sender.imageUrl}}" alt="avatar">
+                                                </div>
+                                            </div>
+                                            <div class="message"> <p>{{ m.translated? m.translated : (m.englishMessage? m.englishMessage : m.originalMessage)}}</p> <span ng-if="m.englishMessage || m.translated">{{m.originalMessage}}</span></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex p-b-5 p-t-5 p-l-0 p-r-0 justify-content-end">
+                                    <label class="m-b-0 m-r-10"> {{'view.communications.simultaneousTranslation'  | translate}}  <switch model="ctrl.simultaneousTranslation"></switch></label>
+                                </div>
+                                <div class="input-group">
+                                    <input id="message" name="message" type="text" class="form-control d-inline"
+                                           ng-disabled="!ctrl.model.selectedRecipient"
+                                           placeholder="Type message here in any language..."
+                                           autocomplete="off"
+                                           ng-model="ctrl.model.message"
+                                           ng-model-options="{ debounce: ctrl.simultaneousTranslation? 700 : 0 }"
+                                           ng-change="ctrl.simulTran()"
+                                           ng-enter="ctrl.sendMessage()" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-info" ng-click="ctrl.sendMessage()" ng-disabled="ctrl.model.message.length == 0 || !ctrl.model.selectedRecipient || $rootScope.loadingOverride"><i class="ion ion-md-paper-plane"></i></button>
+                                    </div>
+                                </div>
+                                <label for="message" ng-if="!ctrl.model.selectedRecipient">*Please select a recipient.</label>
+                                <span ng-if="ctrl.model.englishMessage && ctrl.simultaneousTranslation">eng: {{ctrl.model.englishMessage}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>

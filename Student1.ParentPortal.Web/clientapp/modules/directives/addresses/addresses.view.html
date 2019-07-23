@@ -1,0 +1,79 @@
+﻿<h3> {{'Addresses'  | translate}}</h3>
+<div class="row align-items-center" ng-class="{'add-separator':!$last}" ng-repeat="a in ctrl.model">
+    <div class="col-md-3 m-b-10">
+        <div class="form-group">
+            <label for="addressTypeId{{$index}}">{{'Address Type' | translate}}:</label>
+            <select id="addressTypeId{{$index}}"class="form-control" ng-model="a.addressTypeId" ng-options="at.addressTypeId as at.shortDescription for at in ctrl.addressTypes"></select>
+        </div>
+    </div>
+    <div class="col-md-6 m-b-10">
+        <div class="form-group">
+            <label for="streetNumberName{{$index}}">{{'Street Number and Name' | translate}}:</label>
+            <input id="streetNumberName{{$index}}"type="text" class="form-control"
+                   ng-model="a.streetNumberName"
+                   placeholder="{{'Street Number and Name' | translate}}"
+                   ng-minlength="3"
+                   ng-maxlength="150"
+                   maxlength="150"
+                   ng-required="true" 
+                   aria-required="true" />
+        </div>
+    </div>
+    <div class="col-md-3 m-b-10">
+        <div class="form-group">
+            <label for="apartmentRoomSuiteNumber{{$index}}">{{'Apt/room/suite number' | translate}}:</label>
+            <input id="apartmentRoomSuiteNumber{{$index}}"type="text" class="form-control" ng-model="a.apartmentRoomSuiteNumber" placeholder="{{'Apartment Room Suite Number' | translate}}" />
+        </div>
+    </div>
+
+    <div class="col-md-3 m-b-10">
+        <div class="form-group">
+            <label for="city{{$index}}">{{'City' | translate}}:</label>
+            <input id="city{{$index}}"type="text" class="form-control"
+                   ng-model="a.city"
+                   placeholder="{{'City' | translate}}"
+                   ng-minlength="1"
+                   ng-maxlength="30"
+                   maxlength="30"
+                   ng-required="true" 
+                   aria-required="true" />
+        </div>
+    </div>
+    <div class="col-md-2 m-b-10">
+        <div class="form-group">
+            <label for="stateAbbreviationTypeId{{$index}}">{{'State' | translate}}:</label>
+            <select id="stateAbbreviationTypeId{{$index}}"class="form-control" ng-model="a.stateAbbreviationTypeId" ng-options="st.stateAbbreviationTypeId as st.shortDescription for st in ctrl.stateAbbreviationTypes"></select>
+        </div>
+    </div>
+    <div class="col-md-3 m-b-10">
+        <div class="form-group">
+            <label for="postalCode{{$index}}">{{'Postal Code' | translate}}:</label>
+            <input id="postalCode{{$index}}"type="text" class="form-control"
+                   ng-model="a.postalCode"
+                   placeholder="{{'Postal Code' | translate}}"
+                   ng-minlength="3"
+                   ng-maxlength="17"
+                   maxlength="17"
+                   ng-required="true" 
+                   aria-required="true" />
+        </div>
+    </div>
+    <div class="col-md-3 m-b-10">
+        <div class="form-group">
+            <label for="nameOfCounty{{$index}}">{{'Country' | translate}}:</label>
+            <input id="nameOfCounty{{$index}}"type="text" class="form-control"
+                   ng-model="a.nameOfCounty"
+                   placeholder="{{'Country' | translate}}"
+                   ng-maxlength="30"
+                   maxlength="30" />
+        </div>
+    </div>
+    <div class="col-md-1 m-b-10">
+        <button class="btn btn-danger" confirm-button="ctrl.delete($index)"><span class="visibly-hidden">Delete address row</span><i class="icon ion-md-trash" aria-hidden="true"></i></button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-info" tooltip-placement="bottom" uib-tooltip="{{'Add new address' | translate}}" ng-click="ctrl.add()"><i class="icon ion-md-add-circle" aria-hidden="true"></i></button>
+    </div>
+</div>

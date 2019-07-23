@@ -1,0 +1,12 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th ng-repeat="c in ctrl.options.columns">{{c.displayName}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="r in ctrl.model">
+            <td ng-repeat="c in ctrl.options.columns">{{r[c.field]}}</td>
+        </tr>
+    </tbody>
+</table>

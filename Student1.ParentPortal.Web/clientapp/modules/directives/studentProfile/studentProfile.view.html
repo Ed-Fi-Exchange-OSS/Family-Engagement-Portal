@@ -1,0 +1,52 @@
+﻿<div class="card h-100">
+    <div class="card-header">
+        <div class="text-right">
+            <a class="btn btn-outline-mail"
+               tooltip-placement="bottom"
+               ui-sref="app.communications({studentUsi:ctrl.model.studentUsi})">
+                <i class="ion ion-md-mail"></i>
+                <div ng-if="ctrl.model.unreadMessageCount > 0" class="bubble-counter blue">{{ctrl.model.unreadMessageCount}}</div>
+            </a>
+            <span class="badge danger m-r-10" ng-repeat="i in ctrl.model.indicators" tooltip-placement="bottom" uib-tooltip="{{'Indicator' | translate}}: {{i.indicatorName}} since ({{i.beginDate | date: 'shortDate'}})">{{i.indicatorName}}</span>&nbsp;
+        </div>
+    </div>
+    <div class="card-body p-t-0">
+        <div class="text-center">
+            <div class="image-container img-avatar img-size w-75px" ng-class="'img-avatar-' + ctrl.model.sexType">
+                <img ng-src="{{ctrl.model.imageUrl}}"  alt="Student profile picture">
+            </div>
+            <h2 class="m-t-15 m-b-2">{{ctrl.model.name}}</h2>
+            <p class="text-muted m-b-2">{{ctrl.model.gradeLevel|translate}}</p>
+            <p class="text-muted">{{ctrl.model.currentSchool}}</p>
+            <p>
+                <span class="badge badge-pill primary" ng-if="ctrl.model.hispanicOrLatino">Hispanic or Latino</span>
+                <span class="badge badge-pill success" ng-repeat="r in ctrl.model.races">{{r}}</span>
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-12 p-t-10 p-b-10">
+                <span class="float-left f-w-600"><i class="icon ion-md-mail" /> {{'Email' | translate}}:</span>
+                <a href="mailto:{{ctrl.model.email}}" class="float-right"> {{ctrl.model.email}}</a>
+            </div>
+            <div class="col-12 p-t-10 p-b-10">
+                <span class="float-left f-w-600"><i class="icon ion-md-call" /> {{'Phone' | translate}}:</span>
+                <a href="tel:+{{ctrl.model.telephone}}" class="float-right">{{ctrl.model.telephone}}</a>
+            </div>
+        </div>
+        <hr />
+        <h3 ng-if="ctrl.model.externalLinks.length > 0">External Links</h3>
+        <div class="row">
+            <div class="col-12 p-t-10 p-b-10 d-flex flex-column">
+                <a class="d-flex" ng-repeat="link in ctrl.model.externalLinks" title="{{'Spotlight ' + link.urlType}}" target="_blank" href="{{link.url}}">{{'Spotlight ' + link.urlType}}</a>
+            </div>
+         </div>
+            <!--<hr />
+    <h5 class="p-t-10">{{'Programs' | translate}}</h5>
+    <div class="row">
+        <div class="col-12 p-t-10 p-b-10" ng-repeat="p in ctrl.model.programs">
+            <p class="m-b-0 l-h-1">{{p.programName}}</p>
+            <span class="text-muted f-s-12">Begin date: {{p.beginDate | date: 'shortDate'}}</span>
+        </div>
+    </div>-->
+        </div>
+    </div>

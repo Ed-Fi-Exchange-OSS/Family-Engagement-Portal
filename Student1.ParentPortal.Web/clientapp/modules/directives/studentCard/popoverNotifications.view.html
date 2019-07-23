@@ -1,0 +1,6 @@
+﻿<div>
+    <h3 ng-hide="alerts.length== 0">{{'Alerts' | translate}}</h3>
+    <div class="notification-item" ng-repeat="alert in alerts" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi })">
+        {{alert.alertTypeName + ': ' + alert.value}}
+    </div>
+</div>

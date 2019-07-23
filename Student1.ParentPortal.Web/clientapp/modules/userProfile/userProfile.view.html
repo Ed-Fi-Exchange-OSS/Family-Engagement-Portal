@@ -1,0 +1,151 @@
+﻿<main role="main" class="container">
+    <h1> <a ng-repeat="p in ctrl.urls" ui-sref="{{p.url}}">{{p.displayName | translate}}</a> > {{'view.userProfile.title' | translate}} <span>{{'view.userProfile.subtitle' | translate}}</span></h1>
+    <form name="userForm" novalidate>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-height-fix">
+                    <div class="card-body">
+                        <h2>{{'view.userProfile.profilePicture'  | translate}}</h2>
+                        <div class="image-upload" ng-class="'img-avatar-' + ctrl.model.sexType">
+                            <label for="file-input" class="img-avatar">
+                                <span class="visibly-hidden">Profile Image</span>
+                                <img class="p-0" src="{{ctrl.model.imageUrl}}" ng-src="{{ctrl.model.imageUrl}}" alt="{{ctrl.model.firstName}} {{ctrl.model.lastSurname}}' profile picture">
+                                <i class="icon ion-md-refresh" aria-hidden="true"></i>
+                            </label><div>{{'view.userProfile.changeProfilePicture'  | translate}}</div>
+                            <input id="file-input" type="file" name='file' custom-on-change="ctrl.uploadImage" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>{{'Name'  | translate}}</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group" ng-class="{ 'invalid' : userForm.firstName.$invalid, 'valid': userForm.firstName.$valid }">
+                                            <label for="firstName">{{'First Name'  | translate}}:</label>
+                                            <input id="firstName" name="firstName" type="text"
+                                                   class="form-control"
+                                                   ng-model="ctrl.model.firstName"
+                                                   required
+                                                   ng-minlength="2"
+                                                   ng-maxlength="10" />
+                                            <div class="form-feedback" ng-if="userForm.firstName.$error.required">*Required</div>
+                                            <div class="form-feedback" ng-if="userForm.firstName.$error.maxlength">*Max length of 10 characters exceeded!</div>
+                                            <div class="form-feedback" ng-if="userForm.firstName.$error.minlength">*Min of 2 characters not reached!</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="middleName"> {{'Middle Name'  | translate }}: </label>
+                                            <input id="middleName" type="text" class="form-control" ng-model="ctrl.model.middleName" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="lastName"> {{'Last Name'  | translate}}: </label>
+                                            <input id="lastName" type="text" class="form-control" ng-model="ctrl.model.lastSurname" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nickname"> {{'Nickname'  | translate}}: </label>
+                                            <input id="nickname" type="text" class="form-control" ng-model="ctrl.model.nickname" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>{{'User Preferences' | translate}}</h2>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>{{'User Configuration' | translate}}</h2>
+                        <div class="row">
+                            <div class="col-6 col-md-6 form-group" ng-class="{ 'invalid' : userForm.preferredMethodOfContactTypeId.$invalid, 'valid': userForm.preferredMethodOfContactTypeId.$valid }">
+                                <label for="preferredMethodOfContactTypeId">{{'Preferred Method of Contact' | translate}}</label>
+                                <select id="preferredMethodOfContactTypeId" name="preferredMethodOfContactTypeId" class="form-control" required greater-than-zero ng-model="ctrl.model.preferredMethodOfContactTypeId" ng-options="mc.methodOfContactTypeId as mc.shortDescription for mc in ctrl.methodOfContactTypes"></select>
+                                <div class="form-feedback" ng-if="userForm.preferredMethodOfContactTypeId.$error.required">*Required</div>
+                                <div class="form-feedback" ng-if="userForm.preferredMethodOfContactTypeId.$error.gtZero">*Required</div>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <label for="preferredLanguage">{{'Preferred Language' | translate}}</label>
+                                <select id="preferredLanguage" class="form-control d-inline"
+                                        ng-model="ctrl.model.languageCode"
+                                        ng-selected="item.code == 'en'"
+                                        ng-options="item.code as (item.nativeName + ' - ' + item.name) for item in ctrl.languages"></select>
+                            </div>
+                            <div class="col-12 col-md-12 form-group">
+                                <label for="replyExpectations">{{'Reply Expectations' | translate}}</label>
+                                <textarea id="replyExpectations" class="w-100 form-control" ng-model="ctrl.model.replyExpectations" rows="2" placeholder="{{(ctrl.model.personTypeId == 2 ? 'view.userProfile.expectationsTooltip' : 'view.userProfile.expectationsParentTooltip') | translate}}" maxlength="255"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>{{'Contact Information' | translate}}</h2>
+        <div class="card">
+            <div class="card-body">
+                <emails model="ctrl.model.electronicMails"></emails>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <telephone model="ctrl.model.telephoneNumbers"></telephone>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <addresses model="ctrl.model.addresses"></addresses>
+            </div>
+        </div>
+
+        <h2>{{'Biographical Information' | translate}}</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="funFact"> {{'Fun fact'  | translate}}: </label>
+                    <input id="funFact" type="text" class="form-control" ng-model="ctrl.model.funFact" />
+                </div>
+                <div class="form-group">
+                    <label for="shortBiography"> {{'Short Biography'  | translate}}: </label>
+                    <textarea rows="2" id="shortBiography" type="text" class="form-control" ng-model="ctrl.model.shortBiography" />
+                </div>
+                <div class="form-group">
+                    <label for="biography"> {{'Biography'  | translate}}: </label>
+                    <textarea rows="6" id="biography" type="text" class="form-control" ng-model="ctrl.model.biography" />
+                </div>
+            </div>
+        </div>
+        <div class="row p-b-50">
+            <div class="col"><submit-button promise-to-execute="ctrl.save()" form="userForm" label="{{'Save'|translate}}" class="float-right"></submit-button></div>
+        </div>
+    </form>
+
+    <!--<h2>{{'Alerts'  | translate}}</h2>
+    <div class="card">
+        <div class="card-body">
+            <h4>{{'Configure User Alerts'  | translate}}</h4>
+            <form>
+                <div class="form-group">
+                    <label for="sectionsSelect"> {{'Sections'  | translate}}: </label>
+                    <select class="form-control" name="repeatSelect" id="sectionsSelect"
+                            ng-model="ctrl.selectedSection"
+                            ng-change="ctrl.onSectionChange()"
+                            ng-options="item as (item.localCourseCode + ' (' + item.classPeriodName + ') ') for item in ctrl.sections"></select>
+                </div>
+            </form>
+        </div>
+    </div>-->
+</main>

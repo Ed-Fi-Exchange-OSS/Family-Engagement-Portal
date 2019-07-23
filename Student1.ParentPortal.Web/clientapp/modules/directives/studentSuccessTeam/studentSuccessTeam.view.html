@@ -1,0 +1,48 @@
+﻿<div class="card text-center">
+    <div class="card-body">
+        <h3 class="m-b-30">{{'view.studentSuccessTeam.title' | translate}} <span>{{'view.studentSuccessTeam.subtitle' | translate}}</span></h3>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="image-container img-avatar img-avatar-student-success img-size w-75px">
+                    <img alt="Student Picture" ng-src="{{ctrl.model.student.imageUrl}}" />
+                </div>
+                    <p>{{ctrl.model.student.name}}<br /><span>{{ctrl.model.student.gradeLevel}}</span></p>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-12">
+                <svg xmlns="http://www.w3.org/2000/svg" width="90" height="10">
+                    <symbol id="mustache">
+                        <g>
+                            <path sodipodi:nodetypes="zsszczsszcsszzczzszcz" inkscape:connector-curvature="0" inkscape:original-d="m 50.0087,3.0227061 c 1.292036,0.5024419 4.985995,0.399272 7.550759,0.6849483 1.282382,0.1428382 18.039431,-0.09915 22.426897,-0.020646 4.387466,0.078504 5.444938,0.5434835 6.075969,0.9125736 C 86.693356,4.9686721 90,10 90,10 90,10 88.182447,8.402454 87.576557,8.1974158 86.970666,7.9923776 84.200716,7.0362075 80.107536,6.9734277 76.014356,6.9106479 60.964516,7.0154518 59.816442,6.9528892 57.520294,6.8277642 51.410387,6.1064871 50.134192,5.5698678 48.857997,5.0332484 45,1 45,1 45,1 38.478896,4.5713892 40.032465,5.4662944 40.895198,5.9632565 37.997093,6.5135007 29.962552,7.0265398 21.92801,7.5395789 11.000434,6.893712 10.056424,6.9779241 9.1124136,7.0621362 3.8409013,7.4088488 2.4647757,8.1914576 1.0886501,8.9740664 0,10 0,10 0,10 5.3337905,6.777155 3.9777757,4.5709333 2.6217609,2.3647115 9.6174962,4.4378151 9.9615558,3.5550337 10.305615,2.6722522 24.999056,3.8199992 32.562597,3.4954066 40.126138,3.1708139 39.372095,2.0337056 39.964882,2.9155242 40.55767,3.7973429 42.243915,0.48797044 45,0 c 2.635001,0.50646149 3.716664,2.5202643 5.0087,3.0227061 z" inkscape:path-effect="#path-effect2988" id="path3774" d="m 50.0087,3.0227061 c 2.425745,0.746744 5.012823,0.7122008 7.550759,0.6849483 7.475267,-0.08027 14.951223,-0.039342 22.426897,-0.020646 2.065866,0.00517 4.210218,0.025554 6.075969,0.9125736 C 88.159639,5.5966914 89.691972,7.6982458 90,10 89.307261,9.262159 88.482465,8.6486667 87.576557,8.1974158 85.297754,7.0622986 82.653275,6.9988553 80.107536,6.9734277 73.344129,6.9058728 66.580182,6.9450812 59.816442,6.9528892 56.529683,6.9566834 53.126722,6.929119 50.134192,5.5698678 48.016335,4.607906 46.200968,2.9920752 45,1 43.815115,2.9213533 42.068558,4.4916771 40.032465,5.4662944 36.941889,6.9456618 33.388933,7.0165354 29.962552,7.0265398 23.327154,7.0459139 16.691754,6.9420887 10.056424,6.9779241 7.4704959,6.9918899 4.7850487,7.0497254 2.4647757,8.1914576 1.5457144,8.6436983 0.70717095,9.258984 0,10 0.34151794,7.6910633 1.8791292,5.5924547 3.9777757,4.5709333 5.8118098,3.6782126 7.9223541,3.6028644 9.9615558,3.5550337 17.49377,3.3783611 25.029743,3.3485189 32.562597,3.4954066 35.047171,3.5438548 37.577655,3.6058885 39.964882,2.9155242 41.846492,2.3713797 43.59139,1.3610173 45,0 c 1.390009,1.3953906 3.126297,2.443225 5.0087,3.0227061"
+                                  style="fill:#f1f1f1; fill-opacity:1; stroke:none" />
+                        </g>
+                    </symbol>
+                </svg>
+                <svg viewBox="0 0 90 10" width="100%" height="65%">
+                    <use xlink:href="#mustache" />
+                </svg>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 m-b-10" ng-repeat="p in ctrl.data.successTeamMembers" tooltip-placement="top" uib-tooltip="{{'Click Me' | translate}}">
+                <div class="position-relative" style="width:100px; height:100px; display:inline-table">
+                    <div ng-if="p.unreadMessageCount > 0" class="bubble-counter blue">{{p.unreadMessageCount}}</div>
+                    <div class="image-container img-avatar success-team-member img-size w-100px h-100px" ng-class="'img-avatar-' + ctrl.getColor($index)">
+                        <img alt="Success Team Member"
+                             aria-haspopup="true"
+                             aria-expanded="False"
+                             ng-src="{{p.imageUrl}}"
+                             uib-popover-template="'clientapp/modules/directives/studentSuccessTeam/popoverProfile.view.html'"
+                             popover-placement="bottom"
+                             popover-trigger="'outsideClick'"
+                             popover-append-to-body="true"
+                             ng-init="profile = {p: p, color: 'text-with-bg-'+ ctrl.getColor($index)}" />
+                    </div>
+                        <p>{{p.name}}<br /><span>{{p.relationToStudent}}</span></p>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

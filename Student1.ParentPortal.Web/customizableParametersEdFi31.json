@@ -1,0 +1,338 @@
+﻿{
+  "IMPORTANT_READ": {
+    "info": "This file holds customizable parameters, values, rules and textual descriptions that can be changed through the application.",
+    "NOTE": "Do not save critical/sensible information in here. (i.e. Credentials, connection strings, etc..)"
+  },
+  "attendance": {
+    "ADA": {
+      "maxAbsencesCountThreshold": 10,
+      "excused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "great",
+            "operator": "==",
+            "value": 0
+          },
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<=",
+            "value": 4
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "unexcused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "great",
+            "operator": "==",
+            "value": 0
+          },
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<=",
+            "value": 4
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "tardy": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "great",
+            "operator": "==",
+            "value": 0
+          },
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<=",
+            "value": 4
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      }
+    },
+    "periodLevelAttendance": {
+      "maxAbsencesCountThreshold": 10,
+      "excused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "great",
+            "operator": "==",
+            "value": 0
+          },
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<=",
+            "value": 4
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "unexcused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "great",
+            "operator": "==",
+            "value": 0
+          },
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<=",
+            "value": 4
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "tardy": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "great",
+            "operator": "==",
+            "value": 0
+          },
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<=",
+            "value": 4
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      }
+    }
+  },
+  "behavior": {
+    "maxDisciplineIncidentsCountThreshold": 3,
+    "linkToSystemWithDetails": {
+      "title": "Hero K12",
+      "linkText": "Hero",
+      "url": "https://www.herok12.com/"
+    },
+    "thresholdRules": [
+      {
+        "interpretation": "great",
+        "operator": "<=",
+        "value": 0
+      },
+      {
+        "interpretation": "good",
+        "operator": "<=",
+        "value": 1
+      },
+      {
+        "interpretation": "warning",
+        "operator": "<=",
+        "value": 2
+      },
+      {
+        "interpretation": "bad",
+        "operator": ">=",
+        "value": 3
+      }
+    ]
+  },
+  "courseGrades": {
+    "linkToSystemWithDetails": {
+      "title": "HAC - Detail",
+      "linkText": "Home Access Center",
+      "url": "https://hac.yesprep.org/HomeAccess?gradesDetail"
+    },
+    "gpa": {
+      "nationalAverage": 3.38,
+      "thresholdRules": [
+        {
+          "interpretation": "good",
+          "operator": ">=",
+          "value": 3.38
+        },
+        {
+          "interpretation": "bad",
+          "operator": "<",
+          "value": 3.38
+        }
+      ]
+    },
+    "courseAverage": {
+      "thresholdRules": [
+        {
+          "interpretation": "great",
+          "operator": ">=",
+          "value": 90
+        },
+        {
+          "interpretation": "good",
+          "operator": ">=",
+          "value": 73
+        },
+        {
+          "interpretation": "warning",
+          "operator": ">=",
+          "value": 70
+        },
+        {
+          "interpretation": "bad",
+          "operator": "<",
+          "value": 70
+        }
+      ]
+    }
+  },
+  "assignments": {
+    "maxAssigmentsCountThreshold": 3,
+    "linkToSystemWithDetails": {
+      "title": "HAC - Detail",
+      "linkText": "Home Access Center",
+      "url": "https://hac.yesprep.org/HomeAccess?assignmentsDetail"
+    },
+    "thresholdRules": [
+      {
+        "interpretation": "great",
+        "operator": "==",
+        "value": 0
+      },
+      {
+        "interpretation": "good",
+        "operator": "<=",
+        "value": 2
+      },
+      {
+        "interpretation": "warning",
+        "operator": "<=",
+        "value": 10
+      },
+      {
+        "interpretation": "bad",
+        "operator": ">=",
+        "value": 10
+      }
+    ]
+  },
+  "graduationReadiness": {
+    "thresholdRules": [
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": true
+      },
+      {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": false
+      }
+    ]
+  },
+  "studentProfileExternalLinks": [
+    {
+      "title": "Spotlight report X",
+      "linkText": "NWEA Video",
+      "url": "https://www.spotlight-education.com/"
+    }
+  ],
+  "descriptors": {
+    "excusedAbsenceDescriptorCodeValue": "AE", //"Excused Absence",
+    "unexcusedAbsenceDescriptorCodeValue": "AU", //"Unexcused Absence",
+    "tardyDescriptorCodeValue": "T", //"Tardy",
+    "absentDescriptorCodeValue": "A",
+    "gradeBookMissingAssignmentTypeDescriptors": [ "HMWK" ], //["Assignment","Homework"], [895,897]
+    "gradeTypeGradingPeriodDescriptor": "Grading Period", // 928
+    "gradeTypeSemesterDescriptor": "Semester", // 926
+    "gradeTypeExamDescriptor": "Exam",
+    "gradeTypeFinalDescriptor": "Final", // 925
+    "validParentDescriptors": [ "F", "FP", "G", "M", "SP" ], // [ "Father", "Mother", "Step", "Guardian", "Foster" ]
+    "schoolGradingPeriodDescriptors": [ "A1", "A2", "A3", "A4", "A5", "A6" ], // They have to be in order
+    "examGradingPeriods": [ "A3", "A6" ],
+    "disciplineIncidentDescriptor": "Perpetrator"
+  },
+  "assessments": [
+    {
+      "title": "STAAR", // EoC  -- STAAR Algebra II, STAAR English III
+      "assessmentIdentifiers": [ "STAAR English I", "STAAR Algebra I", "STAAR English II", "STAAR Biology", "STAAR U.S. History" ],
+      "assessmentReportingMethodTypeDescriptor": "Scale score",
+      "shortDescription": "State of Texas Assessments of Academic Readiness - EoC",
+      "externalLink": "https://txparentportal.emetric.net/login"
+    },
+    {
+      "title": "PSAT",
+      "assessmentIdentifiers": [ "PSAT EBRW", "PSAT MATH" ],
+      "assessmentReportingMethodTypeDescriptor": "Scale score",
+      "shortDescription": "Preliminary Scholastic Aptitude Test",
+      "externalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks"
+    },
+    {
+      "title": "SAT",
+      "assessmentIdentifiers": [ "SAT EBRW", "SAT MATH" ],
+      "assessmentReportingMethodTypeDescriptor": "Scale score",
+      "shortDescription": "Scholastic Aptitude Test",
+      "externalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks"
+    }
+  ],
+  "staarAssessmentHistory": {
+    "title": "STAAR", // Elementary and Middle School
+    "assessmentIdentifiers": [ "STAAR READING", "STAAR MATHEMATICS", "STAAR WRITING", "STAAR SCIENCE", "STAAR SOCIAL STUDIES" ],
+    "assessmentReportingMethodTypeDescriptor": "Scale score",
+    "shortDescription": "State of Texas Assessments of Academic Readiness",
+    "externalLink": "https://txparentportal.emetric.net/login"
+  },
+  "feedbackExternalUrl": "https://yespreppublicschools.sharepoint.com/sites/portalhelp/_layouts/15/guestaccess.aspx?docid=088ade0e2b35a4ad4b4895281505062c3&authkey=AYm0BGYqMgJtcRSjcLQSiOM&expiration=2019-12-29T16%3A23%3A02.000Z&e=9xrxaC",
+  "mostCommonLanguageCodes": [ "en", "es", "vi" ]
+}
