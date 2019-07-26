@@ -120,9 +120,10 @@ namespace Student1.ParentPortal.Web.App_Start
             }
             else if(applicationMode == "Local")
             {
-                container.Register<IImageProvider, ConventionBasedImageProvider>();
-                container.Register<IClassPeriodNameProvider, YesPrepClassPeriodNameProvider>();
-                container.Register<IDateProvider, DateProvider>();
+                container.Register<IImageProvider, DemoImageProvider>();
+                container.Register<IClassPeriodNameProvider, CoreClassPeriodNameProvider>();
+                container.Register<IDateProvider, DemoDateProvider>();
+                //container.Register<IDateProvider, DateProvider>();
             }
             else
             {
