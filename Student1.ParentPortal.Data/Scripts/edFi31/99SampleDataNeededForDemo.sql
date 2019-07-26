@@ -1,270 +1,304 @@
-﻿-- Adding emails so that parent and teacher can login.
-INSERT INTO [edfi].[ParentElectronicMail] ([ElectronicMailTypeDescriptorId],[ParentUSI],[ElectronicMailAddress],[PrimaryEmailAddressIndicator]) values (816,881,'perry.savage@toolwise.onmicrosoft.com',1);
-INSERT INTO [edfi].[StaffElectronicMail] ([ElectronicMailTypeDescriptorId],[StaffUSI],[ElectronicMailAddress],[PrimaryEmailAddressIndicator]) values (818, 33,'alexander.kim@toolwise.onmicrosoft.com',1);
-INSERT INTO [edfi].[StaffElectronicMail] ([ElectronicMailTypeDescriptorId],[StaffUSI],[ElectronicMailAddress],[PrimaryEmailAddressIndicator]) values (818, 28,'fred.lloyd@toolwise.onmicrosoft.com',1);
+﻿-- Sex Descroptors
+-- 2018 Male
+-- 2017 Female
+-- Parent Usi = 3;
+-- Students [436, 722]
+-- Staff for 436 = 53
+-- Staff for 722 = 49
 
--- Adding Sex to students so that they show up.
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=1;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=29;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=553;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=798;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=910;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=886;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=922;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=870;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=814;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=817;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=745;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=884;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=945;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=889;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=841;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=932;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=951;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=942;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=892;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=781;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=943;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=811;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=772;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=885;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=960;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=504;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=849;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=877;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=578;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=672;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=755;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=474;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=750;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=424;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=724;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=460;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=894;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=459;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=467;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=834;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=954;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=479;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=590;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=893;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=558;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=488;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=473;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=415;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=659;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=765;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=761;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=788;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=673;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=752;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=545;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=458;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=604;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=824;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=435;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=776;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2018 WHERE [StudentUSI]=759;
-UPDATE [edfi].[Student] SET [BirthSexDescriptorId]=2017 WHERE [StudentUSI]=661;
+-- Descriptor Relation Config
+update edfi.Descriptor set CodeValue = 'M' where DescriptorId = 1881;
+insert into edfi.StaffElectronicMail(ElectronicMailTypeDescriptorId, StaffUSI, ElectronicMailAddress)
+values(818, 49, 'fred.lloyd@toolwise.onmicrosoft.com');
+update edfi.ParentElectronicMail set ElectronicMailAddress = 'perry.savage@toolwise.onmicrosoft.com' where ParentUSI = 3;
+
+update edfi.StaffElectronicMail set ElectronicMailAddress = 'alexander.kim@toolwise.onmicrosoft.com' where StaffUSI = 53;
+update edfi.Student set FirstName = 'Hannah', MiddleName= 'Valeria', LastSurname ='Rodriguez', BirthSexDescriptorId = 2017 where StudentUSI = 436;
+update edfi.Student set BirthSexDescriptorId = 2018 where StudentUSI = 722;
+update edfi.SchoolYearType set CurrentSchoolYear = 0;
+GO
+update edfi.SchoolYearType set CurrentSchoolYear = 1 where SchoolYear = 2011;
+GO
+-- Add Student To parent
+insert into edfi.StudentParentAssociation(ParentUSI, StudentUSI, RelationDescriptorId, PrimaryContactStatus, LivesWith, EmergencyContactStatus)
+Values(3,436,1881,1,1,1);
+GO
+
+update edfi.StudentSchoolAssociation set SchoolYear = 2011 where StudentUSI in (436, 722);
+
+-- Grading Period = 927
+-- Grading Period Config
+ update edfi.Descriptor set CodeValue = 'A1' where DescriptorId = 935;
+ update edfi.Descriptor set CodeValue = 'A2' where DescriptorId = 942;
+ update edfi.Descriptor set CodeValue = 'A3' where DescriptorId = 948;
+ update edfi.Descriptor set CodeValue = 'A4' where DescriptorId = 939;
+ update edfi.Descriptor set CodeValue = 'A5' where DescriptorId = 932;
+ update edfi.Descriptor set CodeValue = 'A6' where DescriptorId = 945;
+ GO
+
+ -- 246 Unexcused absence
+update edfi.Descriptor set CodeValue = 'A' where DescriptorId = 246;
+
+--Adding Student Absences
+insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
+values (246, '2011-05-20',255901001, 2011, '2010-2011 Spring Semester', 436 ,'The student was out of the city.');
+
+insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
+values (246, '2011-05-21',255901001, 2011, '2010-2011 Spring Semester', 436 ,'Traffic.');
+
+insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
+values (246, '2011-05-10',255901044, 2011, '2010-2011 Spring Semester', 722 ,'The student left the school.');
+GO
+
+--Adding student discipline incidents
+insert into edfi.DisciplineIncident(IncidentIdentifier, SchoolId, IncidentDate, IncidentDescription)
+values (22, 255901001, '2011-04-21', 'Student playing with a toy in class.');
+insert into edfi.DisciplineIncident(IncidentIdentifier, SchoolId, IncidentDate, IncidentDescription)
+values (23, 255901044, '2011-04-20', 'Student missbehaving in class.');
+GO
+
+-- StudentParticipationCodeDescriptor = 2180 -> Perpetrator
+insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+values (22, 255901001, 436, 2180);
+insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+values (23, 255901044, 722, 2180);
+GO
 
 
--- Changing Current School Year for the demo.
+insert into edfi.DisciplineAction(DisciplineActionIdentifier, DisciplineDate, StudentUSI, ResponsibilitySchoolId)
+values(26, '2011-04-22', 436, 255901001);
+insert into edfi.DisciplineAction(DisciplineActionIdentifier, DisciplineDate, StudentUSI, ResponsibilitySchoolId)
+values(27, '2011-04-22', 722, 255901044);
+GO
 
-  UPDATE [edfi].[SchoolYearType] 
-  set CurrentSchoolYear=1 
-  where SchoolYear = 2011
+insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
+values(26, '2011-04-22', 22, 255901001, 436);
+insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
+values(27, '2011-04-22', 23, 255901044, 722);
+GO
 
-    UPDATE [edfi].[SchoolYearType] 
-  set CurrentSchoolYear=0 
-  where SchoolYear = 2019
+insert into edfi.DisciplineActionDiscipline(DisciplineActionIdentifier, DisciplineDate, DisciplineDescriptorId,StudentUSI)
+values(26, '2011-04-22', 771, 436);
+insert into edfi.DisciplineActionDiscipline(DisciplineActionIdentifier, DisciplineDate, DisciplineDescriptorId,StudentUSI)
+values(27, '2011-04-22', 771, 722);
+GO
 
- -- Changing it back
-  --UPDATE [edfi].[SchoolYearType] 
-  --set CurrentSchoolYear=0 
-  --where SchoolYear = 2011
+-- 897 Homework
+update edfi.Descriptor set CodeValue = 'HMWK' where DescriptorId = 897;
 
-  --  UPDATE [edfi].[SchoolYearType] 
-  --set CurrentSchoolYear=1
-  --where SchoolYear = 2019
+-- Adding students missing asignments
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-12', 'Assigment 1', 'ALG-2', 255901001, 2011, '25590100106Trad220ALG222011', '2010-2011 Spring Semester', 897);
 
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-20', 'Assigment 2', 'SS-06', 255901044, 2011, '25590104406Trad112SS0622011', '2010-2011 Spring Semester', 897);
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-20', 'Assigment 1', 'SS-06', 255901044, 2011, '25590104406Trad112SS0622011', '2010-2011 Spring Semester', 897);
 
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-20', 'Assigment 2', 'SCI-06', 255901044, 2011, '25590104405Trad212SCI0622011', '2010-2011 Spring Semester', 897);
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-10', 'Assigment 1', 'SCI-06', 255901044, 2011, '25590104405Trad212SCI0622011', '2010-2011 Spring Semester', 897);
+GO
 
--- Add Attendance event
-INSERT INTO [edfi].StudentSchoolAttendanceEvent 
-(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI) 
-VALUES (246,'2011-10-06',255901107, 2011,'2010-2011 Fall Semester', 553);
+-- Add GPA
+update edfi.StudentAcademicRecord set CumulativeGradePointAverage = '3.5' where StudentUSI = 436;
+update edfi.StudentAcademicRecord set CumulativeGradePointAverage = '4.0' where StudentUSI = 722;
+GO
 
-INSERT INTO [edfi].StudentSchoolAttendanceEvent 
-(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI) 
-VALUES (246,'2011-10-06',255901107, 2011,'2010-2011 Spring Semester', 798);
+-- ADDING WEEK FOR SCHEDULE
 
--- Add Student Discipline incident Association with Actions
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-02', 255901001)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-03', 255901001)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-04', 255901001)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-05', 255901001)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-06', 255901001)
+GO
+-- ADDING ASSESSMENTS
 
-INSERT INTO [edfi].[StudentDisciplineIncidentAssociation] 
-(IncidentIdentifier,SchoolId, StudentUSI, StudentParticipationCodeDescriptorId) 
-VALUES (1,255901107,553,2180)
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('SAT MATH', 'uri://ed-fi.org/Assessment/Assessment.xml', 'SAT', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('SAT EBRW', 'uri://ed-fi.org/Assessment/Assessment.xml', 'SAT', 113, 2011,'2012-05-03',550);
 
-INSERT INTO [edfi].[DisciplineAction]
-(DisciplineActionIdentifier, DisciplineDate, StudentUSI, ResponsibilitySchoolId) 
-VALUES (26,'2011-10-20',553,255901107)
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('PSAT MATH', 'uri://ed-fi.org/Assessment/Assessment.xml', 'PSAT', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('PSAT EBRW', 'uri://ed-fi.org/Assessment/Assessment.xml', 'PSAT', 113, 2011,'2012-05-03',550);
 
-INSERT INTO [edfi].[DisciplineActionStudentDisciplineIncidentAssociation]
-(DisciplineActionIdentifier, DisciplineDate,IncidentIdentifier,SchoolId,StudentUSI)
-VALUES (26,'2011-10-20',1,255901107,553)
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR English I', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR Algebra I', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR English II', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR Biology', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR U.S. History', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
 
-INSERT INTO [edfi].[DisciplineActionDiscipline]
-(DisciplineActionIdentifier,DisciplineDate,DisciplineDescriptorId,StudentUSI)
-VALUES (26,'2011-10-20',768,553)
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR READING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR MATHEMATICS', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR WRITING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR SCIENCE', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle, AssessmentCategoryDescriptorId, AssessmentVersion, RevisionDate, MaxRawScore)
+values('STAAR SOCIAL STUDIES', 'uri://ed-fi.org/Assessment/Assessment.xml', 'STAAR', 113, 2011,'2012-05-03',550);
+GO
 
-UPDATE  [edfi].[DisciplineIncident] 
-SET IncidentDescription = 'Student fought with another student'
-WHERE IncidentIdentifier = 1
+-- 218 Scale Score
+-- ASIGNING ASSESSMENTS TO STUDENTS
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('SAT MATH', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('SAT EBRW', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
 
-INSERT INTO [edfi].[StudentDisciplineIncidentAssociation] 
-(IncidentIdentifier,SchoolId, StudentUSI, StudentParticipationCodeDescriptorId) 
-VALUES (1,255901107,910,2180)
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('PSAT MATH', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('PSAT EBRW', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
 
-INSERT INTO [edfi].[DisciplineAction]
-(DisciplineActionIdentifier, DisciplineDate, StudentUSI, ResponsibilitySchoolId) 
-VALUES (27,'2011-10-20',910,255901107)
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('STAAR English I', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('STAAR Algebra I', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('STAAR English II', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('STAAR Biology', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate)
+values('STAAR U.S. History', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, '2012-10-29');
 
-INSERT INTO [edfi].[DisciplineActionStudentDisciplineIncidentAssociation]
-(DisciplineActionIdentifier, DisciplineDate,IncidentIdentifier,SchoolId,StudentUSI)
-VALUES (27,'2011-10-20',1,255901107,910)
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR READING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, '2011-10-29', 907);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR MATHEMATICS', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, '2011-10-29', 907);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR WRITING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, '2011-10-29', 907);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR SCIENCE', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, '2011-10-29', 907);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR SOCIAL STUDIES', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, '2011-10-29', 907);
 
-INSERT INTO [edfi].[DisciplineActionDiscipline]
-(DisciplineActionIdentifier,DisciplineDate,DisciplineDescriptorId,StudentUSI)
-VALUES (27,'2011-10-20',768,910)
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR READING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, '2012-10-29', 917);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR MATHEMATICS', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, '2012-10-29', 917);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR WRITING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, '2012-10-29', 917);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR SCIENCE', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, '2012-10-29', 917);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR SOCIAL STUDIES', 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, '2012-10-29', 917);
 
--- Add Student GPA
+GO
+-- ADDING ASSESSMENT SCORE RESULTS
 
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.9
-WHERE StudentUSI = 553
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('SAT MATH', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('SAT EBRW', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 450, 1938);
 
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.2
-WHERE StudentUSI = 798
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('PSAT MATH', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('PSAT EBRW', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 450, 1938);
 
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.5
-WHERE StudentUSI = 910
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.9
-WHERE StudentUSI = 886
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.7
-WHERE StudentUSI = 922
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.0
-WHERE StudentUSI = 870
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.1
-WHERE StudentUSI = 814
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.3
-WHERE StudentUSI = 817
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.9
-WHERE StudentUSI = 745
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.4
-WHERE StudentUSI = 884
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.7
-WHERE StudentUSI = 945
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.7
-WHERE StudentUSI = 889
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.8
-WHERE StudentUSI = 841
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.2
-WHERE StudentUSI = 932
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.2
-WHERE StudentUSI = 951
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.0
-WHERE StudentUSI = 942
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.0
-WHERE StudentUSI = 892
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.1
-WHERE StudentUSI = 781
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.2
-WHERE StudentUSI = 943
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.3
-WHERE StudentUSI = 811
-
-UPDATE [edfi].[StudentAcademicRecord]
-SET CumulativeGradePointAverage = 3.9
-WHERE StudentUSI = 772
-
---Add Missing Assignment
-
-INSERT INTO [edfi].[GradebookEntry] 
-  (DateAssigned,GradebookEntryTitle,LocalCourseCode,SchoolId,SchoolYear,SectionIdentifier,SessionName, GradebookEntryTypeDescriptorId)
-  VALUES ('2010-08-29', 'Assignment 1','ART-01', 255901107, 2011,'25590110705Trad504ART0112011','2010-2011 Fall Semester',895)
-
-  INSERT INTO [edfi].[StudentGradebookEntry]
-  (BeginDate,DateAssigned,GradebookEntryTitle,LocalCourseCode,SchoolId,SchoolYear, SectionIdentifier, SessionName, StudentUSI)
-  VALUES ('2010-08-23','2010-08-29','Assignment 1','ART-01',255901107,2011,'25590110705Trad504ART0112011','2010-2011 Fall Semester',553)
-
-INSERT INTO [edfi].[GradebookEntry] 
-  (DateAssigned,GradebookEntryTitle,LocalCourseCode,SchoolId,SchoolYear,SectionIdentifier,SessionName, GradebookEntryTypeDescriptorId)
-  VALUES ('2011-02-20', 'Assignment 1','ART-03', 255901107, 2011,'25590110702Trad505ART0322011','2010-2011 Spring Semester',895)
-
-  INSERT INTO [edfi].[StudentGradebookEntry]
-  (BeginDate,DateAssigned,GradebookEntryTitle,LocalCourseCode,SchoolId,SchoolYear, SectionIdentifier, SessionName, StudentUSI)
-  VALUES ('2011-02-19','2011-02-20','Assignment 1','ART-03',255901107,2011,'25590110702Trad505ART0322011','2010-2011 Spring Semester',798)
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR English I', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR Algebra I', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 450, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR English II', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR Biology', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 450, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR U.S. History', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 500, 1938);
 
 
--- Student Schedule
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR READING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR MATHEMATICS', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 450, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR WRITING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR SCIENCE', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 450, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR SOCIAL STUDIES', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 500, 1938);
 
- INSERT INTO [edfi].[BellScheduleDate]
-  (BellScheduleName, Date, SchoolId)
-  VALUES ('Normal Schedule', '2011-01-16', 255901107)
- INSERT INTO [edfi].[BellScheduleDate]
-  (BellScheduleName, Date, SchoolId)
-  VALUES ('Normal Schedule', '2011-01-17', 255901107)
- INSERT INTO [edfi].[BellScheduleDate]
-  (BellScheduleName, Date, SchoolId)
-  VALUES ('Normal Schedule', '2011-01-18', 255901107)
-  INSERT INTO [edfi].[BellScheduleDate]
-  (BellScheduleName, Date, SchoolId)
-  VALUES ('Normal Schedule', '2011-01-19', 255901107)
-  INSERT INTO [edfi].[BellScheduleDate]
-  (BellScheduleName, Date, SchoolId)
-  VALUES ('Normal Schedule', '2011-01-20', 255901107)
-  INSERT INTO [edfi].[BellScheduleDate]
-  (BellScheduleName, Date, SchoolId)
-  VALUES ('Normal Schedule', '2011-01-21', 255901107)
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR READING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR MATHEMATICS', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 450, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR WRITING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 500, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR SCIENCE', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 450, 1938);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR SOCIAL STUDIES', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 500, 1938);
 
-  UPDATE [edfi].[StudentSchoolAttendanceEvent]
-  set AttendanceEventCategoryDescriptorId = 245
-  WHERE Id = '96F30BF2-113A-47AC-A839-5AF9CEDD5975'
+GO
 
-  UPDATE [edfi].[StudentParentAssociation]
-  SET EmergencyContactStatus = 1
-  WHERE ParentUSI = 881
+-- Configuring Performance Levels
+
+update edfi.Descriptor set CodeValue = 'Masters Grade Level', ShortDescription = 'Masters Grade Level' where DescriptorId = 1650;
+update edfi.Descriptor set CodeValue = 'Approaches Grade Level', ShortDescription = 'Approaches Grade Level' where DescriptorId = 1651;
+update edfi.Descriptor set CodeValue = 'Meets Grade Level', ShortDescription = 'Approaches Grade Level' where DescriptorId = 1652;
+update edfi.Descriptor set CodeValue = 'Dit Not Meet Grade Level', ShortDescription = 'Approaches Grade Level' where DescriptorId = 1653;
+
+GO
+
+-- Adding Performance Levels [1650-1653]
+
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('SAT MATH', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('SAT EBRW', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1651, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('PSAT MATH', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('PSAT EBRW', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1651, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR English I', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR Algebra I', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1651, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR English II', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1652, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR Biology', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1653, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR U.S. History', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq', 436, 1 );
+
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR READING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR MATHEMATICS', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1651, 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR WRITING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1652, 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR SCIENCE', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1653, 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR SOCIAL STUDIES', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq', 722, 1 );
+
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR READING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR MATHEMATICS', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1651, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR WRITING', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1652, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR SCIENCE', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1653, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR SOCIAL STUDIES', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
+GO

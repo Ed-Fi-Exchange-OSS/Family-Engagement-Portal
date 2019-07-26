@@ -22,7 +22,7 @@
         <div class="text-center">
             <div class="image-container img-avatar img-size w-75px" ng-class="'img-avatar-' + ctrl.model.sexType"><img ng-src="{{ctrl.model.imageUrl}}"  alt="{{ctrl.model.name}} Profile Picture"></div>
             <h2 class="m-t-15 m-b-2 d-flex justify-content-center align-items-center h-">{{ctrl.model.name}}</h2>
-            <p class="text-muted m-b-2">{{ctrl.model.gradeLevel|translate}}</p>
+            <p class="text-muted m-b-2 card-grade-level">{{ctrl.model.gradeLevel  | translate}}</p>
             <p class="text-muted">{{ctrl.model.currentSchool}}</p>
             <div class="row" ng-if="ctrl.model.externalLinks.length > 0">
                 <div class="col-12 p-t-10 p-b-10 d-flex flex-column align-items-center">

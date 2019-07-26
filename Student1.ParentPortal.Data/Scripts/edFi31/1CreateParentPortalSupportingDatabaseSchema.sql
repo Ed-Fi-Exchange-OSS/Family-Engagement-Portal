@@ -779,6 +779,120 @@ INSERT INTO [ParentPortal].[UrlType](UrlTypeId,Description,ShortDescription) VAL
 GO
 SET IDENTITY_INSERT [ParentPortal].[UrlType] OFF
 GO
-INSERT INTO ParentPortal.SpotlightIntegration SELECT StudentUniqueId, 'https://www.youtube.com/', 1 FROM edfi.Student;
-INSERT INTO ParentPortal.SpotlightIntegration SELECT StudentUniqueId, 'https://www.google.com/', 2 FROM edfi.Student;
+CREATE VIEW ParentPortal.StudentABCSummary AS
+SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname,
+-- Sex Type --
+	(SELECT ShortDescription FROM edfi.Descriptor
+			WHERE DescriptorId = s.BirthSexDescriptorId) as  [SexType],
+-- GPA --
+	(SELECT TOP(1) sar.CumulativeGradePointAverage FROM edfi.StudentAcademicRecord as sar
+			WHERE StudentUSI = s.StudentUSI
+			ORDER BY sar.TermDescriptorId desc) as [Gpa],
+-- Grade Level --
+	(SELECT TOP(1) d.ShortDescription FROM edfi.Descriptor as d
+			INNER JOIN edfi.StudentSchoolAssociation as ssa
+			on ssa.StudentUSI = s.StudentUSI
+			AND d.DescriptorId = ssa.EntryGradeLevelDescriptorId
+			INNER JOIN edfi.SchoolYearType as sy
+			on sy.SchoolYear = ssa.SchoolYear
+			WHERE sy.CurrentSchoolYear = 1
+			ORDER BY ssa.EntryDate desc) as [GradeLevel],
+-- Absences Count --
+ (SELECT Count(*) 
+	FROM edfi.StudentSchoolAttendanceEvent AS ssae
+		INNER JOIN edfi.SchoolYearType AS sy
+		on ssae.SchoolYear = sy.SchoolYear
+		where sy.CurrentSchoolYear = 1 and ssae.StudentUSI = s.StudentUSI) as [Absences],
+-- Missing Assignment Count --
+  (SELECT Count(*) 
+	FROM edfi.GradebookEntry as gbe
+		INNER JOIN edfi.Descriptor as getd
+			on gbe.GradebookEntryTypeDescriptorId = getd.DescriptorId
+		INNER JOIN edfi.StudentSectionAssociation as ssa
+			on ssa.SchoolId = gbe.SchoolId
+			AND ssa.SchoolYear = gbe.SchoolYear
+			AND ssa.SectionIdentifier = gbe.SectionIdentifier
+			AND ssa.LocalCourseCode = gbe.LocalCourseCode
+			AND ssa.SessionName = gbe.SessionName
+		LEFT JOIN edfi.StudentGradebookEntry as sgbe
+		    on sgbe.DateAssigned = gbe.DateAssigned
+			AND sgbe.StudentUSI = ssa.StudentUSI
+			AND sgbe.GradebookEntryTitle = gbe.GradebookEntryTitle
+			AND sgbe.LocalCourseCode = gbe.LocalCourseCode
+			AND sgbe.SchoolId = gbe.SchoolId
+			AND sgbe.SchoolYear = gbe.SchoolYear
+			AND sgbe.SectionIdentifier = gbe.SectionIdentifier
+			AND sgbe.SessionName = gbe.SessionName
+		WHERE  sgbe.DateFulfilled IS NULL 
+			AND ssa.StudentUSI = s.StudentUSI
+			AND sgbe.NumericGradeEarned IS NULL
+			AND gbe.GradebookEntryTypeDescriptorId IS NOT NULL
+			AND getd.CodeValue = 'HMWK'
+			AND ssa.BeginDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = ssa.SchoolId ))
+			as [MissingAssignments],
+-- Discipline Incident Count --
+(SELECT Count(*) 
+	FROM edfi.StudentDisciplineIncidentAssociation as sdia
+		inner join edfi.DisciplineIncident as di
+			on sdia.IncidentIdentifier = di.IncidentIdentifier
+			AND sdia.SchoolId = di.SchoolId
+		inner join edfi.Descriptor as d
+			on sdia.StudentParticipationCodeDescriptorId = d.DescriptorId
+		WHERE d.CodeValue = 'Perpetrator'
+			AND sdia.StudentUSI = s.StudentUSI
+			AND di.IncidentDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = sdia.SchoolId )) 
+			as [DisciplineIncidents],
+-- Grading Period Average --
+(SELECT AVG(g.NumericGradeEarned) from edfi.Grade as g
+		inner join edfi.Descriptor as gtd
+			on g.GradeTypeDescriptorId = gtd.DescriptorId
+		inner join edfi.Descriptor as gpd
+			on g.GradingPeriodDescriptorId = gpd.DescriptorId
+		inner join edfi.SchoolYearType as sy
+			on g.SchoolYear = sy.SchoolYear
+		WHERE g.StudentUSI = s.StudentUSI
+			AND sy.CurrentSchoolYear = 1
+			AND  gtd.CodeValue = 'Grading Period'
+			AND g.NumericGradeEarned IS NOT NULL)
+			as [GradingPeriodAvg],
+-- Exam Average --
+(SELECT AVG(g.NumericGradeEarned) from edfi.Grade as g
+		inner join edfi.Descriptor as gtd
+			on g.GradeTypeDescriptorId = gtd.DescriptorId
+		inner join edfi.Descriptor as gpd
+			on g.GradingPeriodDescriptorId = gpd.DescriptorId
+		inner join edfi.SchoolYearType as sy
+			on g.SchoolYear = sy.SchoolYear
+		WHERE g.StudentUSI = s.StudentUSI
+			AND sy.CurrentSchoolYear = 1
+			AND  gtd.CodeValue = 'Exam'
+			AND g.NumericGradeEarned IS NOT NULL)
+			as [ExamAvg],
+-- Semester Average --
+(SELECT AVG(g.NumericGradeEarned) from edfi.Grade as g
+		inner join edfi.Descriptor as gtd
+			on g.GradeTypeDescriptorId = gtd.DescriptorId
+		inner join edfi.Descriptor as gpd
+			on g.GradingPeriodDescriptorId = gpd.DescriptorId
+		inner join edfi.SchoolYearType as sy
+			on g.SchoolYear = sy.SchoolYear
+		WHERE g.StudentUSI = s.StudentUSI
+			AND sy.CurrentSchoolYear = 1
+			AND  gtd.CodeValue = 'Semester'
+			AND g.NumericGradeEarned IS NOT NULL)
+			as [SemesterAvg],
+-- Final Average --
+(SELECT AVG(g.NumericGradeEarned) FROM edfi.Grade as g
+		inner join edfi.Descriptor as gtd
+			on g.GradeTypeDescriptorId = gtd.DescriptorId
+		inner join edfi.Descriptor as gpd
+			on g.GradingPeriodDescriptorId = gpd.DescriptorId
+		inner join edfi.SchoolYearType as sy
+			on g.SchoolYear = sy.SchoolYear
+		WHERE g.StudentUSI = s.StudentUSI
+			AND sy.CurrentSchoolYear = 1
+			AND  gtd.CodeValue = 'Final'
+			AND g.NumericGradeEarned IS NOT NULL)
+			as [FinalAvg]
+FROM edfi.Student as s;
 GO

@@ -52,7 +52,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
       
         public async Task<List<ParentPortal.Models.Student.DisciplineIncident>> GetStudentDisciplineIncidentsAsync(int studentUsi, string disciplineIncidentDescriptor)
-        {
+        {                                                                                                               
             var data = await(from sdia in _edFiDb.StudentDisciplineIncidentAssociations
                 join di in _edFiDb.DisciplineIncidents on new { sdia.IncidentIdentifier, sdia.SchoolId } equals new { di.IncidentIdentifier, di.SchoolId }
                 join spcd in _edFiDb.Descriptors on sdia.StudentParticipationCodeDescriptorId equals spcd.DescriptorId 
@@ -187,8 +187,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                     equals new { ssa.LocalCourseCode, ssa.SchoolId, ssa.SchoolYear, ssa.SectionIdentifier, ssa.SessionName }
                 join staff in _edFiDb.Staffs on ssa.StaffUsi equals staff.StaffUsi
                 join cp in _edFiDb.SectionClassPeriods
-                        on new {gra.LocalCourseCode, gra.SchoolId, gra.SchoolYear, gra.SessionName}
-                    equals new {cp.LocalCourseCode, cp.SchoolId, cp.SchoolYear, cp.SessionName}
+                        on new {gra.LocalCourseCode, gra.SchoolId, gra.SchoolYear, gra.SessionName, gra.SectionIdentifier}
+                    equals new {cp.LocalCourseCode, cp.SchoolId, cp.SchoolYear, cp.SessionName, cp.SectionIdentifier}
                 join co in _edFiDb.CourseOfferings
                         on new {gra.LocalCourseCode, gra.SchoolId, gra.SchoolYear, gra.SessionName}
                     equals new {co.LocalCourseCode, co.SchoolId, co.SchoolYear, co.SessionName}
@@ -221,7 +221,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                     GradeTypeDescription = gtd.ShortDescription,
                     // The grading Period: First Six Weeks, Second..., First Semester, ..., End of Year
                     gra.GradingPeriodDescriptorId,
-                    GradingPeriodDescription = gpd.ShortDescription,
+                    GradingPeriodDescription = gpd.CodeValue,
                     gra.LetterGradeEarned,
                     gra.NumericGradeEarned,
                     gra.BeginDate,

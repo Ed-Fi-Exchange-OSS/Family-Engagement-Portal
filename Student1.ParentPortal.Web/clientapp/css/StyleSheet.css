@@ -555,6 +555,13 @@ div.event-teal {
     .border-bottom-show-md { border-bottom: 1px solid rgba(120, 130, 140, 0.13); }
 }
 
+.card-grade-level {
+    height: 24px;
+    min-height: 24px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
 .masonry-student-card {
     max-width: 380px;
     width: 380px;

@@ -191,19 +191,19 @@ namespace Student1.ParentPortal.Resources.Services.Students
             // If not lets calculate based on grading periods.
 
             // Final grade calculation
-            if (currentCourses.Any(x => x.GradesByFinal.Any()))
+            if (currentCourses.Any(x => x.GradesByFinal.Any(g => g.NumericGradeEarned.HasValue)))
                 return CalcualteByFinalGrade(currentCourses);
 
             // Semester calculation
-            if (currentCourses.Any(x => x.GradesBySemester.Any()))
+            if (currentCourses.Any(x => x.GradesBySemester.Any(g => g.NumericGradeEarned.HasValue)))
                 return CalcualteBySemesterGrades(currentCourses);
 
             // Exam calculation
-            if (currentCourses.Any(x => x.GradesByExam.Any()))
+            if (currentCourses.Any(x => x.GradesByExam.Any(g => g.NumericGradeEarned.HasValue)))
                 return CalcualteByExamAndGradePeriodsGrades(currentCourses);
 
             // Grading period calculation
-            if (currentCourses.Any(x => x.GradesByGradingPeriod.Any()))
+            if (currentCourses.Any(x => x.GradesByGradingPeriod.Any(g => g.NumericGradeEarned.HasValue)))
                     return CalcualteByGradingPeriodGrades(currentCourses);
 
             return null;

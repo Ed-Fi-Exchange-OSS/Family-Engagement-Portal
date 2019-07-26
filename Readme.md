@@ -23,7 +23,7 @@ Teacher:
 ~~~
 
 ~~~
-Teacher for 3.1:
+Teacher:
    Email: fred.lloyd@toolwise.onmicrosoft.com
    Password: Teacher123
 ~~~
@@ -35,19 +35,30 @@ We tried to make the setup and deploy of this web application as easy as possibl
 
 ### Prerequisites ###
 
-* Install Visual Studio Community Edition
-* Install MsSQL Developer Edition
-* Download and restore Ed-Fi ODS v2.5
-* Download the code
-* Open code with VS
+* Install Visual Studio Community Edition (https://visualstudio.microsoft.com/downloads/)
+* Install MsSQL Developer Edition (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+* Install SQL Server Management Studio (https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+* Download and restore Ed-Fi ODS v3.1
+  * Download 3.1 from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Samples.Ods/3.1.1
+* Download the code (https://github.com/Ed-Fi-Alliance/Ed-Fi-X-ParentPortal)
+* Open code with Visual Studio Community Edition
 * Compile
 
 ### Running the application for the first time ###
 
 Before you begin make sure you have gone through all the Prerequisites listed above.
 
-Make sure you change the connection string parameters to point to your database.
+To run the Parent Portal we still need to execute some application specific scripts.
 
+
+Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
+Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
+  * 1CreateParentPortalSupportingDatabaseSchema.sql
+  * 2ODSExtensions.sql
+  * 99SampleDataNeededForDemo.sql (For Demo Only)
+
+You are now ready to run the application. 
+Go back to Visual Studio Community Edition and press F5.
 
 Test credentials
 ------------
@@ -69,6 +80,12 @@ Teacher:
    Password: Teacher123
 ~~~
 
+~~~
+Teacher:
+   Email: fred.lloyd@toolwise.onmicrosoft.com
+   Password: Teacher123
+~~~
+
 
 Production Deployment Notes
 ------------
@@ -78,7 +95,7 @@ As mentioned before the main goal of this application was to make it as simple a
 The main things needed to change for this application to run in production are:
 
 * Authentication parameters for AzureAd:
-    * In file app.config.authentication.azure.js
+    * In file app.config.js
 		* instance: 'https://login.microsoftonline.com/',
 		* tenant: '[Enter your tenant name here e.g. contoso.onmicrosoft.com]',
 		* clientId: '[Enter your clientId here e.g. e9a5a8b6-8af7-4719-9821-0deef255f68e]',
@@ -86,4 +103,15 @@ The main things needed to change for this application to run in production are:
 		* authentication.azure.tenant value = "[Enter your tenant name here e.g. contoso.onmicrosoft.com]"
 		* authentication.azure.audience value = "[Enter your clientId here e.g. e9a5a8b6-8af7-4719-9821-0deef255f68e]" 
 * Database Connection string located in the Web.config file.
-* Parent Portal API rootApiUri located in the app.config.js file.
+* For alerts and emails update:
+   * feedback.emails to contain the email that should receive the messages.
+   * messaging.email.defaultFromEmail set to the email that will appear in the from field.
+   * messaging.email.server set to your email provider server
+   * messaging.email.user set to the user to send emails
+   * messaging.email.pass set to the password to be able to send emails
+* For translation services:
+   * translation.Name set to the user or name of the service used
+   * translation.Key set to the key provided by the service
+* If using Azure Blob Storage for images set the azure.storage.connectionString.
+* If using Azure Scalable SignalR update the Azure:SignalR:ConnectionString
+
