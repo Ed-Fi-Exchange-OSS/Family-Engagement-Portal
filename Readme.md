@@ -1,7 +1,11 @@
-﻿Parent Portal provided by Student1, YesPrep and MSDF
+﻿Parent Portal provided by YesPrep and Student1 
 ============
 
-This parent portal was made possible thanks to the Student1 and the MSDF foundations.
+This parent portal was made possible thanks to Yes Prep Public Schools and Student1.
+
+Description
+------------
+The Parent Engagement Portal provides an easy-to-use view of student information, attendance, discipline, grades, and assessment scores with links to parent views in other applications. The Portal enables communication between members of the student’s “success team” by supporting text communications with automatic language translation.
 
 Live Demo
 ------------
@@ -115,3 +119,7 @@ The main things needed to change for this application to run in production are:
 * If using Azure Blob Storage for images set the azure.storage.connectionString.
 * If using Azure Scalable SignalR update the Azure:SignalR:ConnectionString
 
+## License
+
+Licensed under the [Ed-Fi
+License](https://www.ed-fi.org/getting-started/license-ed-fi-technology/).

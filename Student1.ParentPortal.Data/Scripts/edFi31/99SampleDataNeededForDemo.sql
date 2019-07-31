@@ -1,12 +1,15 @@
 ﻿-- Sex Descroptors
 -- 2018 Male
 -- 2017 Female
--- Parent Usi = 3;
--- Students [436, 722]
--- Staff for 436 = 53
--- Staff for 722 = 49
+-- Parent Usi = 3 uniqueid = 777779
+-- Students [436, 722] UniqueIds [605255, 605541]
+-- Staff for 436 = 53 uniqueid = 207272
+-- Staff for 722 = 49 uniqueId = 207260
+
+-- Person Type 1 = Parent; 2 = Staff;
 
 -- Descriptor Relation Config
+
 update edfi.Descriptor set CodeValue = 'M' where DescriptorId = 1881;
 insert into edfi.StaffElectronicMail(ElectronicMailTypeDescriptorId, StaffUSI, ElectronicMailAddress)
 values(818, 49, 'fred.lloyd@toolwise.onmicrosoft.com');
@@ -301,4 +304,123 @@ insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, Assessm
 values('STAAR SCIENCE', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1653, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
 insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
 values('STAAR SOCIAL STUDIES', 218, 'uri://ed-fi.org/Assessment/Assessment.xml', 1650, 'goiwenfwf319r9r9v8noAWWDQN9dq1', 722, 1 );
+GO
+
+-- Adding Messages
+insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, OriginalMessage, DateSent, RecipientHasRead)
+values(605541, 2, 207260, 1, 777779, 'Message for Demo', '2011-04-2', 0);
+
+insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, OriginalMessage, DateSent, RecipientHasRead)
+values(605255, 2, 207272, 1, 777779, 'Hello', '2011-04-2', 0);
+insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, OriginalMessage, DateSent, RecipientHasRead)
+values(605255, 2, 207272, 1, 777779, 'This is a message', '2011-04-3', 0);
+GO
+
+-- Adding Alerts
+insert into ParentPortal.AlertLog(SchoolYear, AlertTypeId, ParentUniqueId, StudentUniqueId, Value, [Read], UTCSentDate)
+values(2011, 1, 777779, 605255, 2, 0, '2011-05-20');
+insert into ParentPortal.AlertLog(SchoolYear, AlertTypeId, ParentUniqueId, StudentUniqueId, Value, [Read], UTCSentDate)
+values(2011, 1, 777779, 605541, 1, 0, '2011-05-10');
+GO
+
+-- Updating Grade Data for Students
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 436 and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 91 where StudentUSI = 436 and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 436 and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 93 where StudentUSI = 436 and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 94 where StudentUSI = 436 and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 436 and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 436 and LocalCourseCode = 'ALG-2' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 436 and LocalCourseCode = 'ALG-2' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 436 and LocalCourseCode = 'ALG-2' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 436 and LocalCourseCode = 'ALG-2' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 436 and LocalCourseCode = 'ALG-2' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 436 and LocalCourseCode = 'ALG-2' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 80 where StudentUSI = 436 and LocalCourseCode = 'ENVIRSYS' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 436 and LocalCourseCode = 'ENVIRSYS' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 82 where StudentUSI = 436 and LocalCourseCode = 'ENVIRSYS' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 83 where StudentUSI = 436 and LocalCourseCode = 'ENVIRSYS' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 84 where StudentUSI = 436 and LocalCourseCode = 'ENVIRSYS' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 85 where StudentUSI = 436 and LocalCourseCode = 'ENVIRSYS' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 436 and LocalCourseCode = 'GOVT' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 436 and LocalCourseCode = 'GOVT' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 436 and LocalCourseCode = 'GOVT' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 436 and LocalCourseCode = 'GOVT' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 436 and LocalCourseCode = 'GOVT' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 436 and LocalCourseCode = 'GOVT' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 436 and LocalCourseCode = 'SPAN-1' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 71 where StudentUSI = 436 and LocalCourseCode = 'SPAN-1' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 72 where StudentUSI = 436 and LocalCourseCode = 'SPAN-1' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 73 where StudentUSI = 436 and LocalCourseCode = 'SPAN-1' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 74 where StudentUSI = 436 and LocalCourseCode = 'SPAN-1' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 75 where StudentUSI = 436 and LocalCourseCode = 'SPAN-1' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 436 and LocalCourseCode = 'ART2-EM' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 436 and LocalCourseCode = 'ART2-EM' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 436 and LocalCourseCode = 'ART2-EM' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 436 and LocalCourseCode = 'ART2-EM' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 436 and LocalCourseCode = 'ART2-EM' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 436 and LocalCourseCode = 'ART2-EM' and  GradingPeriodSequence = 6;
+
+
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 436 and LocalCourseCode = 'CREAT-WR' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 61 where StudentUSI = 436 and LocalCourseCode = 'CREAT-WR' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 62 where StudentUSI = 436 and LocalCourseCode = 'CREAT-WR' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 63 where StudentUSI = 436 and LocalCourseCode = 'CREAT-WR' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 64 where StudentUSI = 436 and LocalCourseCode = 'CREAT-WR' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 65 where StudentUSI = 436 and LocalCourseCode = 'CREAT-WR' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 722 and LocalCourseCode = 'PE-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 91 where StudentUSI = 722 and LocalCourseCode = 'PE-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 722 and LocalCourseCode = 'PE-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 93 where StudentUSI = 722 and LocalCourseCode = 'PE-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 94 where StudentUSI = 722 and LocalCourseCode = 'PE-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 722 and LocalCourseCode = 'PE-06' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 722 and LocalCourseCode = 'MATH-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 722 and LocalCourseCode = 'MATH-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 722 and LocalCourseCode = 'MATH-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 722 and LocalCourseCode = 'MATH-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 722 and LocalCourseCode = 'MATH-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 722 and LocalCourseCode = 'MATH-06' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 80 where StudentUSI = 722 and LocalCourseCode = 'MUS-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 722 and LocalCourseCode = 'MUS-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 82 where StudentUSI = 722 and LocalCourseCode = 'MUS-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 83 where StudentUSI = 722 and LocalCourseCode = 'MUS-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 84 where StudentUSI = 722 and LocalCourseCode = 'MUS-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 85 where StudentUSI = 722 and LocalCourseCode = 'MUS-06' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 722 and LocalCourseCode = 'ART-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 722 and LocalCourseCode = 'ART-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 722 and LocalCourseCode = 'ART-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 722 and LocalCourseCode = 'ART-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 722 and LocalCourseCode = 'ART-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 722 and LocalCourseCode = 'ART-06' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 722 and LocalCourseCode = 'ELA-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 71 where StudentUSI = 722 and LocalCourseCode = 'ELA-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 72 where StudentUSI = 722 and LocalCourseCode = 'ELA-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 73 where StudentUSI = 722 and LocalCourseCode = 'ELA-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 74 where StudentUSI = 722 and LocalCourseCode = 'ELA-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 75 where StudentUSI = 722 and LocalCourseCode = 'ELA-06' and  GradingPeriodSequence = 6;
+
+update edfi.Grade set NumericGradeEarned = 70 where StudentUSI = 722 and LocalCourseCode = 'SCI-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 81 where StudentUSI = 722 and LocalCourseCode = 'SCI-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 722 and LocalCourseCode = 'SCI-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = 722 and LocalCourseCode = 'SCI-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = 722 and LocalCourseCode = 'SCI-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 95 where StudentUSI = 722 and LocalCourseCode = 'SCI-06' and  GradingPeriodSequence = 6;
+
+
+update edfi.Grade set NumericGradeEarned = 60 where StudentUSI = 436 and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 1;
+update edfi.Grade set NumericGradeEarned = 61 where StudentUSI = 436 and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 2;
+update edfi.Grade set NumericGradeEarned = 62 where StudentUSI = 436 and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 3;
+update edfi.Grade set NumericGradeEarned = 63 where StudentUSI = 436 and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 4;
+update edfi.Grade set NumericGradeEarned = 64 where StudentUSI = 436 and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 5;
+update edfi.Grade set NumericGradeEarned = 65 where StudentUSI = 436 and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 6;
 GO

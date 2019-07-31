@@ -203,12 +203,17 @@
         {
           "interpretation": "good",
           "operator": ">=",
-          "value": 3.38
+          "value": 3.0
+        },
+        {
+          "interpretation": "warning",
+          "operator": "<",
+          "value": 3.0
         },
         {
           "interpretation": "bad",
-          "operator": "<",
-          "value": 3.38
+          "operator": "<=",
+          "value": 1.9
         }
       ]
     },

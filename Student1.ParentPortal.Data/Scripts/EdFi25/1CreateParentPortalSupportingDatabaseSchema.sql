@@ -790,7 +790,7 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 -- GPA --
 	(SELECT TOP(1) sar.CumulativeGradePointAverage FROM edfi.StudentAcademicRecord as sar
 			WHERE StudentUSI = s.StudentUSI
-			ORDER BY sar.TermDescriptorId desc) as [Gpa],
+			ORDER BY sar.SchoolYear desc, sar.TermDescriptorId desc) as [Gpa],
 -- Grade Level --
 (SELECT TOP(1) gt.ShortDescription FROM edfi.StudentSchoolAssociation as ssa
 		inner join edfi.GradeLevelDescriptor as gld on ssa.EntryGradeLevelDescriptorId = gld.GradeLevelDescriptorId

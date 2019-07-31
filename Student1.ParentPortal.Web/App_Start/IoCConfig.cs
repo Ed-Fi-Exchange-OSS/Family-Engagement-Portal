@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Http;
 using SimpleInjector;
@@ -32,9 +33,7 @@ namespace Student1.ParentPortal.Web.App_Start
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
-            var applicationMode = ConfigurationManager.AppSettings["application.mode"];
-
-            RegisterProviders(container, applicationMode);
+            RegisterProviders(container);
 
             // Register all repositories from our Data project.
             var databaseVersion = ConfigurationManager.AppSettings["application.ed-fi.version"];
@@ -96,10 +95,9 @@ namespace Student1.ParentPortal.Web.App_Start
                 container.Register(pair.InterfaceType, pair.ServiceType);
         }
 
-        private static void RegisterProviders(Container container, string applicationMode)
+        private static void RegisterProviders(Container container)
         {
             container.Register<IApplicationSettingsProvider, ApplicationSettingsProvider>();
-
             container.Register<IDatabaseIdentityProvider, DatabaseIdentityProvider>();
             container.Register<IMessagingProvider, EmailMessagingProvider>();
             container.Register<ISMSProvider, SMSMessagingProvider>();
@@ -110,26 +108,30 @@ namespace Student1.ParentPortal.Web.App_Start
             container.Register<ICacheProvider,InMemoryCacheProvider>();
 
             // Image Provider
-            if (applicationMode == "Demo")
+            RegisterImageProviders(container);
+
+            var applicationMode = ConfigurationManager.AppSettings["application.mode"];
+
+            switch (applicationMode)
             {
-                //container.Register<IImageProvider, DemoImageProvider>();
-                //container.Register<IClassPeriodNameProvider, CoreClassPeriodNameProvider>();
-                container.Register<IImageProvider, BlobImageProvider>();
-                container.Register<IClassPeriodNameProvider, YesPrepClassPeriodNameProvider>();
-                container.Register<IDateProvider, DemoDateProvider>();
-            }
-            else if(applicationMode == "Local")
-            {
-                container.Register<IImageProvider, DemoImageProvider>();
-                container.Register<IClassPeriodNameProvider, CoreClassPeriodNameProvider>();
-                container.Register<IDateProvider, DemoDateProvider>();
-                //container.Register<IDateProvider, DateProvider>();
-            }
-            else
-            {
-                container.Register<IImageProvider, BlobImageProvider>();
-                container.Register<IClassPeriodNameProvider, YesPrepClassPeriodNameProvider>();
-                container.Register<IDateProvider, DateProvider>();
+                case "Demo":
+                    //container.Register<IClassPeriodNameProvider, CoreClassPeriodNameProvider>();
+                    container.Register<IClassPeriodNameProvider, YesPrepClassPeriodNameProvider>();
+                    container.Register<IDateProvider, DemoDateProvider>();
+                    break;
+                case "Local":
+                    container.Register<IClassPeriodNameProvider, CoreClassPeriodNameProvider>();
+                    container.Register<IDateProvider, DemoDateProvider>();
+                    //container.Register<IDateProvider, DateProvider>();
+                    break;
+                case "Production":
+                    container.Register<IClassPeriodNameProvider, YesPrepClassPeriodNameProvider>();
+                    container.Register<IDateProvider, DateProvider>();
+                    break;
+                default:
+                    container.Register<IClassPeriodNameProvider, CoreClassPeriodNameProvider>();
+                    container.Register<IDateProvider, DemoDateProvider>();
+                    break;
             }
 
             // Alert Providers
@@ -161,6 +163,28 @@ namespace Student1.ParentPortal.Web.App_Start
             // Add Cache to Images Provider
             container.InterceptWith<CacheInterceptor>(serviceType => serviceType.Name.EndsWith("BlobImageProvider"));
 
+        }
+
+        private static void RegisterImageProviders(Container container)
+        {
+            var imageProvider = ConfigurationManager.AppSettings["image.provider"];
+
+            // TODO: Refactor into using a more elegant solution. (Due to time restrictions going with the quick approach.)
+            switch (imageProvider)
+            {
+                case "DemoImageProvider":
+                    container.Register<IImageProvider, DemoImageProvider>();
+                    break;
+                case "ConventionBasedImageProvider":
+                    container.Register<IImageProvider, ConventionBasedImageProvider>();
+                    break;
+                case "BlobImageProvider":
+                    container.Register<IImageProvider, BlobImageProvider>();
+                    break;
+                default:
+                    container.Register<IImageProvider, DemoImageProvider>();
+                    break;
+            }
         }
     }
 }
