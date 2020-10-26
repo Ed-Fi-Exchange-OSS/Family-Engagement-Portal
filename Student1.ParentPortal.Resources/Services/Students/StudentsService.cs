@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
@@ -16,12 +11,16 @@ using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Services.Communications;
 using Student1.ParentPortal.Resources.ExtensionMethods;
+using Student1.ParentPortal.Resources.Cache;
 
 namespace Student1.ParentPortal.Resources.Services.Students
 {
     public interface IStudentsService
     {
+        [NoCache]
         Task<StudentDetailModel> GetStudentDetailAsync(int studentUsi, string recipientUniqueId, int recipientTypeId);
+        [NoCache]
+        Task<StudentDetailModel> GetStudentBriefDetailAsync(int studentUsi, string recipientUniqueId, int recipientTypeId);
         Task<PersonBriefModel> GetPersonBriefModelAsync(int studentUsi);
         Task<List<StudentSummary>> GetStudentsSummary(List<int> StudentUsis);
     }
@@ -43,8 +42,22 @@ namespace Student1.ParentPortal.Resources.Services.Students
         private readonly ICommunicationsService _communicationsService;
         private readonly ISpotlightIntegrationsService _spotlightIntegrationsService;
         private readonly ICustomParametersProvider _customParametersProvider;
-
-        public StudentsService(IStudentRepository studentRepository, IImageProvider imageUrlProvider, IStudentAttendanceService studentAttendanceService, IStudentBehaviorService studentBehaviorService, IStudentCourseGradesService studentCourseGradesService, IStudentAssignmentService studentAssignmentService, IStudentScheduleService studentScheduleService, IStudentAssessmentService studentAssessmentService, IStudentProgramService studentProgramService, IStudentIndicatorService studentIndicatorService, IStudentSuccessTeamService studentSuccessTeamService, IStudentGraduationReadinessService studentGraduationReadinessService, ICommunicationsService communicationsService, ISpotlightIntegrationsService spotlightIntegrationsService, ICustomParametersProvider customParametersProvider)
+        
+        public StudentsService(IStudentRepository studentRepository, 
+                               IImageProvider imageUrlProvider, 
+                               IStudentAttendanceService studentAttendanceService, 
+                               IStudentBehaviorService studentBehaviorService, 
+                               IStudentCourseGradesService studentCourseGradesService, 
+                               IStudentAssignmentService studentAssignmentService, 
+                               IStudentScheduleService studentScheduleService, 
+                               IStudentAssessmentService studentAssessmentService, 
+                               IStudentProgramService studentProgramService, 
+                               IStudentIndicatorService studentIndicatorService, 
+                               IStudentSuccessTeamService studentSuccessTeamService, 
+                               IStudentGraduationReadinessService studentGraduationReadinessService, 
+                               ICommunicationsService communicationsService, 
+                               ISpotlightIntegrationsService spotlightIntegrationsService, 
+                               ICustomParametersProvider customParametersProvider)
         {
             _studentRepository = studentRepository;
             _imageUrlProvider = imageUrlProvider;
@@ -85,6 +98,21 @@ namespace Student1.ParentPortal.Resources.Services.Students
             student.ExternalLinks = await _spotlightIntegrationsService.GetStudentExternalLinks(student.StudentUniqueId);
             student.StaarAssessmentHistory = await _studentAssessmentService.GetStudentStaarAssessmentHistoryAsync(student.StudentUsi);
 
+            return student;
+        }
+
+        public async Task<StudentDetailModel> GetStudentBriefDetailAsync(int studentUsi, string recipientUniqueId, int recipientTypeId)
+        {
+            var student = await _studentRepository.GetStudentDetailAsync(studentUsi);
+
+            if (student == null)
+                return null;
+            
+            student.ImageUrl = await _imageUrlProvider.GetStudentImageUrlAsync(student.StudentUniqueId);
+            student.Programs = await _studentProgramService.GetStudentProgramsAsync(student.StudentUsi);
+            student.Indicators = await _studentIndicatorService.GetStudentIndicatorsAsync(student.StudentUsi);
+            student.UnreadMessageCount = await _communicationsService.UnreadMessageCount(student.StudentUsi, recipientUniqueId, recipientTypeId, null, null);
+            student.ExternalLinks = await _spotlightIntegrationsService.GetStudentExternalLinks(student.StudentUniqueId);
             return student;
         }
 

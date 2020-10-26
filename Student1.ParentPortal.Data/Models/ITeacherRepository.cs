@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-
+﻿
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.Student;
@@ -16,7 +11,7 @@ namespace Student1.ParentPortal.Data.Models
 {
     public interface ITeacherRepository
     {
-        Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi);
+        Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi, DateTime today);
         Task<List<StudentBriefModel>> GetTeacherStudents(int staffUsi, TeacherStudentsRequestModel model, string recipientUniqueId, int recipientTypeId);
         Task<UserProfileModel> GetStaffProfileAsync(int staffUsi);
         Task<UserProfileModel> GetStaffProfileAsync(string staffUniqueId);
@@ -25,5 +20,7 @@ namespace Student1.ParentPortal.Data.Models
         Task<UserProfileModel> AddNewProfileAsync(string staffUniqueId, UserProfileModel model);
         bool HasAccessToStudent(int staffUsi, int studentUsi);
         bool HasAccessToStudent(int staffUsi, string studentUniqueId);
+
+        Task SaveStaffLanguage(string staffUniqueId, string languageCode);
     }
 }

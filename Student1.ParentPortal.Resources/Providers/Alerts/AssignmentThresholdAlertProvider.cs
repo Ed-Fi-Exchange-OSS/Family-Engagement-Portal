@@ -1,16 +1,14 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Data.Models;
+﻿using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Data.Models.EdFi25;
 using Student1.ParentPortal.Models.Alert;
+using Student1.ParentPortal.Models.Notifications;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Providers.Image;
 using Student1.ParentPortal.Resources.Providers.Messaging;
+using Student1.ParentPortal.Resources.Providers.Notifications;
+using Student1.ParentPortal.Resources.Providers.Translation;
 using Student1.ParentPortal.Resources.Providers.Url;
 using System;
 using System.Collections.Generic;
@@ -33,8 +31,18 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
         private readonly IUrlProvider _urlProvider;
         private readonly IImageProvider _imageProvider;
         private readonly ISMSProvider _smsProvider;
+        private readonly IPushNotificationProvider _pushNotificationProvider;
+        private readonly ITranslationProvider _translationProvider;
 
-        public AssignmentThresholdAlertProvider(IAlertRepository alertRepository, ICustomParametersProvider customParametersProvider, ITypesRepository typesRepository, IMessagingProvider messagingProvider, IUrlProvider urlProvider, IImageProvider imageProvider, ISMSProvider smsProvider)
+        public AssignmentThresholdAlertProvider(IAlertRepository alertRepository, 
+                                                ICustomParametersProvider customParametersProvider, 
+                                                ITypesRepository typesRepository, 
+                                                IMessagingProvider messagingProvider, 
+                                                IUrlProvider urlProvider, 
+                                                IImageProvider imageProvider, 
+                                                ISMSProvider smsProvider, 
+                                                IPushNotificationProvider pushNotificationProvider,
+                                                ITranslationProvider translationProvider)
         {
             _alertRepository = alertRepository;
             _customParametersProvider = customParametersProvider;
@@ -43,11 +51,16 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
             _imageProvider = imageProvider;
             _smsProvider = smsProvider;
             _typesRepository = typesRepository;
+            _pushNotificationProvider = pushNotificationProvider;
+            _translationProvider = translationProvider;
         }
 
         public async Task<int> SendAlerts()
         {
             var customParameters = _customParametersProvider.GetParameters();
+            var enabledFeauter = customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.missingAssignments;
+            if (!enabledFeauter)
+                return 0;
 
             var alertTypes = await _typesRepository.GetAlertTypes();
             var alertAssignment = alertTypes.Where(x => x.AlertTypeId == AlertTypeEnum.Assignment.Value).FirstOrDefault();
@@ -57,7 +70,7 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
             var currentSchoolYear = await _alertRepository.getCurrentSchoolYear();
 
             // Find students that have surpassed the threshold.
-            var studentsOverThreshold = await _alertRepository.studentsOverThresholdAssignment(assignmentThreshold.ThresholdValue, customParameters.descriptors.gradeBookMissingAssignmentTypeDescriptors);
+            var studentsOverThreshold = await _alertRepository.studentsOverThresholdAssignment(assignmentThreshold.ThresholdValue, customParameters.descriptors.gradeBookMissingAssignmentTypeDescriptors, customParameters.descriptors.missingAssignmentLetterGrade);
 
             var alertCountSent = 0;
 
@@ -76,20 +89,42 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
 
                     string to;
                     string template;
-
+                    string subjectTemplate = "Family Portal: Missing Assignment Alert";
                     
-                    if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.SMS.Value && p.Parent.Telephone != null && p.Parent.SMSDomain != null)
+                    if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.SMS.Value && p.Parent.Telephone != null)
                     {
-                        to = p.Parent.Telephone + p.Parent.SMSDomain;
+                        to = p.Parent.Telephone;
+                        subjectTemplate = await TranslateText(p.Parent.LanguageCode, subjectTemplate);
                         template = FillSMSTemplate(s);
-                        await _smsProvider.SendMessageAsync(to, "Parent Portal: Missing Assignment Alert", template);
+                        template = await TranslateText(p.Parent.LanguageCode, template);
+                        await _smsProvider.SendMessageAsync(to, subjectTemplate, template);
                         alertCountSent++;
                     }
-                    else if (p.Parent.Email != null)
+                    else if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.Email.Value && p.Parent.Email != null)
                     {
                         to = p.Parent.Email;
+                        subjectTemplate = await TranslateText(p.Parent.LanguageCode, subjectTemplate);
                         template = FillEmailTemplate(s, assignmentThreshold, imageUrl);
-                        await _messagingProvider.SendMessageAsync(to, null, null, "Parent Portal: Missing Assignment Alert", template);
+                        template = await TranslateText(p.Parent.LanguageCode, template);
+                        await _messagingProvider.SendMessageAsync(to, null, null, subjectTemplate, template);
+                        alertCountSent++;
+                    } else if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.Notification.Value)
+                    {
+                        string pushNoSubjectTemplate = $"Missing Assignment Alert: {s.FirstName} {s.LastSurname}";
+                        string pushNoBodyTemplate = $"Has a new missing assignment, for a total of {s.ValueCount}";
+                        pushNoSubjectTemplate = await TranslateText(p.Parent.LanguageCode, pushNoSubjectTemplate);
+                        pushNoBodyTemplate = await TranslateText(p.Parent.LanguageCode, pushNoBodyTemplate);
+
+                        await _pushNotificationProvider.SendNotificationAsync(new NotificationItemModel
+                        {
+                            personUniqueId = p.Parent.ParentUniqueId,
+                            personType = "Parent",
+                            notification = new Notification
+                            {
+                                title = pushNoSubjectTemplate, //Grade Alert: {s.FirstName} {s.LastSurname}
+                                body = pushNoBodyTemplate //Has one or more grades below 70 
+                            }
+                        });
                         alertCountSent++;
                     }
 
@@ -143,6 +178,23 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
                                         $"\r\nFor details visit the Parent Portal.")
                                   .Replace("{{StudentFullName}}", $"{s.FirstName} {s.LastSurname}");
             return filledTemplate;
+        }
+
+        private async Task<string> TranslateText(string languageCode, string template)
+        {
+            string textTranslated = string.Empty;
+            if (!string.IsNullOrEmpty(languageCode) && languageCode != "en")
+            {
+                textTranslated = await _translationProvider.TranslateAsync(new TranslateRequest
+                {
+                    FromLangCode = "en",
+                    TextToTranslate = template,
+                    ToLangCode = languageCode
+                });
+            }
+            else
+                textTranslated = template;
+            return textTranslated;
         }
     }
 }

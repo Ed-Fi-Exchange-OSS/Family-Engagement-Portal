@@ -1,9 +1,6 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Caching;
 using Student1.ParentPortal.Resources.Providers.Configuration;
 
@@ -33,5 +30,16 @@ namespace Student1.ParentPortal.Resources.Providers.Cache
             var cacheTime = Convert.ToInt32(_settingsProvider.GetSetting("cache.timeInMinutes"));
             MemoryCache.Default.Add(key, result, DateTime.Now.AddMinutes(cacheTime));
         }
+
+        public void Clear()
+        {
+            ObjectCache cache = MemoryCache.Default;
+            List<string> cacheKeys = cache.Select(kvp => kvp.Key).ToList();
+            foreach (string cacheKey in cacheKeys)
+            {
+                cache.Remove(cacheKey);
+            }
+        }
+
     }
 }

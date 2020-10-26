@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Resources.Providers.Image;
+﻿using Student1.ParentPortal.Resources.Providers.Image;
 using Student1.ParentPortal.Resources.Services.Students;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +15,21 @@ using Student1.ParentPortal.Resources.Services.Communications;
 using System.Net.Http;
 using Student1.ParentPortal.Resources.Services.Alerts;
 using Student1.ParentPortal.Resources.Providers.ClassPeriodName;
+using Student1.ParentPortal.Resources.Cache;
+using Student1.ParentPortal.Resources.Providers.Date;
 
 namespace Student1.ParentPortal.Resources.Services
 {
     public interface ITeachersService {
         Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi);
         Task<List<StudentBriefModel>> GetStudentsInSection(int staffUsi, TeacherStudentsRequestModel model, string recipientUniqueId, int recipientTypeId);
+        [NoCache]
         Task<UserProfileModel> GetStaffProfileAsync(int staffUsi);
+        [NoCache]
         Task<BriefProfileModel> GetBriefStaffProfileAsync(int staffUsi);
         Task<UserProfileModel> SaveStaffProfileAsync(int staffUsi, UserProfileModel model);
         Task UploadStaffImageAsync(string staffUniqueId, byte[] image, string contentType);
+        Task UpdateStaffLanguage(string staffUniqueId, string languageCode);
     }
     public class TeachersService : ITeachersService
     {
@@ -45,8 +45,10 @@ namespace Student1.ParentPortal.Resources.Services
         private readonly IAlertService _alertService;
         private readonly IClassPeriodNameProvider _classPeriodNameProvider;
         private readonly IStudentsService _studentsService;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IDateProvider _dateProvider;
 
-        public TeachersService(ITeacherRepository teacherRepository, IStudentAttendanceService studentAttendanceService, IStudentBehaviorService studentBehaviorService, IStudentCourseGradesService studentCourseGradesService, IImageProvider imageProvider, IStudentAssignmentService studentAssignmentService, ICustomParametersProvider customParametersProvider, ICommunicationsService communicationsService, ISpotlightIntegrationsService spotlightIntegrationsService, IAlertService alertService, IClassPeriodNameProvider classPeriodNameProvider, IStudentsService studentsService)
+        public TeachersService(ITeacherRepository teacherRepository, IStudentAttendanceService studentAttendanceService, IStudentBehaviorService studentBehaviorService, IStudentCourseGradesService studentCourseGradesService, IImageProvider imageProvider, IStudentAssignmentService studentAssignmentService, ICustomParametersProvider customParametersProvider, ICommunicationsService communicationsService, ISpotlightIntegrationsService spotlightIntegrationsService, IAlertService alertService, IClassPeriodNameProvider classPeriodNameProvider, IStudentsService studentsService, IStudentRepository studentRepository, IDateProvider dateProvider)
         {
             _teacherRepository = teacherRepository;
             _studentAttendanceService = studentAttendanceService;
@@ -60,11 +62,14 @@ namespace Student1.ParentPortal.Resources.Services
             _alertService = alertService;
             _classPeriodNameProvider = classPeriodNameProvider;
             _studentsService = studentsService;
+            _studentRepository = studentRepository;
+            _dateProvider = dateProvider;
         }
 
         public async Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi)
         {
-            var data = await _teacherRepository.GetStaffSectionsAsync(staffUsi);
+            var today = _dateProvider.Today();
+            var data = await _teacherRepository.GetStaffSectionsAsync(staffUsi, today);
 
             // Get the current sections by grouping to remove duplicates that are from a previous term.
             var model = (from d in data
@@ -148,5 +153,9 @@ namespace Student1.ParentPortal.Resources.Services
             await _imageProvider.UploadStaffImageAsync(staffUniqueId, image, contentType);
         }
 
+        public async Task UpdateStaffLanguage(string staffUniqueId, string languageCode)
+        {
+            await _teacherRepository.SaveStaffLanguage(staffUniqueId, languageCode);
+        }
     }
 }

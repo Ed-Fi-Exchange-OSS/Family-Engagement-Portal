@@ -32,30 +32,25 @@
         <div id="indicators" class="col-12 col-md-6 col-lg-4">
             <div class="row flex-card-grid">
                 <div class="col-12 col-md-12 col-lg-12">
-                    <!--<indicator3 indicator-title="{{'view.studentDetail.indicators.absences.title' | translate}}"
-                        tooltip="{{'view.studentDetail.indicators.absences.tooltip' | translate}}"
-                        indicator-categories="ctrl.attendanceIndicatorCategories"
-                        anchorid="attendance"
-                        textual-evaluation="'view.studentDetail.indicators.absences.interpretation.'"
-                        bgclass="widget-bg-primary"></indicator3>-->
-
-                    <indicator2 indicator-title="{{'view.studentDetail.indicators.absences.title' | translate}}"
-                                tooltip="{{'view.studentDetail.indicators.absences.tooltip' | translate}}"
-                                value="ctrl.model.attendance.yearToDateAbsenceCount"
-                                ng-click="ctrl.gotoAnchor('attendance')"
-                                interpretation="ctrl.model.attendance.absentInterpretation"
-                                textual-evaluation="'view.studentDetail.indicators.absences.interpretation.' + ctrl.model.attendance.absentInterpretation | translate"
-                                bgclass="widget-bg-primary"></indicator2>
-
+                            <indicator2 show-loader="ctrl.model.attendance.absentAttendanceEvents != null"
+                                        indicator-title="{{'view.studentDetail.indicators.absences.title' | translate}}"
+                                        tooltip="{{'view.studentDetail.indicators.absences.tooltip' | translate}}"
+                                        value="ctrl.model.attendance.yearToDateAbsenceCount"
+                                        ng-click="ctrl.gotoAnchor('attendance')"
+                                        interpretation="ctrl.model.attendance.absentInterpretation"
+                                        textual-evaluation="'view.studentDetail.indicators.absences.interpretation.' + ctrl.model.attendance.absentInterpretation | translate"
+                                        bgclass="widget-bg-primary"
+                                        ></indicator2>
                 </div>
                 <div class="col-12 col-md-12 col-lg-12">
-                    <indicator2 indicator-title="{{'view.studentDetail.indicators.courseAverage.title' | translate}}"
-                                tooltip="{{'view.studentDetail.indicators.courseAverage.tooltip' | translate}}"
-                                value="ctrl.model.courseGrades.currentGradeAverage.gradeAverage | number:2"
-                                interpretation="ctrl.model.courseGrades.currentGradeAverage.evaluation"
-                                ng-click="ctrl.gotoAnchor('grades')"
-                                textual-evaluation="'view.studentDetail.indicators.courseAverage.interpretation.' + ctrl.model.courseGrades.currentGradeAverage.evaluation | translate"
-                                bgclass="widget-bg-secondary"></indicator2>
+                            <indicator2 show-loader="ctrl.model.courseGrades.currentCourses != null"
+                                        indicator-title="{{'view.studentDetail.indicators.courseAverage.title' | translate}}"
+                                        tooltip="{{'view.studentDetail.indicators.courseAverage.tooltip' | translate}}"
+                                        value="ctrl.model.courseGrades.currentGradeAverage.gradeAverage | number:2"
+                                        interpretation="ctrl.model.courseGrades.currentGradeAverage.evaluation"
+                                        ng-click="ctrl.gotoAnchor('grades')"
+                                        textual-evaluation="'view.studentDetail.indicators.courseAverage.interpretation.' + ctrl.model.courseGrades.currentGradeAverage.evaluation | translate"
+                                        bgclass="widget-bg-secondary"></indicator2>
                 </div>
             </div>
 
@@ -64,22 +59,36 @@
         <div id="indicators" class="col-12 col-md-12 col-lg-4">
             <div class="row flex-card-grid">
                 <div class="col-12 col-md-6 col-lg-12">
-                    <indicator2 indicator-title="{{'view.studentDetail.indicators.behavior.title' | translate}}"
+                    <indicator2 show-loader="ctrl.model.behavior.interpretation != null"
+                                indicator-title="{{'view.studentDetail.indicators.behavior.title' | translate}}"
                                 tooltip="{{'view.studentDetail.indicators.behavior.tooltip' | translate}}"
                                 value="ctrl.model.behavior.yearToDateDisciplineIncidentCount"
                                 interpretation="ctrl.model.behavior.interpretation"
                                 ng-click="ctrl.gotoAnchor('behaviour-log')"
                                 textual-evaluation="'view.studentDetail.indicators.behavior.interpretation.' + ctrl.model.behavior.interpretation | translate:{ 'incidentCount': ctrl.model.behavior.yearToDateDisciplineIncidentCount}"
-                                bgclass="widget-bg-warning"></indicator2>
+                                bgclass="widget-bg-warning"
+                                ng-if="$root.featureToggles.comms.studentAbc.behavior"></indicator2>
+                    <div ng-if="!$root.featureToggles.comms.studentAbc.behavior">
+                        <div class="card h-100 cursor-pointer w-100">
+                            <div class="card-body">
+                                <div class="text-center m-t-100">
+                                    <h3 class="m-t-6" tooltip-placement="bottom" uib-tooltip="{{'view.studentDetail.indicators.behavior.tooltip' | translate}}">{{'view.studentDetail.indicators.behavior.title' | translate}}</h3>
+                                    <p class="f-s-12">{{ctrl.heroTextDesc}}</p>
+                                    <a title="{{ctrl.model.behavior.externalLink.title}}" style="font-size: 20px" target="_blank" href="{{ctrl.model.behavior.externalLink.url}}?source={{ctrl.heroClient}}&sid={{ctrl.model.studentUniqueId}}">{{ctrl.model.behavior.externalLink.linkText}}</a>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-12">
-                    <indicator2 indicator-title="{{'view.studentDetail.indicators.missingAssignments.title' | translate}}"
-                                tooltip="{{'view.studentDetail.indicators.missingAssignments.tooltip' | translate}}"
-                                value="ctrl.model.missingAssignments.missingAssignmentCount"
-                                interpretation="ctrl.model.missingAssignments.interpretation"
-                                ng-click="ctrl.gotoAnchor('missing-assignments')"
-                                textual-evaluation="'view.studentDetail.indicators.missingAssignments.interpretation.' + ctrl.model.missingAssignments.interpretation | translate:{ 'count': ctrl.model.missingAssignments.missingAssignmentCount}"
-                                bgclass="widget-bg-success"></indicator2>
+                            <indicator2 show-loader="ctrl.model.missingAssignments.interpretation != null"
+                                        indicator-title="{{'view.studentDetail.indicators.missingAssignments.title' | translate}}"
+                                        tooltip="{{'view.studentDetail.indicators.missingAssignments.tooltip' | translate}}"
+                                        value="ctrl.model.missingAssignments.missingAssignmentCount"
+                                        interpretation="ctrl.model.missingAssignments.interpretation"
+                                        ng-click="ctrl.gotoAnchor('missing-assignments')"
+                                        textual-evaluation="'view.studentDetail.indicators.missingAssignments.interpretation.' + ctrl.model.missingAssignments.interpretation | translate:{ 'count': ctrl.model.missingAssignments.missingAssignmentCount}"
+                                        bgclass="widget-bg-success"></indicator2>
                 </div>
             </div>
         </div>
@@ -93,9 +102,9 @@
     </div>
 
     <!-- Behavior Log -->
-    <div id="behaviour-log" class="row" ng-if="ctrl.model.behavior.yearToDateDisciplineIncidentCount > 0">
+    <div id="behaviour-log" class="row" ng-if="$root.featureToggles.comms.studentAbc.behavior">
         <div class="col-lg-12">
-            <discipline-incidents model="ctrl.model.behavior"></discipline-incidents>
+            <discipline-incidents model="ctrl.model.behavior" student-usi="ctrl.model.studentUsi" student-unique-id="ctrl.model.studentUniqueId"></discipline-incidents>
         </div>
     </div>
 
@@ -189,7 +198,7 @@
     </div>
     <div id="schedule" class="row">
         <div class="col-lg-12">
-            <student-calendar model="ctrl.model.schedule"></student-calendar>
+            <student-calendar student-usi="ctrl.model.studentUsi"></student-calendar>
         </div>
     </div>
 

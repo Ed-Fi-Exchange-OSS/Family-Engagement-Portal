@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -29,7 +24,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             var studentsAssociatedWithParent = await (from s in _edFiDb.Students
                                                 join sp in _edFiDb.StudentParentAssociations on s.StudentUsi equals sp.StudentUsi
                                                 join ssa in _edFiDb.StudentSchoolAssociations on s.StudentUsi equals ssa.StudentUsi
-                                                join eo in _edFiDb.EducationOrganizations on ssa.EducationOrganizationId equals eo.EducationOrganizationId
+                                                join eo in _edFiDb.EducationOrganizations on ssa.SchoolId equals eo.EducationOrganizationId
                                                       where sp.ParentUsi == parentUsi
                                                 group new { s , eo } by s.StudentUniqueId into g
                                                 select new StudentBriefModel
@@ -196,6 +191,24 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             return identity;
         }
 
+        public async Task<List<PersonIdentityModel>> GetParentIdentityByEmailAsync(string email)
+        {
+            var identity = await (from p in _edFiDb.Parents
+                                  join pa in _edFiDb.ParentElectronicMails on p.ParentUsi equals pa.ParentUsi
+                                  where pa.ElectronicMailAddress == email
+                                  select new PersonIdentityModel
+                                  {
+                                      Usi = p.ParentUsi,
+                                      UniqueId = p.ParentUniqueId,
+                                      PersonTypeId = ChatLogPersonTypeEnum.Parent.Value,
+                                      FirstName = p.FirstName,
+                                      LastSurname = p.LastSurname,
+                                      Email = pa.ElectronicMailAddress
+                                  }).ToListAsync();
+
+            return identity;
+        }
+
         public bool HasAccessToStudent(int parentUsi, int studentUsi)
         {
             return _edFiDb.StudentParentAssociations.Any(x => x.ParentUsi == parentUsi && x.StudentUsi == studentUsi);
@@ -204,6 +217,16 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public bool HasAccessToStudent(int parentUsi, string studentUniqueId)
         {
             return _edFiDb.StudentParentAssociations.Include(x => x.Student).Any(x => x.ParentUsi == parentUsi && x.Student.StudentUniqueId == studentUniqueId);
+        }
+
+        public async Task SaveParentLanguage(string parentUniqueId, string languageCode) 
+        {
+            var parentProfile = await _edFiDb.ParentProfiles.FirstOrDefaultAsync(x => x.ParentUniqueId == parentUniqueId);
+            if(parentProfile != null)
+            {
+                parentProfile.LanguageCode = languageCode;
+                await _edFiDb.SaveChangesAsync();
+            }
         }
 
         private async Task<ParentProfile> SaveProfileAsync(int parentUsi, UserProfileModel model)
@@ -377,6 +400,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                     TelephoneNumberTypeId = x.TelephoneNumberTypeDescriptorId,
                     PrimaryMethodOfContact = x.PrimaryMethodOfContact,
                     TelephoneCarrierTypeId = x.TelephoneCarrierTypeId,
+                    SMSDomain = x.TextMessageCarrierType?.SmsSuffixDomain
                 }).ToList()
             };
 
@@ -406,7 +430,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             briefProfileModel.PersonTypeId = ChatLogPersonTypeEnum.Parent.Value;
             briefProfileModel.Role = "Parent";
             briefProfileModel.Email = preferredMail != null ? preferredMail : selectedMail;
-
+            briefProfileModel.DeliveryMethodOfContact = profile.ParentProfile.PreferredMethodOfContactTypeId;
+            briefProfileModel.LanguageCode = profile.ParentProfile.LanguageCode;
             return briefProfileModel;
         }
 

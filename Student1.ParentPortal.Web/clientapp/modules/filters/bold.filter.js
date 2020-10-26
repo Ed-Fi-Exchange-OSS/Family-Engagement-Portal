@@ -1,9 +1,13 @@
 ﻿angular.module('app')
     .filter('bold', function ($sce) {
-        return function (text, phrase) {
-        if (phrase && phrase.length > 0)
-            text = text.replace(new RegExp('(' + phrase + ')', 'gi'), '<mark>$1</mark>');
+        return function (name, query) {
+            if (!query)
+                return name;
 
-        return $sce.trustAsHtml(text);
+            var queryTerms = query.split(' ');
+            queryTerms.forEach(function (qt) {
+                name = name.replace(new RegExp(qt, 'gi'), m => { return '<b>' + m + '</b>' });
+            });
+            return $sce.trustAsHtml(name);
     }
 });

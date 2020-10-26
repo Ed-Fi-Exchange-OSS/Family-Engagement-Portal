@@ -27,7 +27,8 @@
                                 <div class="image-container w-30px h-30px m-r-10">
                                     <img ng-src="{{c.imageUrl}}" alt="">
                                 </div>
-                                <a ui-sref="app.communications({studentUsi: ctrl.studentUsi, recipientUniqueId: c.staffUniqueId, recipientTypeId: c.personTypeId})"> {{c.teacherName}} <i class="ion ion-md-chatboxes"></i></a>
+                                <a ng-if="$root.featureToggles.comms.enabled" ui-sref="app.communications({studentUsi: ctrl.studentUsi, recipientUniqueId: c.staffUniqueId, recipientTypeId: c.personTypeId})"> {{c.teacherName}} <i class="ion ion-md-chatboxes"></i></a>
+                                <!--<a ng-if="$root.featureToggles.comms.enabled"> {{c.teacherName}}</a>-->
                             </div>
                         </td>
                         <td ng-repeat="g in c.gradesByGradingPeriod | limitTo:3" class="text-center">

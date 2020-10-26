@@ -12,7 +12,9 @@
                 ctrl.gradeThresholdTypes = ['bad', 'warning'];
             }
             ctrl.hasFinalGrade = function () {
-                return ctrl.model.currentCourses.some(function (c) { c.gradesByFinal.length > 0 });
+                if (ctrl.model.currentCourses != null)
+                    return ctrl.model.currentCourses.some(function (c) { c.gradesByFinal.length > 0 });
+                return false;
             }
         }]
     });

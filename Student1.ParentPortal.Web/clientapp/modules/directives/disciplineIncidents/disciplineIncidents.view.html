@@ -1,13 +1,14 @@
 ﻿<div class="card">
     <div class="card-body">
         <h3>{{'view.disciplineIncidents.title'  | translate}} <span>{{'view.disciplineIncidents.subtitle' | translate}}</span></h3>
+        <div class="text-center min-height-200" ng-if="ctrl.model.yearToDateDisciplineIncidentCount == 0"><span>No Suspendable Behaviors.</span></div>
         <div class="table-responsive">
-            <table class="table table-xs table-striped">
+            <table class="table table-xs table-striped" ng-if="ctrl.model.yearToDateDisciplineIncidentCount > 0">
                 <thead>
                     <tr>
-                        <th>{{'Date'  | translate}}</th>
-                        <th>{{'Description'  | translate}}</th>
-                        <th>{{'view.disciplineIncidents.actionsTaken'  | translate}}</th>
+                        <th>{{'Date' | translate}}</th>
+                        <th>{{'Description' | translate}}</th>
+                        <th>{{'view.disciplineIncidents.actionsTaken' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,6 @@
                 </tbody>
             </table>
         </div>
-        <a class="float-right mr-2" title="{{ctrl.model.externalLink.title}}" target="_blank" href="{{ctrl.model.externalLink.url}}">{{ctrl.model.externalLink.linkText}}</a>
+        <span class="float-right mr-2">{{'view.disciplineIncidents.moreDetail' | translate}}<a title="{{ctrl.model.externalLink.title}}" target="_blank" href="{{ctrl.model.externalLink.url}}?source={{ctrl.heroClient}}&sid={{ctrl.studentUniqueId}}">{{ctrl.model.externalLink.linkText}}</a></span>
     </div>
 </div>

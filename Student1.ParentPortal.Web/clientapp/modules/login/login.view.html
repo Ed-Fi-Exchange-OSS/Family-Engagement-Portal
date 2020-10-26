@@ -18,6 +18,10 @@
                     <div ng-if="!ctrl.isApplicationOffline" class="text-center m-t-20">
                         <!--<h5 class="m-b-30">{{'view.login.or_login_with' | translate}}</h5>-->
                         <a href="#" ng-click="ctrl.loginSSO()" class="btn btn-primary">Login</a>
+                        <span class="f-s-12">
+                            {{'App Browser' | translate}}
+                            <i class="icon ion-logo-chrome"></i>
+                        </span>
                         <p class="m-t-30">
                             <a href="#" ng-click="ctrl.logOutSSO()">{{'view.login.sign_out' | translate}}</a>
                         </p>
@@ -28,10 +32,25 @@
                         </p>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <span class="m-t-30 text-left">
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span class="text-left">
                         <a ui-sref="app.privacypolicy"><i class="icon ion-md-lock"></i> {{'Privacy Policy' | translate}}</a>
                     </span>
+                    <div class="dropdown login-feedback-button">
+                        <a class="btn btn-fill-help"
+                           id="dropdown"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           tooltip-placement="bottom"
+                           uib-tooltip="{{'HelpTooltip' | translate}}">
+                            <i class="ion ion-md-help"></i>
+                        </a>
+                        <div aria-labelledby="dropdown02" class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button" ng-click="ctrl.showFeedbackModal()"> {{'Feedback' | translate}}</button>
+                            <button class="dropdown-item" type="button" ng-click="ctrl.goToExternalUrl()"> {{'Help' | translate}}</button>
+                        </div>
+                    </div>
                     <div class="float-right">{{ctrl.model.version}}</div>
                 </div>
             </div>

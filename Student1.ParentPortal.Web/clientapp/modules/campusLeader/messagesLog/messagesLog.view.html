@@ -1,0 +1,189 @@
+﻿<div>
+    <div class="row m-t-15">
+        <div class="col-6 border-right p-r-15 message-log-container">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="group-messaging" data-toggle="pill" href="#groupMessaging" role="tab" aria-controls="group-messaging" aria-selected="true" onclick="return false;" ng-click="ctrl.changeTab('gm')">{{'Group Log' | translate}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="individual-messaging" data-toggle="pill" href="#individualMessaging" role="tab" aria-controls="individual-messaging" aria-selected="false" onclick="return false;" ng-click="ctrl.changeTab('im')">{{'Individual Log' | translate}}</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="groupMessaging" role="tabpanel" aria-labelledby="group-messaging-tab">
+                    <div class="input-group mb-3 m-b-5">
+                        <input id="studentNameInputs1" type="text" class="form-control" placeholder="{{'Search group messages' | translate}}." aria-label="Recipient's username" aria-describedby="basic-addon2" ng-model="ctrl.searchMessageLog.value" ng-enter="ctrl.advanceSearch()">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary p-b-5 p-t-5" type="button" ng-click="ctrl.advanceSearch()"><i class="ion ion-ios-search p-r-10"></i> {{'Search' | translate}}</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-link p-l-0 p-r-0 init-font" data-toggle="collapse" data-target="#AdvanceSearch">{{'Advanced Search' | translate}}</button>
+                        </div>
+                    </div>
+
+                    <div id="AdvanceSearch" class="collapse">
+                        <div class="row justify-content-center">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="gradeSelect" id="gradeSelect"
+                                            ng-model="ctrl.selectedGrade"
+                                            ng-options="item as item.name for item in ctrl.grades"
+                                            ng-change="ctrl.OnGradeChange()"></select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="programSelect" id="programSelect"
+                                            ng-model="ctrl.selectedProgram"
+                                            ng-options="item as item.name for item in ctrl.programs"
+                                            ng-change="ctrl.OnProgramChange()">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center m-b-16">
+                            <div class="col-6">
+                                <p class="m-b-0">From:</p>
+                                <input type="date" class="form-control mydatepicker" placeholder="mm/dd/yyyy" id="from-date" ng-model="ctrl.filters.fromDate" ng-change="ctrl.advanceSearch()" />
+                            </div>
+                            <div class="col-6">
+                                <p class="m-b-0">To:</p>
+                                <input type="date" class="form-control mydatepicker" placeholder="mm/dd/yyyy" id="to-date" ng-model="ctrl.filters.toDate" ng-change="ctrl.advanceSearch()" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-b-16 p-r-15">
+                        <div class="col-12 col-lg-12 queue-list" ng-if="ctrl.queues.length > 0">
+                            <div class="list-group" >
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" ng-class="{'active-queue': gmq.selected }" ng-repeat="gmq in ctrl.queues" ng-click="ctrl.selectQueue(gmq)">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h4 class="mb-1">{{ gmq.subject }}</h4>
+                                        <small>{{ gmq.queuedDateTime |  date: 'MM/dd/yyyy HH:mm' }}</small>
+                                    </div>
+                                    <p class="mb-1">To: {{ gmq.audience }} </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12">
+                            <span ng-if="ctrl.queues.length == 0">{{'No result found' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="individualMessaging" role="tabpanel" aria-labelledby="individual-messaginge-tab">
+                    <div class="m-b-5">
+                        <div class="input-group mb-3 m-b-5">
+                            <input ng-model="ctrl.searchIndividualLog.value" id="studentNameInputs" type="text" class="form-control" placeholder="{{'Search by Student or Families Name' | translate}}." aria-label="Recipient's username" aria-describedby="basic-addon2" ng-enter="ctrl.getPrincipalRecipientMessages();  ctrl.getPrincipalRecipientMessagesCount();">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary p-b-5 p-t-5" type="button" ng-click="ctrl.getPrincipalRecipientMessages();  ctrl.getPrincipalRecipientMessagesCount();"><i class="ion ion-ios-search p-r-10"></i> {{'Search' | translate}}</button>
+                            </div>
+                        </div>
+
+                        <input type="checkbox" name="checkbox" id="checkbox_id" value="value" ng-model="ctrl.onlyUnreadMessages" ng-checked="ctrl.onlyUnreadMessages" ng-change="ctrl.getUnreadMessagesOnly()">
+                        <label for="checkbox_id">{{'Unread Messages Only' | translate}}</label>
+                        <p class="m-b-5">{{'Results' | translate}}: {{ctrl.recipientCount}}</p>
+                        <i class="f-s-13">{{'Displayed as Family Member - Student Name' | translate}}</i>
+                    </div>
+                    <div class="p-t-10 p-b-10 individual-chat-list" id="list-individual-chat" ng-if="ctrl.messagesPending.length > 0" on-scroll="ctrl.scrollEventIndividualLog()">
+                        <div class="list-group m-r-5" role="tablist">
+                            <a ng-repeat="p in ctrl.messagesPending track by $index" class="list-group-item" ng-class="{'active-queue': p.selected }" onclick="return false;" data-toggle="list" href="#list-home" role="tab" aria-controls="home" ng-click="ctrl.selectRecipient(p)">
+                                <div class="row justify-content-between gray-color">
+                                    <div class="m-l-5 f-s-15">
+                                    <span ng-bind-html="p.firstName | bold: ctrl.searchIndividualLog.value"></span>
+                                    <span ng-bind-html="p.lastSurname | bold: ctrl.searchIndividualLog.value"></span> - <span ng-bind-html="p.studentName | bold: ctrl.searchIndividualLog.value"></span>
+                                    </div>
+                                    <div class="f-s-13 p-t-2">{{p.oldestMessageDateSent |  date: 'MM/dd/yyyy HH:mm'}}</div>
+
+                                </div>
+                                <div class="bubble-counter orange" ng-if="p.unreadMessageCount > 0">{{p.unreadMessageCount}}</div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div ng-if="ctrl.unreadMessagesNotFound">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <h4>{{'No pending messages' | translate}}. </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="tab-content" id="pills-tabContent">
+                <div ng-if="ctrl.gmDetail" class="m-t-40">
+                    <div ng-if="ctrl.selectedQueue.subject">
+                        <h2 class="p-b-10 m-b-20" style="border-bottom: 1px solid #dee2e6;">{{ctrl.selectedQueue.subject}}</h2>
+                        <p class="m-b-0" style="font-size:0.8em">Sent: {{ctrl.selectedQueue.queuedDateTime | amCalendar}}</p>
+                        <p class="p-b-10" style="font-size:0.8em">To: {{ctrl.selectedQueue.audience}}</p>
+                        <p ng-bind-html="ctrl.selectedQueue.bodyMessage"></p>
+                    </div>
+                </div>
+                <div ng-if="ctrl.imDetail">
+                    <div class="tab-content" id="nav-tabContent" ng-if="ctrl.messagesPending.length > 0">
+                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list" ng-if="ctrl.recipientSelected">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <div>
+                                        <p class="m-l-15 m-t-15"> <b>  {{ctrl.relationship}}: {{ctrl.recipient.name}}  - </b> <b>{{ctrl.recipient.studentName}}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="h-460">
+                                    <div id="message-history" class="col-12 message-history message-history-lg message-container-width">
+                                        <div class="text-center cursor-pointer d-flex justify-content-center align-items-center" ng-if="ctrl.recipients && !ctrl.recipients.conversation.endOfMessageHistory"><a class="btn btn-block btn-outline-primary btn-rounded" ng-click="ctrl.loadMore()">{{'view.communications.loadMore' | translate}}</a></div>
+                                        <ul class="m-b-0 list-unstyled">
+                                            <li class="clearfix" ng-repeat="m in ctrl.recipients.conversation.messages" ng-class="{'text-right': m.senderUniqueId == ctrl.sender.uniqueId && m.senderTypeId == ctrl.sender.personTypeId }">
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex flex-row align-items-center" ng-class="{'justify-content-end': m.senderUniqueId == ctrl.sender.uniqueId && m.senderTypeId == ctrl.sender.personTypeId }">
+                                                        <span class="message-time">{{m.dateSent | amCalendar}}</span>
+                                                    </div>
+                                                    <div class="message">
+                                                        <p>{{  m.englishMessage  }}</p>
+                                                        <span ng-if="ctrl.recipient.languageCode != 'en'">{{  m.translatedMessage }}</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="message" name="message" type="text" class="form-control d-inline"
+                                               placeholder="Type the message here."
+                                               autocomplete="off"
+                                               ng-enter="ctrl.sendMessage()"
+                                               ng-model="ctrl.message.value"
+                                               ng-model-options="{ debounce: ctrl.simultaneousTranslation? 700 : 0 }"
+                                               ng-change="ctrl.simulTran(ctrl.recipient.languageCode)"
+                                               />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-info" ng-click="ctrl.sendMessage()"><i class="ion ion-md-paper-plane"></i></button>
+                                        </div>
+                                    </div>
+                                    <span ng-if="ctrl.simultaneousTranslation && ctrl.message.value">{{ctrl.recipient.languageCode == null ? 'en' : ctrl.recipient.languageCode }}: {{ctrl.recipient.translatedMessage}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="!ctrl.recipientSelected">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <span class="m-t-10">{{'Please select a chat' | translate}}.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

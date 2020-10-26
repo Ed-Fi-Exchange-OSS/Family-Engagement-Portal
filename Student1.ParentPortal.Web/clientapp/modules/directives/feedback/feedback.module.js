@@ -15,12 +15,19 @@
 
             ctrl.model.feedback = $rootScope.feedback;
 
+            ctrl.onLoginScreen = function(){
+                return $location.url().indexOf('login') != -1;
+            };
+
             ctrl.persistFeedback = function () {
                 const modeltoSend = {
                     issue: ctrl.model.issue,
                     subject: ctrl.model.subject,
                     description: ctrl.model.description,
-                    currentUrl: $location.url()
+                    name: ctrl.model.name,
+                    email: ctrl.model.email,
+                    currentUrl: $location.url(),
+                    isFromLoginScreen: ctrl.onLoginScreen()
                 };
                 
 

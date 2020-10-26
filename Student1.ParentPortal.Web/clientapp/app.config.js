@@ -12,5 +12,8 @@
             policy: "B2C_1_FirstTest",
             scope: "openid"
         },
+        hero: {
+            client: 'YP'
+        },
         version: "v1.0.0"
     });

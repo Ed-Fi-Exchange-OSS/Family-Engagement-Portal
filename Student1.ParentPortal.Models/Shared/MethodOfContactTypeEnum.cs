@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +8,9 @@ namespace Student1.ParentPortal.Models.Shared
 {
     public class MethodOfContactTypeEnum : Enumeration<MethodOfContactTypeEnum>
     {
-        public static readonly MethodOfContactTypeEnum Email = new MethodOfContactTypeEnum(1, "Email");
-        public static readonly MethodOfContactTypeEnum SMS = new MethodOfContactTypeEnum(2, "SMS");
+        public static readonly MethodOfContactTypeEnum Email = new MethodOfContactTypeEnum(1, "Electronic Email");
+        public static readonly MethodOfContactTypeEnum SMS = new MethodOfContactTypeEnum(2, "Text Message (SMS)");
+        public static readonly MethodOfContactTypeEnum Notification = new MethodOfContactTypeEnum(3, "Push Notifications (Mobile app)");
 
         private MethodOfContactTypeEnum(int value, string displayName) : base(value, displayName)
         {

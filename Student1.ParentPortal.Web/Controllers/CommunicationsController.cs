@@ -1,14 +1,12 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Student1.ParentPortal.Models.Chat;
 using Student1.ParentPortal.Models.Shared;
+using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Resources.Services.Communications;
+using Student1.ParentPortal.Resources.Services.Notifications;
 using Student1.ParentPortal.Web.Hubs;
 using Student1.ParentPortal.Web.Security;
 
@@ -18,10 +16,12 @@ namespace Student1.ParentPortal.Web.Controllers
     public class CommunicationsController : ApiController
     {
         private readonly ICommunicationsService _communicationsService;
+        private readonly INotificationsService _notificationsService;
 
-        public CommunicationsController(ICommunicationsService communicationsService)
+        public CommunicationsController(ICommunicationsService communicationsService, INotificationsService notificationsService)
         {
             _communicationsService = communicationsService;
+            _notificationsService = notificationsService;
         }
 
         [HttpPost, Route("thread")]
@@ -64,7 +64,7 @@ namespace Student1.ParentPortal.Web.Controllers
             var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
-                return Ok(await _communicationsService.GetAllParentRecipients(request.StudentUsi,person.PersonUniqueId, person.PersonTypeId, request.RowsToSkip, request.RowsToRetrieve));
+                return Ok(await _communicationsService.GetAllParentRecipients(request.StudentUsi, person.PersonUniqueId, person.PersonTypeId, request.RowsToSkip, request.RowsToRetrieve));
 
 
             return Ok(await _communicationsService.GetAllStaffRecipients(request.StudentUsi, person.PersonUniqueId, person.PersonTypeId, request.RowsToSkip, request.RowsToRetrieve));
@@ -99,10 +99,121 @@ namespace Student1.ParentPortal.Web.Controllers
             if (returnModel == null)
                 return NotFound();
 
+            await _notificationsService.SendNotificationAsync(chatLogItemModel);
             ChatHub.UpdateClients(returnModel);
             return Ok(returnModel);
         }
 
-       
+        [HttpPost, Route("groupMessages")]
+        public async Task<IHttpActionResult> GroupMessages(GroupMessageSectionModel groupMessageSectionModel)
+        {
+            var sender = SecurityPrincipal.Current;
+            await _communicationsService.SendSectionGroupMessage(groupMessageSectionModel, sender.PersonUSI, sender.PersonUniqueId);
+            return Ok();
+        }
+
+        [HttpPost, Route("families/calculate/section")]
+        public async Task<IHttpActionResult> CalculateFamiliesPerSection(TeacherStudentsRequestModel groupMessageSectionModel)
+        {
+            var sender = SecurityPrincipal.Current;
+            var model  = await _communicationsService.GetFamilyMemberCountBySection(sender.PersonUSI, groupMessageSectionModel);
+            return Ok(model);
+        }
+
+        [HttpPost, Route("groupMessages/principals")]
+        public async Task<IHttpActionResult> GroupMessages(GroupMessagePrincipalModel groupMessageSectionModel)
+        {
+            var sender = SecurityPrincipal.Current;
+            await _communicationsService.SendPrincipalGroupMessage(groupMessageSectionModel, sender.PersonUSI, sender.PersonUniqueId);
+            return Ok();
+        }
+
+        [HttpPost, Route("groupMessages/individual/principals")]
+        public async Task<IHttpActionResult> GroupMessages(IndividualMessagePrincipalModel groupMessageSectionModel)
+        {
+            var sender = SecurityPrincipal.Current;
+            await _communicationsService.SendPrincipalIndividualGroupMessage(groupMessageSectionModel, sender.PersonUSI, sender.PersonUniqueId);
+            return Ok();
+        }
+
+        [HttpPost, Route("recipient/principals")]
+        public async Task<IHttpActionResult> PrincipalRecipientMessages(RecipientUnreadPrincipalMessagesModel recipientUnreadPrincipalMessagesModel)
+        {
+            var person = SecurityPrincipal.Current;
+            return Ok(await _communicationsService.PrincipalRecipientMessages(person.PersonUniqueId, 
+                                                                                    person.PersonTypeId, 
+                                                                                    recipientUnreadPrincipalMessagesModel.RowsToSkip, 
+                                                                                    recipientUnreadPrincipalMessagesModel.RowsToRetrive, 
+                                                                                    recipientUnreadPrincipalMessagesModel.SearchTerm,
+                                                                                    recipientUnreadPrincipalMessagesModel.OnlyUnreadMessages));
+        }
+
+        [Route("families/calculate")]
+        [HttpPost]
+        public async Task<IHttpActionResult> CalculateFamiliesPerCampus(ParentStudentCountFilterModel request)
+        {
+            var campusLeader = SecurityPrincipal.Current;
+            var model = await _communicationsService.GetFamilyMemberCountByCampusGradeLevelAndProgram(campusLeader.PersonUSI, request);
+
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
+
+        [Route("families/search")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetParentStudentByTermAndGradeLevel(ParentStudentTermFilterModel parentStudentTermFilter)
+        {
+            var campusLeader = SecurityPrincipal.Current;
+            var model = await _communicationsService.GetParentStudentByTermAndGradeLevel(campusLeader.PersonUniqueId, parentStudentTermFilter.SearchTerm, parentStudentTermFilter.GradeLevels);
+
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
+
+        [Route("families/count")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetParentStudentByTermAndGradeLevelCount(ParentStudentTermFilterModel parentStudentTermFilter)
+        {
+            var campusLeader = SecurityPrincipal.Current;
+            var model = await _communicationsService.GetParentStudentByTermAndGradeLevelCount(campusLeader.PersonUniqueId, parentStudentTermFilter.SearchTerm, parentStudentTermFilter.GradeLevels);
+
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("groupMessages/send")]
+        public async Task<IHttpActionResult> SendGroupMessages() 
+        {
+            try
+            {
+                await _communicationsService.SendGroupMessages();
+                return Ok("We have sent the queued group messages.");
+            }
+            catch (Exception ex)
+            {
+                return Ok($"Yup Something Happened: {ex.Message}");
+            }
+        }
+
+        [Route("groupMessages/{schoolId}/queue")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetGroupMessagesQueue(int schoolId, QueuesFilterModel queuesFilterModel) 
+        {
+            var campusLeader = SecurityPrincipal.Current;
+            var model = await _communicationsService.GetGroupMessagesQueues(campusLeader.PersonUniqueId, schoolId, queuesFilterModel);
+
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
     }
 }

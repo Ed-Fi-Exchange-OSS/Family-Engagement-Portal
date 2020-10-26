@@ -1,11 +1,19 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using Newtonsoft.Json;
+using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Resources.Providers.Translation;
+using Student1.ParentPortal.Resources.Services.Translate;
 
 namespace Student1.ParentPortal.Web.Controllers
 {
@@ -13,12 +21,15 @@ namespace Student1.ParentPortal.Web.Controllers
     public class TranslateController : ApiController
     {
         private readonly ITranslationProvider _translationProvider;
+        private readonly ITranslateService _translateService;
 
-        public TranslateController(ITranslationProvider translationProvider)
+        public TranslateController(ITranslationProvider translationProvider, ITranslateService translateService)
         {
             _translationProvider = translationProvider;
+            _translateService = translateService;
         }
 
+        [AllowAnonymous]
         [Route("languages")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAvailableLanguages()
@@ -53,5 +64,23 @@ namespace Student1.ParentPortal.Web.Controllers
 
             return Ok(model);
         }
+
+        [Route("package")]
+        [HttpPost]
+        public async Task<IHttpActionResult> CreatePackLang(TranslatePackageModelRequest request)
+        {
+            var baseLangFile = HttpContext.Current.Server.MapPath("~/clientapp/languages/en-us.js");
+            var folderFiles = HttpContext.Current.Server.MapPath("~/clientapp/languages/");
+            return Ok(await _translateService.CreatePackagesLanguages(request, baseLangFile, folderFiles));
+        }
+
+        [Route("package/add/element")]
+        [HttpPost]
+        public async Task<IHttpActionResult> AddElementInPackageLanguage(TranslateElementRequest request)
+        {
+            var baseLangFile = HttpContext.Current.Server.MapPath("~/clientapp/languages/en-us.js");
+            return Ok(_translateService.AddElementToPackageLanguage(request, baseLangFile));
+        }
+
     }
 }

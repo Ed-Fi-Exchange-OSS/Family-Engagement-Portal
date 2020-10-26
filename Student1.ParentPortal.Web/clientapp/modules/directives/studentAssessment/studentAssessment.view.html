@@ -1,22 +1,29 @@
 ﻿<div class="card">
     <div class="card-body">
         <h3 class="m-b-15" ng-class="'text-' + ctrl.color">{{ctrl.model.title}} <span>{{ctrl.model.shortDescription}}</span><span ng-if="ctrl.assessment != 0" class="float-right">{{'view.studentAssesment.score' | translate}}: <strong>{{ctrl.model.totalScore}}</strong>/{{ctrl.model.maxRawScore}}</span></h3>
-        <div class="d-flex justify-content-between text-center col-12 p-0">
-            <div class="flex-fill" ng-repeat="ss in ctrl.model.subSections" ng-class="{'border-right-1':!$last, 'border-bottom-show-md':!$last}">
-                <p class="m-b-10 m-t-10 f-s-15">{{ss.title}}</p>
-                <p class="m-b-10 f-w-600 f-s-18">{{ss.score == 0 ? '-' : ss.score }}</p>
-                <p class="f-s-14 f-w-500" ng-if="ss.performanceLevelMet" ng-class="{'font-weight-bold':ss.performanceLevelMet == 'Did Not Meet Grade Level' || ss.performanceLevelMet == 'Approaches Grade Level'}" tooltip-placement="bottom" uib-tooltip="{{('view.studentAssesment.performanceLevel.' + ss.performanceLevelMet) | translate}}">{{ss.performanceLevelMet}}</p>
+        <div ng-if="ctrl.model != undefined">
+            <div class="d-flex justify-content-between text-center col-12 p-0">
+                <div class="flex-fill" ng-repeat="ss in ctrl.model.subSections" ng-class="{'border-right-1':!$last, 'border-bottom-show-md':!$last}">
+                    <p class="m-b-10 m-t-10 f-s-15">{{ss.title}}</p>
+                    <p class="m-b-10 f-w-600 f-s-18">{{ss.score == 0 ? '-' : ss.score }}</p>
+                    <p class="f-s-14 f-w-500" ng-if="ss.performanceLevelMet" ng-class="{'font-weight-bold':ss.performanceLevelMet == 'Did Not Meet Grade Level' || ss.performanceLevelMet == 'Approaches Grade Level'}" tooltip-placement="bottom" uib-tooltip="{{('view.studentAssesment.performanceLevel.' + ss.performanceLevelMet) | translate}}">{{ss.performanceLevelMet | translate}}</p>
+                </div>
+                <!--<div class="border-right-1 border-bottom-show-md border-right-hide-md flex-fill">
+            <p class="m-b-10 m-t-10 f-s-13">English II</p>
+            <h5 class="f-w-600">4831</h5>
+            <p class="f-s-12 f-w-500">Masters</p>
+        </div>-->
             </div>
-            <!--<div class="border-right-1 border-bottom-show-md border-right-hide-md flex-fill">
-                <p class="m-b-10 m-t-10 f-s-13">English II</p>
-                <h5 class="f-w-600">4831</h5>
-                <p class="f-s-12 f-w-500">Masters</p>
-            </div>-->
+            <div ng-if="ctrl.assessment != 0" class="progress m-t-15 h-10px">
+                <div class="progress-bar progress-bar-animated" ng-class="'bg-'+ctrl.color" role="progressbar" style="width: {{ctrl.model.totalScore*100/ctrl.model.maxRawScore}}%" aria-valuenow="{{ctrl.model.totalScore}}" aria-valuemin="1" aria-valuemax="{{ctrl.model.maxRawScore}}"></div>
+            </div>
+            <h4 ng-if="ctrl.assessment != 0" class="m-t-10">{{'view.studentAssesment.totalScore' | translate}}: <span class="pull-right">{{ctrl.model.totalScore}}</span></h4>
         </div>
-        <div ng-if="ctrl.assessment != 0" class="progress m-t-15 h-10px">
-            <div class="progress-bar progress-bar-animated" ng-class="'bg-'+ctrl.color" role="progressbar" style="width: {{ctrl.model.totalScore*100/ctrl.model.maxRawScore}}%" aria-valuenow="{{ctrl.model.totalScore}}" aria-valuemin="1" aria-valuemax="{{ctrl.model.maxRawScore}}"></div>
+        <div ng-if="ctrl.model == undefined">
+            <div class="d-flex justify-content-center">
+                <i style="color: #03a9f4" class="ion-ios-refresh f-s-100 animation-rotate"></i>
+            </div>
         </div>
-        <h4 ng-if="ctrl.assessment != 0" class="m-t-10">{{'view.studentAssesment.totalScore' | translate}}: <span class="pull-right">{{ctrl.model.totalScore}}</span></h4>
     </div>
     <div class="d-flex justify-content-end p-r-10"> <a href="{{ctrl.model.externalLink}}" target="_blank">{{'Click Me' | translate}}</a> </div>
 </div>

@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,6 +24,22 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
     // To regenerate: 
     //  - Copy and paste JSON from the root ~.Web/customizableParameters.json file.
     //  - Rename "RootObject" to "CustomParameters"
+
+    public class CustomParameters
+    {
+        public Attendance attendance { get; set; }
+        public Behavior behavior { get; set; }
+        public CourseGrades courseGrades { get; set; }
+        public Assignments assignments { get; set; }
+        public List<Assessment> assessments { get; set; }
+        public Assessment staarAssessmentHistory { get; set; }
+        public GraduationReadiness graduationReadiness { get; set; }
+        public List<ExternalLink> studentProfileExternalLinks { get; set; }
+        public Descriptors descriptors { get; set; }
+        public string feedbackExternalUrl { get; set; }
+        public string[] mostCommonLanguageCodes { get; set; }
+        public List<Page> featureToggle { get; set; }
+    }
     public class ThresholdRule<T>
     {
         public string interpretation { get; set; }
@@ -126,24 +137,33 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public string gradeTypeExamDescriptor { get; set; }
         public string gradeTypeFinalDescriptor { get; set; }
         public string[] validParentDescriptors { get; set; }
+        public string [] validCampusLeaderDescriptors { get; set; }
         public string [] schoolGradingPeriodDescriptors { get; set; }
         public string [] examGradingPeriods { get; set; }
         public string disciplineIncidentDescriptor { get; set; }
+        public string missingAssignmentLetterGrade { get; set; }
+        public string[] validEmailTypeDescriptors { get; set; }
     }
 
-    public class CustomParameters
+    public class Page
     {
-        public Attendance attendance { get; set; }
-        public Behavior behavior { get; set; }
-        public CourseGrades courseGrades { get; set; }
-        public Assignments assignments { get; set; }
-        public List<Assessment> assessments { get; set; }
-        public Assessment staarAssessmentHistory { get; set; }
-        public GraduationReadiness graduationReadiness { get; set; }
-        public List<ExternalLink> studentProfileExternalLinks { get; set; }
-        public Descriptors descriptors { get; set; }
-        public string feedbackExternalUrl { get; set; }
-        public string[] mostCommonLanguageCodes { get; set; }
+        public string page { get; set; }
+        public string route { get; set; }
+        public List<Feature> features { get; set; }
+    }
 
+    public class Feature
+    {
+        public string name { get; set; }
+        public bool enabled { get; set; }
+        public StudentAbc studentAbc { get; set; }
+    }
+
+    public class StudentAbc 
+    {
+        public bool missingAssignments { get; set; }
+        public bool courseAverage { get; set; }
+        public bool behavior { get; set; }
+        public bool absence { get; set; }
     }
 }

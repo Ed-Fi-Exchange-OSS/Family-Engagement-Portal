@@ -11,6 +11,7 @@
     <AssemblyName>Student1.ParentPortal.Models</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,10 +45,30 @@
     <Compile Include="Alert\ParentAlertProfileModel.cs" />
     <Compile Include="Alert\ParentAlertTypeModel.cs" />
     <Compile Include="Alert\UnreadMessageAlertModel.cs" />
+    <Compile Include="Chat\GroupMessagesChatLogModel.cs" />
+    <Compile Include="Chat\GroupMessageSectionModel.cs" />
+    <Compile Include="Chat\GroupMessagePrincipalModel.cs" />
     <Compile Include="Chat\ChatLogItemModel.cs" />
+    <Compile Include="Chat\GroupMessagesQueueLogModel.cs" />
+    <Compile Include="Chat\IndividualMessagePrincipalModel.cs" />
     <Compile Include="Chat\ChatThreadRequestModel.cs" />
+    <Compile Include="Chat\RecipientMessagesModel.cs" />
     <Compile Include="Chat\RecipientModel.cs" />
+    <Compile Include="Chat\RecipientUnreadPrincipalMessagesModel.cs" />
+    <Compile Include="Notifications\NotificationItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schools\ProgramsModel.cs" />
+    <Compile Include="Shared\GradeTypeEnum.cs" />
+    <Compile Include="Shared\GroupMessagesFilterParamsModel.cs" />
+    <Compile Include="Shared\GroupMessagesStatusEnum.cs" />
+    <Compile Include="Shared\GroupMessagesQueueTypeEnum.cs" />
+    <Compile Include="Shared\IndividualGroupMessagesFilterParamsModel.cs" />
+    <Compile Include="Shared\MessageAbstractionModel.cs" />
+    <Compile Include="Shared\ProfileLanguageModel.cs" />
+    <Compile Include="Shared\ParentsLanguagesCount.cs" />
+    <Compile Include="Shared\ParentStudentCountModel.cs" />
+    <Compile Include="Shared\GradeModel.cs" />
+    <Compile Include="Shared\LogRequestModel.cs" />
     <Compile Include="Shared\LinkModel.cs" />
     <Compile Include="Shared\FeedbackLogModel.cs" />
     <Compile Include="Shared\AddressModel.cs" />
@@ -56,18 +77,26 @@
     <Compile Include="Shared\ElectronicMailModel.cs" />
     <Compile Include="Shared\Enumeration.cs" />
     <Compile Include="Shared\FeedbackRequestModel.cs" />
+    <Compile Include="Shared\ParentStudentsModel.cs" />
     <Compile Include="Shared\PersonBriefModel.cs" />
     <Compile Include="Shared\MethodOfContactTypeEnum.cs" />
     <Compile Include="Shared\PersonIdentityModel.cs" />
+    <Compile Include="Shared\QueuesFilterModel.cs" />
     <Compile Include="Shared\SchoolYearTypeModel.cs" />
     <Compile Include="Shared\TelephoneModel.cs" />
+    <Compile Include="Shared\LogTypeEnum.cs" />
     <Compile Include="Shared\ThresholdTypeEnum.cs" />
+    <Compile Include="Shared\TranslatedPackageModel.cs" />
     <Compile Include="Shared\UnreadMessageModel.cs" />
+    <Compile Include="Staff\ParentStudentTermFilterModel.cs" />
+    <Compile Include="Staff\ParentStudentCountFilterModel.cs" />
     <Compile Include="Staff\TeacherStudentsRequestModel.cs" />
     <Compile Include="Staff\BriefProfileModel.cs" />
     <Compile Include="Staff\StaffImageModel.cs" />
     <Compile Include="Staff\StaffProfileModel.cs" />
     <Compile Include="Staff\StaffSectionModel.cs" />
+    <Compile Include="Student\StudentGradeModel.cs" />
+    <Compile Include="Student\StudentProgramModel.cs" />
     <Compile Include="Student\StudentSummary.cs" />
     <Compile Include="Student\StudentAbsencesCount.cs" />
     <Compile Include="Student\StudentAlertModel.cs" />

@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -21,6 +16,9 @@ using Student1.ParentPortal.Web.App_Start;
 using Student1.ParentPortal.Web.Security;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Student1.ParentPortal.Web.Hubs;
+using System.Text;
+using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.Jwt;
 
 namespace Student1.ParentPortal.Web
 {
@@ -68,6 +66,30 @@ namespace Student1.ParentPortal.Web
                 var instance = ConfigurationManager.AppSettings["authentication.azure.instance"];
                 var policy = ConfigurationManager.AppSettings["authentication.azure.policy"];
 
+                var jwtAudience = ConfigurationManager.AppSettings["Jwt:Audience"];
+                var jwtKey = ConfigurationManager.AppSettings["Jwt:Key"];
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+                var jwtIssuer = ConfigurationManager.AppSettings["Jwt:Issuer"];
+
+                var customJwtAzureOAuthBearerAuthenticationProvider = ioCContainer.GetInstance<CustomAzureAdOAuthBearerAuthenticationProvider>();
+                
+                app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
+                {
+                    TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = jwtIssuer,
+
+                        ValidateAudience = true,
+                        ValidAudience = jwtAudience,
+
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key
+                    },
+                    Provider = customJwtAzureOAuthBearerAuthenticationProvider
+                });
+
+
                 if (mode == "B2C")
                 {
                     var stsDiscoveryEndpoint = string.Format(instance, tenant, policy);
@@ -86,7 +108,7 @@ namespace Student1.ParentPortal.Web
                                 ValidIssuer = config.Issuer,
                                 IssuerSigningKeys = config.SigningKeys.ToList(),
                             },
-                            Provider = customAzureAdOAuthBearerAuthenticationProvider
+                            Provider = customJwtAzureOAuthBearerAuthenticationProvider
                         });
                 }
 
@@ -102,7 +124,7 @@ namespace Student1.ParentPortal.Web
                             {
                                 ValidAudience = audience,
                             },
-                            Provider = customAzureAdOAuthBearerAuthenticationProvider
+                            Provider = customJwtAzureOAuthBearerAuthenticationProvider
                         });
                 }
             }

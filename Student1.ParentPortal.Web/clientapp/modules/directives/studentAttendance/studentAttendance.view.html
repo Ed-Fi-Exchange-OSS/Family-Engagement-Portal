@@ -13,7 +13,7 @@
                 <tbody>
                     <tr ng-repeat="e in ctrl.model.absentAttendanceEvents" ng-if="$index < 2 || ctrl.showAll">
                         <td>{{e.dateOfEvent | date: 'M/d/yy'}}</td>
-                        <td><span class="label label-good w-150px">{{e.eventDescription}}</span></td>
+                        <td><span class="label label-good w-150px">{{e.eventDescription | translate}}</span></td>
                         <td>{{e.reason}}</td>
                     </tr>
                     <tr>

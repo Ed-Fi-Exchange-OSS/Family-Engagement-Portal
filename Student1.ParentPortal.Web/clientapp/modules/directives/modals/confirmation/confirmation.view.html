@@ -1,0 +1,21 @@
+﻿<div class="modal-body">
+    <div class="modal-header">
+        <h3 class="modal-title" id="confirmModalLabel">{{'Confirmation' | translate}}</h3>
+        <button type="button" class="close" ng-click="ctrl.cancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>{{ctrl.body}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary f-s-16" ng-click="ctrl.cancel()">Cancel</button>
+        <button ng-if="!ctrl.confirmButtonLabel" type="button" class="btn btn-primary f-s-16" ng-click="ctrl.confirm()" data-dismiss="modal">
+            {{'Confirm' | translate}}
+        </button>
+        <button ng-if="ctrl.confirmButtonLabel" type="button" class="btn btn-primary f-s-16" ng-click="ctrl.confirm()" data-dismiss="modal">
+            {{ ctrl.confirmButtonLabel }}
+        </button>
+    </div>
+
+</div>

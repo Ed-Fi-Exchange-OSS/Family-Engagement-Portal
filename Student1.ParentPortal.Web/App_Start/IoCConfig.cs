@@ -1,10 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
 using System.Web.Http;
 using SimpleInjector;
@@ -28,6 +22,9 @@ using Student1.ParentPortal.Resources.Providers.Url;
 using Student1.ParentPortal.Resources.Services;
 using Student1.ParentPortal.Web.Infrastructure.Cache;
 using IApplicationSettingsProvider = Student1.ParentPortal.Resources.Providers.Configuration.IApplicationSettingsProvider;
+using Student1.ParentPortal.Resources.Providers.Logger;
+using Student1.ParentPortal.Resources.Providers.Notifications;
+using Student1.ParentPortal.Resources.Providers.Message;
 
 namespace Student1.ParentPortal.Web.App_Start
 {
@@ -108,7 +105,9 @@ namespace Student1.ParentPortal.Web.App_Start
             container.Register<ISMSProvider, SMSMessagingProvider>();
             container.Register<ICustomParametersProvider, CustomParametersProvider>();
             container.Register<IUrlProvider, UrlProvider>();
-
+            container.Register<ILogger, DatabaseLogger>();
+            container.Register<IPushNotificationProvider, PushNotificationProvider>();
+            
             // Caching
             container.Register<ICacheProvider,InMemoryCacheProvider>();
 
@@ -143,6 +142,10 @@ namespace Student1.ParentPortal.Web.App_Start
             var assemblies = new[] { typeof(IAlertProvider).Assembly };
             container.Collection.Register(typeof(IAlertProvider), assemblies);
 
+            // Message Providers
+            var assembliesMessages = new[] { typeof(IMessageProvider).Assembly };
+            container.Collection.Register(typeof(IMessageProvider), assembliesMessages);
+
             // Translation Provider
             container.Register<ITranslationProvider, AzureTransaltionProvider>();
 
@@ -150,7 +153,9 @@ namespace Student1.ParentPortal.Web.App_Start
             container.Collection.Register(typeof(IIdentityProvider), new[]
             {
                 typeof(ParentIdeintityProvider),
-                typeof(StaffIdeintityProvider)
+                typeof(StaffIdeintityProvider),
+                typeof(AdminIdeintityProvider),
+                typeof(CampusLeaderIdentityProvider)
             });
 
             container.Collection.Register(typeof(IRoleResourceAccessValidator), assemblies);
@@ -165,9 +170,8 @@ namespace Student1.ParentPortal.Web.App_Start
             // Add the CacheInterceptor on every service.
             container.InterceptWith<CacheInterceptor>(serviceType => serviceType.Name.EndsWith("Service"));
 
-            // Add Cache to Images Provider
-            container.InterceptWith<CacheInterceptor>(serviceType => serviceType.Name.EndsWith("BlobImageProvider"));
-
+            // Add Cache to Images Providers
+            container.InterceptWith<CacheInterceptor>(serviceType => serviceType.Name.EndsWith("ImageProvider"));
         }
 
         private static void RegisterImageProviders(Container container)

@@ -1,15 +1,15 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Data.Models;
+﻿using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Models.Alert;
+using Student1.ParentPortal.Models.Notifications;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Providers.Image;
 using Student1.ParentPortal.Resources.Providers.Messaging;
+using Student1.ParentPortal.Resources.Providers.Notifications;
+using Student1.ParentPortal.Resources.Providers.Translation;
 using Student1.ParentPortal.Resources.Providers.Url;
+using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,8 +26,20 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
         private readonly IUrlProvider _urlProvider;
         private readonly IImageProvider _imageProvider;
         private readonly ISMSProvider _smsProvider;
+        private readonly IApplicationSettingsProvider _applicationSettingsProvider;
+        private readonly IPushNotificationProvider _pushNotificationProvider;
+        private readonly ITranslationProvider _translationProvider;
 
-        public UnreadMessagesAlertProvider(IAlertRepository alertRepository, ICustomParametersProvider customParametersProvider, ITypesRepository typesRepository, IMessagingProvider messagingProvider, IUrlProvider urlProvider, IImageProvider imageProvider, ISMSProvider smsProvider)
+        public UnreadMessagesAlertProvider(IAlertRepository alertRepository, 
+                                           ICustomParametersProvider customParametersProvider, 
+                                           ITypesRepository typesRepository, 
+                                           IMessagingProvider messagingProvider, 
+                                           IUrlProvider urlProvider, 
+                                           IImageProvider imageProvider, 
+                                           ISMSProvider smsProvider, 
+                                           IApplicationSettingsProvider applicationSettingsProvider, 
+                                           IPushNotificationProvider pushNotificationProvider,
+                                           ITranslationProvider translationProvider)
         {
             _alertRepository = alertRepository;
             _customParametersProvider = customParametersProvider;
@@ -36,10 +48,19 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
             _imageProvider = imageProvider;
             _smsProvider = smsProvider;
             _typesRepository = typesRepository;
+            _applicationSettingsProvider = applicationSettingsProvider;
+            _pushNotificationProvider = pushNotificationProvider;
+            _translationProvider = translationProvider;
         }
 
         public async Task<int> SendAlerts()
         {
+            var timeToSend = DateTime.Today.AddHours(Double.Parse(_applicationSettingsProvider.GetSetting("unread.message.alert.hour")));
+
+            var wasSentBefore = await _alertRepository.unreadMessageAlertWasSentBefore();
+            if (DateTime.UtcNow < timeToSend.ToUniversalTime() || wasSentBefore)
+                return 0;
+
             var customParameters = _customParametersProvider.GetParameters();
 
             var alertTypes = await _typesRepository.GetAlertTypes();
@@ -57,29 +78,53 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
             {
 
                 if (p.AlertTypeIds == null || !p.AlertTypeIds.Contains(AlertTypeEnum.Message.Value))
-                        continue;
+                    continue;
 
-                    string to;
-                    string template;
+                string to;
+                string template;
+                string subjectTemplate = "Family Portal: Unread Messages Alert";
 
-                   
-                    if (p.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.SMS.Value && p.Telephone != null && p.SMSDomain != null)
+                if (p.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.SMS.Value && p.Telephone != null)
+                {
+                    to = p.Telephone;
+                    subjectTemplate = await TranslateText(p.LanguageCode, subjectTemplate);
+                    template = FillSMSTemplate(p);
+                    template = await TranslateText(p.LanguageCode, template);
+                    await _smsProvider.SendMessageAsync(to, subjectTemplate, template);
+                    alertCountSent++;
+                } 
+                else if (p.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.Email.Value &&  p.Email != null)
+                {
+                    to = p.Email;
+                    subjectTemplate = await TranslateText(p.LanguageCode, subjectTemplate);
+                    template = FillEmailTemplate(p);
+                    template = await TranslateText(p.LanguageCode, template);
+                    await _messagingProvider.SendMessageAsync(to, null, null, subjectTemplate, template);
+                    alertCountSent++;
+                } 
+                else if (p.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.Notification.Value)
+                {
+                    string pushNoSubjectTemplate = $"Unread Messages Alert";
+                    string pushNoBodyTemplate = $"You have {p.UnreadMessageCount} unread messages";
+                    pushNoSubjectTemplate = await TranslateText(p.LanguageCode, pushNoSubjectTemplate);
+                    pushNoBodyTemplate = await TranslateText(p.LanguageCode, pushNoBodyTemplate);
+
+
+                    await _pushNotificationProvider.SendNotificationAsync(new NotificationItemModel
                     {
-                        to = p.Telephone + p.SMSDomain;
-                        template = FillSMSTemplate(p);
-                        await _smsProvider.SendMessageAsync(to, "Parent Portal: Unread Messages Alert", template);
-                        alertCountSent++;
-                    }
-                    else if (p.Email != null)
-                    {
-                        to = p.Email;
-                        template = FillEmailTemplate(p);
-                        await _messagingProvider.SendMessageAsync(to, null, null, "Parent Portal: Unread Messages Alert", template);
-                        alertCountSent++;
-                    }
+                        personUniqueId = p.PersonUniqueId,
+                        personType = p.PersonType,
+                        notification = new Notification
+                        {
+                            title = pushNoSubjectTemplate,
+                            body = pushNoBodyTemplate
+                        }
+                    });
+                    alertCountSent++;
+                }
 
             }
-
+            await _alertRepository.AddAlertLog(currentSchoolYear, AlertTypeEnum.Message.Value, "0", "0", alertCountSent.ToString());
             // Commit all log entries.
             await _alertRepository.SaveChanges();
 
@@ -116,9 +161,26 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
         {
             var template = loadSmsTemplate();
             var filledTemplate = template.Replace("{{AlertContent}}", $"you have {u.UnreadMessageCount} unread messages." +
-                                        $"\r\nFor details visit the Parent Portal.")
+                                        $"\r\nFor details visit the Family Portal.")
                                   .Replace("{{StudentFullName}}", $"{u.FirstName} {u.LastSurname}");
             return filledTemplate;
+        }
+
+        private async Task<string> TranslateText(string languageCode, string template)
+        {
+            string textTranslated = string.Empty;
+            if (!string.IsNullOrEmpty(languageCode) && languageCode != "en")
+            {
+                textTranslated = await _translationProvider.TranslateAsync(new TranslateRequest
+                {
+                    FromLangCode = "en",
+                    TextToTranslate = template,
+                    ToLangCode = languageCode
+                });
+            }
+            else
+                textTranslated = template;
+            return textTranslated;
         }
     }
 }

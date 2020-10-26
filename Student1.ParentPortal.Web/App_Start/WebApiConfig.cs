@@ -1,12 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Cors;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
@@ -35,6 +27,8 @@ namespace Student1.ParentPortal.Web
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Filters.Add(new ExceptionLogFilter(container));
+            config.Filters.Add(new UnauthorizedFilterAttribute());
             // Filters
             // Add default filter to secure all endpoints
             config.Filters.Add(new AuthorizeAttribute());
@@ -42,6 +36,7 @@ namespace Student1.ParentPortal.Web
             // Web API registers filters as singletons so to create instances of the EF DbContext we need to send the container all the way down.
             config.Filters.Add(new AuthorizationFilterAttribute(container));
             config.Filters.Add(new ActionExecutionTimerFilter());
+            
         }
     }
 }

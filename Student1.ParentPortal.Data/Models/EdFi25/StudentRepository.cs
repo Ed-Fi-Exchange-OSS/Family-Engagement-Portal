@@ -1,15 +1,12 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Student1.ParentPortal.Models.Shared;
+using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.Student;
+using Student1.ParentPortal.Models.User;
 
 namespace Student1.ParentPortal.Data.Models.EdFi25
 {
@@ -56,7 +53,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
             return studentsAndAbsenceCount;
         }
 
-        public async Task<List<ParentPortal.Models.Student.DisciplineIncident>> GetStudentDisciplineIncidentsAsync(int studentUsi, string disciplineIncidentDescriptor)
+        public async Task<List<ParentPortal.Models.Student.DisciplineIncident>> GetStudentDisciplineIncidentsAsync(int studentUsi, string disciplineIncidentDescriptor, DateTime date)
         {
             var data = await(from sdia in _edFiDb.StudentDisciplineIncidentAssociations
                 join spct in _edFiDb.StudentParticipationCodeTypes on sdia.StudentParticipationCodeTypeId equals spct.StudentParticipationCodeTypeId
@@ -311,7 +308,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
             return data;
         }
 
-        public async Task<StudentMissingAssignments> GetStudentMissingAssignments(int studentUsi, string[] gradeBookMissingAssignmentTypeDescriptors)
+        public async Task<StudentMissingAssignments> GetStudentMissingAssignments(int studentUsi, string[] gradeBookMissingAssignmentTypeDescriptors, string missingAssignmentLetterGrade)
         {
             // Get all assignments and homeworks that were assigned to the section that the student is enrolled in.
             // Assumption: If he hasn't turned it in then its a candidate for missing assignments.
@@ -348,6 +345,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                                                                   ).DefaultIfEmpty() // Left join to get missing assignments.
                                             where ssa.StudentUsi == studentUsi
                                                   && sge.DateFulfilled == null // Not delivered
+                                                  && sge.LetterGradeEarned == missingAssignmentLetterGrade
                                                   && gbe.GradebookEntryTypeId != null // They have to be categorized
                                                   && gradeBookMissingAssignmentTypeDescriptors.Contains(gbe.GradebookEntryType.CodeValue) // Only Homework and Assignments
                                                   && sge.BeginDate == studentMaxBeginDate
@@ -856,6 +854,345 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                   }).ToListAsync();
 
             return siblings;
+        }
+
+        public async Task<PersonBriefModel> GetStudentBriefModelAsyncByUniqueId(string studentUniqueId)
+        {
+            var data = await(from s in _edFiDb.Students
+                             where s.StudentUniqueId == studentUniqueId
+                             select new PersonBriefModel
+                             {
+                                 Usi = s.StudentUsi,
+                                 UniqueId = s.StudentUniqueId,
+                                 FirstName = s.FirstName,
+                                 LastSurname = s.LastSurname
+                             }).SingleOrDefaultAsync();
+
+            return data;
+        }
+
+        public async Task<List<StudentParentAssociationModel>> GetParentAssociation(int studentUsi)
+        {
+            var parents = await (from p in _edFiDb.Parents
+                                 join pp in _edFiDb.ParentProfiles
+                                                     .Include(x => x.ParentProfileTelephones)
+                                                     .Include(x => x.ParentProfileElectronicMails)
+                                 on p.ParentUniqueId equals pp.ParentUniqueId
+                                 join spa in _edFiDb.StudentParentAssociations on p.ParentUsi equals spa.ParentUsi
+                                 join s in _edFiDb.Students on spa.StudentUsi equals s.StudentUsi
+                                 where s.StudentUsi == studentUsi
+                                 select new StudentParentAssociationModel
+                                 {
+                                     ParentUsi = p.ParentUsi,
+                                     Parent = new ParentModel
+                                     {
+                                         ParentUniqueId = p.ParentUniqueId,
+                                         LanguageCode = pp.LanguageCode,
+                                         Email = pp.ParentProfileElectronicMails.FirstOrDefault().ElectronicMailAddress,
+                                         Telephone = pp.ParentProfileTelephones.FirstOrDefault().TelephoneNumber,
+                                         SMSDomain = pp.ParentProfileTelephones.FirstOrDefault().TextMessageCarrierType.SmsSuffixDomain,
+                                         ParentAlert = new ParentAlertModel
+                                         {
+                                             PreferredMethodOfContactTypeId = pp.PreferredMethodOfContactTypeId
+                                         }
+                                     }
+                                 }).ToListAsync();
+            return parents;
+        }
+
+        public async Task<List<ParentStudentsModel>> GetParentsBySearchTermAndGrades(int staffUsi, string term, GradesLevelModel model)
+        {
+            int studentUniqueId = 0;
+            string firstName = "", lastName = "";
+            var searchName = new List<string>();
+            var isStudentId = int.TryParse(term, out studentUniqueId);
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                searchName = term.Split(' ').ToList();
+                firstName = searchName[0];
+                lastName = searchName.Count > 1 ? searchName[1] : string.Empty;
+            }
+
+            if (!model.PageSize.HasValue)
+                model.PageSize = 0;
+
+            var queryBase = (from edor in _edFiDb.EducationOrganizations
+                             join seoaa in _edFiDb.StaffEducationOrganizationAssignmentAssociations on edor.EducationOrganizationId equals seoaa.EducationOrganizationId
+                             join sgl in _edFiDb.SchoolGradeLevels on edor.EducationOrganizationId equals sgl.SchoolId
+                             join ssa in _edFiDb.StudentSchoolAssociations on sgl.GradeLevelDescriptorId equals ssa.EntryGradeLevelDescriptorId
+                             join spa in _edFiDb.StudentParentAssociations on ssa.StudentUsi equals spa.StudentUsi
+                             join s in _edFiDb.Students on ssa.StudentUsi equals s.StudentUsi
+                             join p in _edFiDb.Parents on spa.ParentUsi equals p.ParentUsi
+                             join pp in _edFiDb.ParentProfiles on p.ParentUniqueId equals pp.ParentUniqueId
+                             where seoaa.StaffUsi == staffUsi
+                             select new
+                             {
+                                 ParentFirstName = p.FirstName,
+                                 ParentMiddleName = p.MiddleName,
+                                 ParentLastSurname = p.LastSurname,
+                                 ParentUniqueId = p.ParentUniqueId,
+                                 ParentUsi = p.ParentUsi,
+                                 LanguageCode = pp.LanguageCode,
+                                 PreferredMethodOfContactTypeId = pp.PreferredMethodOfContactTypeId,
+                                 ParentRelation = spa.EmergencyContactStatus == true ? "Emergency Contact" : "Parent",
+                                 sgl.GradeLevelDescriptorId,
+                                 StudentUniqueId = s.StudentUniqueId,
+                                 StudentUsi = ssa.StudentUsi,
+                                 StudentFirstName = ssa.Student.FirstName,
+                                 StudentMiddleName = ssa.Student.MiddleName,
+                                 StudentLastSurname = ssa.Student.LastSurname,
+                                 GradeLevel = ssa.GradeLevelDescriptor.Descriptor.CodeValue
+                             });
+
+            if (string.IsNullOrEmpty(term))
+            {
+                queryBase = (from q in queryBase
+                             where model.Grades.Contains(q.GradeLevelDescriptorId)
+                             select q);
+            }
+
+            if (isStudentId)
+            {
+                queryBase = (from q in queryBase
+                             where model.Grades.Contains(q.GradeLevelDescriptorId) && q.StudentUniqueId == term
+                             select q);
+            }
+
+            if (!string.IsNullOrEmpty(term) && !string.IsNullOrEmpty(lastName))
+            {
+                queryBase = (from q in queryBase
+                             where model.Grades.Contains(q.GradeLevelDescriptorId)
+                             && (((q.StudentFirstName.Contains(firstName) && q.StudentLastSurname.Contains(lastName)) || (q.StudentFirstName.Contains(lastName) && q.StudentLastSurname.Contains(firstName))) ||
+                                 ((q.ParentFirstName.Contains(firstName) && q.ParentLastSurname.Contains(lastName)) || (q.ParentFirstName.Contains(lastName) && q.ParentLastSurname.Contains(firstName))))
+                             select q);
+            }
+
+            if (!string.IsNullOrEmpty(term) && !string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName))
+            {
+                queryBase = (from q in queryBase
+                             where model.Grades.Contains(q.GradeLevelDescriptorId)
+                             && ((q.StudentFirstName.Contains(firstName) || q.StudentLastSurname.Contains(firstName)) || (q.ParentFirstName.Contains(firstName) || q.ParentLastSurname.Contains(firstName)))
+                             select q);
+            }
+
+            if (model.PageSize.HasValue)
+            {
+                queryBase = queryBase.Skip(model.SkipRows).Take(model.PageSize.Value);
+            }
+
+            var query = (from q in queryBase
+                         select new ParentStudentsModel
+                         {
+                             ParentUsi = q.ParentUsi,
+                             ParentUniqueId = q.ParentUniqueId,
+                             ParentFirstName = q.ParentFirstName,
+                             ParentLastSurname = q.ParentLastSurname,
+                             //EdFiEmail = q.EdFiEmail,
+                             //ProfileEmail = q.ProfileEmail,
+                             //ProfileTelephone = q.ProfileTelephone,
+                             //ProfileTelephoneSMSSuffixDomain = q.ProfileTelephoneSMSSuffixDomain,
+                             LanguageCode = q.LanguageCode,
+                             PreferredMethodOfContactTypeId = q.PreferredMethodOfContactTypeId,
+                             StudentFirstName = q.StudentFirstName,
+                             StudentLastSurname = q.StudentLastSurname,
+                             StudentUsi = q.StudentUsi,
+                             StudentUniqueId = q.StudentUniqueId
+                         }).OrderBy(x => x.StudentFirstName);
+
+
+            var students = await query.ToListAsync();
+
+            return students;
+        }
+
+        public async Task<List<ParentStudentsModel>> GetParentsBySection(int staffUsi, StaffSectionModel model, string[] validEmailTypeDescriptors, DateTime today)
+        {
+            var baseQuery = (from s in _edFiDb.Students
+                             join ssa in _edFiDb.StudentSchoolAssociations on s.StudentUsi equals ssa.StudentUsi
+                             join studSec in _edFiDb.StudentSectionAssociations
+                                     on new { ssa.StudentUsi, ssa.SchoolId }
+                                 equals new { studSec.StudentUsi, studSec.SchoolId }
+                             join sy in _edFiDb.SchoolYearTypes on studSec.SchoolYear equals sy.SchoolYear
+                             join ses in _edFiDb.Sessions
+                                     on new { studSec.SchoolId, studSec.SchoolYear }
+                                 equals new { ses.SchoolId, ses.SchoolYear }
+                             join staffSec in _edFiDb.StaffSectionAssociations
+                                     on new { studSec.SchoolId, studSec.LocalCourseCode, studSec.SchoolYear }
+                                 equals new { staffSec.SchoolId, staffSec.LocalCourseCode, staffSec.SchoolYear }
+                             join pr in _edFiDb.StudentParentAssociations on s.StudentUsi equals pr.StudentUsi
+                             join p in _edFiDb.Parents on pr.ParentUsi equals p.ParentUsi
+                             join pe in _edFiDb.ParentElectronicMails on p.ParentUsi equals pe.ParentUsi
+                             // Left join
+                             from pp in _edFiDb.ParentProfiles.Where(x => x.ParentUniqueId == p.ParentUniqueId).DefaultIfEmpty()
+                             from ppe in _edFiDb.ParentProfileElectronicMails
+                                 .Where(x => x.ParentUniqueId == p.ParentUniqueId && x.PrimaryEmailAddressIndicator == true)
+                                 .DefaultIfEmpty()
+                             from ppt in _edFiDb.ParentProfileTelephones.Where(x =>
+                                 x.ParentUniqueId == p.ParentUniqueId && x.PrimaryMethodOfContact == true &&
+                                 x.TextMessageCapabilityIndicator == true).DefaultIfEmpty()
+                             from pptc in _edFiDb.TextMessageCarrierTypes
+                                 .Where(x => x.TextMessageCarrierTypeId == ppt.TelephoneCarrierTypeId).DefaultIfEmpty()
+                             where staffSec.StaffUsi == staffUsi
+                                     && sy.CurrentSchoolYear
+                             && ses.BeginDate <= today && ses.EndDate >= today
+                             select new
+                             {
+                                 ParentUsi = p.ParentUsi,
+                                 ParentUniqueId = p.ParentUniqueId,
+                                 ParentFirstName = p.FirstName,
+                                 ParentLastSurname = p.LastSurname,
+                                 EdFiEmail = pe.ElectronicMailAddress,
+                                 ProfileEmail = ppe.ElectronicMailAddress,
+                                 ProfileTelephone = ppt.TelephoneNumber,
+                                 ProfileTelephoneSMSSuffixDomain = pptc.SmsSuffixDomain,
+                                 LanguageCode = pp.LanguageCode,
+                                 pp.PreferredMethodOfContactTypeId,
+
+                                 StudentFirstName = s.FirstName,
+                                 StudentLastSurname = s.LastSurname,
+                                 StudentUsi = s.StudentUsi,
+                                 StudentUniqueId = s.StudentUniqueId,
+
+                                 // Section info for filtering,
+                                 studSec.SchoolId,
+                                 studSec.LocalCourseCode,
+                                 studSec.SchoolYear
+                             });
+
+            // Filtering can be all Teacher Sections or a specific section.
+            if (!string.IsNullOrEmpty(model.UniqueSectionCode))
+                baseQuery = baseQuery.Where(x => x.SchoolId == model.SchoolId
+                                            && x.LocalCourseCode == model.LocalCourseCode
+                                            && x.SchoolYear == model.SchoolYear);
+
+            var query = (from q in baseQuery
+                         select new ParentStudentsModel
+                         {
+                             ParentUsi = q.ParentUsi,
+                             ParentUniqueId = q.ParentUniqueId,
+                             ParentFirstName = q.ParentFirstName,
+                             ParentLastSurname = q.ParentLastSurname,
+                             EdFiEmail = q.EdFiEmail,
+                             ProfileEmail = q.ProfileEmail,
+                             ProfileTelephone = q.ProfileTelephone,
+                             ProfileTelephoneSMSSuffixDomain = q.ProfileTelephoneSMSSuffixDomain,
+                             LanguageCode = q.LanguageCode,
+                             PreferredMethodOfContactTypeId = q.PreferredMethodOfContactTypeId,
+                             StudentFirstName = q.StudentFirstName,
+                             StudentLastSurname = q.StudentLastSurname,
+                             StudentUsi = q.StudentUsi,
+                             StudentUniqueId = q.StudentUniqueId
+                         });
+
+            var studentsAssociatedWithStaff = await query.ToListAsync();
+
+            return studentsAssociatedWithStaff;
+        }
+
+        public async Task<ParentStudentCountModel> GetFamilyMembersBySection(int staffUsi, StaffSectionModel model, string[] validParentDescriptors, DateTime today)
+        {
+            var baseQuery = (from s in _edFiDb.Students
+                             join ssa in _edFiDb.StudentSchoolAssociations on s.StudentUsi equals ssa.StudentUsi
+                             join studSec in _edFiDb.StudentSectionAssociations
+                                     on new { ssa.StudentUsi, ssa.SchoolId }
+                                 equals new { studSec.StudentUsi, studSec.SchoolId }
+                             join sy in _edFiDb.SchoolYearTypes on studSec.SchoolYear equals sy.SchoolYear
+                             join ses in _edFiDb.Sessions
+                                  on new { studSec.SchoolId, studSec.SchoolYear }
+                              equals new { ses.SchoolId, ses.SchoolYear }
+                             join staffSec in _edFiDb.StaffSectionAssociations
+                                     on new { studSec.SchoolId, studSec.LocalCourseCode, studSec.SchoolYear }
+                                 equals new { staffSec.SchoolId, staffSec.LocalCourseCode, staffSec.SchoolYear }
+                             join pr in _edFiDb.StudentParentAssociations on s.StudentUsi equals pr.StudentUsi
+                             join p in _edFiDb.Parents on pr.ParentUsi equals p.ParentUsi
+                             // Left join
+                             from pp in _edFiDb.ParentProfiles.Where(x => x.ParentUniqueId == p.ParentUniqueId).DefaultIfEmpty()
+                             where staffSec.StaffUsi == staffUsi
+                                     && sy.CurrentSchoolYear
+                                     && ses.BeginDate <= today && ses.EndDate >= today
+                             select new
+                             {
+                                 LanguageCode = pp.LanguageCode,
+                                 ParentUsi = p.ParentUsi,
+                                 StudentUsi = s.StudentUsi,
+                                 // Section info for filtering,
+                                 studSec.SchoolId,
+                                 studSec.LocalCourseCode,
+                                 studSec.SchoolYear
+                             });
+
+
+
+
+            // Filtering can be all Teacher Sections or a specific section.
+            if (!string.IsNullOrEmpty(model.UniqueSectionCode))
+                baseQuery = baseQuery.Where(x => x.SchoolId == model.SchoolId
+                                            && x.LocalCourseCode == model.LocalCourseCode
+                                            && x.SchoolYear == model.SchoolYear);
+
+            var parentsLanguages = await baseQuery.ToListAsync();
+
+            var result = new ParentStudentCountModel()
+            {
+                FamilyMembersCount = baseQuery.GroupBy(x => x.ParentUsi).Count(),
+                StudentsCount = baseQuery.GroupBy(x => x.StudentUsi).Count()
+            };
+            return result;
+        }
+
+        public async Task<List<StudentSuccessTeamMember>> GetPrincipals(int studentUsi, string[] validLeadersDescriptors, string recipientUniqueId, int recipientTypeId)
+        {
+            var query = from staff in _edFiDb.Staffs
+                        join staffEdOrg in _edFiDb.StaffEducationOrganizationAssignmentAssociations on staff.StaffUsi equals staffEdOrg.StaffUsi
+                        join seoa in _edFiDb.StudentEducationOrganizationAssociations on staffEdOrg.EducationOrganizationId equals seoa.EducationOrganizationId
+                        join s in _edFiDb.Students on seoa.StudentUsi equals s.StudentUsi
+                        from led in _edFiDb.Descriptors.Where(x => x.DescriptorId == staff.HighestCompletedLevelOfEducationDescriptorId).DefaultIfEmpty()
+                        from bio in _edFiDb.StaffBiographies.Where(x => x.StaffUniqueId == staff.StaffUniqueId).DefaultIfEmpty()
+                        where s.StudentUsi == studentUsi && validLeadersDescriptors.Contains(staffEdOrg.PositionTitle)
+                        select new
+                        {
+                            staff.StaffUsi,
+                            staff.Id,
+                            staff.StaffUniqueId,
+                            staff.PersonalTitlePrefix,
+                            staff.FirstName,
+                            staff.MiddleName,
+                            staff.LastSurname,
+                            staffEdOrg.PositionTitle,
+                            staff.YearsOfPriorTeachingExperience,
+                            staff.HighlyQualifiedTeacher,
+                            bio.ShortBiography,
+                            HighestCompletedLevelOfEducation = led.ShortDescription,
+
+                            Chat = _edFiDb.ChatLogs.Count(x => x.StudentUniqueId == s.StudentUniqueId)
+                        };
+
+            var executedQuery = await query.ToListAsync();
+
+            var gr = (from d in executedQuery
+                      group d by d.StaffUsi into g
+                      select new StudentSuccessTeamMember
+                      {
+                          Id = g.FirstOrDefault().StaffUsi,
+                          Guid = g.FirstOrDefault().Id,
+                          UniqueId = g.FirstOrDefault().StaffUniqueId,
+                          StudentUsi = studentUsi,
+                          PersonTypeId = ChatLogPersonTypeEnum.Staff.Value,
+                          PersonalTitlePrefix = g.FirstOrDefault().PersonalTitlePrefix,
+                          RelationToStudent = g.FirstOrDefault().PositionTitle,
+                          FirstName = g.FirstOrDefault().FirstName,
+                          MiddleName = g.FirstOrDefault().MiddleName,
+                          LastSurname = g.FirstOrDefault().LastSurname,
+                          HighlyQualifiedTeacher = g.FirstOrDefault().HighlyQualifiedTeacher ?? false,
+                          HighestCompletedLevelOfEducation = g.FirstOrDefault().HighestCompletedLevelOfEducation,
+                          YearsOfTeachingExperience = g.FirstOrDefault().YearsOfPriorTeachingExperience,
+                          ShortBiography = g.FirstOrDefault().ShortBiography,
+                          UnreadMessageCount = g.FirstOrDefault().Chat,
+                          ChatEnabled = ChatLogPersonTypeEnum.Parent.Value == recipientTypeId
+                      }).ToList();
+
+            return gr;
         }
     }
 }

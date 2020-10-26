@@ -10,7 +10,7 @@
                 },
                 resolve: {
                     model: ['$stateParams', 'api', function ($stateParams, api) {
-                        return api.students.get($stateParams.studentId);
+                        return api.students.getStudentBriefDetail($stateParams.studentId);
                     }],
                     customParams: ['api', function (api) {
                         return api.customParams.getAll();
@@ -37,12 +37,15 @@
         }, // One way data binding.
         templateUrl: 'clientapp/modules/studentdetail/studentdetail.view.html',
         controllerAs: 'ctrl',
-        controller: ['api','$anchorScroll', '$location', 'landingRouteService', function (api, $anchorScroll, $location, landingRouteService) {
+        controller: ['api', '$anchorScroll', '$location', 'landingRouteService', '$translate', '$rootScope', 'appConfig',
+            function (api, $anchorScroll, $location, landingRouteService, $translate, $rootScope, appConfig) {
+          
             var ctrl = this;
             ctrl.urls = [];
             ctrl.showAbsences = false;
-            ctrl.test = 'view.studentDetail.indicators.courseAverage.title';
             ctrl.currentPos = 0;
+            ctrl.heroClient = appConfig.hero.client;
+
             ctrl.sections = [
                 { name: 'Absences', id: 'attendance' },
                 { name: 'Behavior', id: 'behaviour-log' },
@@ -85,11 +88,12 @@
             };
 
             landingRouteService.getRoute().then(function (route) {
-                ctrl.urls.push({ displayName: 'Home', url: route });
+                ctrl.urls.push({ displayName: $translate.instant('Home'), url: route});
             });
             // On Init needed for life-cycle purposes.
             // Model is not binded until resolved.
             ctrl.$onInit = function () {
+                $rootScope.loadingOverride = false;
                 ctrl.attendanceIndicatorCategories = [
                     {
                         tooltip: "Unexcused Absences",
@@ -113,6 +117,26 @@
                 ctrl.currentPos = ctrl.studentIds.indexOf(parseInt(ctrl.currentStudent));
                 
                 ctrl.gotoAnchor(ctrl.anchor);
+                api.students.getStudentAttendance(ctrl.currentStudent).then(function (data) {
+                    ctrl.model.attendance = data;
+                });
+                api.students.getStudentBehavior(ctrl.currentStudent).then(function (data) {
+                    ctrl.model.behavior = data;
+                });
+                api.students.getStudentCourseGrades(ctrl.currentStudent).then(function (data) {
+                    ctrl.model.courseGrades = data;
+                });
+                api.students.getStudentMissingAssignments(ctrl.currentStudent).then(function (data) {
+                    ctrl.model.missingAssignments = data;
+                });
+                api.students.getStudentAssessments(ctrl.currentStudent).then(function (data) {
+                    ctrl.model.assessment = data;
+                });
+                ctrl.heroTextDesc = $translate.instant('view.disciplineIncidents.moreDetail');
+                $rootScope.$on('$translateChangeSuccess', function (event, current, previous) {
+                    ctrl.heroTextDesc =  $translate.instant('view.disciplineIncidents.moreDetail');
+                });
+
             };
         }]
     });

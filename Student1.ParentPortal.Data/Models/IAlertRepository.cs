@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-
+﻿
 using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Models.Types;
@@ -20,9 +15,10 @@ namespace Student1.ParentPortal.Data.Models
         Task<List<StudentAlertModel>> studentsOverThresholdAbsence(decimal excusedThreshold, decimal unexcusedThreshold, decimal tardyThreshold, string excusedDescriptor, string unexcusedDescriptor, string tardyDescriptor);
         Task<List<StudentAlertModel>> studentsOverThresholdAdaAbsence(decimal unexcusedThreshold, string absentDescriptor);
         Task<List<StudentAlertModel>> studentsOverThresholdBehavior(decimal behaviorThreshold, string disciplineIncidentDescriptor);
-        Task<List<StudentAlertModel>> studentsOverThresholdAssignment(decimal assignmentThreshold, string[] gradeBookMissingAssignmentTypeDescriptors);
+        Task<List<StudentAlertModel>> studentsOverThresholdAssignment(decimal assignmentThreshold, string[] gradeBookMissingAssignmentTypeDescriptors, string missingAssignmentLetterGrade);
         Task<List<StudentAlertModel>> studentsOverThresholdCourse(decimal courseThreshold, string gradeTypeGradingPeriodDescriptor);
         Task<bool> wasSentBefore(string parentUniqueId, string studentUniqueId, string valueCount, SchoolYearTypeModel currentSchoolYear, int alertType);
+        Task<bool> unreadMessageAlertWasSentBefore();
         Task AddAlertLog(SchoolYearTypeModel currentSchoolYear, int alertTypeId, string parentUniqueId, string studentUniqueId, string absencesCount);
         Task SaveChanges();
         Task<ParentAlertTypeModel> GetParentAlertTypes(int usi);

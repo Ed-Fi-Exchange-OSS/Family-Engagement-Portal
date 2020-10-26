@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Data.Models.EdFi25;
+﻿using Student1.ParentPortal.Data.Models.EdFi25;
 using Student1.ParentPortal.Resources.Providers.Image;
 using System;
 using System.Collections.Generic;
@@ -14,11 +9,14 @@ using System.Threading.Tasks;
 using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Resources.Services.Communications;
+using Student1.ParentPortal.Resources.Providers.Configuration;
+using Student1.ParentPortal.Resources.Cache;
 
 namespace Student1.ParentPortal.Resources.Services.Students
 {
     public interface IStudentSuccessTeamService
     {
+        [NoCache]
         Task<List<StudentSuccessTeamMember>> GetStudentSuccessTeamAsync(int studentUSI, string recipientUniqueId, int recipientTypeId);
     }
 
@@ -27,12 +25,17 @@ namespace Student1.ParentPortal.Resources.Services.Students
         private readonly IStudentRepository _studentRepository;
         private readonly IImageProvider _imageUrlProvider;
         private readonly ICommunicationsService _communicationsService;
+        private readonly ICustomParametersProvider _customParametersProvider;
 
-        public StudentSuccessTeamService(IStudentRepository studentRepository, IImageProvider imageUrlProvider, ICommunicationsService communicationsService)
+        public StudentSuccessTeamService(IStudentRepository studentRepository, 
+                                         IImageProvider imageUrlProvider, 
+                                         ICommunicationsService communicationsService,
+                                         ICustomParametersProvider customParametersProvider)
         {
             _studentRepository = studentRepository;
             _imageUrlProvider = imageUrlProvider;
             _communicationsService = communicationsService;
+            _customParametersProvider = customParametersProvider;
         }
 
         public async Task<List<StudentSuccessTeamMember>> GetStudentSuccessTeamAsync(int studentUSI, string recipientUniqueId, int recipientTypeId)
@@ -49,6 +52,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
             model.AddRange((await GetOtherStaff(studentUSI)));
             model.AddRange((await GetProgramAssociatedStaff(studentUSI)));
             model.AddRange(await GetSiblings(studentUSI));
+            model.AddRange(await GetPrincipals(studentUSI, recipientUniqueId, recipientTypeId));
 
             return model;
         }
@@ -84,7 +88,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
         private async Task<List<StudentSuccessTeamMember>> GetParents(int studentUsi, string recipientUniqueId, int recipientTypeId)
         {
 
-            var parents = await _studentRepository.GetParents(studentUsi, recipientUniqueId, recipientTypeId );
+            var parents = await _studentRepository.GetParents(studentUsi, recipientUniqueId, recipientTypeId);
             // Add Image Urls
             foreach (var p in parents)
             {
@@ -117,6 +121,18 @@ namespace Student1.ParentPortal.Resources.Services.Students
             }
 
             return siblings;
+        }
+        private async Task<List<StudentSuccessTeamMember>> GetPrincipals(int studentUSI, string recipientUniqueId, int recipientTypeId)
+        {
+            var validLeadersDescriptors = _customParametersProvider.GetParameters().descriptors.validCampusLeaderDescriptors;
+            var principals = await _studentRepository.GetPrincipals(studentUSI, validLeadersDescriptors, recipientUniqueId, recipientTypeId);
+
+            foreach (var p in principals)
+            {
+                p.ImageUrl = await _imageUrlProvider.GetStaffImageUrlAsync(p.UniqueId);
+            }
+
+            return principals;
         }
 
     }

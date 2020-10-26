@@ -5,6 +5,22 @@
         </div>
         <div class="card-body">
             <form name="feedbackForm" novalidate>
+                <div ng-if="ctrl.onLoginScreen()" class="col-12 col-md-12 form-group" ng-class="{ 'invalid' : feedbackForm.name.$invalid, 'valid': feedbackForm.name.$valid }">
+                    <label for="name">{{'view.feedback.name'  | translate}}:</label>
+                    <input id="name" name="name" type="text"
+                           class="form-control"
+                           ng-model="ctrl.model.name"
+                           required />
+                    <div class="form-feedback" ng-if="feedbackForm.name.$error.required">*Required</div>
+                </div>
+                <div ng-if="ctrl.onLoginScreen()" class="col-12 col-md-12 form-group" ng-class="{ 'invalid' : feedbackForm.email.$invalid, 'valid': feedbackForm.email.$valid }">
+                    <label for="email">{{'view.feedback.email'  | translate}}:</label>
+                    <input id="email" name="email" type="text"
+                           class="form-control"
+                           ng-model="ctrl.model.email"
+                           required />
+                    <div class="form-feedback" ng-if="feedbackForm.email.$error.required">*Required</div>
+                </div>
                 <div class="col-12 col-md-12 form-group" ng-class="{ 'invalid' : feedbackForm.subject.$invalid, 'valid': feedbackForm.subject.$valid }">
                     <label for="subject">{{'view.feedback.subject'  | translate}}:</label>
                     <input id="subject" name="subject" type="text"

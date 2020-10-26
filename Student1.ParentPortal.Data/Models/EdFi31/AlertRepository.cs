@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -68,7 +63,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                     where p.ParentUsi == usi
                                     select pa).FirstOrDefaultAsync();
 
-            parentAlertTypes.AlertsEnabled = parentAlert != null && parentAlert.AlertsEnabled;
+            //Note: This flag was true always by the user feedback
+            parentAlertTypes.AlertsEnabled = true;
 
             var alertTypes = (await _edFiDb.AlertTypes
                 .Include(x => x.ThresholdTypes)
@@ -115,15 +111,12 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             if (parentAlert == null)
             {
                 parentAlert = createParentAlert(parent.ParentUniqueId);
-
-                parentAlert.AlertsEnabled = parentAlertTypes.AlertsEnabled;
                 parentAlert.AlertTypes = parentAlerts;
 
                 _edFiDb.ParentAlerts.Add(parentAlert);
             }
             else
             {
-                parentAlert.AlertsEnabled = parentAlertTypes.AlertsEnabled;
                 parentAlert.AlertTypes = parentAlerts;
             }
 
@@ -318,7 +311,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             return result;
         }
 
-        public async Task<List<StudentAlertModel>> studentsOverThresholdAssignment(decimal assignmentThreshold, string[] gradeBookMissingAssignmentTypeDescriptors)
+        public async Task<List<StudentAlertModel>> studentsOverThresholdAssignment(decimal assignmentThreshold, string[] gradeBookMissingAssignmentTypeDescriptors, string missingAssignmentLetterGrade)
         {
 
             var studentsOverThreshold = await (from s in _edFiDb.Students
@@ -339,10 +332,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                                             .Include(x => x.GradebookEntry.GradebookEntryTypeDescriptor.Descriptor)
                                                on s.StudentUsi equals sge.StudentUsi
                                                join sy in _edFiDb.SchoolYearTypes on sge.SchoolYear equals sy.SchoolYear
-                                               where pa.AlertsEnabled
-                                               && sge.DateFulfilled == null 
+                                               where pa.AlertsEnabled 
+                                               && sge.DateFulfilled == null
+                                               && sge.LetterGradeEarned == missingAssignmentLetterGrade
                                                && sge.GradebookEntry.GradebookEntryTypeDescriptorId != null
-                                               && sge.NumericGradeEarned == null
                                                && gradeBookMissingAssignmentTypeDescriptors.Contains(sge.GradebookEntry.GradebookEntryTypeDescriptor.Descriptor.CodeValue)
                                                && sy.CurrentSchoolYear
                                                group new { s, pa, profile, spa } by new { s.StudentUsi, pa.ParentUniqueId } into g
@@ -454,6 +447,12 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                 return result;
         }
 
+        public async Task<bool> unreadMessageAlertWasSentBefore()
+        {
+            var today = DateTime.Today;
+            return await _edFiDb.AlertLogs.AnyAsync(x => DbFunctions.TruncateTime(x.UtcSentDate) == today && x.AlertTypeId == AlertTypeEnum.Message.Value);
+        }
+
         public async Task<bool> wasSentBefore(string parentUniqueId, string studentUniqueId, string absencesCount, SchoolYearTypeModel currentSchoolYear, int alertType)
         {
             var wasSentBefore = await _edFiDb.AlertLogs.AnyAsync(x =>
@@ -475,7 +474,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                 ParentUniqueId = x.ParentUniqueId,
                                 StudentUniqueId = x.StudentUniqueId,
                                 Value = x.Value,
-                                AlertTypeName = x.AlertType.ShortDescription
+                                AlertTypeName = x.AlertType.ShortDescription,
+                                SentDate = x.UtcSentDate
                             }).ToListAsync();
         }
 
@@ -505,7 +505,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             parentModel.ParentAlert.PreferredMethodOfContactTypeId = profile?.PreferredMethodOfContactTypeId;
             parentModel.ParentAlert.AlertTypeIds = parentAlert.AlertTypes.Select(x => x.AlertTypeId).ToList();
-
+            parentModel.LanguageCode = profile.LanguageCode;
             return parentModel;
         }
 
@@ -560,8 +560,11 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                 Email = getParentMail(x.ParentProfile) ?? getParentMail(x.Parent),
                 Telephone = getParentTelephone(x.ParentProfile),
                 SMSDomain = getParentSMSDomain(x.ParentProfile),
-                PreferredMethodOfContactTypeId = x.ParentProfile.PreferredMethodOfContactTypeId,
+                PreferredMethodOfContactTypeId = x.ParentProfile?.PreferredMethodOfContactTypeId,
                 AlertTypeIds = x.ParentAlert.AlertTypes.Select(pa => pa.AlertTypeId).ToList(),
+                PersonUniqueId = x.Parent.ParentUniqueId,
+                PersonType = "Parent",
+                LanguageCode = x.ParentProfile.LanguageCode
             }).ToList();
 
             var staffs = await (from s in _edFiDb.Staffs
@@ -581,14 +584,18 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             var returnstaffs = staffs.Select(x => new UnreadMessageAlertModel
             {
-                FirstName = x.Profile.FirstName,
-                LastSurname = x.Profile.LastSurname,
+                FirstName = x.Staff.FirstName,
+                LastSurname = x.Staff.LastSurname,
                 UnreadMessageCount = _edFiDb.ChatLogs.Where(cl => cl.RecipientTypeId == ChatLogPersonTypeEnum.Staff.Value && cl.RecipientUniqueId == x.Staff.StaffUniqueId && !cl.RecipientHasRead).Count(),
                 Email = getStaffMail(x.Profile) ?? getStaffMail(x.Staff),
                 Telephone = getStaffTelephone(x.Profile),
                 SMSDomain = getStaffSMSDomain(x.Profile),
-                PreferredMethodOfContactTypeId = x.Profile.PreferredMethodOfContactTypeId,
-                AlertTypeIds = new List<int>() { 1, 2, 3, 4, 5 }  // Review how are we going to handle this
+                PreferredMethodOfContactTypeId = x.Profile?.PreferredMethodOfContactTypeId,
+                //Note: As of when this code was written Staff do not have a way to configure what alerts they receive. 
+                //Requirement specified for them to receive all types of alerts
+                AlertTypeIds = new List<int>() { 1, 2, 3, 4, 5 },
+                PersonUniqueId = x.Staff.StaffUniqueId,
+                PersonType = "Staff"
             }).ToList();
 
             var result = returnParents;

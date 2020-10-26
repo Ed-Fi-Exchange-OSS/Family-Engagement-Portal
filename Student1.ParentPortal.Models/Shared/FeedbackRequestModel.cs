@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +8,12 @@ namespace Student1.ParentPortal.Models.Shared
 {
     public class FeedbackRequestModel
     {
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string Subject { get; set; }
         public string Issue { get; set; }
         public string Description { get; set; }
         public string CurrentUrl { get; set; }
+        public bool IsFromLoginScreen { get; set; }
     }
 }

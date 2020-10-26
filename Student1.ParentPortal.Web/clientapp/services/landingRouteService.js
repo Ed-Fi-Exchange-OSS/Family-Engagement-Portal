@@ -11,6 +11,10 @@
                     case 'Staff':
                         return'app.teacherLanding';
                         break;
+                    case 'Admin':
+                        return 'app.adminLanding';
+                    case 'CampusLeader':
+                        return 'app.campusLeaderLanding';
                     default:
                         return 'app.parentLanding';
                 }

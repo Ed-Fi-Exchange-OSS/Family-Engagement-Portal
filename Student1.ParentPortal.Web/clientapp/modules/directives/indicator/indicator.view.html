@@ -2,6 +2,6 @@
     <div class="card-body text-center text-white" ng-class="ctrl.bgclass">
         <h3 class="m-t-15 text-white" tooltip-placement="bottom" uib-tooltip="{{ctrl.tooltip}}">{{ctrl.indicatorTitle}}</h3>
         <span class="m-t-10 f-s-50 font-weight-bold">{{ctrl.value}}</span>
-        <p class="m-t-10">{{ctrl.textualEvaluation}}</p>
+        <p class="m-t-10" ng-bind-html="ctrl.textualEvaluation"></p>
     </div>
 </div>

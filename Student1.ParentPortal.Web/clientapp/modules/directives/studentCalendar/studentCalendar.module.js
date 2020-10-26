@@ -1,13 +1,14 @@
 ﻿angular.module('app.directives')
     .component('studentCalendar', {
         bindings: {
-            model: "<"
+            studentUsi: "<",
         }, // One way data binding.
         templateUrl: 'clientapp/modules/directives/studentCalendar/studentCalendar.view.html',
         controllerAs: 'ctrl',
-        controller: [function () {
+        controller: ['api', function (api) {
             var ctrl = this;
-
+            ctrl.model = {};
+            ctrl.showLoader = false;
             var calendarEventAvailableColors = ['event-light-blue', 'event-orange', 'event-pink', 'event-purple', 'event-teal', 'event-green', 'event-brown', 'event-indigo', 'event-blue-grey', 'event-light-blue', 'event-orange', 'event-pink', 'event-purple', 'event-teal', 'event-green', 'event-brown', 'event-indigo', 'event-blue-grey'];
             var courses = [];
 
@@ -44,7 +45,12 @@
 
 
             ctrl.$onInit = function () {
-                createPostionioning();
+                api.students.getStudentSchedule(ctrl.studentUsi).then(function (data) {
+                    ctrl.model = data;
+                    createPostionioning();
+                    ctrl.showLoader = true;
+                });
+                    
             }
 
             function createPostionioning() {

@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -39,7 +34,7 @@ namespace Student1.ParentPortal.Web.Security
         /// </summary>
         public int PersonUSI
         {
-            get { return Convert.ToInt32(Current.Claims.FirstOrDefault(x => x.Type == "person_usi").Value); }
+            get { return Convert.ToInt32(Current.Claims.FirstOrDefault(x => x.Type == "person_usi")?.Value); }
         }
 
         /// <summary>
@@ -47,30 +42,30 @@ namespace Student1.ParentPortal.Web.Security
         /// </summary>
         public string PersonUniqueId
         {
-            get { return Current.Claims.FirstOrDefault(x => x.Type == "person_unique_id").Value; }
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "person_unique_id")?.Value; }
         }
         public int PersonTypeId
         {
-            get { return Convert.ToInt32(Current.Claims.FirstOrDefault(x => x.Type == "person_type_id").Value); }
+            get { return Convert.ToInt32(Current.Claims.FirstOrDefault(x => x.Type == "person_type_id")?.Value); }
         }
         public string Role
         {
-            get { return Current.Claims.FirstOrDefault(x => x.Type == "role").Value; }
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "role")?.Value; }
         }
 
         public string Email
         {
-            get { return Current.Claims.FirstOrDefault(x => x.Type == "email").Value; }
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "email")?.Value; }
         }
 
         public string FirstName
         {
-            get { return Current.Claims.FirstOrDefault(x => x.Type == "firstname").Value; }
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "firstname")?.Value; }
         }
 
         public string LastSurname
         {
-            get { return Current.Claims.FirstOrDefault(x => x.Type == "lastsurname").Value; }
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "lastsurname")?.Value; }
         }
     }
 }

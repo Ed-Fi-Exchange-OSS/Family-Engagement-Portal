@@ -1,5 +1,5 @@
 ﻿<main role="main" class="container">
-    <h1> <a ng-repeat="p in ctrl.urls" ui-sref="{{p.url}}">{{p.displayName | translate}}</a> > {{'view.userProfile.title' | translate}} <span>{{'view.userProfile.subtitle' | translate}}</span></h1>
+    <h1> <a ng-repeat="p in ctrl.urls" ui-sref="{{p.url}}">{{p.displayName | translate}}</a> > {{'view.userProfile.title' | translate}}, <span>{{'view.userProfile.subtitle' | translate}}</span></h1>
     <form name="userForm" novalidate>
         <div class="row">
             <div class="col-md-4">
@@ -32,9 +32,9 @@
                                                    ng-model="ctrl.model.firstName"
                                                    required
                                                    ng-minlength="2"
-                                                   ng-maxlength="10" />
+                                                   ng-maxlength="75" />
                                             <div class="form-feedback" ng-if="userForm.firstName.$error.required">*Required</div>
-                                            <div class="form-feedback" ng-if="userForm.firstName.$error.maxlength">*Max length of 10 characters exceeded!</div>
+                                            <div class="form-feedback" ng-if="userForm.firstName.$error.maxlength">*Max length of 75 characters exceeded!</div>
                                             <div class="form-feedback" ng-if="userForm.firstName.$error.minlength">*Min of 2 characters not reached!</div>
                                         </div>
                                     </div>
@@ -77,6 +77,9 @@
                                 <select id="preferredMethodOfContactTypeId" name="preferredMethodOfContactTypeId" class="form-control" required greater-than-zero ng-model="ctrl.model.preferredMethodOfContactTypeId" ng-options="mc.methodOfContactTypeId as mc.shortDescription for mc in ctrl.methodOfContactTypes"></select>
                                 <div class="form-feedback" ng-if="userForm.preferredMethodOfContactTypeId.$error.required">*Required</div>
                                 <div class="form-feedback" ng-if="userForm.preferredMethodOfContactTypeId.$error.gtZero">*Required</div>
+                                <div class="p-t-5 p-l-1">
+                                    <span ng-if="ctrl.model.preferredMethodOfContactTypeId == 2">*{{'SMS: message and data rates may apply.' | translate}}</span>
+                                </div>
                             </div>
                             <div class="col-6 col-md-6">
                                 <label for="preferredLanguage">{{'Preferred Language' | translate}}</label>

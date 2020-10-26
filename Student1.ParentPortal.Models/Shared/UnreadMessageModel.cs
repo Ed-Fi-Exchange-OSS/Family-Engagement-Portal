@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Models.Chat;
+﻿using Student1.ParentPortal.Models.Chat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +14,7 @@ namespace Student1.ParentPortal.Models.Shared
         public int PersonTypeId { get; set; }
         public int StudentUsi { get; set; }
         public string StudentUniqueId { get; set; }
-        public DateTime OldestMessageDateSent { get; set; } 
+        public DateTime? OldestMessageDateSent { get; set; } 
         public string StudentFirstName { get; set; }
         public string StudentMiddleName { get; set; }
         public string StudentLastSurname { get; set; }
@@ -30,7 +25,8 @@ namespace Student1.ParentPortal.Models.Shared
         public string Name => $"{FirstName} {MiddleName} {LastSurname}";
         public int UnreadMessageCount { get; set; }
         public string ImageUrl { get; set; }
-        public IEnumerable<string> RelationsToStudent { get; set; }
+        public string RelationToStudent { get; set; }
+        public string LanguageCode { get; set; }
     }
 
 

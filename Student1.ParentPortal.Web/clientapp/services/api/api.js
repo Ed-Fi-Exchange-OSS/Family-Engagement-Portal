@@ -1,6 +1,6 @@
 ﻿angular.module('app.api',[])
-    .service('api', ['customParams', 'apiParents', 'apiStudents', 'apiTeachers', 'apiMe', 'apiTypes', 'apiTranslate', 'apiAlerts', 'apiCommunications', 'apiApplication', 'apiFeedback', 'apiImage',
-        function (customParams, apiParents, apiStudents, apiTeachers, apiMe, apiTypes, apiTranslate, apiAlerts, apiCommunications, apiApplication, apiFeedback, apiImage) {
+    .service('api', ['customParams', 'apiLog', 'apiParents', 'apiStudents', 'apiTeachers', 'apiMe', 'apiTypes', 'apiTranslate', 'apiAlerts', 'apiCommunications', 'apiApplication', 'apiFeedback', 'apiImage', 'apiAdmin','apiSchools',
+        function (customParams, apiLog, apiParents, apiStudents, apiTeachers, apiMe, apiTypes, apiTranslate, apiAlerts, apiCommunications, apiApplication, apiFeedback, apiImage, apiAdmin, apiSchools) {
         return {
             customParams: customParams,
             parents: apiParents,
@@ -13,6 +13,9 @@
             types: apiTypes,
             alerts: apiAlerts,
             communications: apiCommunications,
-            application: apiApplication
+            application: apiApplication,
+            log: apiLog,
+            admin: apiAdmin,
+            schools: apiSchools
         };
     }]);

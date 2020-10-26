@@ -1,0 +1,111 @@
+﻿<div>
+    <div class="row m-t-15">
+
+        <div class="col-12 col-lg-4">
+            <div class="form-group">
+                <select class="form-control" name="gradeSelect" id="gradeSelect"
+                        ng-model="ctrl.selectedGrade"
+                        ng-options="item as item.name for item in ctrl.grades"
+                        ng-change="ctrl.changeGradeLevel(); ctrl.saveState();"></select>
+            </div>
+        </div>
+        <div class="col-12 col-lg-7">
+            <div class="input-group mb-3">
+                <input id="studentNameOrParent" type="text" class="form-control" placeholder="{{'Search by Student or Families Name' | translate}}." aria-label="Recipient's username" aria-describedby="basic-addon2" ng-model="ctrl.search.value" ng-enter="ctrl.getStudentsByGradesAndSearchTerm(); ctrl.getParentStudentInGradesAndSearchTermCount();" ng-keyup="ctrl.saveState();">
+                <div class="input-group-append">
+                    <button class="btn btn-primary p-b-5 p-t-5" type="button" ng-click="ctrl.getStudentsByGradesAndSearchTerm(); ctrl.getParentStudentInGradesAndSearchTermCount();"><i class="ion ion-ios-search p-r-10"></i> {{'Search' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form name="ctrl.messageGroupIndividualForm" novalidate>
+        <div class="row">
+            <div class="col-12 col-lg-12 m-b-15">
+                <div ng-if="ctrl.showParentsTable">
+                    <div ng-if="ctrl.parents.length > 0">
+                        <p class="m-b-10" ng-if="!ctrl.showResultEmptyMessage">{{'Search Results' | translate}}: <span style="color:#678098">{{ctrl.familyMembersCount}} family members.</span></p>
+                        <i>Results sorted by student name.</i>
+                        <table class="table-individual-header table m-b-0 ">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="custom-control custom-checkbox m-r-0 p-l-25">
+                                            <input type="checkbox" class="custom-control-input" id="checkAllStudents" ng-click="ctrl.checkAllCheckBoxes();">
+                                            <label class="custom-control-label p-b-17 m-l-20" for="checkAllStudents"></label>
+                                        </div>
+                                    </th>
+                                    <th class="width-define">Family Member</th>
+                                    <th class="width-define">Relationship</th>
+                                    <th class="width-define">Student</th>
+                                    <th class="width-define">Grade Level</th>
+                                    <th>Preferred Contact</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                    <div id="tableResult" class="table-scroll" ng-if="ctrl.parents.length > 0" on-scroll="ctrl.scrollEvent()">
+                        <table class="table table-individual table-hover">
+                            <tbody>
+                                <tr ng-repeat="p in ctrl.parents">
+                                    <td style="border-left: 1px solid #ced4da !important;">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="studentCheck{{$index}}" name="studentCheck{{$index}}" ng-click="ctrl.checkedCheckBox(p);" ng-checked="p.isChecked" ng-required="ctrl.parentsCheckeds.length == 0">
+                                            <label class="custom-control-label p-b-17 m-l-20" for="studentCheck{{$index}}"></label>
+                                        </div>
+                                    </td>
+                                    <td class="width-define" ng-bind-html="p.parentName | bold: ctrl.search.value"></td>
+                                    <td class="width-define">{{p.parentRelation}}</td>
+                                    <td class="width-define" ng-bind-html="p.studentName | bold: ctrl.search.value"></td>
+                                    <td class="width-define">{{p.gradeLevel}}</td>
+                                    <td class="width-define" style="border-right: 1px solid #ced4da !important;">{{ctrl.handlerLanguage(p.languageCode)}} - {{ctrl.handlerMethodContact(p.preferredMethodOfContactTypeId)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <span ng-if="ctrl.showResultEmptyMessage"> {{'No result found' | translate}}. </span>
+                </div>
+                <div ng-if="!ctrl.showParentsTable">
+                    <span>{{'Start by running a search' | translate}}.</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <h3 ng-if="ctrl.studentHasSelect" style="font-weight: initial"><b>{{'Principals Individual Message Audience without audience' | translate}}:</b> {{ctrl.recipient}}</h3>
+            </div>
+        </div>
+
+        <h3>Subject</h3>
+        <div class="row m-b-10">
+            <div class="col-12 col-lg-12">
+                <input type="text" class="form-control" id="SubjectMessage" ng-model="ctrl.message.subject" placeholder="{{'Quick Messaging Subject Placeholder' | translate}}" required ng-class="ctrl.resetStylesInput" ng-change="ctrl.resetStylesInput = ' ng-touched'" ng-keyup="ctrl.saveState()"/>
+            </div>
+        </div>
+
+        <h3>Message</h3>
+        <div class="row m-t-15">
+            <div class="col-12 col-lg-12">
+                <textarea type="text" class="form-control" id="TextAreaMessage" rows="4" ng-model="ctrl.message.body" ng-change="ctrl.simulTran(ctrl.message.body); ctrl.saveState();" ng-model-options="{ debounce: { 'default': 1500, 'blur': 0 } }" placeholder="{{'Quick Messaging Message Placeholder' | translate}}" required ng-class="ctrl.resetStylesTextArea"></textarea>
+            </div>
+        </div>
+        <div class="row m-t-15" ng-if="ctrl.parentsLanguages.length > 0">
+            <div class="col-12 col-lg-12" ng-repeat="pl in ctrl.parentsLanguages">
+                <div class="d-flex flex-row">
+                    <h3 class="p-t-5">{{ctrl.handlerLanguage(pl.code)}}: </h3>
+                    <section ng-repeat="l in pl.value" class="p-l-5 m-t-5">
+                        <h3 style="font-weight: initial"> {{l.parentFirstName}}  {{l.parentLastSurname}}{{$last? '' : ','}}</h3>
+                    </section>
+                </div>
+                <textarea type="text" class="form-control" id="TextAreaMessage" ng-keyup="ctrl.autoExpand($event)">{{pl.translateText}}</textarea>
+            </div>
+        </div>
+
+        <div class="row m-t-15 ">
+            <div class="col align-self-end">
+                <submit-button promise-to-execute="ctrl.confirmSend();" form="ctrl.messageGroupIndividualForm" ng-if="ctrl.parentsCheckeds.length > 1 || ctrl.parentsCheckeds.length < 1" label="{{'Send to people'| translate: {'count': ctrl.parentsCheckeds.length } }}" class="float-right"></submit-button>
+                <submit-button promise-to-execute="ctrl.confirmSend();" form="ctrl.messageGroupIndividualForm" ng-if="ctrl.parentsCheckeds.length == 1" label="{{'Send to one person'| translate }}" class="float-right"></submit-button>
+            </div>
+        </div>
+    </form>
+</div>

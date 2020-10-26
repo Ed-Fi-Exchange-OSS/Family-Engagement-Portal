@@ -5,7 +5,7 @@
         }, // One way data binding.
         templateUrl: 'clientapp/modules/directives/studentSuccessTeam/studentSuccessTeam.view.html',
         controllerAs: 'ctrl',
-        controller: [function () {
+        controller: ['api', function (api) {
             var ctrl = this;
 
             ctrl.model = {
@@ -15,6 +15,9 @@
 
             ctrl.$onInit = function() {
                 ctrl.model.student = ctrl.data;
+                api.students.getStudentSuccessTeamMembers(ctrl.data.studentUsi).then(function (successTeam) {
+                    ctrl.model.student.successTeamMembers = successTeam;
+                });
                 processSuccessTeam(ctrl.data.successTeamMembers);
             }
 

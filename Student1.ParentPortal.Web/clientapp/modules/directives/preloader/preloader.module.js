@@ -50,7 +50,7 @@
                 responseCount++;
                 updateStatus();
                 $log.error('Response error:', rejection);
-                toastr.error(rejection.data.exceptionMessage);
+                toastr.error(rejection.data.exceptionMessage || rejection.data.message || rejection.data);
                 return $q.reject(rejection);
             }
         };

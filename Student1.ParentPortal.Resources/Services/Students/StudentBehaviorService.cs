@@ -1,15 +1,11 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Resources.ExtensionMethods;
 using Student1.ParentPortal.Resources.Providers.Configuration;
+using Student1.ParentPortal.Resources.Providers.Date;
 
 namespace Student1.ParentPortal.Resources.Services.Students
 {
@@ -22,16 +18,18 @@ namespace Student1.ParentPortal.Resources.Services.Students
     {
         private readonly IStudentRepository _studentRepository;
         private readonly ICustomParametersProvider _customParametersProvider;
+        private readonly IDateProvider _dateProvider;
 
-        public StudentBehaviorService(IStudentRepository studentRepository, ICustomParametersProvider customParametersProvider)
+        public StudentBehaviorService(IStudentRepository studentRepository, ICustomParametersProvider customParametersProvider, IDateProvider dateProvider)
         {
             _studentRepository = studentRepository;
             _customParametersProvider = customParametersProvider;
+            _dateProvider = dateProvider;
         }
 
         public async Task<StudentBehavior> GetStudentBehaviorAsync(int studentUsi)
         {
-            var incidents = await _studentRepository.GetStudentDisciplineIncidentsAsync(studentUsi, _customParametersProvider.GetParameters().descriptors.disciplineIncidentDescriptor);
+            var incidents = await _studentRepository.GetStudentDisciplineIncidentsAsync(studentUsi, _customParametersProvider.GetParameters().descriptors.disciplineIncidentDescriptor, _dateProvider.Today());
 
             var externalLink = _customParametersProvider.GetParameters().behavior.linkToSystemWithDetails;
             var behaviorLink = new LinkModel { Title = externalLink.title, LinkText = externalLink.linkText, Url = externalLink.url };

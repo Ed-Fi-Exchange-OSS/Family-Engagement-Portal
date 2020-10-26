@@ -1,17 +1,14 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleInjector;
 using Student1.ParentPortal.Data.Models.EdFi25;
 using Student1.ParentPortal.Models.Shared;
+using Student1.ParentPortal.Resources.Providers.Logger;
 using Student1.ParentPortal.Resources.Providers.Security;
 
 namespace Student1.ParentPortal.Resources.Services
@@ -20,7 +17,6 @@ namespace Student1.ParentPortal.Resources.Services
     {
         Task<PersonIdentityModel> GetPersonInformationAsync(string email);
     }
-
     public class DatabaseIdentityProvider : IDatabaseIdentityProvider
     {
         private readonly Container _container;
@@ -34,10 +30,10 @@ namespace Student1.ParentPortal.Resources.Services
         {
             // Because this code is used in the authentication middle ware we need to resolve dependencies in here.
             var identityProviders = _container.GetAllInstances<IIdentityProvider>();
-
+            var logger = _container.GetInstance<ILogger>();
             PersonIdentityModel person = null;
 
-            foreach (var idProvider in identityProviders)
+            foreach (var idProvider in identityProviders.OrderBy(x => x.Order))
             {
                 var personCandidate = await idProvider.GetIdentity(email);
                 if (personCandidate != null)
@@ -48,7 +44,10 @@ namespace Student1.ParentPortal.Resources.Services
             }
 
             if (person == null)
-                throw new NotImplementedException("Could not find a person with provided email");
+            {
+                await logger.LogErrorAsync($"Could not find a person with the provided email: {email}");
+                throw new AuthenticationException("Could not find a person with provided email");
+            }
 
             return person;
         }

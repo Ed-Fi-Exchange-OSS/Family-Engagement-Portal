@@ -23,6 +23,8 @@
             var ctrl = this;
             ctrl.selectedOrder = {};
             ctrl.search = {};
+            ctrl.sectionSelected = "";
+            ctrl.message = {};
             ctrl.orderBy = {
                 expression: { propertyName: '', reverse: false },
                 properties: [
@@ -46,6 +48,7 @@
                 // Set the selectedSection to default
                 ctrl.sections.unshift({ courseTitle: 'All Sections' });
                 ctrl.selectedSection = ctrl.sections[0];
+                ctrl.sectionSelected = ctrl.selectedSection.courseTitle;
             }
 
             ctrl.getTeacherStudents = function () {
@@ -56,5 +59,15 @@
                     api.students.setStudentIds(ctrl.model.map(function (x) { return x.studentUsi }));
                 });
             };
+
+            ctrl.updateSection = function () {
+                if (ctrl.selectedSection.courseTitle == 'All Sections') {
+                    ctrl.sectionSelected = ctrl.selectedSection.courseTitle;
+                } else {
+                    ctrl.sectionSelected = (ctrl.selectedSection.localCourseCode ? ctrl.selectedSection.localCourseCode + ' - ' : '') + ctrl.selectedSection.courseTitle + (ctrl.selectedSection.classPeriodName ? ' (' + ctrl.selectedSection.classPeriodName + ') ' : ' ') + 'section.';
+                }
+            }
+
+            
         }]
     });

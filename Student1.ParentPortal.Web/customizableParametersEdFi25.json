@@ -298,10 +298,13 @@
     "gradeTypeSemesterDescriptor": "Semester", // 7
     "gradeTypeExamDescriptor": "Exam",
     "gradeTypeFinalDescriptor": "Final", // 3
-    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster" ], // [ "Father", "Mother", "Step", "Guardian", "Foster" ]
+    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster", "Grandparent" ], // [ "Father", "Mother", "Step", "Guardian", "Foster", "Grandparent" ]
+    "validStaffPositionTitle": [ "Principal", "Leader" ],
     "schoolGradingPeriodDescriptors": [ "A1", "A2", "A3", "A4", "A5", "A6" ], // They have to be in order
     "examGradingPeriods": [ "A3", "A6" ],
-    "disciplineIncidentDescriptor": "Perpetrator"
+    "disciplineIncidentDescriptor": "Perpetrator",
+    "missingAssignmentLetterGrade": "M",
+    "validEmailTypeDescriptors": [ "Home/Personal" ]
   },
   "assessments": [
     {
@@ -329,8 +332,50 @@
     "assessmentReportingMethodTypeDescriptor": "Scale score",
     "shortDescription": "State of Texas Assessments of Academic Readiness"
   },
-  "feedbackExternalUrl": "https://yespreppublicschools.sharepoint.com/sites/portalhelp/_layouts/15/guestaccess.aspx?docid=088ade0e2b35a4ad4b4895281505062c3&authkey=AYm0BGYqMgJtcRSjcLQSiOM&expiration=2019-12-29T16%3A23%3A02.000Z&e=9xrxaC",
+  "feedbackExternalUrl": "https://www.yesprep.org/parents/family-dashboards/portal-help",
   "mostCommonLanguageCodes": [ "en", "es", "vi" ],
   "staarExternalLink": "https://txparentportal.emetric.net/login",
-  "psatSATExternalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks"
+  "psatSATExternalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks",
+  "featureToggle": [
+    {
+      "page": "ParentLanding",
+      "route": "landing",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true"
+        }
+      ]
+    },
+    {
+      "page": "TeacherLanding",
+      "route": "teacherLanding",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true"
+        }
+      ]
+    },
+    {
+      "page": "StudentDetail",
+      "route": "studentdetail",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true"
+        }
+      ]
+    },
+    {
+      "page": "UserProfile",
+      "route": "userProfile",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true"
+        }
+      ]
+    }
+  ]
 }

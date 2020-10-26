@@ -7,7 +7,8 @@
             interpretation: '<',
             anchorid:'@',
             bgclass: '@',
-            textualEvaluation: '<'
+            textualEvaluation: '<',
+            showLoader: '='
         }, // One way data binding.
         templateUrl: 'clientapp/modules/directives/indicator/indicator2.view.html',
         controllerAs: 'ctrl',

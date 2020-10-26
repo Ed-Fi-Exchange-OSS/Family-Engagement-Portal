@@ -1,10 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Data.Models;
-using Student1.ParentPortal.Data.Models.EdFi25;
+﻿using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Models.Alert;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Student;
@@ -12,13 +6,8 @@ using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Providers.Image;
 using Student1.ParentPortal.Resources.Providers.Messaging;
 using Student1.ParentPortal.Resources.Providers.Url;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 

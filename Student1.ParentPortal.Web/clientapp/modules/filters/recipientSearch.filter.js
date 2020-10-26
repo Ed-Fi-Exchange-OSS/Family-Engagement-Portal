@@ -8,7 +8,7 @@
             var out = [];
 
             out = recipients.filter(function (r) {
-                return r.fullName.toUpperCase().includes(value.toUpperCase());
+                return r.fullName.toUpperCase().indexOf(value.toUpperCase()) != -1;
             });
             return out;
         }

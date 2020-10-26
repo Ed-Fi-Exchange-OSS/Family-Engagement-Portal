@@ -166,7 +166,7 @@
     "linkToSystemWithDetails": {
       "title": "Hero K12",
       "linkText": "Hero",
-      "url": "https://www.herok12.com/"
+      "url": "https://access.heropowered-stg.com/sso/parent/login"
     },
     "thresholdRules": [
       {
@@ -187,15 +187,15 @@
       {
         "interpretation": "bad",
         "operator": ">=",
-        "value": 3
+        "value": 1
       }
     ]
   },
   "courseGrades": {
     "linkToSystemWithDetails": {
       "title": "HAC - Detail",
-      "linkText": "Home Access Center",
-      "url": "https://hac.yesprep.org/HomeAccess?gradesDetail"
+      "linkText": "Skyward Family Access",
+      "url": "https://skyward.iscorp.com/YESPrepTXStuSTS/Session/Signin"
     },
     "gpa": {
       "nationalAverage": 3.38,
@@ -246,8 +246,8 @@
     "maxAssigmentsCountThreshold": 3,
     "linkToSystemWithDetails": {
       "title": "HAC - Detail",
-      "linkText": "Home Access Center",
-      "url": "https://hac.yesprep.org/HomeAccess?assignmentsDetail"
+      "linkText": "Skyward Family Access",
+      "url": "https://skyward.iscorp.com/YESPrepTXStuSTS/Session/Signin"
     },
     "thresholdRules": [
       {
@@ -294,26 +294,36 @@
     }
   ],
   "descriptors": {
-    "excusedAbsenceDescriptorCodeValue": "AE", //"Excused Absence",
-    "unexcusedAbsenceDescriptorCodeValue": "AU", //"Unexcused Absence",
-    "tardyDescriptorCodeValue": "T", //"Tardy",
-    "absentDescriptorCodeValue": "A",
+    "excusedAbsenceDescriptorCodeValue": "Excused Absence", // "AE",
+    "unexcusedAbsenceDescriptorCodeValue": "Unexcused Absence", // "AU",
+    "tardyDescriptorCodeValue": "Tardy", // "T",
+    "absentDescriptorCodeValue": "Absent", // "A",
     "gradeBookMissingAssignmentTypeDescriptors": [ "HMWK" ], //["Assignment","Homework"], [895,897]
     "gradeTypeGradingPeriodDescriptor": "Grading Period", // 928
     "gradeTypeSemesterDescriptor": "Semester", // 926
     "gradeTypeExamDescriptor": "Exam",
     "gradeTypeFinalDescriptor": "Final", // 925
-    "validParentDescriptors": [ "F", "FP", "G", "M", "SP" ], // [ "Father", "Mother", "Step", "Guardian", "Foster" ]
-    "schoolGradingPeriodDescriptors": [ "A1", "A2", "A3", "A4", "A5", "A6" ], // They have to be in order
+    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster", "GrandParent" ], //[ "F", "FP", "G", "M", "SP", "GP" ]
+    "validCampusLeaderDescriptors": [ "Assistant Principal", "Counselor", "Principal", "School Administrator", "School Leader" ],
+    "schoolGradingPeriodDescriptors": [
+      "First Six Weeks",
+      "Second Six Weeks",
+      "Third Six Weeks",
+      "Fourth Six Weeks",
+      "Fifth Six Weeks",
+      "Sixth Six Weeks"
+    ], // They have to be in order [ "A1", "A2", "A3", "A4", "A5", "A6" ]
     "examGradingPeriods": [ "A3", "A6" ],
-    "disciplineIncidentDescriptor": "Perpetrator"
+    "disciplineIncidentDescriptor": "Perpetrator",
+    "missingAssignmentLetterGrade": "M",
+    "validEmailTypeDescriptors": [ "Home/Personal" ]
   },
   "assessments": [
     {
       "title": "STAAR", // EoC  -- STAAR Algebra II, STAAR English III
       "assessmentIdentifiers": [ "STAAR English I", "STAAR Algebra I", "STAAR English II", "STAAR Biology", "STAAR U.S. History" ],
       "assessmentReportingMethodTypeDescriptor": "Scale score",
-      "shortDescription": "State of Texas Assessments of Academic Readiness - EoC",
+      "shortDescription": "State of Texas Assessments of Academic Readiness",
       "externalLink": "https://txparentportal.emetric.net/login"
     },
     {
@@ -338,6 +348,89 @@
     "shortDescription": "State of Texas Assessments of Academic Readiness",
     "externalLink": "https://txparentportal.emetric.net/login"
   },
-  "feedbackExternalUrl": "https://yespreppublicschools.sharepoint.com/sites/portalhelp/_layouts/15/guestaccess.aspx?docid=088ade0e2b35a4ad4b4895281505062c3&authkey=AYm0BGYqMgJtcRSjcLQSiOM&expiration=2019-12-29T16%3A23%3A02.000Z&e=9xrxaC",
-  "mostCommonLanguageCodes": [ "en", "es", "vi" ]
+  "feedbackExternalUrl": "https://www.yesprep.org/parents/family-dashboards/portal-help",
+  "mostCommonLanguageCodes": [ "en", "es", "vi" ],
+  "staarExternalLink": "https://txparentportal.emetric.net/login",
+  "psatSATExternalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks",
+  "featureToggle": [
+    {
+      "page": "ParentLanding",
+      "route": "landing",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true",
+          "studentAbc": {
+            "missingAssignments": "true",
+            "courseAverage": "true",
+            "behavior": "false",
+            "absence": "true"
+          }
+        }
+      ]
+    },
+    {
+      "page": "TeacherLanding",
+      "route": "teacherLanding",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true",
+          "studentAbc": {
+            "missingAssignments": "true",
+            "courseAverage": "true",
+            "behavior": "false",
+            "absence": "true"
+          }
+        }
+      ]
+    },
+    {
+      "page": "AdminLanding",
+      "route": "adminLanding",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true"
+        }
+      ]
+    },
+    {
+      "page": "StudentDetail",
+      "route": "studentdetail",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true",
+          "studentAbc": {
+            "missingAssignments": "true",
+            "courseAverage": "true",
+            "behavior": "false",
+            "absence": "true"
+          }
+        }
+      ]
+    },
+    {
+      "page": "UserProfile",
+      "route": "userProfile",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "true"
+        }
+      ]
+    },
+    {
+      "page": "CampusLeaderLanding",
+      "route": "campusLeaderLanding",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "false"
+        }
+      ]
+    }
+
+  ]
 }

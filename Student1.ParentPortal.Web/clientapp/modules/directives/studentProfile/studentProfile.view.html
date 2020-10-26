@@ -1,7 +1,7 @@
 ﻿<div class="card h-100">
     <div class="card-header">
         <div class="text-right">
-            <a class="btn btn-outline-mail"
+            <a ng-if="$root.featureToggles.comms.enabled" class="btn btn-outline-mail"
                tooltip-placement="bottom"
                ui-sref="app.communications({studentUsi:ctrl.model.studentUsi})">
                 <i class="ion ion-md-mail"></i>
@@ -20,7 +20,7 @@
             <p class="text-muted">{{ctrl.model.currentSchool}}</p>
             <p>
                 <span class="badge badge-pill primary" ng-if="ctrl.model.hispanicOrLatino">Hispanic or Latino</span>
-                <span class="badge badge-pill success" ng-repeat="r in ctrl.model.races">{{r}}</span>
+                <span class="badge badge-pill success" ng-repeat="r in ctrl.model.races">{{r | translate}}</span>
             </p>
         </div>
         <div class="row">

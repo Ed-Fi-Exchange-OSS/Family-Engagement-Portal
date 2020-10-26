@@ -1,103 +1,110 @@
 ﻿<div class="card">
     <div class="card-body">
         <h3 class="card-title">{{'view.studentCalendar.title' | translate}} <span>{{'view.studentCalendar.subtitle' | translate}}</span></h3>
-        <div class="m-b-5 text-center" ng-if="ctrl.model.days.length > 1">{{('Todays Schedule' | translate)}} {{ctrl.model.days[0].date | date : 'dd'}} - {{ctrl.model.days[ctrl.model.days.length - 1].date | date : 'dd'}}</div>
-        <table class="calendar">
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th style="width:20%" ng-repeat="d in ctrl.model.days">{{d.date | date : 'EEE d'}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="f-s-13">7am</td>
-                    <td ng-repeat="d in ctrl.model.days">
-                        <div class="calendar-col">
-                            <div class="calendar-event" 
-                                 ng-repeat="e in d.events" 
-                                 ng-class="ctrl.calendarEventColor(e)" 
-                                 ng-style="{'top':e.top+'px', 'height':e.height+'px'}" 
-                                 appendTo="body" tooltip-placement="bottom"  
-                                 uib-tooltip="{{(e.startTime | date:'h:mm a') + '  -  ' + (e.endTime | date:'h:mm a') + ' &#013;&#010;' + ('Classroom Number' | translate) + ': ' + e.classroomIdentificationCode + ' ' + ('Teacher' | translate) + ': ' + e.name }}">
-                                <div class="calendar-title">{{e.courseTitle}}</div> 
+        <div ng-if="ctrl.showLoader">
+            <div class="m-b-5 text-center" ng-if="ctrl.model.days.length > 1">{{('Todays Schedule' | translate)}} {{ctrl.model.days[0].date | date : 'dd'}} - {{ctrl.model.days[ctrl.model.days.length - 1].date | date : 'dd'}}</div>
+            <table class="calendar">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th style="width:20%" ng-repeat="d in ctrl.model.days">{{d.date | date : 'EEE d'}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="f-s-13">7am</td>
+                        <td ng-repeat="d in ctrl.model.days">
+                            <div class="calendar-col">
+                                <div class="calendar-event"
+                                     ng-repeat="e in d.events"
+                                     ng-class="ctrl.calendarEventColor(e)"
+                                     ng-style="{'top':e.top+'px', 'height':e.height+'px'}"
+                                     appendTo="body" tooltip-placement="bottom"
+                                     uib-tooltip="{{(e.startTime | date:'h:mm a') + '  -  ' + (e.endTime | date:'h:mm a') + ' &#013;&#010;' + ('Classroom Number' | translate) + ': ' + e.classroomIdentificationCode + ' ' + ('Teacher' | translate) + ': ' + e.name }}">
+                                    <div class="calendar-title">{{e.courseTitle}}</div>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">8am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">9am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">10am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">11am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">12pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">1pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">2pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">3pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="f-s-13">4pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">8am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">9am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">10am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">11am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">12pm</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">1pm</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">2pm</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">3pm</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="f-s-13">4pm</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="!ctrl.showLoader">
+            <div class="d-flex justify-content-center">
+                <i style="color: #03a9f4" class="ion-ios-refresh f-s-50 animation-rotate"></i>
+            </div>
+        </div>
     </div>
 </div>

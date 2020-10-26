@@ -17,7 +17,7 @@
         }, // One way data binding.
         templateUrl: 'clientapp/modules/alert/alert.view.html',
         controllerAs:'ctrl',
-        controller: ['api', '$translate', '$scope', 'landingRouteService', function (api, $translate, $scope, landingRouteService) {
+        controller: ['api', '$translate', '$scope', 'landingRouteService', '$rootScope', function (api, $translate, $scope, landingRouteService, $rootScope) {
 
             var ctrl = this;
             ctrl.urls = [];
@@ -30,13 +30,6 @@
             landingRouteService.getRoute().then(function (route) {
                 ctrl.urls.push({ displayName: 'Home', url: route });
             });
-
-            ctrl.changeAll = function () {
-                ctrl.model.alerts.forEach(function (alert) {
-                    if (ctrl.model.alertsEnabled)
-                        alert.enabled = false;
-                });
-            }
 
             ctrl.$onInit = function () {
 

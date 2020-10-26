@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,8 +7,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Student1.ParentPortal.Models.Shared;
+using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.User;
 using Student1.ParentPortal.Resources.Services;
+using Student1.ParentPortal.Resources.Services.Admin;
 using Student1.ParentPortal.Resources.Services.Parents;
 using Student1.ParentPortal.Web.Security;
 
@@ -24,11 +21,13 @@ namespace Student1.ParentPortal.Web.Controllers
     {
         private readonly IParentsService _parentsService;
         private readonly ITeachersService _teachersService;
+        private readonly IAdminService _adminService;
 
-        public MeController(IParentsService parentsService, ITeachersService teachersService)
+        public MeController(IParentsService parentsService, ITeachersService teachersService, IAdminService adminService)
         {
             _parentsService = parentsService;
             _teachersService = teachersService;
+            _adminService = adminService;
         }
 
         [HttpGet]
@@ -55,6 +54,10 @@ namespace Student1.ParentPortal.Web.Controllers
 
             // TODO: If this application grows into something bigger it is important to 
             // refactor this into a more extensible pattern like a chain of responsibility.
+            BriefProfileModel response = null;
+            if (role.Equals("Admin", System.StringComparison.InvariantCultureIgnoreCase))
+                return Ok(await _teachersService.GetBriefStaffProfileAsync(person.PersonUSI));
+
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _parentsService.GetBriefParentProfileAsync(person.PersonUSI));
 
@@ -86,6 +89,15 @@ namespace Student1.ParentPortal.Web.Controllers
             return Ok(role);
         }
 
+        [Route("school")]
+        [HttpGet]
+        public IHttpActionResult GetSchool()
+        {
+            var person = SecurityPrincipal.Current;
+            var school = person.Claims.FirstOrDefault(x => x.Type == "schoolId").Value;
+            return Ok(school);
+        }
+
         [Route("image")]
         [HttpPost]
         public async Task<IHttpActionResult> UploadImage()
@@ -109,6 +121,24 @@ namespace Student1.ParentPortal.Web.Controllers
 
             return Ok();
 
+        }
+
+        [HttpPost]
+        [Route("language")]
+        public async Task<IHttpActionResult> ProfileLanguage(ProfileLanguageModel model) 
+        {
+            var person = SecurityPrincipal.Current;
+            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            // TODO: If this application grows into something bigger it is important to 
+            // refactor this into a more extensible pattern like a chain of responsibility.
+            if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase)) 
+            {
+                await _parentsService.UpdateParentLanguage(person.PersonUniqueId, model.LanguageCode);
+                return Ok();
+            }
+
+            await _teachersService.UpdateStaffLanguage(person.PersonUniqueId, model.LanguageCode);
+            return Ok();
         }
     }
 

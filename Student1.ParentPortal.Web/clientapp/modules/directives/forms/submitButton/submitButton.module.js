@@ -13,11 +13,10 @@
             ctrl.resolvingPromise = false;
 
             ctrl.executePromise = function () {
-                
-                ctrl.resolvingPromise = true;
-                ctrl.promiseToExecute().then(function () {
-                    ctrl.resolvingPromise = false;
-                });
+                if (ctrl.form.$valid) {
+                    ctrl.resolvingPromise = true;
+                    ctrl.promiseToExecute().then(function () { ctrl.resolvingPromise = false; });
+                }
             };
         }]
     });

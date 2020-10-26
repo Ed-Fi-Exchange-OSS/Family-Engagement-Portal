@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,9 +24,18 @@ namespace Student1.ParentPortal.Web.Controllers
             _feedbackService = feedbackService;
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("persist/public")]
+        public async Task<IHttpActionResult> PersistFeedback(FeedbackRequestModel model)
+        {
+            return Ok(await _feedbackService.PersistFeedback("0", 1, model));
+        }
+
+        
         [HttpPost]
         [Route("persist")]
-        public async Task<IHttpActionResult> PersistFeedback(FeedbackRequestModel model)
+        public async Task<IHttpActionResult> PersistFeedbackLogged(FeedbackRequestModel model)
         {
             var person = SecurityPrincipal.Current;
             return Ok(await _feedbackService.PersistFeedback(person.PersonUniqueId, person.PersonTypeId, person.FirstName, person.LastSurname, person.Email, model));

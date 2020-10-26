@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Models.Shared;
+﻿using Student1.ParentPortal.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -252,6 +247,10 @@ namespace Student1.ParentPortal.Models.Student
 
     public class StudentMissingAssignments
     {
+        public StudentMissingAssignments() 
+        {
+            AssignmentSections = new List<StudentAssignmentSection>();
+        }
         public int MissingAssignmentCount { get { return AssignmentSections.Sum(x => x.Assignments.Count()); } }
         public List<StudentAssignmentSection> AssignmentSections { get; set; }
         public string Interpretation { get; set; }
@@ -372,6 +371,7 @@ namespace Student1.ParentPortal.Models.Student
         public int Score { get; set; }
         public string PerformanceLevelMet { get; set; }
         public string GradeLevel { get; set; }
+        public DateTime AdministrationDate { get; set; }
     }
 
     public class StudentOnTrackToGraduate

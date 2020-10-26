@@ -1,5 +1,13 @@
 ﻿<main role="main" class="container">
     <h1>{{'view.landing.title'  |translate}}, <span>{{'view.landing.subtitle' | translate}}</span></h1>
+    <div class="alert alert-info ng-binding" ng-if="ctrl.showDeliveryMethodOfContactDescription">
+        <i class="ion-md-information-circle f-s-20"></i>
+        Enhance your portal experience by setting your <a ui-sref="app.userProfile">preferred language</a> and <a ui-sref="app.alert">notifications</a>.
+    </div>
+    <div class="alert alert-info ng-binding" ng-if="ctrl.isElementaty">
+        <i class="ion-md-information-circle f-s-20"></i>  {{ 'Please use' | translate}} <a href="https://home.classdojo.com/#/login?redirectTo=%2Fstory" target="_blank"> ClassDojo </a> {{ 'for all communications about elementary students.' | translate}}
+    </div>
+
     <div class="row justify-content-center">
         <div class="col student-card-width" ng-repeat="s in ctrl.model">
             <student-card model="s"></student-card>

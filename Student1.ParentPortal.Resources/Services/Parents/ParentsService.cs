@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Resources.Providers.Image;
+﻿using Student1.ParentPortal.Resources.Providers.Image;
 using Student1.ParentPortal.Resources.Services.Students;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,15 +16,21 @@ using Student1.ParentPortal.Resources.Providers.Messaging;
 using System.Configuration;
 using System.Net.Http;
 using Student1.ParentPortal.Resources.Services.Alerts;
+using Student1.ParentPortal.Resources.Cache;
 
 namespace Student1.ParentPortal.Resources.Services.Parents
 {
     public interface IParentsService {
+        [NoCache]
         Task<List<StudentBriefModel>> GetStudentsAssociatedWithParentAsync(int parentUsi, string recipientUniqueId, int recipientTypeId);
+        [NoCache]
         Task<UserProfileModel> GetParentProfileAsync(int parentUsi);
+        [NoCache]
         Task<BriefProfileModel> GetBriefParentProfileAsync(int parentUsi);
         Task<UserProfileModel> SaveParentProfileAsync(int parentUsi, UserProfileModel model);
         Task UploadParentImageAsync(string parentUniqueId, byte[] image, string contentType);
+        [NoCache]
+        Task UpdateParentLanguage(string parentUniqueId, string languageCode);
     }
 
     public class ParentsService : IParentsService
@@ -145,6 +146,11 @@ namespace Student1.ParentPortal.Resources.Services.Parents
             return _customParametersProvider.GetParameters()
                             .courseGrades.gpa.thresholdRules
                             .GetRuleThatApplies(gpa).interpretation;
+        }
+
+        public async Task UpdateParentLanguage(string parentUniqueId, string languageCode) 
+        {
+            await _parentRepository.SaveParentLanguage(parentUniqueId, languageCode);
         }
     }
 }

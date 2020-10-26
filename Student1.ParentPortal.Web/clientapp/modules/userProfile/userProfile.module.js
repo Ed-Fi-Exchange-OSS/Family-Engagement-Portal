@@ -22,18 +22,24 @@
         }, // One way data binding.
         templateUrl: 'clientapp/modules/userProfile/userProfile.view.html',
         controllerAs:'ctrl',
-        controller: ['api', '$translate', '$scope', 'landingRouteService', function (api, $translate, $scope, landingRouteService) {
+        controller: ['api', '$translate', '$scope', 'landingRouteService', '$rootScope', function (api, $translate, $scope, landingRouteService, $rootScope) {
 
             var ctrl = this;
             ctrl.urls = [];
             ctrl.save = function () {
-                    return api.me.saveMyProfile(ctrl.model).then(function (data) {
+                ctrl.changeLanguage(ctrl.model.languageCode);
+                return api.me.saveMyProfile(ctrl.model).then(function (data) {
                         toastr.success($translate.instant('Information saved') + ".");
-                    });
+                });
             };
 
+
+            ctrl.changeLanguage = function (code) {
+                $rootScope.$broadcast('languageChange', { code: code });
+            }
+
             landingRouteService.getRoute().then(function (route) {
-                ctrl.urls.push({ displayName: 'Home', url: route });
+                ctrl.urls.push({ displayName: $translate.instant('Home'), url: route, icon: 'ion-md-home' });
             });
 
             ctrl.uploadImage = function (e) {
@@ -51,7 +57,7 @@
                         api.me.uploadImage(fd).then(function (data) {
                             toastr.success($translate.instant('Information saved') + ".");
                         });
-                    })
+                    });
                    
                 })
             }

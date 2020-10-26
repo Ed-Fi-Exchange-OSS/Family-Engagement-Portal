@@ -1,9 +1,4 @@
-﻿-- SPDX-License-Identifier: Apache-2.0
--- Licensed to the Ed-Fi Alliance under one or more agreements.
--- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
--- See the LICENSE and NOTICES files in the project root for more information.
-
-IF (NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ParentPortal')) 
+﻿IF (NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ParentPortal')) 
 BEGIN
     EXEC ('CREATE SCHEMA [ParentPortal] AUTHORIZATION [dbo]')
 END
@@ -803,11 +798,13 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 		where ssa.StudentUSI = s.StudentUsi
 		order by ssa.EntryDate desc) as [GradeLevel],
 -- Absences Count --
- (SELECT Count(*) 
-	FROM edfi.StudentSchoolAttendanceEvent AS ssae
-		INNER JOIN edfi.SchoolYearType AS sy
-		on ssae.SchoolYear = sy.SchoolYear
-		where sy.CurrentSchoolYear = 1 and ssae.StudentUSI = s.StudentUSI) as [Absences],
+ (SELECT COUNT(*) AS Expr1 
+		FROM edfi.StudentSchoolAttendanceEvent AS ssae 
+		INNER JOIN edfi.SchoolYearType AS sy ON ssae.SchoolYear = sy.SchoolYear
+		INNER JOIN edfi.Descriptor as aecd on ssae.AttendanceEventCategoryDescriptorId = aecd.DescriptorId
+		WHERE (sy.CurrentSchoolYear = 1) 
+			AND (ssae.StudentUSI = s.StudentUSI)
+			AND (aecd.CodeValue NOT IN ('In Attendance'))) as [Absences],
 -- Missing Assignment Count --
   (SELECT Count(*) 
 	FROM edfi.GradebookEntry as gbe
@@ -837,10 +834,10 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			AND ssa.BeginDate = sgbe.BeginDate
 		WHERE  sgbe.DateFulfilled IS NULL 
 			AND ssa.StudentUSI = s.StudentUSI
-			AND sgbe.NumericGradeEarned IS NULL
+			AND sgbe.LetterGradeEarned = 'M'
 			AND gbe.GradebookEntryTypeId IS NOT NULL
 			AND getd.CodeValue IN  ('Assignment', 'Homework')
-			AND ssa.BeginDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = ssa.SchoolId ))
+			AND gbe.SchoolYear = (SELECT SchoolYear FROM edfi.SchoolYearType WHERE( CurrentSchoolYear = 1)))
 			as [MissingAssignments],
 -- Discipline Incident Count --
 (SELECT Count(*) 
@@ -907,4 +904,121 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			AND g.NumericGradeEarned IS NOT NULL)
 			as [FinalAvg]
 FROM edfi.Student as s;
+GO
+CREATE TABLE [ParentPortal].[Logs](
+	[LogId] [int] IDENTITY(1,1) NOT NULL,
+	[LogMessage] [nvarchar](MAX) NOT NULL,
+	[LogType] [nvarchar](450) NOT NULL,
+	[DateTimeOfEvent] [datetime] NOT NULL,
+	[LastModifiedDate] [datetime] NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Log] PRIMARY KEY CLUSTERED 
+(
+	[LogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [DF_Logs_DateTimeOfEvent]  DEFAULT (getdate()) FOR [DateTimeOfEvent];
+GO
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [Logs_DF_LastModifiedDate]  DEFAULT (getdate()) FOR [LastModifiedDate]
+GO
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [Logs_DF_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+CREATE TABLE [ParentPortal].[NotificationsToken](
+	[NotificationTokenUSI] [int] IDENTITY(1,1) NOT NULL,
+	[PersonUniqueId] [nvarchar](32) NOT NULL,
+	[PersonType] [nvarchar](8) NOT NULL,
+	[DeviceUUID] [nvarchar](100) NOT NULL,
+	[Token] [nvarchar](500) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[LastModifiedDate] [datetime2](7) NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_NotificationsToken] PRIMARY KEY CLUSTERED 
+(
+	[NotificationTokenUSI] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+INSERT INTO [ParentPortal].[MethodOfContactType]
+           ([Description]
+           ,[ShortDescription]
+           )
+     VALUES
+           ('Push Notifications'
+           ,'Push Notifications')
+GO
+
+ /****** Object:  Table [ParentPortal].[Admin]    Script Date: 3/4/2020 2:50:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ParentPortal].[Admin](
+	[AdminUSI] [int] IDENTITY(1,1) NOT NULL,
+	[ElectronicMailAddress] [nvarchar](50) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[LastModifiedDate] [datetime2](7) NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Admin] PRIMARY KEY CLUSTERED 
+(
+	[AdminUSI] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [ParentPortal].[GroupMessagesQueueLog]    Script Date: 5/5/2020 7:38:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ParentPortal].[GroupMessagesQueueLog](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Type] [nvarchar](20) NOT NULL,
+	[QueuedDateTime] [datetime] NOT NULL,
+	[StaffUniqueIdSent] [nvarchar](50) NOT NULL,
+	[SchoolId] [int] NOT NULL,
+	[Audience] [nvarchar](1000) NOT NULL,
+	[FilterParams] [nvarchar](max) NULL,
+	[Subject] [nvarchar](250) NOT NULL,
+	[Body] [nvarchar](max) NOT NULL,
+	[SentStatus] [int] NOT NULL,
+	[RetryCount] [int] NOT NULL,
+	[Data] [nvarchar](max) NOT NULL,
+	[DateSent] [datetime] NULL,
+ CONSTRAINT [PK_GroupMessagesQueueLog] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [ParentPortal].[GroupMessagesQueueLog] ADD  CONSTRAINT [GroupMessagesQueueLog_DF_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+/****** Object:  Table [ParentPortal].[GroupMessagesLogChatLog]    Script Date: 5/7/2020 8:17:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ParentPortal].[GroupMessagesLogChatLog](
+	[GroupMessagesLogId] [uniqueidentifier] NOT NULL,
+	[ChatLogId] [uniqueidentifier] NOT NULL,
+	[Status] [int] NOT NULL,
+	[ErrorMessage] [nvarchar](500) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [ParentPortal].[GroupMessagesLogChatLog]  WITH CHECK ADD  CONSTRAINT [FK_GroupMessagesLogChatLog_GroupMessagesQueueLog] FOREIGN KEY([GroupMessagesLogId])
+REFERENCES [ParentPortal].[GroupMessagesQueueLog] ([Id])
+GO
+
+ALTER TABLE [ParentPortal].[GroupMessagesLogChatLog] CHECK CONSTRAINT [FK_GroupMessagesLogChatLog_GroupMessagesQueueLog]
 GO

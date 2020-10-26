@@ -1,9 +1,4 @@
-﻿-- SPDX-License-Identifier: Apache-2.0
--- Licensed to the Ed-Fi Alliance under one or more agreements.
--- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
--- See the LICENSE and NOTICES files in the project root for more information.
-
-IF (NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ParentPortal')) 
+﻿IF (NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ParentPortal')) 
 BEGIN
     EXEC ('CREATE SCHEMA [ParentPortal] AUTHORIZATION [dbo]')
 END
@@ -528,7 +523,7 @@ GO
 /*DATA*/
 SET IDENTITY_INSERT [ParentPortal].[MethodOfContactType] ON 
 INSERT [ParentPortal].[MethodOfContactType] ([MethodOfContactTypeId], [Description], [ShortDescription], [CreateDate], [LastModifiedDate], [Id]) VALUES (1, N'Email', N'Email', CAST(N'2018-11-23T17:16:51.620' AS DateTime), CAST(N'2018-11-23T17:16:51.620' AS DateTime), N'5d98c5aa-e244-421f-9439-6b50648e34ca');
-INSERT [ParentPortal].[MethodOfContactType] ([MethodOfContactTypeId], [Description], [ShortDescription], [CreateDate], [LastModifiedDate], [Id]) VALUES (2, N'SMS Text Message', N'SMS', CAST(N'2018-11-23T17:16:58.227' AS DateTime), CAST(N'2018-11-23T17:16:58.227' AS DateTime), N'24919a67-a67d-4ac3-bcd4-d2b33a7e75f2');
+INSERT [ParentPortal].[MethodOfContactType] ([MethodOfContactTypeId], [Description], [ShortDescription], [CreateDate], [LastModifiedDate], [Id]) VALUES (2, N'Text Message (SMS)', N'SMS', CAST(N'2018-11-23T17:16:58.227' AS DateTime), CAST(N'2018-11-23T17:16:58.227' AS DateTime), N'24919a67-a67d-4ac3-bcd4-d2b33a7e75f2');
 SET IDENTITY_INSERT [ParentPortal].[MethodOfContactType] OFF
 GO
 SET IDENTITY_INSERT [ParentPortal].[AlertType] ON 
@@ -621,41 +616,31 @@ INSERT INTO [ParentPortal].[AlertTypeThresholdAssociation] VALUES (1,1),(1,2),(1
 GO
 
 /****** Object:  Table [ParentPortal].[ChatLog]    Script Date: 3/22/2019 11:51:41 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [ParentPortal].[ChatLog](
-	[StudentUniqueId] [nvarchar](32) NOT NULL,
-	[SenderTypeId] [int] not null,
-	[SenderUniqueId] [nvarchar](32) NOT NULL,
-	[RecipientTypeId] [int] not null,
-	[RecipientUniqueId] [nvarchar](32) NOT NULL,
-	[OriginalMessage] [nvarchar](MAX) NOT NULL,
-	[EnglishMessage] [nvarchar](MAX) NULL,
-	[DateSent] [datetime] NOT NULL,
-	[RecipientHasRead] bit NOT NULL,
-	[Id] [uniqueidentifier] NOT NULL,
- CONSTRAINT [ChatLog_PK] PRIMARY KEY CLUSTERED 
-(
-	[StudentUniqueId] ASC,
-	[SenderTypeId],
-	[SenderUniqueId],
-	[RecipientTypeId],
-	[RecipientUniqueId],
-	[DateSent]
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+CREATE TABLE [ParentPortal].[ChatLog] (
+    [StudentUniqueId]        NVARCHAR (32)    NOT NULL,
+    [SenderTypeId]           INT              NOT NULL,
+    [SenderUniqueId]         NVARCHAR (32)    NOT NULL,
+    [RecipientTypeId]        INT              NOT NULL,
+    [RecipientUniqueId]      NVARCHAR (32)    NOT NULL,
+    [EnglishMessage]         NVARCHAR (MAX)   NOT NULL,
+    [TranslatedMessage]      NVARCHAR (MAX)   NULL,
+    [DateSent]               DATETIME         CONSTRAINT [DF_ChatLog_CreateDate] DEFAULT (getdate()) NOT NULL,
+    [RecipientHasRead]       BIT              CONSTRAINT [DF_ChatLog_RecipientHasRead] DEFAULT ((0)) NOT NULL,
+    [Id]                     UNIQUEIDENTIFIER CONSTRAINT [ChatLog_DF_Id] DEFAULT (newid()) NOT NULL,
+    [TranslatedLanguageCode] NVARCHAR (5)     NULL,
+    CONSTRAINT [ChatLog_PK] PRIMARY KEY NONCLUSTERED ([StudentUniqueId] ASC, [SenderTypeId] ASC, [SenderUniqueId] ASC, [RecipientTypeId] ASC, [RecipientUniqueId] ASC, [DateSent] ASC, [Id] ASC),
+    CONSTRAINT [FK_ChatLog_RecipientType] FOREIGN KEY ([RecipientTypeId]) REFERENCES [ParentPortal].[ChatLogPersonType] ([ChatLogPersonTypeId]),
+    CONSTRAINT [FK_ChatLog_SenderType] FOREIGN KEY ([SenderTypeId]) REFERENCES [ParentPortal].[ChatLogPersonType] ([ChatLogPersonTypeId])
+);
 GO
 
-ALTER TABLE [ParentPortal].[ChatLog] ADD  CONSTRAINT [DF_ChatLog_CreateDate]  DEFAULT (getdate()) FOR [DateSent];
-GO
-ALTER TABLE [ParentPortal].[ChatLog] ADD  CONSTRAINT [ChatLog_DF_Id]  DEFAULT (newid()) FOR [Id]
-GO
-ALTER TABLE [ParentPortal].[ChatLog] ADD  CONSTRAINT [DF_ChatLog_RecipientHasRead]  DEFAULT (0) FOR [RecipientHasRead];
+CREATE NONCLUSTERED INDEX [ChatLog_RecipientUniqueId]
+    ON [ParentPortal].[ChatLog]([RecipientUniqueId] ASC);
 GO
 
-
+CREATE NONCLUSTERED INDEX [ChatLog_SenderUniqueId]
+    ON [ParentPortal].[ChatLog]([SenderUniqueId] ASC);
+GO
 /****** Object:  Table [ParentPortal].[[ThresholdType]]    Script Date: 05/02/2019 3:50:00 PM ******/
 SET QUOTED_IDENTIFIER ON
 GO
@@ -794,20 +779,26 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			WHERE StudentUSI = s.StudentUSI
 			ORDER BY sar.SchoolYear desc, sar.TermDescriptorId desc) as [Gpa],
 -- Grade Level --
-	(SELECT TOP(1) d.ShortDescription FROM edfi.Descriptor as d
-			INNER JOIN edfi.StudentSchoolAssociation as ssa
-			on ssa.StudentUSI = s.StudentUSI
-			AND d.DescriptorId = ssa.EntryGradeLevelDescriptorId
-			INNER JOIN edfi.SchoolYearType as sy
-			on sy.SchoolYear = ssa.SchoolYear
+	(SELECT TOP (1) d.ShortDescription 
+			FROM edfi.Descriptor AS d 
+			INNER JOIN edfi.StudentSchoolAssociation AS ssa ON ssa.StudentUSI = 730 
+				AND d.DescriptorId = ssa.EntryGradeLevelDescriptorId
+			INNER JOIN edfi.Session AS sess ON ssa.EntryDate >= sess.BeginDate 
+				AND ssa.EntryDate <= sess.EndDate 
+				AND ssa.ExitWithdrawDate IS NULL 
+				AND GETDATE() >= sess.BeginDate 
+				AND GETDATE() <= sess.EndDate
+			INNER JOIN edfi.SchoolYearType AS sy ON sy.SchoolYear = sess.SchoolYear 
 			WHERE sy.CurrentSchoolYear = 1
-			ORDER BY ssa.EntryDate desc) as [GradeLevel],
+			ORDER BY ssa.EntryDate DESC) as [GradeLevel],
 -- Absences Count --
- (SELECT Count(*) 
-	FROM edfi.StudentSchoolAttendanceEvent AS ssae
-		INNER JOIN edfi.SchoolYearType AS sy
-		on ssae.SchoolYear = sy.SchoolYear
-		where sy.CurrentSchoolYear = 1 and ssae.StudentUSI = s.StudentUSI) as [Absences],
+ (SELECT COUNT(*) AS Expr1 
+	FROM edfi.StudentSchoolAttendanceEvent AS ssae 
+		INNER JOIN edfi.SchoolYearType AS sy ON ssae.SchoolYear = sy.SchoolYear
+		INNER JOIN edfi.Descriptor as aecd on ssae.AttendanceEventCategoryDescriptorId = aecd.DescriptorId
+		WHERE (sy.CurrentSchoolYear = 1) 
+			AND (ssae.StudentUSI = s.StudentUSI)
+			AND (aecd.CodeValue NOT IN ('In Attendance'))) as [Absences],
 -- Missing Assignment Count --
   (SELECT Count(*) 
 	FROM edfi.GradebookEntry as gbe
@@ -830,10 +821,10 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			AND sgbe.SessionName = gbe.SessionName
 		WHERE  sgbe.DateFulfilled IS NULL 
 			AND ssa.StudentUSI = s.StudentUSI
-			AND sgbe.NumericGradeEarned IS NULL
+			AND sgbe.LetterGradeEarned = 'M'
 			AND gbe.GradebookEntryTypeDescriptorId IS NOT NULL
 			AND getd.CodeValue = 'HMWK'
-			AND ssa.BeginDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = ssa.SchoolId ))
+			AND gbe.SchoolYear = (SELECT SchoolYear FROM edfi.SchoolYearType WHERE( CurrentSchoolYear = 1)))
 			as [MissingAssignments],
 -- Discipline Incident Count --
 (SELECT Count(*) 
@@ -845,7 +836,7 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			on sdia.StudentParticipationCodeDescriptorId = d.DescriptorId
 		WHERE d.CodeValue = 'Perpetrator'
 			AND sdia.StudentUSI = s.StudentUSI
-			AND di.IncidentDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = sdia.SchoolId )) 
+			AND di.IncidentDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = sdia.SchoolId AND BeginDate <= GETDATE() AND EndDate >= GETDATE())) 
 			as [DisciplineIncidents],
 -- Grading Period Average --
 (SELECT AVG(g.NumericGradeEarned) from edfi.Grade as g
@@ -900,4 +891,179 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			AND g.NumericGradeEarned IS NOT NULL)
 			as [FinalAvg]
 FROM edfi.Student as s;
+GO
+CREATE TABLE [ParentPortal].[Logs](
+	[LogId] [int] IDENTITY(1,1) NOT NULL,
+	[LogMessage] [nvarchar](MAX) NOT NULL,
+	[LogType] [nvarchar](450) NOT NULL,
+	[DateTimeOfEvent] [datetime] NOT NULL,
+	[LastModifiedDate] [datetime] NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Log] PRIMARY KEY CLUSTERED 
+(
+	[LogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [DF_Logs_DateTimeOfEvent]  DEFAULT (getdate()) FOR [DateTimeOfEvent];
+GO
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [Logs_DF_LastModifiedDate]  DEFAULT (getdate()) FOR [LastModifiedDate]
+GO
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [Logs_DF_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+CREATE TABLE [ParentPortal].[NotificationsToken](
+	[NotificationTokenUSI] [int] IDENTITY(1,1) NOT NULL,
+	[PersonUniqueId] [nvarchar](32) NOT NULL,
+	[PersonType] [nvarchar](8) NOT NULL,
+	[DeviceUUID] [nvarchar](100) NOT NULL,
+	[Token] [nvarchar](500) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[LastModifiedDate] [datetime2](7) NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_NotificationsToken] PRIMARY KEY CLUSTERED 
+(
+	[NotificationTokenUSI] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+INSERT INTO [ParentPortal].[MethodOfContactType]
+           ([Description]
+           ,[ShortDescription]
+           )
+     VALUES
+           ('App Notifications'
+           ,'Notifications')
+GO
+
+ /****** Object:  Table [ParentPortal].[Admin]    Script Date: 3/4/2020 2:50:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ParentPortal].[Admin](
+	[AdminUSI] [int] IDENTITY(1,1) NOT NULL,
+	[ElectronicMailAddress] [nvarchar](50) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[LastModifiedDate] [datetime2](7) NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Admin] PRIMARY KEY CLUSTERED 
+(
+	[AdminUSI] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [ParentPortal].[GroupMessagesQueueLog]    Script Date: 5/5/2020 7:38:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ParentPortal].[GroupMessagesQueueLog](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Type] [nvarchar](20) NOT NULL,
+	[QueuedDateTime] [datetime] NOT NULL,
+	[StaffUniqueIdSent] [nvarchar](50) NOT NULL,
+	[SchoolId] [int] NOT NULL,
+	[Audience] [nvarchar](1000) NULL,
+	[FilterParams] [nvarchar](max) NULL,
+	[Subject] [nvarchar](250) NOT NULL,
+	[Body] [nvarchar](max) NOT NULL,
+	[SentStatus] [int] NOT NULL,
+	[RetryCount] [int] NOT NULL,
+	[Data] [nvarchar](max) NOT NULL,
+	[DateSent] [datetime] NULL,
+ CONSTRAINT [PK_GroupMessagesQueueLog] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [ParentPortal].[GroupMessagesQueueLog] ADD  CONSTRAINT [GroupMessagesQueueLog_DF_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+/****** Object:  Table [ParentPortal].[GroupMessagesLogChatLog]    Script Date: 5/5/2020 7:42:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ParentPortal].[GroupMessagesLogChatLog](
+	[GroupMessagesLogId] [uniqueidentifier] NOT NULL,
+	[ChatLogId] [uniqueidentifier] NOT NULL,
+	[Status] [int] NOT NULL,
+	[ErrorMessage] [nvarchar](500) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [ParentPortal].[GroupMessagesLogChatLog]  WITH CHECK ADD  CONSTRAINT [FK_GroupMessagesLogChatLog_GroupMessagesQueueLog] FOREIGN KEY([GroupMessagesLogId])
+REFERENCES [ParentPortal].[GroupMessagesQueueLog] ([Id])
+GO
+
+ALTER TABLE [ParentPortal].[GroupMessagesLogChatLog] CHECK CONSTRAINT [FK_GroupMessagesLogChatLog_GroupMessagesQueueLog]
+GO
+
+GO
+CREATE VIEW [ParentPortal].[ParentChatRecipients]
+AS
+SELECT        stu.StudentUSI, stu.StudentUniqueId, stu.FirstName AS StudentFirstName, stu.MiddleName AS StudentMiddleName, stu.LastSurname AS StudentLastSurname, co.LocalCourseTitle AS RelationsToStudent, sta.StaffUSI, 
+                         sta.StaffUniqueId, sta.FirstName, sta.LastSurname, pro.ReplyExpectations, MAX(cl.DateSent) AS MostRecentMessageDate, SUM(CASE WHEN cl.RecipientHasRead = 0 THEN 1 ELSE 0 END) AS UnreadMessageCount, 
+                         sess.BeginDate, sess.EndDate
+FROM            edfi.Student AS stu INNER JOIN
+                         edfi.StudentSectionAssociation AS stusa ON stu.StudentUSI = stusa.StudentUSI INNER JOIN
+                         edfi.SchoolYearType AS sy ON stusa.SchoolYear = sy.SchoolYear INNER JOIN
+                         edfi.StaffSectionAssociation AS stasa ON stusa.SectionIdentifier = stasa.SectionIdentifier AND stusa.LocalCourseCode = stasa.LocalCourseCode AND stusa.SchoolId = stasa.SchoolId AND 
+                         stusa.SchoolYear = stasa.SchoolYear AND stusa.SessionName = stasa.SessionName INNER JOIN
+                         edfi.CourseOffering AS co ON co.LocalCourseCode = stasa.LocalCourseCode AND co.SchoolId = stasa.SchoolId AND co.SchoolYear = stasa.SchoolYear AND co.SessionName = stasa.SessionName INNER JOIN
+                         edfi.Session AS sess ON stusa.SchoolId = sess.SchoolId AND stusa.SchoolYear = sess.SchoolYear AND stusa.SessionName = sess.SessionName INNER JOIN
+                         edfi.Staff AS sta ON stasa.StaffUSI = sta.StaffUSI LEFT OUTER JOIN
+                         ParentPortal.StaffProfile AS pro ON sta.StaffUniqueId = pro.StaffUniqueId LEFT OUTER JOIN
+                         ParentPortal.ChatLog AS cl ON stu.StudentUniqueId = cl.StudentUniqueId AND sta.StaffUniqueId = cl.SenderUniqueId AND cl.SenderTypeId = 2
+WHERE        (sy.CurrentSchoolYear = 1)
+GROUP BY stu.StudentUSI, stu.StudentUniqueId, stu.FirstName, stu.LastSurname, stu.MiddleName, co.LocalCourseTitle, sta.StaffUSI, sta.StaffUniqueId, sta.FirstName, sta.LastSurname, pro.ReplyExpectations, sess.BeginDate, 
+                         sess.EndDate
+GO
+
+GO
+CREATE VIEW [ParentPortal].[ParentPrincipalsChatRecipients]
+AS
+SELECT        s.StudentUSI, s.StudentUniqueId, s.FirstName AS StudentFirstName, s.MiddleName AS StudentMiddleName, s.LastSurname AS StudentLastSurname, staff.StaffUSI, staff.StaffUniqueId, staff.FirstName AS StaffFirstName, 
+                         staff.LastSurname AS StaffLastSurname, seoaa.PositionTitle AS RelationsToStudent, MAX(cl.DateSent) AS MostRecentMessageDate, SUM(CASE WHEN cl.RecipientHasRead = 0 THEN 1 ELSE 0 END) 
+                         AS UnreadMessageCount
+FROM            edfi.StaffEducationOrganizationAssignmentAssociation AS seoaa INNER JOIN
+                         edfi.StudentEducationOrganizationAssociation AS seoa ON seoaa.EducationOrganizationId = seoa.EducationOrganizationId INNER JOIN
+                         edfi.Student AS s ON seoa.StudentUSI = s.StudentUSI INNER JOIN
+                         edfi.Staff AS staff ON seoaa.StaffUSI = staff.StaffUSI LEFT OUTER JOIN
+                         ParentPortal.ChatLog AS cl ON s.StudentUniqueId = cl.StudentUniqueId AND staff.StaffUniqueId = cl.SenderUniqueId AND cl.SenderTypeId = 2
+GROUP BY s.StudentUSI, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname, staff.StaffUSI, staff.StaffUniqueId, staff.FirstName, staff.LastSurname, seoaa.PositionTitle
+GO
+
+GO
+CREATE VIEW [ParentPortal].[StaffChatRecipients]
+AS
+SELECT        s.StudentUSI, s.StudentUniqueId, s.FirstName AS StudentFirstName, s.MiddleName AS StudentMiddleName, s.LastSurname AS StudentLastSurname, p.ParentUSI, p.ParentUniqueId, p.FirstName AS ParentFirstName, 
+                         p.LastSurname AS ParentLastSurname, co.LocalCourseTitle, MAX(cl.DateSent) AS MostRecentMessageDate, SUM(CASE WHEN cl.RecipientHasRead = 0 THEN 1 ELSE 0 END) AS UnreadMessageCount, staff.StaffUniqueId, 
+                         sess.BeginDate, sess.EndDate, pro.ReplyExpectations, pro.LanguageCode
+FROM            edfi.Student AS s INNER JOIN
+                         edfi.StudentSectionAssociation AS ssa ON s.StudentUSI = ssa.StudentUSI INNER JOIN
+                         edfi.SchoolYearType AS sy ON ssa.SchoolYear = sy.SchoolYear INNER JOIN
+                         edfi.StaffSectionAssociation AS staffsa ON staffsa.SchoolId = ssa.SchoolId AND staffsa.SchoolYear = ssa.SchoolYear AND staffsa.LocalCourseCode = ssa.LocalCourseCode AND staffsa.SessionName = ssa.SessionName AND 
+                         staffsa.SectionIdentifier = ssa.SectionIdentifier INNER JOIN
+                         edfi.CourseOffering AS co ON staffsa.SchoolId = co.SchoolId AND staffsa.SchoolYear = co.SchoolYear AND staffsa.LocalCourseCode = co.LocalCourseCode AND staffsa.SessionName = co.SessionName INNER JOIN
+                         edfi.Session AS sess ON ssa.SchoolId = sess.SchoolId AND ssa.SchoolYear = sess.SchoolYear AND ssa.SessionName = sess.SessionName INNER JOIN
+                         edfi.Staff AS staff ON staffsa.StaffUSI = staff.StaffUSI LEFT OUTER JOIN
+                         edfi.StudentParentAssociation AS spa ON s.StudentUSI = spa.StudentUSI LEFT OUTER JOIN
+                         edfi.Parent AS p ON spa.ParentUSI = p.ParentUSI LEFT OUTER JOIN
+                         ParentPortal.ParentProfile AS pro ON p.ParentUniqueId = pro.ParentUniqueId LEFT OUTER JOIN
+                         ParentPortal.ChatLog AS cl ON cl.StudentUniqueId = s.StudentUniqueId AND p.ParentUniqueId = cl.SenderUniqueId AND cl.SenderTypeId = 1
+WHERE        (sy.CurrentSchoolYear = 1)
+GROUP BY s.StudentUSI, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname, co.LocalCourseTitle, pro.ReplyExpectations, p.ParentUSI, p.ParentUniqueId, p.FirstName, p.LastSurname, staff.StaffUniqueId, sess.BeginDate, 
+                         sess.EndDate, pro.LanguageCode
 GO

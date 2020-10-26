@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -53,8 +48,8 @@ namespace Student1.ParentPortal.Web.Controllers
 
             return NotFound(); // A Teacher Shouldnt have access
         }
-
-
+        
+        
         [HttpGet]
         [Route("parent/{uniqueId}")]
         public async Task<IHttpActionResult> ParentHasReadStudentAlerts(string uniqueId)
@@ -80,6 +75,19 @@ namespace Student1.ParentPortal.Web.Controllers
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _alertsService.SaveParentAlertTypes(model, person.PersonUSI));
+
+            return NotFound(); // A Teacher Shouldnt have access
+        }
+
+        [HttpGet]
+        [Route("parent/unread/{studentUniqueId}")]
+        public async Task<IHttpActionResult> GetParentUnreadAlerts(string studentUniqueId) 
+        {
+            var person = SecurityPrincipal.Current;
+            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+
+            if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
+                return Ok(await _alertsService.GetParentStudentUnreadAlerts(person.PersonUniqueId, studentUniqueId));
 
             return NotFound(); // A Teacher Shouldnt have access
         }

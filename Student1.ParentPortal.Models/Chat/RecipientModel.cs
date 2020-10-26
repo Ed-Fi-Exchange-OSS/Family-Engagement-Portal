@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +21,8 @@ namespace Student1.ParentPortal.Models.Chat
         public string ImageUrl { get; set; }
         public List<string> RelationsToStudent { get; set; }
         public int UnreadMessageCount { get; set; }
+        public string ReplyExpectations { get; set; }
+        public string LanguageCode { get; set; }
     }
 
     public class StudentRecipients

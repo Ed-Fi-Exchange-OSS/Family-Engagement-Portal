@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Resources.ExtensionMethods;
+﻿using Student1.ParentPortal.Resources.ExtensionMethods;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,65 +7,44 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace Student1.ParentPortal.Resources.Providers.Messaging
 {
     public class SMSMessagingProvider : ISMSProvider
     {
-        private readonly string _defaultFromAddress;
-        private readonly string _defaultFromDisplayName;
-        private readonly string _mailServer;
-        private readonly string _mailPort;
-        private readonly string _mailUser;
-        private readonly string _mailPassword;
+        private readonly string _defaultFromPhone;
+        private readonly string _accountKey;
+        private readonly string _accountAuthKey;
 
         public SMSMessagingProvider()
         {
-            _defaultFromAddress = ConfigurationManager.AppSettings["messaging.email.defaultFromEmail"];
-            _defaultFromDisplayName = ConfigurationManager.AppSettings["messaging.email.defaultFromDisplayName"];
-            _mailServer = ConfigurationManager.AppSettings["messaging.email.server"];
-            _mailPort = ConfigurationManager.AppSettings["messaging.email.port"];
-            _mailUser = ConfigurationManager.AppSettings["messaging.email.user"];
-            _mailPassword = ConfigurationManager.AppSettings["messaging.email.pass"];
+            _defaultFromPhone = ConfigurationManager.AppSettings["messaging.sms.sender"];
+            _accountKey = ConfigurationManager.AppSettings["messaging.sms.account"];
+            _accountAuthKey = ConfigurationManager.AppSettings["messaging.sms.key"];
         }
 
-        public async Task SendMessageAsync(string from, string[] to, string subject, string body)
+        public async Task SendMessageAsync(string from, string to, string subject, string body)
         {
-            var fromAddress = new MailAddress(from);
-            await SendSMSAsync(fromAddress, to, subject, body);
-        }
-
-        public async Task SendMessageAsync(string[] to, string subject, string body)
-        {
-            var defaultFrom = new MailAddress(_defaultFromAddress, _defaultFromDisplayName);
-            await SendSMSAsync(defaultFrom, to, subject, body);
+            await SendSMSAsync(from, to, subject, body);
         }
 
         public async Task SendMessageAsync(string to, string subject, string body)
         {
-            await SendMessageAsync(new string[] { to }, subject, body);
+            await SendSMSAsync(_defaultFromPhone, to, subject, body);
         }
 
-        private async Task SendSMSAsync(MailAddress from, string[] to, string subject, string body)
+        private async Task SendSMSAsync(string from, string to, string subject, string body)
         {
-            // Create mail credentials and client
-            var credentials = new NetworkCredential(_mailUser, _mailPassword);
-            var smtpClient = new SmtpClient(_mailServer, Convert.ToInt32(_mailPort)) { Credentials = credentials };
+            // Create sms credentials and client
+            TwilioClient.Init(_accountKey, _accountAuthKey);
 
-            // Create mail message
-            var mailMessage = new MailMessage()
-            {
-                From = from,
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = false
-            };
-
-            // Allow for multiple To, CC and BCC
-            if (!to.IsNullOrEmpty())
-                to.ToList().ForEach(x => mailMessage.To.Add(new MailAddress(x)));
-
-            await smtpClient.SendMailAsync(mailMessage);
+            await MessageResource.CreateAsync(
+                body: $"{subject}\n\n{body}",
+                from: new Twilio.Types.PhoneNumber(from),
+                to: new Twilio.Types.PhoneNumber(to)
+            );
         }
     }
 }

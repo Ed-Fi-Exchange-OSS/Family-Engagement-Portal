@@ -11,6 +11,7 @@
     <AssemblyName>Student1.ParentPortal.Data</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,41 +55,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EdFi25\AlertRepository.cs" />
-    <Compile Include="Models\EdFi25\ApplicationRepository.cs" />
-    <Compile Include="Models\EdFi25\CommunicationsRepository.cs" />
     <Compile Include="Models\EdFi25\Database.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EdFi25\LogRepository.cs" />
+    <Compile Include="Models\EdFi25\ApplicationRepository.cs" />
+    <Compile Include="Models\EdFi25\CommunicationsRepository.cs" />
     <Compile Include="Models\EdFi25\FeedbackRepository.cs" />
     <Compile Include="Models\EdFi25\ParentRepository.cs" />
+    <Compile Include="Models\EdFi25\SchoolsRepository.cs" />
     <Compile Include="Models\EdFi25\StudentRepository.cs" />
     <Compile Include="Models\EdFi25\StaffRepository.cs" />
     <Compile Include="Models\EdFi25\ImageRepository.cs" />
     <Compile Include="Models\EdFi25\SpotlightIntegrationRepository.cs" />
     <Compile Include="Models\EdFi25\TypesRepository.cs" />
     <Compile Include="Models\EdFi25\TeacherRepository.cs" />
+    <Compile Include="Models\EdFi31\AdminRepository.cs" />
+    <Compile Include="Models\EdFi31\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EdFi31\LogRepository.cs" />
     <Compile Include="Models\EdFi31\ApplicationRepository.cs" />
     <Compile Include="Models\EdFi31\AlertRepository.cs" />
     <Compile Include="Models\EdFi31\CommunicationsRepository.cs" />
-    <Compile Include="Models\EdFi31\Database.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="Models\EdFi31\FeedbackRepository.cs" />
+    <Compile Include="Models\EdFi31\NotificationsRepository.cs" />
     <Compile Include="Models\EdFi31\ParentRepository.cs" />
+    <Compile Include="Models\EdFi31\SchoolsRepository.cs" />
     <Compile Include="Models\EdFi31\SpotlightIntegrationRepository.cs" />
     <Compile Include="Models\EdFi31\StaffRepository.cs" />
     <Compile Include="Models\EdFi31\StudentRepository.cs" />
     <Compile Include="Models\EdFi31\ImageRepository.cs" />
     <Compile Include="Models\EdFi31\TypesRepository.cs" />
     <Compile Include="Models\EdFi31\TeacherRepository.cs" />
+    <Compile Include="Models\IAdminRepository.cs" />
+    <Compile Include="Models\ILogRepository.cs" />
     <Compile Include="Models\IApplicationRepository.cs" />
     <Compile Include="Models\IAlertRepository.cs" />
     <Compile Include="Models\ICommunicationsRepository.cs" />
     <Compile Include="Models\IFeedbackRepository.cs" />
+    <Compile Include="Models\INotificationsRepository.cs" />
+    <Compile Include="Models\ISchoolsRepository.cs" />
     <Compile Include="Models\ITeacherRepository.cs" />
     <Compile Include="Models\IImageRepository.cs" />
     <Compile Include="Models\ISpotlightIntegrationRepository.cs" />
@@ -119,6 +133,9 @@
     <Content Include="Scripts\edFi31\2ODSExtensions.sql" />
     <Content Include="Scripts\edFi31\98Parent Portal QA Scripts.sql" />
     <Content Include="Scripts\edFi31\99SampleDataNeededForDemo.sql" />
+    <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentCreationDemoData.sql" />
+    <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentDeleteDemoData.sql" />
+    <Content Include="Scripts\edFi31\CreateFakeSchoolInformationScript.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

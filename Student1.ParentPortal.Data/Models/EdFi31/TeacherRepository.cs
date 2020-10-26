@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -26,7 +21,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             _edFiDb = edFiDb;
         }
 
-        public async Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi)
+        public async Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi, DateTime today)
         {
             // Get the current sections for this teacher.
 
@@ -38,10 +33,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                               join s in _edFiDb.Sections
                                      on new { sec.LocalCourseCode, sec.SchoolId, sec.SchoolYear, sec.SectionIdentifier, sec.SessionName }
                                      equals new { s.LocalCourseCode, s.SchoolId, s.SchoolYear, s.SectionIdentifier, s.SessionName }
+                              join ses in _edFiDb.Sessions
+                                     on new { sec.SchoolId, sec.SchoolYear, sec.SessionName }
+                                     equals new { ses.SchoolId, ses.SchoolYear, ses.SessionName }
                               join co in _edFiDb.CourseOfferings
                                      on new { sec.LocalCourseCode, sec.SchoolId, sec.SchoolYear, sec.SessionName }
                                      equals new { co.LocalCourseCode, co.SchoolId, co.SchoolYear, co.SessionName }
                               where sec.StaffUsi == staffUsi && sy.CurrentSchoolYear
+                                    && ses.BeginDate <= today && ses.EndDate >= today
                               group sec by new { sec.SchoolId, scp.ClassPeriodName, sec.SessionName, sec.LocalCourseCode, sec.SchoolYear, sec.SectionIdentifier, co.LocalCourseTitle } into g
                               select new StaffSectionModel
                               {
@@ -66,37 +65,38 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             var studentNameNotNull = model.StudentName != null;
 
             var studentsAssociatedWithStaff = await (from s in _edFiDb.Students
-                                                      join ssa in _edFiDb.StudentSchoolAssociations on s.StudentUsi equals ssa.StudentUsi
-                                                      join eo in _edFiDb.EducationOrganizations on ssa.EducationOrganizationId equals eo.EducationOrganizationId
-                                                      join studSec in _edFiDb.StudentSectionAssociations 
-                                                        on new { ssa.StudentUsi, ssa.SchoolId } equals new { studSec.StudentUsi, studSec.SchoolId }
-                                                      join staffSec in _edFiDb.StaffSectionAssociations
-                                                                  on new { studSec.SchoolId, studSec.SessionName, studSec.SectionIdentifier, studSec.LocalCourseCode, studSec.SchoolYear }
-                                                                  equals new { staffSec.SchoolId, staffSec.SessionName, staffSec.SectionIdentifier, staffSec.LocalCourseCode, staffSec.SchoolYear }
-                                                      where staffSec.StaffUsi == staffUsi
-                                                            && (sectionIsNotNull ? (studSec.SchoolId == model.Section.SchoolId
-                                                            && studSec.LocalCourseCode == model.Section.LocalCourseCode
-                                                            && studSec.SchoolYear == model.Section.SchoolYear
-                                                            && studSec.SectionIdentifier == model.Section.UniqueSectionCode
-                                                            && studSec.SessionName == model.Section.SessionName) : true)
-                                                            && (studentNameNotNull && model.StudentName.Length > 0 ?
-                                                            (s.FirstName.ToUpper().Contains(upperStudentName) || 
-                                                            s.MiddleName.ToUpper().Contains(upperStudentName) || 
-                                                            s.LastSurname.ToUpper().Contains(upperStudentName)) 
-                                                            : true )
-                                                      orderby s.LastSurname
-                                                group new { s, eo } by new { s.StudentUniqueId } into g
-                                                select new StudentBriefModel
-                                                {
-                                                          StudentUsi = g.FirstOrDefault().s.StudentUsi,
-                                                          ExternalLinks = _edFiDb.SpotlightIntegrations.Where(x => x.StudentUniqueId == g.Key.StudentUniqueId)
-                                                          .Select(x => new StudentExternalLink { Url = x.Url, UrlType = x.UrlType.Description }),
-                                                          UnreadMessageCount = _edFiDb.ChatLogs
-                                                            .Count(x => x.StudentUniqueId == g.Key.StudentUniqueId
-                                                                && x.RecipientUniqueId == recipientUniqueId 
-                                                                && x.RecipientTypeId == recipientTypeId && !x.RecipientHasRead),
-                                                          CurrentSchool = g.FirstOrDefault().eo.NameOfInstitution
-                                                      }).ToListAsync();
+                                                     join ssa in _edFiDb.StudentSchoolAssociations on s.StudentUsi equals ssa.StudentUsi
+                                                     join eo in _edFiDb.EducationOrganizations on ssa.SchoolId equals eo.EducationOrganizationId
+                                                     join studSec in _edFiDb.StudentSectionAssociations
+                                                       on new { ssa.StudentUsi, ssa.SchoolId } equals new { studSec.StudentUsi, studSec.SchoolId }
+                                                     join staffSec in _edFiDb.StaffSectionAssociations
+                                                                 on new { studSec.SchoolId, studSec.SessionName, studSec.SectionIdentifier, studSec.LocalCourseCode, studSec.SchoolYear }
+                                                                 equals new { staffSec.SchoolId, staffSec.SessionName, staffSec.SectionIdentifier, staffSec.LocalCourseCode, staffSec.SchoolYear }
+                                                     where staffSec.StaffUsi == staffUsi
+                                                           && (sectionIsNotNull ? (studSec.SchoolId == model.Section.SchoolId
+                                                           && studSec.LocalCourseCode == model.Section.LocalCourseCode
+                                                           && studSec.SchoolYear == model.Section.SchoolYear
+                                                           && studSec.SectionIdentifier == model.Section.UniqueSectionCode
+                                                           && studSec.SessionName == model.Section.SessionName) : true)
+                                                           && (studentNameNotNull && model.StudentName.Length > 0 ?
+                                                           (s.FirstName.ToUpper().Contains(upperStudentName) ||
+                                                           s.MiddleName.ToUpper().Contains(upperStudentName) ||
+                                                           s.LastSurname.ToUpper().Contains(upperStudentName))
+                                                           : true)
+                                                     orderby s.LastSurname
+                                                     group new { s, eo } by new { s.StudentUniqueId } into g
+                                                     select new StudentBriefModel
+                                                     {
+                                                         StudentUsi = g.FirstOrDefault().s.StudentUsi,
+                                                         StudentUniqueId = g.FirstOrDefault().s.StudentUniqueId,
+                                                         ExternalLinks = _edFiDb.SpotlightIntegrations.Where(x => x.StudentUniqueId == g.Key.StudentUniqueId)
+                                                               .Select(x => new StudentExternalLink { Url = x.Url, UrlType = x.UrlType.Description }),
+                                                         UnreadMessageCount = _edFiDb.ChatLogs
+                                                                 .Count(x => x.StudentUniqueId == g.Key.StudentUniqueId
+                                                                     && x.RecipientUniqueId == recipientUniqueId
+                                                                     && x.RecipientTypeId == recipientTypeId && !x.RecipientHasRead),
+                                                         CurrentSchool = g.FirstOrDefault().eo.NameOfInstitution
+                                                     }).ToListAsync();
 
             return studentsAssociatedWithStaff;
         }
@@ -152,19 +152,23 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public async Task<BriefProfileModel> GetBriefStaffProfileAsync(int staffUsi)
         {
             var profile = await (from s in _edFiDb.StaffProfiles
-                                            .Include(x => x.StaffProfileAddresses.Select(y => y.AddressTypeDescriptor.Descriptor))
-                                            .Include(x => x.StaffProfileElectronicMails.Select(y => y.ElectronicMailTypeDescriptor.Descriptor))
-                                            .Include(x => x.StaffProfileTelephones.Select(y => y.TelephoneNumberTypeDescriptor.Descriptor))
                                  join staff in _edFiDb.Staffs on s.StaffUniqueId equals staff.StaffUniqueId
+                                 join ssa in _edFiDb.StaffEducationOrganizationAssignmentAssociations on staff.StaffUsi equals ssa.StaffUsi
+                                 //Left join
+                                 from spa in _edFiDb.StaffProfileAddresses.Where(x => x.StaffUniqueId == s.StaffUniqueId).DefaultIfEmpty()
+                                 from spem in _edFiDb.StaffProfileElectronicMails.Where(x => x.StaffUniqueId == s.StaffUniqueId).DefaultIfEmpty()
+                                 from spt in _edFiDb.StaffProfileTelephones.Where(x => x.StaffUniqueId == s.StaffUniqueId).DefaultIfEmpty()
                                  where staff.StaffUsi == staffUsi
-                                 select new StaffProfileModel { Staff = staff, Profile = s }).SingleOrDefaultAsync();
+                                 select new StaffProfileModel { Staff = staff, Profile = s }).FirstOrDefaultAsync();
 
             var edfiProfile = await (from s in _edFiDb.Staffs
-                                           .Include(x => x.StaffAddresses.Select(y => y.AddressTypeDescriptor.Descriptor))
-                                           .Include(x => x.StaffElectronicMails.Select(y => y.ElectronicMailTypeDescriptor.Descriptor))
-                                           .Include(x => x.StaffTelephones.Select(y => y.TelephoneNumberTypeDescriptor.Descriptor))
+                                     join ssa in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.StaffUsi equals ssa.StaffUsi
+                                     //Left join
+                                     from spa in _edFiDb.StaffAddresses.Where(x => x.StaffUsi == s.StaffUsi).DefaultIfEmpty()
+                                     from spem in _edFiDb.StaffElectronicMails.Where(x => x.StaffUsi == s.StaffUsi).DefaultIfEmpty()
+                                     from spt in _edFiDb.StaffAddresses.Where(x => x.StaffUsi == s.StaffUsi).DefaultIfEmpty()
                                      where s.StaffUsi == staffUsi
-                                     select s).SingleOrDefaultAsync();
+                                     select s).FirstOrDefaultAsync();
 
             if (profile == null)
                 return ToBriefProfileModel(edfiProfile);
@@ -177,14 +181,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public async Task<UserProfileModel> SaveStaffProfileAsync(int staffUsi, UserProfileModel model)
         {
             var profile = await (from staff in _edFiDb.Staffs
-                                join s in _edFiDb.StaffProfiles
-                                           .Include(x => x.StaffProfileAddresses.Select(y => y.AddressTypeDescriptor.Descriptor))
-                                           .Include(x => x.StaffProfileElectronicMails.Select(y => y.ElectronicMailTypeDescriptor.Descriptor))
-                                           .Include(x => x.StaffProfileTelephones.Select(y => y.TelephoneNumberTypeDescriptor.Descriptor)) 
-                                        on staff.StaffUniqueId equals s.StaffUniqueId into pro
-                                from spro in pro.DefaultIfEmpty()
-                                where staff.StaffUsi == staffUsi
-                                select new StaffProfileModel { Staff = staff, Profile = spro }).SingleOrDefaultAsync();
+                                 join s in _edFiDb.StaffProfiles
+                                            .Include(x => x.StaffProfileAddresses.Select(y => y.AddressTypeDescriptor.Descriptor))
+                                            .Include(x => x.StaffProfileElectronicMails.Select(y => y.ElectronicMailTypeDescriptor.Descriptor))
+                                            .Include(x => x.StaffProfileTelephones.Select(y => y.TelephoneNumberTypeDescriptor.Descriptor))
+                                         on staff.StaffUniqueId equals s.StaffUniqueId into pro
+                                 from spro in pro.DefaultIfEmpty()
+                                 where staff.StaffUsi == staffUsi
+                                 select new StaffProfileModel { Staff = staff, Profile = spro }).SingleOrDefaultAsync();
 
             // If the parent portal extended profile is not null remove it and add it again with the submitted changes.
             if (profile.Profile != null)
@@ -396,7 +400,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             briefProfileModel.PersonTypeId = ChatLogPersonTypeEnum.Staff.Value;
             briefProfileModel.Role = "Staff";
             briefProfileModel.Email = preferredMail != null ? preferredMail : selectedMail;
-
+            briefProfileModel.SchoolId = profile.Staff.StaffEducationOrganizationAssignmentAssociations.FirstOrDefault()?.EducationOrganizationId;
+            
             return briefProfileModel;
         }
 
@@ -414,6 +419,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             briefProfileModel.PersonTypeId = ChatLogPersonTypeEnum.Staff.Value;
             briefProfileModel.Role = "Staff";
             briefProfileModel.Email = preferredMail != null ? preferredMail : selectedMail;
+            briefProfileModel.SchoolId = profile.StaffEducationOrganizationAssignmentAssociations.FirstOrDefault()?.EducationOrganizationId;
 
             return briefProfileModel;
         }
@@ -432,6 +438,16 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                 .Where(x => x.StaffUsi == staffUsi)
                 .Include(x => x.StaffSectionAssociations.Select(ssa => ssa.Section.StudentSectionAssociations.Select(studsa => studsa.Student)))
                 .Any(x => x.StaffSectionAssociations.Any(ssa => ssa.Section.StudentSectionAssociations.Any(studsa => studsa.Student.StudentUniqueId == studentUniqueId)));
+        }
+
+        public async Task SaveStaffLanguage(string staffUniqueId, string languageCode)
+        {
+            var staff = await _edFiDb.StaffProfiles.FirstOrDefaultAsync(x => x.StaffUniqueId == staffUniqueId);
+            if (staff != null) 
+            {
+                staff.LanguageCode = languageCode;
+                await _edFiDb.SaveChangesAsync();
+            }
         }
 
         private class StaffBiographyModel

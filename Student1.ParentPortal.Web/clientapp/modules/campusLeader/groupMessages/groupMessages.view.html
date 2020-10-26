@@ -1,0 +1,52 @@
+﻿<main role="main">
+    <div>
+        <div class="row m-t-15">
+            <div class="col-12 col-lg-4">
+                <div class="form-group">
+                    <select class="form-control" name="gradeSelect" id="gradeSelect"
+                            ng-model="ctrl.selectedGrade"
+                            ng-options="item as item.name for item in ctrl.grades"
+                            ng-change="ctrl.OnGradeChange(); ctrl.saveState(); "></select>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="form-group">
+                    <select class="form-control" name="programSelect" id="programSelect"
+                            ng-model="ctrl.selectedProgram"
+                            ng-options="item as item.name for item in ctrl.programs"
+                            ng-change="ctrl.OnProgramChange(); ctrl.saveState();">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row m-b-16">
+            <div class="col-12 col-lg-12">
+                <div class="d-flex flex-row" ng-if="ctrl.showDescription">
+                    <span>
+                        <b>{{'Audience' | translate}}:</b> {{'Audience Message part 1' | translate}} <b class="material-500-light-blue">{{ctrl.familyCountDescription.familyMembersCount}}</b> {{'Audience Message part 2' | translate}} <b class="material-500-light-blue">{{ctrl.familyCountDescription.studentsCount}}</b> {{'students at' | translate}} {{ctrl.familyCountDescription.campusName}} {{'in' | translate}}
+                        <b class="material-500-light-blue">{{ctrl.selectedGrade.name}}</b> {{'and' | translate}} <b class="material-500-light-blue">{{ctrl.selectedProgram.name}}</b>.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <form name="messageGroupForm" novalidate>
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <input type="text" class="form-control" id="messageSubject" ng-model="ctrl.message.subject" placeholder="{{'Quick Messaging Subject Placeholder' | translate}}" required ng-class="ctrl.resetStylesInput" ng-change="ctrl.resetStylesInput = ' ng-touched'" ng-keyup="ctrl.saveState()"/>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <textarea type="text" class="form-control" id="messageBody" rows="6" ng-model="ctrl.message.body" placeholder="{{'Quick Messaging Message Placeholder' | translate}}" required ng-class="ctrl.resetStylesTextArea" ng-change="ctrl.resetStylesTextArea = ' ng-touched'" ng-keyup="ctrl.saveState()"></textarea>
+                </div>
+            </div>
+
+            <div class="row m-t-15 ">
+                <div class="col align-self-end">
+                    <submit-button promise-to-execute="ctrl.confirmSend();" form="messageGroupForm" label="{{'Send to'|translate}} {{ctrl.familyCountDescription.familyMembersCount}} {{'people' | translate}}" class="float-right"></submit-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

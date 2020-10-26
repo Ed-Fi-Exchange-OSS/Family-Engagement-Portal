@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="clientapp/assets/img/favicon.ico">
+    <link rel="shortcut icon" href="clientapp/assets/img/favicon-district.ico">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="clientapp/lib/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="clientapp/lib/bootstrap/css/bootstrap.min.css">
@@ -19,13 +19,14 @@
 
     <!-- Icon Fonts -->
     <link href="https://unpkg.com/ionicons@4.6.1/dist/css/ionicons.min.css" rel="stylesheet">
-    <title>Parent Portal provided by Student 1</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Family Portal provided by Student 1</title>
 </head>
 <body ng-app="app">
     <preloader></preloader>
     <feedback></feedback>
     <div ui-view="navbar"></div>
-    <div ui-view="content" class="content"></div>
+    <div ui-view="content" class="content" style="padding-top:5em;"></div>
     <!-- Scripts -->
     <script src="clientapp/lib/jquery/jquery-3.3.1.min.js"></script>
     <script src="clientapp/lib/popper/popper.min.js"></script>
@@ -49,11 +50,75 @@
     <script src="clientapp/languages/languages.module.js"></script>
     <script src="clientapp/languages/en-us.js"></script>
     <script src="clientapp/languages/es-mx.js"></script>
+    <script src="clientapp/languages/vi-vn.js"></script>
+    <script src="clientapp/languages/af-af.js"></script>
+    <script src="clientapp/languages/ar-ar.js"></script>
+    <script src="clientapp/languages/bg-bg.js"></script>
+    <script src="clientapp/languages/bn-bd.js"></script>
+    <script src="clientapp/languages/bs-ba.js"></script>
+    <script src="clientapp/languages/ca-ct.js"></script>
+    <script src="clientapp/languages/cy-gb.js"></script>
+    <script src="clientapp/languages/cs-cz.js"></script>
+    <script src="clientapp/languages/da-dk.js"></script>
+    <script src="clientapp/languages/de-de.js"></script>
+    <script src="clientapp/languages/el-gl.js"></script>
+    <script src="clientapp/languages/et-ee.js"></script>
+    <script src="clientapp/languages/fa-ir.js"></script>
+    <script src="clientapp/languages/fi-fi.js"></script>
+    <script src="clientapp/languages/fr-fr.js"></script>
+    <script src="clientapp/languages/ga-ie.js"></script>
+    <script src="clientapp/languages/gu-in.js"></script>
+    <script src="clientapp/languages/he-il.js"></script>
+    <script src="clientapp/languages/hi-in.js"></script>
+    <script src="clientapp/languages/hr-hr.js"></script>
+    <script src="clientapp/languages/ht-ht.js"></script>
+    <script src="clientapp/languages/hu-hu.js"></script>
+    <script src="clientapp/languages/id-id.js"></script>
+    <script src="clientapp/languages/is-is.js"></script>
+    <script src="clientapp/languages/it-it.js"></script>
+    <script src="clientapp/languages/ja-ja.js"></script>
+    <script src="clientapp/languages/kk-kz.js"></script>
+    <script src="clientapp/languages/kn-in.js"></script>
+    <script src="clientapp/languages/ko-ko.js"></script>
+    <script src="clientapp/languages/lt-lt.js"></script>
+    <script src="clientapp/languages/lv-lv.js"></script>
+    <script src="clientapp/languages/mg-mg.js"></script>
+    <script src="clientapp/languages/mi-nz.js"></script>
+    <script src="clientapp/languages/ml-in.js"></script>
+    <script src="clientapp/languages/mr-in.js"></script>
+    <script src="clientapp/languages/ms-my.js"></script>
+    <script src="clientapp/languages/mt-mt.js"></script>
+    <script src="clientapp/languages/mww-cn.js"></script>
+    <script src="clientapp/languages/nb-no.js"></script>
+    <script src="clientapp/languages/nl-nl.js"></script>
+    <script src="clientapp/languages/pa-in.js"></script>
+    <script src="clientapp/languages/pt-br.js"></script>
+    <script src="clientapp/languages/pt-pt.js"></script>
+    <script src="clientapp/languages/ro-ro.js"></script>
+    <script src="clientapp/languages/ru-ru.js"></script>
+    <script src="clientapp/languages/sk-sk.js"></script>
+    <script src="clientapp/languages/sl-si.js"></script>
+    <script src="clientapp/languages/sm-ws.js"></script>
+    <script src="clientapp/languages/sr-Cyrl-sr.js"></script>
+    <script src="clientapp/languages/sr-Latn-sr.js"></script>
+    <script src="clientapp/languages/sv-se.js"></script>
+    <script src="clientapp/languages/sw-ke.js"></script>
+    <script src="clientapp/languages/ta-my.js"></script>
+    <script src="clientapp/languages/te-in.js"></script>
+    <script src="clientapp/languages/th-th.js"></script>
+    <script src="clientapp/languages/to-to.js"></script>
+    <script src="clientapp/languages/tr-tr.js"></script>
+    <script src="clientapp/languages/ty-pf.js"></script>
+    <script src="clientapp/languages/uk-ua.js"></script>
+    <script src="clientapp/languages/ur-in.js"></script>
+    <script src="clientapp/languages/zh-Hans-cn.js"></script>
+    <script src="clientapp/languages/zh-Hant-cn.js"></script>
     <script src="clientapp/lib/angular-chart/angular-chart.min.js"></script>
     <script src="clientapp/lib/azureAD/adal-angular.js"></script>
     <script src="clientapp/lib/angular-touch/angular-touch.min.js"></script>
     <script src="clientapp/lib/ui-bootstrap/ui-bootstrap-tpls-3.0.6.min.js"></script>
     <script src="clientapp/lib/moment/angular-moment.min.js"></script>
+    <script src="clientapp/lib/angular-jwt/angular-jwt.min.js"></script>
 
     <!-- Masonry, Angular Masonry and Images Loaded dependencies for (Angular Masonry)-->
     <script src="clientapp/lib/masonry/masonry.pkgd.min.js"></script>
@@ -70,6 +135,10 @@
     <script src="clientapp/services/landingRouteService.js"></script>
     <script src="clientapp/services/signalRService.js"></script>
     <script src="clientapp/services/userAuthenticationService.js"></script>
+    <script src="clientapp/services/impersonateService.js"></script>
+    <script src="clientapp/services/unreadMessagesService.js"></script>
+    <script src="clientapp/services/stateStorageService.js"></script>
+    <script src="clientapp/services/communicationService.js"></script>
 
     <!-- Angular.Apis -->
     <script src="clientapp/services/api/api.js"></script>
@@ -84,6 +153,9 @@
     <script src="clientapp/services/api/apiCommunications.js"></script>
     <script src="clientapp/services/api/apiApplication.js"></script>
     <script src="clientapp/services/api/apiFeedback.js"></script>
+    <script src="clientapp/services/api/apiLog.js"></script>
+    <script src="clientapp/services/api/apiAdmin.js"></script>
+    <script src="clientapp/services/api/apiSchools.js"></script>
     <!-- Angular.Directives -->
     <script src="clientapp/modules/directives/directives.module.js"></script>
     <script src="clientapp/modules/directives/preloader/preloader.module.js"></script>
@@ -118,6 +190,13 @@
     <script src="clientapp/modules/directives/interpretationIcon/interpretationIcon.module.js"></script>
     <script src="clientapp/modules/directives/validators/greaterThanZeroValidator.module.js"></script>
     <script src="clientapp/modules/directives/feedback/feedback.module.js"></script>
+    <script src="clientapp/modules/campusLeader/groupMessages/groupMessages.module.js"></script>
+    <script src="clientapp/modules/campusLeader/individualMessages/individualMessages.module.js"></script>
+    <script src="clientapp/modules/campusLeader/messagesLog/messagesLog.module.js"></script>
+    <script src="clientapp/modules/directives/onScroll/onScroll.directive.js"></script>
+    <script src="clientapp/modules/teacher/groupMessaging/groupMessaging.module.js"></script>
+    <script src="clientapp/modules/directives/modals/confirmation/confirmation.module.js"></script>
+    <script src="clientapp/modules/directives/modals/inactivity/inactivity.module.js"></script>
     <!--Angular.Components-->
     <script src="clientapp/modules/componentSkeleton/skeleton.module.js"></script>
     <script src="clientapp/modules/login/login.module.js"></script>
@@ -129,6 +208,9 @@
     <script src="clientapp/modules/userProfile/userProfile.module.js"></script>
     <script src="clientapp/modules/communications/communications.module.js"></script>
     <script src="clientapp/modules/alert/alert.module.js"></script>
+    <script src="clientapp/modules/admin/landing.module.js"></script>
+    <script src="clientapp/modules/campusLeader/landing/landing.module.js"></script>
+    <script src="clientapp/modules/tools/langTransPack/langTranslate.module.js"></script>
     <!--Angular.Filters-->
     <script src="clientapp/modules/filters/recipientSearch.filter.js"></script>
     <script src="clientapp/modules/filters/bold.filter.js"></script>

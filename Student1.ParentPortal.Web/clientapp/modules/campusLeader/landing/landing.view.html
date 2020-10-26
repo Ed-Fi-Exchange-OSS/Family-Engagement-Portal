@@ -1,0 +1,29 @@
+﻿<main role="main" class="container">
+    <h1>{{'Home' | translate}}, <span>{{'Communication' | translate}}</span></h1>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" onclick="return false;" role="tab" aria-controls="nav-home" aria-selected="true">{{'Group Messaging' | translate}}</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" onclick="return false;" role="tab" aria-controls="nav-profile" aria-selected="false">{{'Individual Messaging' | translate}}</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" onclick="return false;" role="tab" aria-controls="nav-contact" aria-selected="false" ng-click="ctrl.getQueues()">{{'Message Log' | translate}}</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <group-messages grades="ctrl.gradeLevels" programs="ctrl.programs"></group-messages>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <individual-messages grades="ctrl.gradeLevels" languages="ctrl.languages"></individual-messages>
+                        </div>
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <messages-log sender="ctrl.sender" grades="ctrl.gradeLevels" programs="ctrl.programs" queues="ctrl.queues"></messages-log>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

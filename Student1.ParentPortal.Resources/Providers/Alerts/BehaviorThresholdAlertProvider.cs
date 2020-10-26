@@ -1,16 +1,14 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Data.Models;
+﻿using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Data.Models.EdFi25;
 using Student1.ParentPortal.Models.Alert;
+using Student1.ParentPortal.Models.Notifications;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Providers.Image;
 using Student1.ParentPortal.Resources.Providers.Messaging;
+using Student1.ParentPortal.Resources.Providers.Notifications;
+using Student1.ParentPortal.Resources.Providers.Translation;
 using Student1.ParentPortal.Resources.Providers.Url;
 using System;
 using System.Collections.Generic;
@@ -33,8 +31,18 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
         private readonly IUrlProvider _urlProvider;
         private readonly ISMSProvider _smsProvider;
         private readonly IImageProvider _imageUrlProvider;
+        private readonly IPushNotificationProvider _pushNotificationProvider;
+        private readonly ITranslationProvider _translationProvider;
 
-        public BehaviorThresholdAlertProvider(IAlertRepository alertRepository, ICustomParametersProvider customParametersProvider, Data.Models.ITypesRepository typesRepository, IMessagingProvider messagingProvider, IUrlProvider urlProvider, IImageProvider imageUrlProvider,ISMSProvider smsProvider)
+        public BehaviorThresholdAlertProvider(IAlertRepository alertRepository, 
+                                              ICustomParametersProvider customParametersProvider,
+                                              Data.Models.ITypesRepository typesRepository, 
+                                              IMessagingProvider messagingProvider, 
+                                              IUrlProvider urlProvider, 
+                                              IImageProvider imageUrlProvider,
+                                              ISMSProvider smsProvider, 
+                                              IPushNotificationProvider pushNotificationProvider,
+                                              ITranslationProvider translationProvider)
         {
             _alertRepository = alertRepository;
             _customParametersProvider = customParametersProvider;
@@ -43,12 +51,16 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
             _imageUrlProvider = imageUrlProvider;
             _smsProvider = smsProvider;
             _typesRepository = typesRepository;
+            _pushNotificationProvider = pushNotificationProvider;
+            _translationProvider = translationProvider;
         }
 
         public async Task<int> SendAlerts()
         {
             var customParameters = _customParametersProvider.GetParameters();
-
+            var enabledFeauter = customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.behavior;
+            if (!enabledFeauter)
+                return 0;
             var alertTypes = await _typesRepository.GetAlertTypes();
             var alertBehavior = alertTypes.Where(x => x.AlertTypeId == AlertTypeEnum.Behavior.Value).FirstOrDefault();
 
@@ -80,20 +92,43 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
 
                     string to;
                     string template;
+                    string subjectTemplate = "Family Portal: Behavior Alert";
 
-                    if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.SMS.Value && p.Parent.Telephone != null && p.Parent.SMSDomain != null)
+                    if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.SMS.Value && p.Parent.Telephone != null)
                     {
-                        to = p.Parent.Telephone + p.Parent.SMSDomain;
+                        to = p.Parent.Telephone;
+                        subjectTemplate = await TranslateText(p.Parent.LanguageCode, subjectTemplate);
                         template = FillSMSTemplate(s);
-                        await _smsProvider.SendMessageAsync(to, "Parent Portal: Behavior Alert", template);
+                        template = await TranslateText(p.Parent.LanguageCode, template);
+                        await _smsProvider.SendMessageAsync(to, subjectTemplate, template);
                         alertCountSent++;
                     }
                     else if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.Email.Value && p.Parent.Email != null)
                     {
                         to = p.Parent.Email;
+                        subjectTemplate = await TranslateText(p.Parent.LanguageCode, subjectTemplate);
                         template = FillEmailTemplate(s, behaviorThreshold, imageUrl);
-                        await _messagingProvider.SendMessageAsync(to, null, null, "Parent Portal: Behavior Alert", template);
+                        template = await TranslateText(p.Parent.LanguageCode, template);
+                        await _messagingProvider.SendMessageAsync(to, null, null, subjectTemplate, template);
                         alertCountSent++;
+                    }
+                    else if (parentAlert.PreferredMethodOfContactTypeId == MethodOfContactTypeEnum.Notification.Value)
+                    {
+                        string pushNoSubjectTemplate = $"Behavior Alert: {s.FirstName} {s.LastSurname}";
+                        string pushNoBodyTemplate = $"1 new discipline incident.";
+                        pushNoSubjectTemplate = await TranslateText(p.Parent.LanguageCode, pushNoSubjectTemplate);
+                        pushNoBodyTemplate = await TranslateText(p.Parent.LanguageCode, pushNoBodyTemplate);
+
+                        await _pushNotificationProvider.SendNotificationAsync(new NotificationItemModel
+                        {
+                            personUniqueId = p.Parent.ParentUniqueId,
+                            personType = "Parent",
+                            notification = new Notification
+                            {
+                                title = pushNoSubjectTemplate,
+                                body = pushNoBodyTemplate
+                            }
+                        });
                     }
 
                     // Save in log
@@ -146,6 +181,23 @@ namespace Student1.ParentPortal.Resources.Providers.Alerts
                                         $"\r\nFor details visit the Parent Portal.")
                                   .Replace("{{StudentFullName}}", $"{s.FirstName} {s.LastSurname}");
             return filledTemplate;
+        }
+
+        private async Task<string> TranslateText(string languageCode, string template)
+        {
+            string textTranslated = string.Empty;
+            if (!string.IsNullOrEmpty(languageCode) && languageCode != "en")
+            {
+                textTranslated = await _translationProvider.TranslateAsync(new TranslateRequest
+                {
+                    FromLangCode = "en",
+                    TextToTranslate = template,
+                    ToLangCode = languageCode
+                });
+            }
+            else
+                textTranslated = template;
+            return textTranslated;
         }
     }
 }

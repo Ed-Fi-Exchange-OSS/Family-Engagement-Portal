@@ -7,6 +7,7 @@
             headers: { 'Content-Type': undefined },
         };
         var briefProfile = null;
+        var schoolId = '';
 
         return {
             getRole: function () { return $http.get(apiResourceUri + '/role').then(function (response) { return response.data; }); },
@@ -16,6 +17,9 @@
             uploadImage: function (formData) { return $http.post(apiResourceUri + '/image', formData, config).then(function (response) { return response.data; }); },
             setBriefProfile: function (newBriefProfile) { briefProfile = newBriefProfile },
             getBriefProfile: function () { return briefProfile },
-            persistFeedback: function (model) { return $http.post(apiResourceUri + '/feedback', model).then(function (response) { return response.data; }); }
+            persistFeedback: function (model) { return $http.post(apiResourceUri + '/feedback', model).then(function (response) { return response.data; }); },
+            getSchool: function () { return $http.get(apiResourceUri + '/school').then(function (response) { schoolId = response.data; return response.data; }); },
+            getSchoolId: function () { return schoolId; },
+            updateProfileLanguage: function (model) { return $http.post(apiResourceUri + '/language', model).then(function (response) { return response.data; }); },
         }
     }]);

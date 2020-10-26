@@ -1,0 +1,100 @@
+﻿<main id="top" role="main" class="container">
+    <div class="row">
+        <div class="col-6 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Translate Language Package</h3>
+                    <form name="transForm" novalidate>
+                        <label for="preferredLanguage">Choose the language to translate</label>
+                        <select id="preferredLanguage" class="form-control d-inline"
+                                ng-model="ctrl.model.code"
+                                ng-disabled="ctrl.model.allLanguages"
+                                ng-options="item.code as (item.nativeName + ' - ' + item.name) for item in ctrl.languages"></select>
+                        <div class="m-l-20 m-t-10">
+                            <label for="allLanguages">
+                                <input id="allLanguages" type="checkbox" class="form-check-input" ng-model="ctrl.model.allLanguages" ng-checked="ctrl.model.allLanguages" ng-click="ctrl.model.allLanguages = !ctrl.model.allLanguages" />
+                                Select All Languages
+                            </label>
+                        </div>
+                        <label>Select the type of language package: </label>
+                        <!--<input id="funFact" type="file" class="form-control" custom-on-change="ctrl.uploadImage"  />-->
+                        <div class="row justify-content-center p-t-15">
+                            <div class="col-5">
+                                <label for="web">
+                                    <input id="web" type="radio" name="web" class="form-check-input" ng-checked="ctrl.model.type" ng-click="ctrl.model.type = true" />
+                                    Web
+                                </label>
+                            </div>
+                            <div class="col-5">
+                                <label for="mobile">
+                                    <input id="mobile" type="radio" name="mobile" class="form-check-input" ng-checked="!ctrl.model.type" ng-click="ctrl.model.type = false" />
+                                    Mobile
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-b-20 p-t-25">
+                            <div class="col">
+                                <submit-button promise-to-execute="ctrl.translate()" form="transForm" label="Translate" class="float-right"></submit-button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Translate Language Add Element</h3>
+                    <form name="transForm" novalidate>
+                        <!--<label for="preferredLanguage">Choose the language to translate</label>
+                    <select id="preferredLanguage" class="form-control d-inline"
+                            ng-model="ctrl.model.code"
+                            ng-disabled="ctrl.model.allLanguages"
+                            ng-options="item.code as (item.nativeName + ' - ' + item.name) for item in ctrl.languages"></select>
+                    <div class="m-l-20 m-t-10">
+                        <label for="allLanguages">
+                            <input id="allLanguages" type="checkbox" class="form-check-input" ng-model="ctrl.model.allLanguages" ng-checked="ctrl.model.allLanguages" ng-click="ctrl.model.allLanguages = !ctrl.model.allLanguages" />
+                            Select All Languages
+                        </label>
+                    </div>-->
+                        <!--<label>Select the type of language package: </label>-->
+                        <!--<input id="funFact" type="file" class="form-control" custom-on-change="ctrl.uploadImage"  />-->
+                        <div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="middleName"> Key: </label>
+                                    <input id="middleName" type="text" class="form-control" ng-model="ctrl.newElement.key"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="middleName"> Value: </label>
+                                    <input id="middleName" type="text" class="form-control" ng-model="ctrl.newElement.value" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row justify-content-center p-t-15">
+                        <div class="col-5">
+                            <label for="web">
+                                <input id="web" type="radio" name="web" class="form-check-input" ng-checked="ctrl.model.type" ng-click="ctrl.model.type = true" />
+                                Web
+                            </label>
+                        </div>
+                        <div class="col-5">
+                            <label for="mobile">
+                                <input id="mobile" type="radio" name="mobile" class="form-check-input" ng-checked="!ctrl.model.type" ng-click="ctrl.model.type = false" />
+                                Mobile
+                            </label>
+                        </div>
+                    </div>-->
+                        <div class="row p-b-20 p-t-25">
+                            <div class="col">
+                                <submit-button promise-to-execute="ctrl.addNewElement()" form="transForm" label="Add Element" class="float-right"></submit-button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,14 +1,7 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.Owin.Security.OAuth;
 using Student1.ParentPortal.Resources.Services;
 
@@ -44,16 +37,18 @@ namespace Student1.ParentPortal.Web.Security
             var identityEmail = emailClaim.Value;
 
             // Get the person details
+
             var person = await _databaseIdentityProvider.GetPersonInformationAsync(identityEmail);
 
             // Add custom claims
-            context.Ticket.Identity.AddClaim(new Claim("person_usi",person.Usi.ToString(),ClaimValueTypes.Integer));
+            context.Ticket.Identity.AddClaim(new Claim("person_usi", person.Usi.ToString(), ClaimValueTypes.Integer));
             context.Ticket.Identity.AddClaim(new Claim("person_type_id", person.PersonTypeId.ToString(), ClaimValueTypes.Integer));
-            context.Ticket.Identity.AddClaim(new Claim("person_unique_id",person.UniqueId.ToString(),ClaimValueTypes.String));
-            context.Ticket.Identity.AddClaim(new Claim("role",person.PersonType,ClaimValueTypes.String));
-            context.Ticket.Identity.AddClaim(new Claim("email",identityEmail,ClaimValueTypes.String));
+            context.Ticket.Identity.AddClaim(new Claim("person_unique_id", person.UniqueId.ToString(), ClaimValueTypes.String));
+            context.Ticket.Identity.AddClaim(new Claim("role", person.PersonType, ClaimValueTypes.String));
+            context.Ticket.Identity.AddClaim(new Claim("email", identityEmail, ClaimValueTypes.String));
             context.Ticket.Identity.AddClaim(new Claim("firstname", person.FirstName, ClaimValueTypes.String));
             context.Ticket.Identity.AddClaim(new Claim("lastsurname", person.LastSurname, ClaimValueTypes.String));
+            context.Ticket.Identity.AddClaim(new Claim("schoolId", person.SchoolId.ToString(), ClaimValueTypes.Integer));
         }
     }
 }

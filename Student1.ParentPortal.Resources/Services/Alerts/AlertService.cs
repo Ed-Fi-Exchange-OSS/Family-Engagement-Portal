@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using Student1.ParentPortal.Data.Models;
+﻿using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Data.Models.EdFi25;
 using Student1.ParentPortal.Models.Alert;
 using Student1.ParentPortal.Resources.Providers.Alerts;
@@ -40,8 +35,8 @@ namespace Student1.ParentPortal.Resources.Services.Alerts
         {
             var customParams = _customParametersProvider.GetParameters();
             var parentTypeAlerts = await _alertRepository.GetParentAlertTypes(usi);
-
-            return parentTypeAlerts;
+            
+            return featureToggleFilter(customParams, parentTypeAlerts);
 
         }
 
@@ -86,6 +81,45 @@ namespace Student1.ParentPortal.Resources.Services.Alerts
             {
                 await alertProvider.SendAlerts();
             }
+        }
+
+
+        private ParentAlertTypeModel featureToggleFilter(CustomParameters customParameters, ParentAlertTypeModel model) 
+        {
+            List<AlertTypeModel> modelAlerts = new List<AlertTypeModel>();
+            modelAlerts = model.Alerts.ToList();
+            model.Alerts = new List<AlertTypeModel>();
+            
+            foreach (var alert in modelAlerts)
+            {
+                if (alert.AlertTypeId == 1 &&
+                   customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.absence)
+                {
+                    model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 1));
+                }
+
+                if (alert.AlertTypeId == 2 &&
+                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.behavior)
+                {
+                    model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 2));
+                }
+
+                if (alert.AlertTypeId == 3 &&
+                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.missingAssignments)
+                {
+                    model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 3));
+                }
+
+                if (alert.AlertTypeId == 4 &&
+                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.courseAverage) 
+                {
+                    model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 4));
+                }
+
+                if(alert.AlertTypeId == 5)
+                    model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 5));
+            }
+            return model;
         }
     }
 }

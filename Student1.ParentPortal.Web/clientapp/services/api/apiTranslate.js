@@ -8,5 +8,7 @@
             getAvailableLanguages: function () { return $http.get(apiResourceUri + '/languages').then(function (response) { return response.data.filter(function (x) {return x.code != 'tlh' }); }); },
             autoDetectTranslate: function (model) { return $http.post(apiResourceUri + '/autoDetect', model).then(function (response) { return response.data; }); },
             translate: function (model) { return $http.post(apiResourceUri, model).then(function (response) { return response.data; }); },
+            translatePackage: function (model) { return $http.post(apiResourceUri + '/package', model).then(function (response) { return response.data; }); },
+            addNewElementToPackage: function (model) { return $http.post(apiResourceUri + '/package/add/element', model).then(function (response) { return response.data; }); },
         }
     }]);

@@ -51,6 +51,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<Actual> Actuals { get; set; } // Actual
         System.Data.Entity.DbSet<AdditionalCreditTypeDescriptor> AdditionalCreditTypeDescriptors { get; set; } // AdditionalCreditTypeDescriptor
         System.Data.Entity.DbSet<AddressTypeDescriptor> AddressTypeDescriptors { get; set; } // AddressTypeDescriptor
+        System.Data.Entity.DbSet<Admin> Admins { get; set; } // Admin
         System.Data.Entity.DbSet<AdministrationEnvironmentDescriptor> AdministrationEnvironmentDescriptors { get; set; } // AdministrationEnvironmentDescriptor
         System.Data.Entity.DbSet<AdministrativeFundingControlDescriptor> AdministrativeFundingControlDescriptors { get; set; } // AdministrativeFundingControlDescriptor
         System.Data.Entity.DbSet<AlertLog> AlertLogs { get; set; } // AlertLog
@@ -223,6 +224,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<GraduationPlanRequiredAssessmentPerformanceLevel> GraduationPlanRequiredAssessmentPerformanceLevels { get; set; } // GraduationPlanRequiredAssessmentPerformanceLevel
         System.Data.Entity.DbSet<GraduationPlanRequiredAssessmentScore> GraduationPlanRequiredAssessmentScores { get; set; } // GraduationPlanRequiredAssessmentScore
         System.Data.Entity.DbSet<GraduationPlanTypeDescriptor> GraduationPlanTypeDescriptors { get; set; } // GraduationPlanTypeDescriptor
+        System.Data.Entity.DbSet<GroupMessagesLogChatLog> GroupMessagesLogChatLogs { get; set; } // GroupMessagesLogChatLog
+        System.Data.Entity.DbSet<GroupMessagesQueueLog> GroupMessagesQueueLogs { get; set; } // GroupMessagesQueueLog
         System.Data.Entity.DbSet<GunFreeSchoolsActReportingStatusDescriptor> GunFreeSchoolsActReportingStatusDescriptors { get; set; } // GunFreeSchoolsActReportingStatusDescriptor
         System.Data.Entity.DbSet<HomelessPrimaryNighttimeResidenceDescriptor> HomelessPrimaryNighttimeResidenceDescriptors { get; set; } // HomelessPrimaryNighttimeResidenceDescriptor
         System.Data.Entity.DbSet<HomelessProgramServiceDescriptor> HomelessProgramServiceDescriptors { get; set; } // HomelessProgramServiceDescriptor
@@ -294,6 +297,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<LocalEducationAgencyIdToStudentUsi> LocalEducationAgencyIdToStudentUsis { get; set; } // LocalEducationAgencyIdToStudentUSI
         System.Data.Entity.DbSet<LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociation> LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociations { get; set; } // LocalEducationAgencyIdToStudentUSIThroughEdOrgAssociation
         System.Data.Entity.DbSet<Location> Locations { get; set; } // Location
+        System.Data.Entity.DbSet<Log> Logs { get; set; } // Logs
         System.Data.Entity.DbSet<MagnetSpecialProgramEmphasisSchoolDescriptor> MagnetSpecialProgramEmphasisSchoolDescriptors { get; set; } // MagnetSpecialProgramEmphasisSchoolDescriptor
         System.Data.Entity.DbSet<MediumOfInstructionDescriptor> MediumOfInstructionDescriptors { get; set; } // MediumOfInstructionDescriptor
         System.Data.Entity.DbSet<MethodCreditEarnedDescriptor> MethodCreditEarnedDescriptors { get; set; } // MethodCreditEarnedDescriptor
@@ -303,6 +307,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<NeglectedOrDelinquentProgramDescriptor> NeglectedOrDelinquentProgramDescriptors { get; set; } // NeglectedOrDelinquentProgramDescriptor
         System.Data.Entity.DbSet<NeglectedOrDelinquentProgramServiceDescriptor> NeglectedOrDelinquentProgramServiceDescriptors { get; set; } // NeglectedOrDelinquentProgramServiceDescriptor
         System.Data.Entity.DbSet<NetworkPurposeDescriptor> NetworkPurposeDescriptors { get; set; } // NetworkPurposeDescriptor
+        System.Data.Entity.DbSet<NotificationsToken> NotificationsTokens { get; set; } // NotificationsToken
         System.Data.Entity.DbSet<ObjectiveAssessment> ObjectiveAssessments { get; set; } // ObjectiveAssessment
         System.Data.Entity.DbSet<ObjectiveAssessmentAssessmentItem> ObjectiveAssessmentAssessmentItems { get; set; } // ObjectiveAssessmentAssessmentItem
         System.Data.Entity.DbSet<ObjectiveAssessmentLearningObjective> ObjectiveAssessmentLearningObjectives { get; set; } // ObjectiveAssessmentLearningObjective
@@ -323,12 +328,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<ParentAddressPeriod> ParentAddressPeriods { get; set; } // ParentAddressPeriod
         System.Data.Entity.DbSet<ParentAlert> ParentAlerts { get; set; } // ParentAlert
         System.Data.Entity.DbSet<ParentBiography> ParentBiographies { get; set; } // ParentBiography
+        System.Data.Entity.DbSet<ParentChatRecipient> ParentChatRecipients { get; set; } // ParentChatRecipients
         System.Data.Entity.DbSet<ParentElectronicMail> ParentElectronicMails { get; set; } // ParentElectronicMail
         System.Data.Entity.DbSet<ParentInternationalAddress> ParentInternationalAddresses { get; set; } // ParentInternationalAddress
         System.Data.Entity.DbSet<ParentLanguage> ParentLanguages { get; set; } // ParentLanguage
         System.Data.Entity.DbSet<ParentLanguageUse> ParentLanguageUses { get; set; } // ParentLanguageUse
         System.Data.Entity.DbSet<ParentOtherName> ParentOtherNames { get; set; } // ParentOtherName
         System.Data.Entity.DbSet<ParentPersonalIdentificationDocument> ParentPersonalIdentificationDocuments { get; set; } // ParentPersonalIdentificationDocument
+        System.Data.Entity.DbSet<ParentPrincipalsChatRecipient> ParentPrincipalsChatRecipients { get; set; } // ParentPrincipalsChatRecipients
         System.Data.Entity.DbSet<ParentProfile> ParentProfiles { get; set; } // ParentProfile
         System.Data.Entity.DbSet<ParentProfileAddress> ParentProfileAddresses { get; set; } // ParentProfileAddress
         System.Data.Entity.DbSet<ParentProfileElectronicMail> ParentProfileElectronicMails { get; set; } // ParentProfileElectronicMail
@@ -420,6 +427,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<StaffAddress> StaffAddresses { get; set; } // StaffAddress
         System.Data.Entity.DbSet<StaffAddressPeriod> StaffAddressPeriods { get; set; } // StaffAddressPeriod
         System.Data.Entity.DbSet<StaffBiography> StaffBiographies { get; set; } // StaffBiography
+        System.Data.Entity.DbSet<StaffChatRecipient> StaffChatRecipients { get; set; } // StaffChatRecipients
         System.Data.Entity.DbSet<StaffClassificationDescriptor> StaffClassificationDescriptors { get; set; } // StaffClassificationDescriptor
         System.Data.Entity.DbSet<StaffCohortAssociation> StaffCohortAssociations { get; set; } // StaffCohortAssociation
         System.Data.Entity.DbSet<StaffCredential> StaffCredentials { get; set; } // StaffCredential
@@ -553,7 +561,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<TechnicalSkillsAssessmentDescriptor> TechnicalSkillsAssessmentDescriptors { get; set; } // TechnicalSkillsAssessmentDescriptor
         System.Data.Entity.DbSet<TelephoneNumberTypeDescriptor> TelephoneNumberTypeDescriptors { get; set; } // TelephoneNumberTypeDescriptor
         System.Data.Entity.DbSet<TermDescriptor> TermDescriptors { get; set; } // TermDescriptor
-        System.Data.Entity.DbSet<Test1> Test1 { get; set; } // Test1
         System.Data.Entity.DbSet<TextMessageCarrierType> TextMessageCarrierTypes { get; set; } // TextMessageCarrierType
         System.Data.Entity.DbSet<ThresholdType> ThresholdTypes { get; set; } // ThresholdType
         System.Data.Entity.DbSet<TitleIPartAParticipantDescriptor> TitleIPartAParticipantDescriptors { get; set; } // TitleIPartAParticipantDescriptor
@@ -576,11 +583,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet Set(System.Type entityType);
         System.Data.Entity.DbSet<TEntity> Set<TEntity>() where TEntity : class;
         string ToString();
-
-        // Stored Procedures
-        int EtlAssessmentInterchange(string sourceDbCommon, string destinationDb, int? schoolYear);
-        // EtlAssessmentInterchangeAsync cannot be created due to having out parameters, or is relying on the procedure result (int)
-
     }
 
     #endregion
@@ -604,6 +606,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<Actual> Actuals { get; set; } // Actual
         public System.Data.Entity.DbSet<AdditionalCreditTypeDescriptor> AdditionalCreditTypeDescriptors { get; set; } // AdditionalCreditTypeDescriptor
         public System.Data.Entity.DbSet<AddressTypeDescriptor> AddressTypeDescriptors { get; set; } // AddressTypeDescriptor
+        public System.Data.Entity.DbSet<Admin> Admins { get; set; } // Admin
         public System.Data.Entity.DbSet<AdministrationEnvironmentDescriptor> AdministrationEnvironmentDescriptors { get; set; } // AdministrationEnvironmentDescriptor
         public System.Data.Entity.DbSet<AdministrativeFundingControlDescriptor> AdministrativeFundingControlDescriptors { get; set; } // AdministrativeFundingControlDescriptor
         public System.Data.Entity.DbSet<AlertLog> AlertLogs { get; set; } // AlertLog
@@ -776,6 +779,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<GraduationPlanRequiredAssessmentPerformanceLevel> GraduationPlanRequiredAssessmentPerformanceLevels { get; set; } // GraduationPlanRequiredAssessmentPerformanceLevel
         public System.Data.Entity.DbSet<GraduationPlanRequiredAssessmentScore> GraduationPlanRequiredAssessmentScores { get; set; } // GraduationPlanRequiredAssessmentScore
         public System.Data.Entity.DbSet<GraduationPlanTypeDescriptor> GraduationPlanTypeDescriptors { get; set; } // GraduationPlanTypeDescriptor
+        public System.Data.Entity.DbSet<GroupMessagesLogChatLog> GroupMessagesLogChatLogs { get; set; } // GroupMessagesLogChatLog
+        public System.Data.Entity.DbSet<GroupMessagesQueueLog> GroupMessagesQueueLogs { get; set; } // GroupMessagesQueueLog
         public System.Data.Entity.DbSet<GunFreeSchoolsActReportingStatusDescriptor> GunFreeSchoolsActReportingStatusDescriptors { get; set; } // GunFreeSchoolsActReportingStatusDescriptor
         public System.Data.Entity.DbSet<HomelessPrimaryNighttimeResidenceDescriptor> HomelessPrimaryNighttimeResidenceDescriptors { get; set; } // HomelessPrimaryNighttimeResidenceDescriptor
         public System.Data.Entity.DbSet<HomelessProgramServiceDescriptor> HomelessProgramServiceDescriptors { get; set; } // HomelessProgramServiceDescriptor
@@ -847,6 +852,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<LocalEducationAgencyIdToStudentUsi> LocalEducationAgencyIdToStudentUsis { get; set; } // LocalEducationAgencyIdToStudentUSI
         public System.Data.Entity.DbSet<LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociation> LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociations { get; set; } // LocalEducationAgencyIdToStudentUSIThroughEdOrgAssociation
         public System.Data.Entity.DbSet<Location> Locations { get; set; } // Location
+        public System.Data.Entity.DbSet<Log> Logs { get; set; } // Logs
         public System.Data.Entity.DbSet<MagnetSpecialProgramEmphasisSchoolDescriptor> MagnetSpecialProgramEmphasisSchoolDescriptors { get; set; } // MagnetSpecialProgramEmphasisSchoolDescriptor
         public System.Data.Entity.DbSet<MediumOfInstructionDescriptor> MediumOfInstructionDescriptors { get; set; } // MediumOfInstructionDescriptor
         public System.Data.Entity.DbSet<MethodCreditEarnedDescriptor> MethodCreditEarnedDescriptors { get; set; } // MethodCreditEarnedDescriptor
@@ -856,6 +862,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<NeglectedOrDelinquentProgramDescriptor> NeglectedOrDelinquentProgramDescriptors { get; set; } // NeglectedOrDelinquentProgramDescriptor
         public System.Data.Entity.DbSet<NeglectedOrDelinquentProgramServiceDescriptor> NeglectedOrDelinquentProgramServiceDescriptors { get; set; } // NeglectedOrDelinquentProgramServiceDescriptor
         public System.Data.Entity.DbSet<NetworkPurposeDescriptor> NetworkPurposeDescriptors { get; set; } // NetworkPurposeDescriptor
+        public System.Data.Entity.DbSet<NotificationsToken> NotificationsTokens { get; set; } // NotificationsToken
         public System.Data.Entity.DbSet<ObjectiveAssessment> ObjectiveAssessments { get; set; } // ObjectiveAssessment
         public System.Data.Entity.DbSet<ObjectiveAssessmentAssessmentItem> ObjectiveAssessmentAssessmentItems { get; set; } // ObjectiveAssessmentAssessmentItem
         public System.Data.Entity.DbSet<ObjectiveAssessmentLearningObjective> ObjectiveAssessmentLearningObjectives { get; set; } // ObjectiveAssessmentLearningObjective
@@ -876,12 +883,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<ParentAddressPeriod> ParentAddressPeriods { get; set; } // ParentAddressPeriod
         public System.Data.Entity.DbSet<ParentAlert> ParentAlerts { get; set; } // ParentAlert
         public System.Data.Entity.DbSet<ParentBiography> ParentBiographies { get; set; } // ParentBiography
+        public System.Data.Entity.DbSet<ParentChatRecipient> ParentChatRecipients { get; set; } // ParentChatRecipients
         public System.Data.Entity.DbSet<ParentElectronicMail> ParentElectronicMails { get; set; } // ParentElectronicMail
         public System.Data.Entity.DbSet<ParentInternationalAddress> ParentInternationalAddresses { get; set; } // ParentInternationalAddress
         public System.Data.Entity.DbSet<ParentLanguage> ParentLanguages { get; set; } // ParentLanguage
         public System.Data.Entity.DbSet<ParentLanguageUse> ParentLanguageUses { get; set; } // ParentLanguageUse
         public System.Data.Entity.DbSet<ParentOtherName> ParentOtherNames { get; set; } // ParentOtherName
         public System.Data.Entity.DbSet<ParentPersonalIdentificationDocument> ParentPersonalIdentificationDocuments { get; set; } // ParentPersonalIdentificationDocument
+        public System.Data.Entity.DbSet<ParentPrincipalsChatRecipient> ParentPrincipalsChatRecipients { get; set; } // ParentPrincipalsChatRecipients
         public System.Data.Entity.DbSet<ParentProfile> ParentProfiles { get; set; } // ParentProfile
         public System.Data.Entity.DbSet<ParentProfileAddress> ParentProfileAddresses { get; set; } // ParentProfileAddress
         public System.Data.Entity.DbSet<ParentProfileElectronicMail> ParentProfileElectronicMails { get; set; } // ParentProfileElectronicMail
@@ -973,6 +982,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<StaffAddress> StaffAddresses { get; set; } // StaffAddress
         public System.Data.Entity.DbSet<StaffAddressPeriod> StaffAddressPeriods { get; set; } // StaffAddressPeriod
         public System.Data.Entity.DbSet<StaffBiography> StaffBiographies { get; set; } // StaffBiography
+        public System.Data.Entity.DbSet<StaffChatRecipient> StaffChatRecipients { get; set; } // StaffChatRecipients
         public System.Data.Entity.DbSet<StaffClassificationDescriptor> StaffClassificationDescriptors { get; set; } // StaffClassificationDescriptor
         public System.Data.Entity.DbSet<StaffCohortAssociation> StaffCohortAssociations { get; set; } // StaffCohortAssociation
         public System.Data.Entity.DbSet<StaffCredential> StaffCredentials { get; set; } // StaffCredential
@@ -1106,7 +1116,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<TechnicalSkillsAssessmentDescriptor> TechnicalSkillsAssessmentDescriptors { get; set; } // TechnicalSkillsAssessmentDescriptor
         public System.Data.Entity.DbSet<TelephoneNumberTypeDescriptor> TelephoneNumberTypeDescriptors { get; set; } // TelephoneNumberTypeDescriptor
         public System.Data.Entity.DbSet<TermDescriptor> TermDescriptors { get; set; } // TermDescriptor
-        public System.Data.Entity.DbSet<Test1> Test1 { get; set; } // Test1
         public System.Data.Entity.DbSet<TextMessageCarrierType> TextMessageCarrierTypes { get; set; } // TextMessageCarrierType
         public System.Data.Entity.DbSet<ThresholdType> ThresholdTypes { get; set; } // ThresholdType
         public System.Data.Entity.DbSet<TitleIPartAParticipantDescriptor> TitleIPartAParticipantDescriptors { get; set; } // TitleIPartAParticipantDescriptor
@@ -1156,6 +1165,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new ActualConfiguration());
             modelBuilder.Configurations.Add(new AdditionalCreditTypeDescriptorConfiguration());
             modelBuilder.Configurations.Add(new AddressTypeDescriptorConfiguration());
+            modelBuilder.Configurations.Add(new AdminConfiguration());
             modelBuilder.Configurations.Add(new AdministrationEnvironmentDescriptorConfiguration());
             modelBuilder.Configurations.Add(new AdministrativeFundingControlDescriptorConfiguration());
             modelBuilder.Configurations.Add(new AlertLogConfiguration());
@@ -1328,6 +1338,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new GraduationPlanRequiredAssessmentPerformanceLevelConfiguration());
             modelBuilder.Configurations.Add(new GraduationPlanRequiredAssessmentScoreConfiguration());
             modelBuilder.Configurations.Add(new GraduationPlanTypeDescriptorConfiguration());
+            modelBuilder.Configurations.Add(new GroupMessagesLogChatLogConfiguration());
+            modelBuilder.Configurations.Add(new GroupMessagesQueueLogConfiguration());
             modelBuilder.Configurations.Add(new GunFreeSchoolsActReportingStatusDescriptorConfiguration());
             modelBuilder.Configurations.Add(new HomelessPrimaryNighttimeResidenceDescriptorConfiguration());
             modelBuilder.Configurations.Add(new HomelessProgramServiceDescriptorConfiguration());
@@ -1399,6 +1411,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new LocalEducationAgencyIdToStudentUsiConfiguration());
             modelBuilder.Configurations.Add(new LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociationConfiguration());
             modelBuilder.Configurations.Add(new LocationConfiguration());
+            modelBuilder.Configurations.Add(new LogConfiguration());
             modelBuilder.Configurations.Add(new MagnetSpecialProgramEmphasisSchoolDescriptorConfiguration());
             modelBuilder.Configurations.Add(new MediumOfInstructionDescriptorConfiguration());
             modelBuilder.Configurations.Add(new MethodCreditEarnedDescriptorConfiguration());
@@ -1408,6 +1421,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new NeglectedOrDelinquentProgramDescriptorConfiguration());
             modelBuilder.Configurations.Add(new NeglectedOrDelinquentProgramServiceDescriptorConfiguration());
             modelBuilder.Configurations.Add(new NetworkPurposeDescriptorConfiguration());
+            modelBuilder.Configurations.Add(new NotificationsTokenConfiguration());
             modelBuilder.Configurations.Add(new ObjectiveAssessmentConfiguration());
             modelBuilder.Configurations.Add(new ObjectiveAssessmentAssessmentItemConfiguration());
             modelBuilder.Configurations.Add(new ObjectiveAssessmentLearningObjectiveConfiguration());
@@ -1428,12 +1442,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new ParentAddressPeriodConfiguration());
             modelBuilder.Configurations.Add(new ParentAlertConfiguration());
             modelBuilder.Configurations.Add(new ParentBiographyConfiguration());
+            modelBuilder.Configurations.Add(new ParentChatRecipientConfiguration());
             modelBuilder.Configurations.Add(new ParentElectronicMailConfiguration());
             modelBuilder.Configurations.Add(new ParentInternationalAddressConfiguration());
             modelBuilder.Configurations.Add(new ParentLanguageConfiguration());
             modelBuilder.Configurations.Add(new ParentLanguageUseConfiguration());
             modelBuilder.Configurations.Add(new ParentOtherNameConfiguration());
             modelBuilder.Configurations.Add(new ParentPersonalIdentificationDocumentConfiguration());
+            modelBuilder.Configurations.Add(new ParentPrincipalsChatRecipientConfiguration());
             modelBuilder.Configurations.Add(new ParentProfileConfiguration());
             modelBuilder.Configurations.Add(new ParentProfileAddressConfiguration());
             modelBuilder.Configurations.Add(new ParentProfileElectronicMailConfiguration());
@@ -1525,6 +1541,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new StaffAddressConfiguration());
             modelBuilder.Configurations.Add(new StaffAddressPeriodConfiguration());
             modelBuilder.Configurations.Add(new StaffBiographyConfiguration());
+            modelBuilder.Configurations.Add(new StaffChatRecipientConfiguration());
             modelBuilder.Configurations.Add(new StaffClassificationDescriptorConfiguration());
             modelBuilder.Configurations.Add(new StaffCohortAssociationConfiguration());
             modelBuilder.Configurations.Add(new StaffCredentialConfiguration());
@@ -1658,7 +1675,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new TechnicalSkillsAssessmentDescriptorConfiguration());
             modelBuilder.Configurations.Add(new TelephoneNumberTypeDescriptorConfiguration());
             modelBuilder.Configurations.Add(new TermDescriptorConfiguration());
-            modelBuilder.Configurations.Add(new Test1Configuration());
             modelBuilder.Configurations.Add(new TextMessageCarrierTypeConfiguration());
             modelBuilder.Configurations.Add(new ThresholdTypeConfiguration());
             modelBuilder.Configurations.Add(new TitleIPartAParticipantDescriptorConfiguration());
@@ -1686,6 +1702,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new ActualConfiguration(schema));
             modelBuilder.Configurations.Add(new AdditionalCreditTypeDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new AddressTypeDescriptorConfiguration(schema));
+            modelBuilder.Configurations.Add(new AdminConfiguration(schema));
             modelBuilder.Configurations.Add(new AdministrationEnvironmentDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new AdministrativeFundingControlDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new AlertLogConfiguration(schema));
@@ -1858,6 +1875,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new GraduationPlanRequiredAssessmentPerformanceLevelConfiguration(schema));
             modelBuilder.Configurations.Add(new GraduationPlanRequiredAssessmentScoreConfiguration(schema));
             modelBuilder.Configurations.Add(new GraduationPlanTypeDescriptorConfiguration(schema));
+            modelBuilder.Configurations.Add(new GroupMessagesLogChatLogConfiguration(schema));
+            modelBuilder.Configurations.Add(new GroupMessagesQueueLogConfiguration(schema));
             modelBuilder.Configurations.Add(new GunFreeSchoolsActReportingStatusDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new HomelessPrimaryNighttimeResidenceDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new HomelessProgramServiceDescriptorConfiguration(schema));
@@ -1929,6 +1948,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new LocalEducationAgencyIdToStudentUsiConfiguration(schema));
             modelBuilder.Configurations.Add(new LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociationConfiguration(schema));
             modelBuilder.Configurations.Add(new LocationConfiguration(schema));
+            modelBuilder.Configurations.Add(new LogConfiguration(schema));
             modelBuilder.Configurations.Add(new MagnetSpecialProgramEmphasisSchoolDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new MediumOfInstructionDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new MethodCreditEarnedDescriptorConfiguration(schema));
@@ -1938,6 +1958,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new NeglectedOrDelinquentProgramDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new NeglectedOrDelinquentProgramServiceDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new NetworkPurposeDescriptorConfiguration(schema));
+            modelBuilder.Configurations.Add(new NotificationsTokenConfiguration(schema));
             modelBuilder.Configurations.Add(new ObjectiveAssessmentConfiguration(schema));
             modelBuilder.Configurations.Add(new ObjectiveAssessmentAssessmentItemConfiguration(schema));
             modelBuilder.Configurations.Add(new ObjectiveAssessmentLearningObjectiveConfiguration(schema));
@@ -1958,12 +1979,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new ParentAddressPeriodConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentAlertConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentBiographyConfiguration(schema));
+            modelBuilder.Configurations.Add(new ParentChatRecipientConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentElectronicMailConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentInternationalAddressConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentLanguageConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentLanguageUseConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentOtherNameConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentPersonalIdentificationDocumentConfiguration(schema));
+            modelBuilder.Configurations.Add(new ParentPrincipalsChatRecipientConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentProfileConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentProfileAddressConfiguration(schema));
             modelBuilder.Configurations.Add(new ParentProfileElectronicMailConfiguration(schema));
@@ -2055,6 +2078,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new StaffAddressConfiguration(schema));
             modelBuilder.Configurations.Add(new StaffAddressPeriodConfiguration(schema));
             modelBuilder.Configurations.Add(new StaffBiographyConfiguration(schema));
+            modelBuilder.Configurations.Add(new StaffChatRecipientConfiguration(schema));
             modelBuilder.Configurations.Add(new StaffClassificationDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new StaffCohortAssociationConfiguration(schema));
             modelBuilder.Configurations.Add(new StaffCredentialConfiguration(schema));
@@ -2188,7 +2212,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new TechnicalSkillsAssessmentDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new TelephoneNumberTypeDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new TermDescriptorConfiguration(schema));
-            modelBuilder.Configurations.Add(new Test1Configuration(schema));
             modelBuilder.Configurations.Add(new TextMessageCarrierTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new ThresholdTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new TitleIPartAParticipantDescriptorConfiguration(schema));
@@ -2200,29 +2223,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new WeaponDescriptorConfiguration(schema));
             return modelBuilder;
         }
-
-        // Stored Procedures
-        public int EtlAssessmentInterchange(string sourceDbCommon, string destinationDb, int? schoolYear)
-        {
-            var sourceDbCommonParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@SourceDb_Common", SqlDbType = System.Data.SqlDbType.VarChar, Direction = System.Data.ParameterDirection.Input, Value = sourceDbCommon, Size = 100 };
-            if (sourceDbCommonParam.Value == null)
-                sourceDbCommonParam.Value = System.DBNull.Value;
-
-            var destinationDbParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DestinationDb", SqlDbType = System.Data.SqlDbType.VarChar, Direction = System.Data.ParameterDirection.Input, Value = destinationDb, Size = 100 };
-            if (destinationDbParam.Value == null)
-                destinationDbParam.Value = System.DBNull.Value;
-
-            var schoolYearParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@SchoolYear", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = schoolYear.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!schoolYear.HasValue)
-                schoolYearParam.Value = System.DBNull.Value;
-
-            var procResultParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@procResult", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output };
-
-            Database.ExecuteSqlCommand(System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[ETL_Assessment_Interchange] @SourceDb_Common, @DestinationDb, @SchoolYear", sourceDbCommonParam, destinationDbParam, schoolYearParam, procResultParam);
-
-            return (int) procResultParam.Value;
-        }
-
     }
     #endregion
 
@@ -2257,6 +2257,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<Actual> Actuals { get; set; }
         public System.Data.Entity.DbSet<AdditionalCreditTypeDescriptor> AdditionalCreditTypeDescriptors { get; set; }
         public System.Data.Entity.DbSet<AddressTypeDescriptor> AddressTypeDescriptors { get; set; }
+        public System.Data.Entity.DbSet<Admin> Admins { get; set; }
         public System.Data.Entity.DbSet<AdministrationEnvironmentDescriptor> AdministrationEnvironmentDescriptors { get; set; }
         public System.Data.Entity.DbSet<AdministrativeFundingControlDescriptor> AdministrativeFundingControlDescriptors { get; set; }
         public System.Data.Entity.DbSet<AlertLog> AlertLogs { get; set; }
@@ -2429,6 +2430,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<GraduationPlanRequiredAssessmentPerformanceLevel> GraduationPlanRequiredAssessmentPerformanceLevels { get; set; }
         public System.Data.Entity.DbSet<GraduationPlanRequiredAssessmentScore> GraduationPlanRequiredAssessmentScores { get; set; }
         public System.Data.Entity.DbSet<GraduationPlanTypeDescriptor> GraduationPlanTypeDescriptors { get; set; }
+        public System.Data.Entity.DbSet<GroupMessagesLogChatLog> GroupMessagesLogChatLogs { get; set; }
+        public System.Data.Entity.DbSet<GroupMessagesQueueLog> GroupMessagesQueueLogs { get; set; }
         public System.Data.Entity.DbSet<GunFreeSchoolsActReportingStatusDescriptor> GunFreeSchoolsActReportingStatusDescriptors { get; set; }
         public System.Data.Entity.DbSet<HomelessPrimaryNighttimeResidenceDescriptor> HomelessPrimaryNighttimeResidenceDescriptors { get; set; }
         public System.Data.Entity.DbSet<HomelessProgramServiceDescriptor> HomelessProgramServiceDescriptors { get; set; }
@@ -2500,6 +2503,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<LocalEducationAgencyIdToStudentUsi> LocalEducationAgencyIdToStudentUsis { get; set; }
         public System.Data.Entity.DbSet<LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociation> LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociations { get; set; }
         public System.Data.Entity.DbSet<Location> Locations { get; set; }
+        public System.Data.Entity.DbSet<Log> Logs { get; set; }
         public System.Data.Entity.DbSet<MagnetSpecialProgramEmphasisSchoolDescriptor> MagnetSpecialProgramEmphasisSchoolDescriptors { get; set; }
         public System.Data.Entity.DbSet<MediumOfInstructionDescriptor> MediumOfInstructionDescriptors { get; set; }
         public System.Data.Entity.DbSet<MethodCreditEarnedDescriptor> MethodCreditEarnedDescriptors { get; set; }
@@ -2509,6 +2513,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<NeglectedOrDelinquentProgramDescriptor> NeglectedOrDelinquentProgramDescriptors { get; set; }
         public System.Data.Entity.DbSet<NeglectedOrDelinquentProgramServiceDescriptor> NeglectedOrDelinquentProgramServiceDescriptors { get; set; }
         public System.Data.Entity.DbSet<NetworkPurposeDescriptor> NetworkPurposeDescriptors { get; set; }
+        public System.Data.Entity.DbSet<NotificationsToken> NotificationsTokens { get; set; }
         public System.Data.Entity.DbSet<ObjectiveAssessment> ObjectiveAssessments { get; set; }
         public System.Data.Entity.DbSet<ObjectiveAssessmentAssessmentItem> ObjectiveAssessmentAssessmentItems { get; set; }
         public System.Data.Entity.DbSet<ObjectiveAssessmentLearningObjective> ObjectiveAssessmentLearningObjectives { get; set; }
@@ -2529,12 +2534,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<ParentAddressPeriod> ParentAddressPeriods { get; set; }
         public System.Data.Entity.DbSet<ParentAlert> ParentAlerts { get; set; }
         public System.Data.Entity.DbSet<ParentBiography> ParentBiographies { get; set; }
+        public System.Data.Entity.DbSet<ParentChatRecipient> ParentChatRecipients { get; set; }
         public System.Data.Entity.DbSet<ParentElectronicMail> ParentElectronicMails { get; set; }
         public System.Data.Entity.DbSet<ParentInternationalAddress> ParentInternationalAddresses { get; set; }
         public System.Data.Entity.DbSet<ParentLanguage> ParentLanguages { get; set; }
         public System.Data.Entity.DbSet<ParentLanguageUse> ParentLanguageUses { get; set; }
         public System.Data.Entity.DbSet<ParentOtherName> ParentOtherNames { get; set; }
         public System.Data.Entity.DbSet<ParentPersonalIdentificationDocument> ParentPersonalIdentificationDocuments { get; set; }
+        public System.Data.Entity.DbSet<ParentPrincipalsChatRecipient> ParentPrincipalsChatRecipients { get; set; }
         public System.Data.Entity.DbSet<ParentProfile> ParentProfiles { get; set; }
         public System.Data.Entity.DbSet<ParentProfileAddress> ParentProfileAddresses { get; set; }
         public System.Data.Entity.DbSet<ParentProfileElectronicMail> ParentProfileElectronicMails { get; set; }
@@ -2626,6 +2633,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<StaffAddress> StaffAddresses { get; set; }
         public System.Data.Entity.DbSet<StaffAddressPeriod> StaffAddressPeriods { get; set; }
         public System.Data.Entity.DbSet<StaffBiography> StaffBiographies { get; set; }
+        public System.Data.Entity.DbSet<StaffChatRecipient> StaffChatRecipients { get; set; }
         public System.Data.Entity.DbSet<StaffClassificationDescriptor> StaffClassificationDescriptors { get; set; }
         public System.Data.Entity.DbSet<StaffCohortAssociation> StaffCohortAssociations { get; set; }
         public System.Data.Entity.DbSet<StaffCredential> StaffCredentials { get; set; }
@@ -2759,7 +2767,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<TechnicalSkillsAssessmentDescriptor> TechnicalSkillsAssessmentDescriptors { get; set; }
         public System.Data.Entity.DbSet<TelephoneNumberTypeDescriptor> TelephoneNumberTypeDescriptors { get; set; }
         public System.Data.Entity.DbSet<TermDescriptor> TermDescriptors { get; set; }
-        public System.Data.Entity.DbSet<Test1> Test1 { get; set; }
         public System.Data.Entity.DbSet<TextMessageCarrierType> TextMessageCarrierTypes { get; set; }
         public System.Data.Entity.DbSet<ThresholdType> ThresholdTypes { get; set; }
         public System.Data.Entity.DbSet<TitleIPartAParticipantDescriptor> TitleIPartAParticipantDescriptors { get; set; }
@@ -2790,6 +2797,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Actuals = new FakeDbSet<Actual>("AccountIdentifier", "AsOfDate", "EducationOrganizationId", "FiscalYear");
             AdditionalCreditTypeDescriptors = new FakeDbSet<AdditionalCreditTypeDescriptor>("AdditionalCreditTypeDescriptorId");
             AddressTypeDescriptors = new FakeDbSet<AddressTypeDescriptor>("AddressTypeDescriptorId");
+            Admins = new FakeDbSet<Admin>("AdminUsi");
             AdministrationEnvironmentDescriptors = new FakeDbSet<AdministrationEnvironmentDescriptor>("AdministrationEnvironmentDescriptorId");
             AdministrativeFundingControlDescriptors = new FakeDbSet<AdministrativeFundingControlDescriptor>("AdministrativeFundingControlDescriptorId");
             AlertLogs = new FakeDbSet<AlertLog>("AlertlogId");
@@ -2832,7 +2840,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             CareerPathwayDescriptors = new FakeDbSet<CareerPathwayDescriptor>("CareerPathwayDescriptorId");
             CharterApprovalAgencyTypeDescriptors = new FakeDbSet<CharterApprovalAgencyTypeDescriptor>("CharterApprovalAgencyTypeDescriptorId");
             CharterStatusDescriptors = new FakeDbSet<CharterStatusDescriptor>("CharterStatusDescriptorId");
-            ChatLogs = new FakeDbSet<ChatLog>("StudentUniqueId", "SenderTypeId", "SenderUniqueId", "RecipientTypeId", "RecipientUniqueId", "DateSent");
+            ChatLogs = new FakeDbSet<ChatLog>("StudentUniqueId", "SenderTypeId", "SenderUniqueId", "RecipientTypeId", "RecipientUniqueId", "DateSent", "Id");
             ChatLogPersonTypes = new FakeDbSet<ChatLogPersonType>("ChatLogPersonTypeId");
             CitizenshipStatusDescriptors = new FakeDbSet<CitizenshipStatusDescriptor>("CitizenshipStatusDescriptorId");
             ClassPeriods = new FakeDbSet<ClassPeriod>("ClassPeriodName", "SchoolId");
@@ -2962,6 +2970,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             GraduationPlanRequiredAssessmentPerformanceLevels = new FakeDbSet<GraduationPlanRequiredAssessmentPerformanceLevel>("AssessmentIdentifier", "EducationOrganizationId", "GraduationPlanTypeDescriptorId", "GraduationSchoolYear", "Namespace");
             GraduationPlanRequiredAssessmentScores = new FakeDbSet<GraduationPlanRequiredAssessmentScore>("AssessmentIdentifier", "AssessmentReportingMethodDescriptorId", "EducationOrganizationId", "GraduationPlanTypeDescriptorId", "GraduationSchoolYear", "Namespace");
             GraduationPlanTypeDescriptors = new FakeDbSet<GraduationPlanTypeDescriptor>("GraduationPlanTypeDescriptorId");
+            GroupMessagesLogChatLogs = new FakeDbSet<GroupMessagesLogChatLog>("GroupMessagesLogId", "ChatLogId", "Status");
+            GroupMessagesQueueLogs = new FakeDbSet<GroupMessagesQueueLog>("Id");
             GunFreeSchoolsActReportingStatusDescriptors = new FakeDbSet<GunFreeSchoolsActReportingStatusDescriptor>("GunFreeSchoolsActReportingStatusDescriptorId");
             HomelessPrimaryNighttimeResidenceDescriptors = new FakeDbSet<HomelessPrimaryNighttimeResidenceDescriptor>("HomelessPrimaryNighttimeResidenceDescriptorId");
             HomelessProgramServiceDescriptors = new FakeDbSet<HomelessProgramServiceDescriptor>("HomelessProgramServiceDescriptorId");
@@ -3033,6 +3043,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             LocalEducationAgencyIdToStudentUsis = new FakeDbSet<LocalEducationAgencyIdToStudentUsi>("StudentUsi", "BeginDate");
             LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociations = new FakeDbSet<LocalEducationAgencyIdToStudentUsiThroughEdOrgAssociation>("StudentUsi");
             Locations = new FakeDbSet<Location>("ClassroomIdentificationCode", "SchoolId");
+            Logs = new FakeDbSet<Log>("LogId");
             MagnetSpecialProgramEmphasisSchoolDescriptors = new FakeDbSet<MagnetSpecialProgramEmphasisSchoolDescriptor>("MagnetSpecialProgramEmphasisSchoolDescriptorId");
             MediumOfInstructionDescriptors = new FakeDbSet<MediumOfInstructionDescriptor>("MediumOfInstructionDescriptorId");
             MethodCreditEarnedDescriptors = new FakeDbSet<MethodCreditEarnedDescriptor>("MethodCreditEarnedDescriptorId");
@@ -3042,6 +3053,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             NeglectedOrDelinquentProgramDescriptors = new FakeDbSet<NeglectedOrDelinquentProgramDescriptor>("NeglectedOrDelinquentProgramDescriptorId");
             NeglectedOrDelinquentProgramServiceDescriptors = new FakeDbSet<NeglectedOrDelinquentProgramServiceDescriptor>("NeglectedOrDelinquentProgramServiceDescriptorId");
             NetworkPurposeDescriptors = new FakeDbSet<NetworkPurposeDescriptor>("NetworkPurposeDescriptorId");
+            NotificationsTokens = new FakeDbSet<NotificationsToken>("NotificationTokenUsi");
             ObjectiveAssessments = new FakeDbSet<ObjectiveAssessment>("AssessmentIdentifier", "IdentificationCode", "Namespace");
             ObjectiveAssessmentAssessmentItems = new FakeDbSet<ObjectiveAssessmentAssessmentItem>("AssessmentIdentifier", "AssessmentItemIdentificationCode", "IdentificationCode", "Namespace");
             ObjectiveAssessmentLearningObjectives = new FakeDbSet<ObjectiveAssessmentLearningObjective>("AssessmentIdentifier", "IdentificationCode", "LearningObjectiveId", "LearningObjectiveNamespace", "Namespace");
@@ -3062,12 +3074,14 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             ParentAddressPeriods = new FakeDbSet<ParentAddressPeriod>("AddressTypeDescriptorId", "BeginDate", "ParentUsi");
             ParentAlerts = new FakeDbSet<ParentAlert>("ParentUniqueId");
             ParentBiographies = new FakeDbSet<ParentBiography>("ParentUniqueId");
+            ParentChatRecipients = new FakeDbSet<ParentChatRecipient>("StudentUsi", "StudentUniqueId", "StudentFirstName", "StudentLastSurname", "StaffUsi", "StaffUniqueId", "FirstName", "LastSurname", "BeginDate", "EndDate");
             ParentElectronicMails = new FakeDbSet<ParentElectronicMail>("ElectronicMailTypeDescriptorId", "ParentUsi");
             ParentInternationalAddresses = new FakeDbSet<ParentInternationalAddress>("AddressTypeDescriptorId", "ParentUsi");
             ParentLanguages = new FakeDbSet<ParentLanguage>("LanguageDescriptorId", "ParentUsi");
             ParentLanguageUses = new FakeDbSet<ParentLanguageUse>("LanguageDescriptorId", "LanguageUseDescriptorId", "ParentUsi");
             ParentOtherNames = new FakeDbSet<ParentOtherName>("OtherNameTypeDescriptorId", "ParentUsi");
             ParentPersonalIdentificationDocuments = new FakeDbSet<ParentPersonalIdentificationDocument>("IdentificationDocumentUseDescriptorId", "ParentUsi", "PersonalInformationVerificationDescriptorId");
+            ParentPrincipalsChatRecipients = new FakeDbSet<ParentPrincipalsChatRecipient>("StudentUsi", "StudentUniqueId", "StudentFirstName", "StudentLastSurname", "StaffUsi", "StaffUniqueId", "StaffFirstName", "StaffLastSurname");
             ParentProfiles = new FakeDbSet<ParentProfile>("ParentUniqueId");
             ParentProfileAddresses = new FakeDbSet<ParentProfileAddress>("ParentUniqueId", "AddressTypeDescriptorId");
             ParentProfileElectronicMails = new FakeDbSet<ParentProfileElectronicMail>("ParentUniqueId", "ElectronicMailTypeDescriptorId");
@@ -3159,6 +3173,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             StaffAddresses = new FakeDbSet<StaffAddress>("AddressTypeDescriptorId", "StaffUsi");
             StaffAddressPeriods = new FakeDbSet<StaffAddressPeriod>("AddressTypeDescriptorId", "BeginDate", "StaffUsi");
             StaffBiographies = new FakeDbSet<StaffBiography>("StaffUniqueId");
+            StaffChatRecipients = new FakeDbSet<StaffChatRecipient>("StudentUsi", "StudentUniqueId", "StudentFirstName", "StudentLastSurname", "StaffUniqueId", "BeginDate", "EndDate");
             StaffClassificationDescriptors = new FakeDbSet<StaffClassificationDescriptor>("StaffClassificationDescriptorId");
             StaffCohortAssociations = new FakeDbSet<StaffCohortAssociation>("BeginDate", "CohortIdentifier", "EducationOrganizationId", "StaffUsi");
             StaffCredentials = new FakeDbSet<StaffCredential>("CredentialIdentifier", "StaffUsi", "StateOfIssueStateAbbreviationDescriptorId");
@@ -3292,7 +3307,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             TechnicalSkillsAssessmentDescriptors = new FakeDbSet<TechnicalSkillsAssessmentDescriptor>("TechnicalSkillsAssessmentDescriptorId");
             TelephoneNumberTypeDescriptors = new FakeDbSet<TelephoneNumberTypeDescriptor>("TelephoneNumberTypeDescriptorId");
             TermDescriptors = new FakeDbSet<TermDescriptor>("TermDescriptorId");
-            Test1 = new FakeDbSet<Test1>("Id");
             TextMessageCarrierTypes = new FakeDbSet<TextMessageCarrierType>("TextMessageCarrierTypeId");
             ThresholdTypes = new FakeDbSet<ThresholdType>("ThresholdTypeId");
             TitleIPartAParticipantDescriptors = new FakeDbSet<TitleIPartAParticipantDescriptor>("TitleIPartAParticipantDescriptorId");
@@ -3361,14 +3375,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public override string ToString()
         {
             throw new System.NotImplementedException();
-        }
-
-
-        // Stored Procedures
-        public int EtlAssessmentInterchange(string sourceDbCommon, string destinationDb, int? schoolYear)
-        {
-
-            return 0;
         }
 
     }
@@ -4378,6 +4384,17 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // Admin
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class Admin
+    {
+        public int AdminUsi { get; set; } // AdminUSI (Primary key)
+        public string ElectronicMailAddress { get; set; } // ElectronicMailAddress (length: 50)
+        public System.DateTime CreateDate { get; set; } // CreateDate
+        public System.DateTime LastModifiedDate { get; set; } // LastModifiedDate
+        public System.Guid Id { get; set; } // Id
+    }
+
     // AdministrationEnvironmentDescriptor
     ///<summary>
     /// The environment in which the test was administered. For example:
@@ -4458,10 +4475,30 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
     public class AlertLog
     {
         public int AlertlogId { get; set; } // AlertlogId (Primary key)
+
+        ///<summary>
+        /// Key for School Year
+        ///</summary>
         public short SchoolYear { get; set; } // SchoolYear
+
+        ///<summary>
+        /// Key for AlertType
+        ///</summary>
         public int AlertTypeId { get; set; } // AlertTypeId
+
+        ///<summary>
+        /// A unique alphanumeric code assigned to a parent.
+        ///</summary>
         public string ParentUniqueId { get; set; } // ParentUniqueId (length: 32)
+
+        ///<summary>
+        /// A unique alphanumeric code assigned to a student.
+        ///</summary>
         public string StudentUniqueId { get; set; } // StudentUniqueId (length: 32)
+
+        ///<summary>
+        /// The main value which triggered the alert
+        ///</summary>
         public string Value { get; set; } // Value (length: 200)
         public bool Read { get; set; } // Read
         public System.DateTime UtcSentDate { get; set; } // UTCSentDate
@@ -6495,11 +6532,12 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public string SenderUniqueId { get; set; } // SenderUniqueId (Primary key) (length: 32)
         public int RecipientTypeId { get; set; } // RecipientTypeId (Primary key)
         public string RecipientUniqueId { get; set; } // RecipientUniqueId (Primary key) (length: 32)
-        public string OriginalMessage { get; set; } // OriginalMessage
         public string EnglishMessage { get; set; } // EnglishMessage
+        public string TranslatedMessage { get; set; } // TranslatedMessage
         public System.DateTime DateSent { get; set; } // DateSent (Primary key)
         public bool RecipientHasRead { get; set; } // RecipientHasRead
-        public System.Guid Id { get; set; } // Id
+        public System.Guid Id { get; set; } // Id (Primary key)
+        public string TranslatedLanguageCode { get; set; } // TranslatedLanguageCode (length: 5)
 
         // Foreign keys
 
@@ -14154,6 +14192,55 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // GroupMessagesLogChatLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class GroupMessagesLogChatLog
+    {
+        public System.Guid GroupMessagesLogId { get; set; } // GroupMessagesLogId (Primary key)
+        public System.Guid ChatLogId { get; set; } // ChatLogId (Primary key)
+        public int Status { get; set; } // Status (Primary key)
+        public string ErrorMessage { get; set; } // ErrorMessage (length: 500)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent GroupMessagesQueueLog pointed by [GroupMessagesLogChatLog].([GroupMessagesLogId]) (FK_GroupMessagesLogChatLog_GroupMessagesQueueLog)
+        /// </summary>
+        public virtual GroupMessagesQueueLog GroupMessagesQueueLog { get; set; } // FK_GroupMessagesLogChatLog_GroupMessagesQueueLog
+    }
+
+    // GroupMessagesQueueLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class GroupMessagesQueueLog
+    {
+        public System.Guid Id { get; set; } // Id (Primary key)
+        public string Type { get; set; } // Type (length: 20)
+        public System.DateTime QueuedDateTime { get; set; } // QueuedDateTime
+        public string StaffUniqueIdSent { get; set; } // StaffUniqueIdSent (length: 50)
+        public int SchoolId { get; set; } // SchoolId
+        public string Audience { get; set; } // Audience (length: 1000)
+        public string FilterParams { get; set; } // FilterParams
+        public string Subject { get; set; } // Subject (length: 250)
+        public string Body { get; set; } // Body
+        public int SentStatus { get; set; } // SentStatus
+        public int RetryCount { get; set; } // RetryCount
+        public string Data { get; set; } // Data
+        public System.DateTime? DateSent { get; set; } // DateSent
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child GroupMessagesLogChatLogs where [GroupMessagesLogChatLog].[GroupMessagesLogId] point to this entity (FK_GroupMessagesLogChatLog_GroupMessagesQueueLog)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<GroupMessagesLogChatLog> GroupMessagesLogChatLogs { get; set; } // GroupMessagesLogChatLog.FK_GroupMessagesLogChatLog_GroupMessagesQueueLog
+
+        public GroupMessagesQueueLog()
+        {
+            Id = System.Guid.NewGuid();
+            GroupMessagesLogChatLogs = new System.Collections.Generic.List<GroupMessagesLogChatLog>();
+        }
+    }
+
     // GunFreeSchoolsActReportingStatusDescriptor
     ///<summary>
     /// An indication of whether the school or local education agency (LEA) submitted a Gun-Free Schools Act (GFSA) of 1994 report to the state, as defined by Title 18, Section 921.
@@ -17537,6 +17624,25 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // Logs
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class Log
+    {
+        public int LogId { get; set; } // LogId (Primary key)
+        public string LogMessage { get; set; } // LogMessage
+        public string LogType { get; set; } // LogType (length: 450)
+        public System.DateTime DateTimeOfEvent { get; set; } // DateTimeOfEvent
+        public System.DateTime LastModifiedDate { get; set; } // LastModifiedDate
+        public System.Guid Id { get; set; } // Id
+
+        public Log()
+        {
+            DateTimeOfEvent = System.DateTime.Now;
+            LastModifiedDate = System.DateTime.Now;
+            Id = System.Guid.NewGuid();
+        }
+    }
+
     // MagnetSpecialProgramEmphasisSchoolDescriptor
     ///<summary>
     /// A school that has been designed to attract students of different racial/ethnic backgrounds for the purpose of reducing, preventing or eliminating racial isolation; and/or to provide an academic or social focus on a particular theme (e.g., science/math, performing arts, gifted/talented, or foreign language).
@@ -17850,6 +17956,27 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public NetworkPurposeDescriptor()
         {
             EducationOrganizationNetworks = new System.Collections.Generic.List<EducationOrganizationNetwork>();
+        }
+    }
+
+    // NotificationsToken
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class NotificationsToken
+    {
+        public int NotificationTokenUsi { get; set; } // NotificationTokenUSI (Primary key)
+        public string PersonUniqueId { get; set; } // PersonUniqueId (length: 32)
+        public string PersonType { get; set; } // PersonType (length: 8)
+        public string DeviceUuid { get; set; } // DeviceUUID (length: 100)
+        public string Token { get; set; } // Token (length: 500)
+        public System.DateTime CreateDate { get; set; } // CreateDate
+        public System.DateTime LastModifiedDate { get; set; } // LastModifiedDate
+        public System.Guid Id { get; set; } // Id
+
+        public NotificationsToken()
+        {
+            CreateDate = System.DateTime.Now;
+            LastModifiedDate = System.DateTime.Now;
+            Id = System.Guid.NewGuid();
         }
     }
 
@@ -18990,6 +19117,27 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // ParentChatRecipients
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class ParentChatRecipient
+    {
+        public int StudentUsi { get; set; } // StudentUSI (Primary key)
+        public string StudentUniqueId { get; set; } // StudentUniqueId (Primary key) (length: 32)
+        public string StudentFirstName { get; set; } // StudentFirstName (Primary key) (length: 75)
+        public string StudentMiddleName { get; set; } // StudentMiddleName (length: 75)
+        public string StudentLastSurname { get; set; } // StudentLastSurname (Primary key) (length: 75)
+        public string RelationsToStudent { get; set; } // RelationsToStudent (length: 60)
+        public int StaffUsi { get; set; } // StaffUSI (Primary key)
+        public string StaffUniqueId { get; set; } // StaffUniqueId (Primary key) (length: 32)
+        public string FirstName { get; set; } // FirstName (Primary key) (length: 75)
+        public string LastSurname { get; set; } // LastSurname (Primary key) (length: 75)
+        public string ReplyExpectations { get; set; } // ReplyExpectations (length: 255)
+        public System.DateTime? MostRecentMessageDate { get; set; } // MostRecentMessageDate
+        public int? UnreadMessageCount { get; set; } // UnreadMessageCount
+        public System.DateTime BeginDate { get; set; } // BeginDate (Primary key)
+        public System.DateTime EndDate { get; set; } // EndDate (Primary key)
+    }
+
     // ParentElectronicMail
     ///<summary>
     /// The numbers, letters, and symbols used to identify an electronic mail (e-mail) user within the network to which the individual or organization belongs.
@@ -19353,6 +19501,24 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         {
             CreateDate = System.DateTime.Now;
         }
+    }
+
+    // ParentPrincipalsChatRecipients
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class ParentPrincipalsChatRecipient
+    {
+        public int StudentUsi { get; set; } // StudentUSI (Primary key)
+        public string StudentUniqueId { get; set; } // StudentUniqueId (Primary key) (length: 32)
+        public string StudentFirstName { get; set; } // StudentFirstName (Primary key) (length: 75)
+        public string StudentMiddleName { get; set; } // StudentMiddleName (length: 75)
+        public string StudentLastSurname { get; set; } // StudentLastSurname (Primary key) (length: 75)
+        public int StaffUsi { get; set; } // StaffUSI (Primary key)
+        public string StaffUniqueId { get; set; } // StaffUniqueId (Primary key) (length: 32)
+        public string StaffFirstName { get; set; } // StaffFirstName (Primary key) (length: 75)
+        public string StaffLastSurname { get; set; } // StaffLastSurname (Primary key) (length: 75)
+        public string RelationsToStudent { get; set; } // RelationsToStudent (length: 100)
+        public System.DateTime? MostRecentMessageDate { get; set; } // MostRecentMessageDate
+        public int? UnreadMessageCount { get; set; } // UnreadMessageCount
     }
 
     // ParentProfile
@@ -24165,6 +24331,29 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // StaffChatRecipients
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StaffChatRecipient
+    {
+        public int StudentUsi { get; set; } // StudentUSI (Primary key)
+        public string StudentUniqueId { get; set; } // StudentUniqueId (Primary key) (length: 32)
+        public string StudentFirstName { get; set; } // StudentFirstName (Primary key) (length: 75)
+        public string StudentMiddleName { get; set; } // StudentMiddleName (length: 75)
+        public string StudentLastSurname { get; set; } // StudentLastSurname (Primary key) (length: 75)
+        public int? ParentUsi { get; set; } // ParentUSI
+        public string ParentUniqueId { get; set; } // ParentUniqueId (length: 32)
+        public string ParentFirstName { get; set; } // ParentFirstName (length: 75)
+        public string ParentLastSurname { get; set; } // ParentLastSurname (length: 75)
+        public string LocalCourseTitle { get; set; } // LocalCourseTitle (length: 60)
+        public System.DateTime? MostRecentMessageDate { get; set; } // MostRecentMessageDate
+        public int? UnreadMessageCount { get; set; } // UnreadMessageCount
+        public string StaffUniqueId { get; set; } // StaffUniqueId (Primary key) (length: 32)
+        public System.DateTime BeginDate { get; set; } // BeginDate (Primary key)
+        public System.DateTime EndDate { get; set; } // EndDate (Primary key)
+        public string ReplyExpectations { get; set; } // ReplyExpectations (length: 255)
+        public string LanguageCode { get; set; } // LanguageCode (length: 10)
+    }
+
     // StaffClassificationDescriptor
     ///<summary>
     /// This descriptor defines an individual&apos;s title of employment, official status or rank.
@@ -26819,7 +27008,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class StudentAbcSummary
     {
-        public int StudentUsi { get; set; } // StudentUsi (Primary key)
+        public int StudentUsi { get; set; } // StudentUSI (Primary key)
         public string StudentUniqueId { get; set; } // StudentUniqueId (Primary key) (length: 32)
         public string FirstName { get; set; } // FirstName (Primary key) (length: 75)
         public string MiddleName { get; set; } // MiddleName (length: 75)
@@ -33939,16 +34128,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
-    // Test1
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class Test1
-    {
-        public int Id { get; set; } // ID (Primary key)
-        public string Name { get; set; } // Name (length: 10)
-        public string Type { get; set; } // Type (length: 10)
-        public int? Value { get; set; } // Value
-    }
-
     // TextMessageCarrierType
     ///<summary>
     /// The type of alerts available.
@@ -34335,8 +34514,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsRequired();
             Property(x => x.TotalInstructionalDays).HasColumnName(@"TotalInstructionalDays").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -34384,8 +34563,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.FiscalYear).HasColumnName(@"FiscalYear").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AccountName).HasColumnName(@"AccountName").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -34415,8 +34594,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.RatingOrganization).HasColumnName(@"RatingOrganization").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.RatingProgram).HasColumnName(@"RatingProgram").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -34444,7 +34623,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AccountIdentifier).HasColumnName(@"AccountIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(50).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.FiscalYear).HasColumnName(@"FiscalYear").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Account).WithMany(b => b.AccountAccountCodes).HasForeignKey(c => new { c.AccountIdentifier, c.EducationOrganizationId, c.FiscalYear }); // FK_AccountAccountCode_Account
@@ -34493,8 +34672,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.FiscalYear).HasColumnName(@"FiscalYear").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AccountCodeDescription).HasColumnName(@"AccountCodeDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -34544,8 +34723,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.FiscalYear).HasColumnName(@"FiscalYear").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AmountToDate).HasColumnName(@"AmountToDate").HasColumnType("money").IsRequired().HasPrecision(19,4);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -34592,6 +34771,28 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             // Foreign keys
             HasRequired(a => a.Descriptor).WithOptional(b => b.AddressTypeDescriptor); // FK_AddressTypeDescriptor_Descriptor
+        }
+    }
+
+    // Admin
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class AdminConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Admin>
+    {
+        public AdminConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public AdminConfiguration(string schema)
+        {
+            ToTable("Admin", schema);
+            HasKey(x => x.AdminUsi);
+
+            Property(x => x.AdminUsi).HasColumnName(@"AdminUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ElectronicMailAddress).HasColumnName(@"ElectronicMailAddress").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
         }
     }
 
@@ -34748,8 +34949,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsOptional();
             Property(x => x.AdaptiveAssessment).HasColumnName(@"AdaptiveAssessment").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -34775,7 +34976,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AcademicSubjectDescriptorId).HasColumnName(@"AcademicSubjectDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AssessmentIdentifier).HasColumnName(@"AssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicSubjectDescriptor).WithMany(b => b.AssessmentAcademicSubjects).HasForeignKey(c => c.AcademicSubjectDescriptorId).WillCascadeOnDelete(false); // FK_AssessmentAcademicSubject_AcademicSubjectDescriptor
@@ -34800,7 +35001,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AssessmentIdentifier).HasColumnName(@"AssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithMany(b => b.AssessmentAssessedGradeLevels).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }); // FK_AssessmentAssessedGradeLevel_Assessment
@@ -34854,7 +35055,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MandatingEducationOrganizationId).HasColumnName(@"MandatingEducationOrganizationId").HasColumnType("int").IsOptional();
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.EducationOrganization).WithMany(b => b.AssessmentContentStandards).HasForeignKey(c => c.MandatingEducationOrganizationId).WillCascadeOnDelete(false); // FK_AssessmentContentStandard_EducationOrganization
@@ -34880,7 +35081,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AssessmentIdentifier).HasColumnName(@"AssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Author).HasColumnName(@"Author").HasColumnType("nvarchar").IsRequired().HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentContentStandard).WithMany(b => b.AssessmentContentStandardAuthors).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }); // FK_AssessmentContentStandardAuthor_AssessmentContentStandard
@@ -34906,7 +35107,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60);
             Property(x => x.AssigningOrganizationIdentificationCode).HasColumnName(@"AssigningOrganizationIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithMany(b => b.AssessmentIdentificationCodes).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }); // FK_AssessmentIdentificationCode_Assessment
@@ -34959,8 +35160,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Nomenclature).HasColumnName(@"Nomenclature").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.AssessmentItemUri).HasColumnName(@"AssessmentItemURI").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35008,7 +35209,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentItem).WithMany(b => b.AssessmentItemLearningStandards).HasForeignKey(c => new { c.AssessmentIdentifier, c.IdentificationCode, c.Namespace }); // FK_AssessmentItemLearningStandard_AssessmentItem
@@ -35054,7 +35255,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AssessmentIdentifier).HasColumnName(@"AssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithMany(b => b.AssessmentLanguages).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }); // FK_AssessmentLanguage_Assessment
@@ -35083,7 +35284,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinimumScore).HasColumnName(@"MinimumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.MaximumScore).HasColumnName(@"MaximumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResultDatatypeTypeDescriptor).WithMany(b => b.AssessmentPerformanceLevels).HasForeignKey(c => c.ResultDatatypeTypeDescriptorId).WillCascadeOnDelete(false); // FK_AssessmentPerformanceLevel_ResultDatatypeTypeDescriptor
@@ -35112,7 +35313,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AssessmentPeriodDescriptorId).HasColumnName(@"AssessmentPeriodDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithOptional(b => b.AssessmentPeriod); // FK_AssessmentPeriod_Assessment
@@ -35160,7 +35361,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithMany(b => b.AssessmentPrograms).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }); // FK_AssessmentProgram_Assessment
@@ -35209,7 +35410,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinimumScore).HasColumnName(@"MinimumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.MaximumScore).HasColumnName(@"MaximumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResultDatatypeTypeDescriptor).WithMany(b => b.AssessmentScores).HasForeignKey(c => c.ResultDatatypeTypeDescriptorId).WillCascadeOnDelete(false); // FK_AssessmentScore_ResultDatatypeTypeDescriptor
@@ -35239,7 +35440,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithMany(b => b.AssessmentSections).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }); // FK_AssessmentSection_Assessment
@@ -35328,8 +35529,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AlternateDayName).HasColumnName(@"AlternateDayName").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35354,7 +35555,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BellScheduleName).HasColumnName(@"BellScheduleName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ClassPeriodName).HasColumnName(@"ClassPeriodName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.BellSchedule).WithMany(b => b.BellScheduleClassPeriods).HasForeignKey(c => new { c.BellScheduleName, c.SchoolId }); // FK_BellScheduleClassPeriod_BellSchedule
@@ -35379,7 +35580,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BellScheduleName).HasColumnName(@"BellScheduleName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Date).HasColumnName(@"Date").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.BellSchedule).WithMany(b => b.BellScheduleDates).HasForeignKey(c => new { c.BellScheduleName, c.SchoolId }); // FK_BellScheduleDate_BellSchedule
@@ -35403,7 +35604,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BellScheduleName).HasColumnName(@"BellScheduleName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.BellSchedule).WithMany(b => b.BellScheduleGradeLevels).HasForeignKey(c => new { c.BellScheduleName, c.SchoolId }); // FK_BellScheduleGradeLevel_BellSchedule
@@ -35431,8 +35632,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.FiscalYear).HasColumnName(@"FiscalYear").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Amount).HasColumnName(@"Amount").HasColumnType("money").IsRequired().HasPrecision(19,4);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35459,8 +35660,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CalendarTypeDescriptorId).HasColumnName(@"CalendarTypeDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35489,8 +35690,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35517,7 +35718,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Date).HasColumnName(@"Date").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CalendarDate).WithMany(b => b.CalendarDateCalendarEvents).HasForeignKey(c => new { c.CalendarCode, c.Date, c.SchoolId, c.SchoolYear }); // FK_CalendarDateCalendarEvent_CalendarDate
@@ -35564,7 +35765,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Calendar).WithMany(b => b.CalendarGradeLevels).HasForeignKey(c => new { c.CalendarCode, c.SchoolId, c.SchoolYear }); // FK_CalendarGradeLevel_Calendar
@@ -35668,18 +35869,19 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public ChatLogConfiguration(string schema)
         {
             ToTable("ChatLog", schema);
-            HasKey(x => new { x.StudentUniqueId, x.SenderTypeId, x.SenderUniqueId, x.RecipientTypeId, x.RecipientUniqueId, x.DateSent });
+            HasKey(x => new { x.StudentUniqueId, x.SenderTypeId, x.SenderUniqueId, x.RecipientTypeId, x.RecipientUniqueId, x.DateSent, x.Id });
 
             Property(x => x.StudentUniqueId).HasColumnName(@"StudentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SenderTypeId).HasColumnName(@"SenderTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SenderUniqueId).HasColumnName(@"SenderUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RecipientTypeId).HasColumnName(@"RecipientTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RecipientUniqueId).HasColumnName(@"RecipientUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.OriginalMessage).HasColumnName(@"OriginalMessage").HasColumnType("nvarchar(max)").IsRequired();
-            Property(x => x.EnglishMessage).HasColumnName(@"EnglishMessage").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.EnglishMessage).HasColumnName(@"EnglishMessage").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.TranslatedMessage).HasColumnName(@"TranslatedMessage").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.DateSent).HasColumnName(@"DateSent").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RecipientHasRead).HasColumnName(@"RecipientHasRead").HasColumnType("bit").IsRequired();
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.TranslatedLanguageCode).HasColumnName(@"TranslatedLanguageCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(5);
 
             // Foreign keys
             HasRequired(a => a.RecipientType).WithMany(b => b.ChatLogs_RecipientTypeId).HasForeignKey(c => c.RecipientTypeId).WillCascadeOnDelete(false); // FK_ChatLog_RecipientType
@@ -35749,8 +35951,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.OfficialAttendancePeriod).HasColumnName(@"OfficialAttendancePeriod").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35776,7 +35978,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndTime).HasColumnName(@"EndTime").HasColumnType("time").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StartTime).HasColumnName(@"StartTime").HasColumnType("time").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ClassPeriod).WithMany(b => b.ClassPeriodMeetingTimes).HasForeignKey(c => new { c.ClassPeriodName, c.SchoolId }); // FK_ClassPeriodMeetingTime_ClassPeriod
@@ -35825,8 +36027,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CohortScopeDescriptorId).HasColumnName(@"CohortScopeDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.AcademicSubjectDescriptorId).HasColumnName(@"AcademicSubjectDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -35856,7 +36058,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramEducationOrganizationId).HasColumnName(@"ProgramEducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Cohort).WithMany(b => b.CohortPrograms).HasForeignKey(c => new { c.CohortIdentifier, c.EducationOrganizationId }); // FK_CohortProgram_Cohort
@@ -36024,8 +36226,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.OldestAgeAuthorizedToServe).HasColumnName(@"OldestAgeAuthorizedToServe").HasColumnType("int").IsOptional();
             Property(x => x.YoungestAgeAuthorizedToServe).HasColumnName(@"YoungestAgeAuthorizedToServe").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36077,8 +36279,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.SuccessCriteria).HasColumnName(@"SuccessCriteria").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36171,8 +36373,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AmountToDate).HasColumnName(@"AmountToDate").HasColumnType("money").IsRequired().HasPrecision(19,4);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36257,8 +36459,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CareerPathwayDescriptorId).HasColumnName(@"CareerPathwayDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.MaxCompletionsForCredit).HasColumnName(@"MaxCompletionsForCredit").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36310,7 +36512,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CompetencyLevelDescriptorId).HasColumnName(@"CompetencyLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CourseCode).HasColumnName(@"CourseCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CompetencyLevelDescriptor).WithMany(b => b.CourseCompetencyLevels).HasForeignKey(c => c.CompetencyLevelDescriptorId).WillCascadeOnDelete(false); // FK_CourseCompetencyLevel_CompetencyLevelDescriptor
@@ -36379,7 +36581,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60);
             Property(x => x.AssigningOrganizationIdentificationCode).HasColumnName(@"AssigningOrganizationIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Course).WithMany(b => b.CourseIdentificationCodes).HasForeignKey(c => new { c.CourseCode, c.EducationOrganizationId }); // FK_CourseIdentificationCode_Course
@@ -36426,7 +36628,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Course).WithMany(b => b.CourseLearningObjectives).HasForeignKey(c => new { c.CourseCode, c.EducationOrganizationId }); // FK_CourseLearningObjective_Course
@@ -36451,7 +36653,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CourseCode).HasColumnName(@"CourseCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Course).WithMany(b => b.CourseLearningStandards).HasForeignKey(c => new { c.CourseCode, c.EducationOrganizationId }); // FK_CourseLearningStandard_Course
@@ -36476,7 +36678,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CourseCode).HasColumnName(@"CourseCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CourseLevelCharacteristicDescriptorId).HasColumnName(@"CourseLevelCharacteristicDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Course).WithMany(b => b.CourseLevelCharacteristics).HasForeignKey(c => new { c.CourseCode, c.EducationOrganizationId }); // FK_CourseLevelCharacteristic_Course
@@ -36522,7 +36724,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CourseCode).HasColumnName(@"CourseCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Course).WithMany(b => b.CourseOfferedGradeLevels).HasForeignKey(c => new { c.CourseCode, c.EducationOrganizationId }); // FK_CourseOfferedGradeLevel_Course
@@ -36553,8 +36755,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CourseCode).HasColumnName(@"CourseCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36583,7 +36785,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CourseLevelCharacteristicDescriptor).WithMany(b => b.CourseOfferingCourseLevelCharacteristics).HasForeignKey(c => c.CourseLevelCharacteristicDescriptorId).WillCascadeOnDelete(false); // FK_CourseOfferingCourseLevelCharacteristic_CourseLevelCharacteristicDescriptor
@@ -36610,7 +36812,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CourseOffering).WithMany(b => b.CourseOfferingCurriculumUseds).HasForeignKey(c => new { c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SessionName }); // FK_CourseOfferingCurriculumUsed_CourseOffering
@@ -36637,7 +36839,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CourseOffering).WithMany(b => b.CourseOfferingOfferedGradeLevels).HasForeignKey(c => new { c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SessionName }); // FK_CourseOfferingOfferedGradeLevel_CourseOffering
@@ -36703,8 +36905,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AlternativeCourseCode).HasColumnName(@"AlternativeCourseCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.ExternalEducationOrganizationId).HasColumnName(@"ExternalEducationOrganizationId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36743,7 +36945,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.TermDescriptorId).HasColumnName(@"TermDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Credits).HasColumnName(@"Credits").HasColumnType("decimal").IsRequired().HasPrecision(9,3);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AdditionalCreditTypeDescriptor).WithMany(b => b.CourseTranscriptEarnedAdditionalCredits).HasForeignKey(c => c.AdditionalCreditTypeDescriptorId).WillCascadeOnDelete(false); // FK_CourseTranscriptEarnedAdditionalCredits_AdditionalCreditTypeDescriptor
@@ -36776,8 +36978,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.TeachingCredentialBasisDescriptorId).HasColumnName(@"TeachingCredentialBasisDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -36806,7 +37008,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AcademicSubjectDescriptorId).HasColumnName(@"AcademicSubjectDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CredentialIdentifier).HasColumnName(@"CredentialIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateOfIssueStateAbbreviationDescriptorId).HasColumnName(@"StateOfIssueStateAbbreviationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicSubjectDescriptor).WithMany(b => b.CredentialAcademicSubjects).HasForeignKey(c => c.AcademicSubjectDescriptorId).WillCascadeOnDelete(false); // FK_CredentialAcademicSubject_AcademicSubjectDescriptor
@@ -36831,7 +37033,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CredentialEndorsement_).HasColumnName(@"CredentialEndorsement").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CredentialIdentifier).HasColumnName(@"CredentialIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateOfIssueStateAbbreviationDescriptorId).HasColumnName(@"StateOfIssueStateAbbreviationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Credential).WithMany(b => b.CredentialEndorsements).HasForeignKey(c => new { c.CredentialIdentifier, c.StateOfIssueStateAbbreviationDescriptorId }); // FK_CredentialEndorsement_Credential
@@ -36876,7 +37078,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CredentialIdentifier).HasColumnName(@"CredentialIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateOfIssueStateAbbreviationDescriptorId).HasColumnName(@"StateOfIssueStateAbbreviationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Credential).WithMany(b => b.CredentialGradeLevels).HasForeignKey(c => new { c.CredentialIdentifier, c.StateOfIssueStateAbbreviationDescriptorId }); // FK_CredentialGradeLevel_Credential
@@ -36990,8 +37192,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PriorDescriptorId).HasColumnName(@"PriorDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.EffectiveBeginDate).HasColumnName(@"EffectiveBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EffectiveEndDate).HasColumnName(@"EffectiveEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
         }
     }
@@ -37221,8 +37423,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ReceivedEducationServicesDuringExpulsion).HasColumnName(@"ReceivedEducationServicesDuringExpulsion").HasColumnType("bit").IsOptional();
             Property(x => x.IepPlacementMeetingIndicator).HasColumnName(@"IEPPlacementMeetingIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -37251,7 +37453,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DisciplineDate).HasColumnName(@"DisciplineDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.DisciplineDescriptorId).HasColumnName(@"DisciplineDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DisciplineAction).WithMany(b => b.DisciplineActionDisciplines).HasForeignKey(c => new { c.DisciplineActionIdentifier, c.DisciplineDate, c.StudentUsi }); // FK_DisciplineActionDiscipline_DisciplineAction
@@ -37298,7 +37500,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DisciplineDate).HasColumnName(@"DisciplineDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DisciplineAction).WithMany(b => b.DisciplineActionStaffs).HasForeignKey(c => new { c.DisciplineActionIdentifier, c.DisciplineDate, c.StudentUsi }); // FK_DisciplineActionStaff_DisciplineAction
@@ -37325,7 +37527,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IncidentIdentifier).HasColumnName(@"IncidentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DisciplineAction).WithMany(b => b.DisciplineActionStudentDisciplineIncidentAssociations).HasForeignKey(c => new { c.DisciplineActionIdentifier, c.DisciplineDate, c.StudentUsi }); // FK_DisciplineActionStudentDisciplineIncidentAssociation_DisciplineAction
@@ -37381,8 +37583,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IncidentCost).HasColumnName(@"IncidentCost").HasColumnType("money").IsOptional().HasPrecision(19,4);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -37411,7 +37613,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IncidentIdentifier).HasColumnName(@"IncidentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.BehaviorDetailedDescription).HasColumnName(@"BehaviorDetailedDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.BehaviorDescriptor).WithMany(b => b.DisciplineIncidentBehaviors).HasForeignKey(c => c.BehaviorDescriptorId).WillCascadeOnDelete(false); // FK_DisciplineIncidentBehavior_BehaviorDescriptor
@@ -37436,7 +37638,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IncidentIdentifier).HasColumnName(@"IncidentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.WeaponDescriptorId).HasColumnName(@"WeaponDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DisciplineIncident).WithMany(b => b.DisciplineIncidentWeapons).HasForeignKey(c => new { c.IncidentIdentifier, c.SchoolId }); // FK_DisciplineIncidentWeapon_DisciplineIncident
@@ -37497,8 +37699,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CostRateDescriptorId).HasColumnName(@"CostRateDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -37525,7 +37727,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.EducationContentAppropriateGradeLevels).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentAppropriateGradeLevel_EducationContent
@@ -37549,7 +37751,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SexDescriptorId).HasColumnName(@"SexDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.EducationContentAppropriateSexes).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentAppropriateSex_EducationContent
@@ -37573,7 +37775,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.Author).HasColumnName(@"Author").HasColumnType("nvarchar").IsRequired().HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.EducationContentAuthors).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentAuthor_EducationContent
@@ -37596,7 +37798,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.DerivativeSourceContentIdentifier).HasColumnName(@"DerivativeSourceContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent_ContentIdentifier).WithMany(b => b.EducationContentDerivativeSourceEducationContents_ContentIdentifier).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentDerivativeSourceEducationContent_EducationContent
@@ -37620,7 +37822,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.DerivativeSourceLearningResourceMetadataUri).HasColumnName(@"DerivativeSourceLearningResourceMetadataURI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.EducationContentDerivativeSourceLearningResourceMetadataUris).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentDerivativeSourceLearningResourceMetadataURI_EducationContent
@@ -37643,7 +37845,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.DerivativeSourceUri).HasColumnName(@"DerivativeSourceURI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.EducationContentDerivativeSourceUris).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentDerivativeSourceURI_EducationContent
@@ -37666,7 +37868,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.EducationContentLanguages).HasForeignKey(c => c.ContentIdentifier); // FK_EducationContentLanguage_EducationContent
@@ -37694,8 +37896,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.WebSite).HasColumnName(@"WebSite").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.OperationalStatusDescriptorId).HasColumnName(@"OperationalStatusDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -37732,7 +37934,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.CongressionalDistrict).HasColumnName(@"CongressionalDistrict").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
             Property(x => x.LocaleDescriptorId).HasColumnName(@"LocaleDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.LocaleDescriptor).WithMany(b => b.EducationOrganizationAddresses).HasForeignKey(c => c.LocaleDescriptorId).WillCascadeOnDelete(false); // FK_EducationOrganizationAddress_LocaleDescriptor
@@ -37760,7 +37962,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationOrganizationAddress).WithMany(b => b.EducationOrganizationAddressPeriods).HasForeignKey(c => new { c.AddressTypeDescriptorId, c.EducationOrganizationId }); // FK_EducationOrganizationAddressPeriod_EducationOrganizationAddress
@@ -37783,7 +37985,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.EducationOrganizationCategoryDescriptorId).HasColumnName(@"EducationOrganizationCategoryDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationOrganization).WithMany(b => b.EducationOrganizationCategories).HasForeignKey(c => c.EducationOrganizationId); // FK_EducationOrganizationCategory_EducationOrganization
@@ -37829,7 +38031,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationIdentificationSystemDescriptorId).HasColumnName(@"EducationOrganizationIdentificationSystemDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationOrganization).WithMany(b => b.EducationOrganizationIdentificationCodes).HasForeignKey(c => c.EducationOrganizationId); // FK_EducationOrganizationIdentificationCode_EducationOrganization
@@ -38038,7 +38240,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InstitutionTelephoneNumberTypeDescriptorId).HasColumnName(@"InstitutionTelephoneNumberTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.TelephoneNumber).HasColumnName(@"TelephoneNumber").HasColumnType("nvarchar").IsRequired().HasMaxLength(24);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationOrganization).WithMany(b => b.EducationOrganizationInstitutionTelephones).HasForeignKey(c => c.EducationOrganizationId); // FK_EducationOrganizationInstitutionTelephone_EducationOrganization
@@ -38071,7 +38273,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Longitude).HasColumnName(@"Longitude").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AddressTypeDescriptor).WithMany(b => b.EducationOrganizationInternationalAddresses).HasForeignKey(c => c.AddressTypeDescriptorId).WillCascadeOnDelete(false); // FK_EducationOrganizationInternationalAddress_AddressTypeDescriptor
@@ -38100,8 +38302,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38152,8 +38354,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38179,8 +38381,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PeerEducationOrganizationId).HasColumnName(@"PeerEducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38455,8 +38657,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.FeederRelationshipDescription).HasColumnName(@"FeederRelationshipDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38489,8 +38691,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ReasonExitedDescriptorId).HasColumnName(@"ReasonExitedDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.ServedOutsideOfRegularSession).HasColumnName(@"ServedOutsideOfRegularSession").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38531,8 +38733,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DiagnosticStatement).HasColumnName(@"DiagnosticStatement").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.PerformanceBaseConversionDescriptorId).HasColumnName(@"PerformanceBaseConversionDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38569,8 +38771,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.GradingPeriodDescriptorId).HasColumnName(@"GradingPeriodDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.PeriodSequence).HasColumnName(@"PeriodSequence").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38603,7 +38805,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradebookEntry).WithMany(b => b.GradebookEntryLearningObjectives).HasForeignKey(c => new { c.DateAssigned, c.GradebookEntryTitle, c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SectionIdentifier, c.SessionName }); // FK_GradebookEntryLearningObjective_GradebookEntry
@@ -38633,7 +38835,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradebookEntry).WithMany(b => b.GradebookEntryLearningStandards).HasForeignKey(c => new { c.DateAssigned, c.GradebookEntryTitle, c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SectionIdentifier, c.SessionName }); // FK_GradebookEntryLearningStandard_GradebookEntry
@@ -38726,8 +38928,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsRequired();
             Property(x => x.TotalInstructionalDays).HasColumnName(@"TotalInstructionalDays").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38780,8 +38982,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.TotalRequiredCreditTypeDescriptorId).HasColumnName(@"TotalRequiredCreditTypeDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.TotalRequiredCreditConversion).HasColumnName(@"TotalRequiredCreditConversion").HasColumnType("decimal").IsOptional().HasPrecision(9,2);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -38814,7 +39016,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CreditTypeDescriptorId).HasColumnName(@"CreditTypeDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.CreditConversion).HasColumnName(@"CreditConversion").HasColumnType("decimal").IsOptional().HasPrecision(9,2);
             Property(x => x.WhenTakenGradeLevelDescriptorId).HasColumnName(@"WhenTakenGradeLevelDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CreditTypeDescriptor).WithMany(b => b.GraduationPlanCreditsByCourses).HasForeignKey(c => c.CreditTypeDescriptorId).WillCascadeOnDelete(false); // FK_GraduationPlanCreditsByCourse_CreditTypeDescriptor
@@ -38843,7 +39045,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GraduationPlanTypeDescriptorId).HasColumnName(@"GraduationPlanTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GraduationSchoolYear).HasColumnName(@"GraduationSchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Course).WithMany(b => b.GraduationPlanCreditsByCourseCourses).HasForeignKey(c => new { c.CourseCode, c.CourseEducationOrganizationId }).WillCascadeOnDelete(false); // FK_GraduationPlanCreditsByCourseCourse_Course
@@ -38872,7 +39074,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Credits).HasColumnName(@"Credits").HasColumnType("decimal").IsRequired().HasPrecision(9,3);
             Property(x => x.CreditTypeDescriptorId).HasColumnName(@"CreditTypeDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.CreditConversion).HasColumnName(@"CreditConversion").HasColumnType("decimal").IsOptional().HasPrecision(9,2);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CreditTypeDescriptor).WithMany(b => b.GraduationPlanCreditsBySubjects).HasForeignKey(c => c.CreditTypeDescriptorId).WillCascadeOnDelete(false); // FK_GraduationPlanCreditsBySubject_CreditTypeDescriptor
@@ -38900,7 +39102,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.GraduationPlanTypeDescriptorId).HasColumnName(@"GraduationPlanTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GraduationSchoolYear).HasColumnName(@"GraduationSchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Assessment).WithMany(b => b.GraduationPlanRequiredAssessments).HasForeignKey(c => new { c.AssessmentIdentifier, c.Namespace }).WillCascadeOnDelete(false); // FK_GraduationPlanRequiredAssessment_Assessment
@@ -38932,7 +39134,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinimumScore).HasColumnName(@"MinimumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.MaximumScore).HasColumnName(@"MaximumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResultDatatypeTypeDescriptor).WithMany(b => b.GraduationPlanRequiredAssessmentPerformanceLevels).HasForeignKey(c => c.ResultDatatypeTypeDescriptorId).WillCascadeOnDelete(false); // FK_GraduationPlanRequiredAssessmentPerformanceLevel_ResultDatatypeTypeDescriptor
@@ -38965,7 +39167,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinimumScore).HasColumnName(@"MinimumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.MaximumScore).HasColumnName(@"MaximumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResultDatatypeTypeDescriptor).WithMany(b => b.GraduationPlanRequiredAssessmentScores).HasForeignKey(c => c.ResultDatatypeTypeDescriptorId).WillCascadeOnDelete(false); // FK_GraduationPlanRequiredAssessmentScore_ResultDatatypeTypeDescriptor
@@ -38992,6 +39194,60 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             // Foreign keys
             HasRequired(a => a.Descriptor).WithOptional(b => b.GraduationPlanTypeDescriptor); // FK_GraduationPlanTypeDescriptor_Descriptor
+        }
+    }
+
+    // GroupMessagesLogChatLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class GroupMessagesLogChatLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<GroupMessagesLogChatLog>
+    {
+        public GroupMessagesLogChatLogConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public GroupMessagesLogChatLogConfiguration(string schema)
+        {
+            ToTable("GroupMessagesLogChatLog", schema);
+            HasKey(x => new { x.GroupMessagesLogId, x.ChatLogId, x.Status });
+
+            Property(x => x.GroupMessagesLogId).HasColumnName(@"GroupMessagesLogId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ChatLogId).HasColumnName(@"ChatLogId").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Status).HasColumnName(@"Status").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ErrorMessage).HasColumnName(@"ErrorMessage").HasColumnType("nvarchar").IsOptional().HasMaxLength(500);
+
+            // Foreign keys
+            HasRequired(a => a.GroupMessagesQueueLog).WithMany(b => b.GroupMessagesLogChatLogs).HasForeignKey(c => c.GroupMessagesLogId).WillCascadeOnDelete(false); // FK_GroupMessagesLogChatLog_GroupMessagesQueueLog
+        }
+    }
+
+    // GroupMessagesQueueLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class GroupMessagesQueueLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<GroupMessagesQueueLog>
+    {
+        public GroupMessagesQueueLogConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public GroupMessagesQueueLogConfiguration(string schema)
+        {
+            ToTable("GroupMessagesQueueLog", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Type).HasColumnName(@"Type").HasColumnType("nvarchar").IsRequired().HasMaxLength(20);
+            Property(x => x.QueuedDateTime).HasColumnName(@"QueuedDateTime").HasColumnType("datetime").IsRequired();
+            Property(x => x.StaffUniqueIdSent).HasColumnName(@"StaffUniqueIdSent").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired();
+            Property(x => x.Audience).HasColumnName(@"Audience").HasColumnType("nvarchar").IsOptional().HasMaxLength(1000);
+            Property(x => x.FilterParams).HasColumnName(@"FilterParams").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.Subject).HasColumnName(@"Subject").HasColumnType("nvarchar").IsRequired().HasMaxLength(250);
+            Property(x => x.Body).HasColumnName(@"Body").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.SentStatus).HasColumnName(@"SentStatus").HasColumnType("int").IsRequired();
+            Property(x => x.RetryCount).HasColumnName(@"RetryCount").HasColumnType("int").IsRequired();
+            Property(x => x.Data).HasColumnName(@"Data").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.DateSent).HasColumnName(@"DateSent").HasColumnType("datetime").IsOptional();
         }
     }
 
@@ -39186,8 +39442,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinDosage).HasColumnName(@"MinDosage").HasColumnType("int").IsOptional();
             Property(x => x.MaxDosage).HasColumnName(@"MaxDosage").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -39214,7 +39470,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.InterventionAppropriateGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_InterventionAppropriateGradeLevel_GradeLevelDescriptor
@@ -39239,7 +39495,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SexDescriptorId).HasColumnName(@"SexDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionAppropriateSexes).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionAppropriateSex_Intervention
@@ -39285,7 +39541,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DiagnosisDescriptorId).HasColumnName(@"DiagnosisDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DiagnosisDescriptor).WithMany(b => b.InterventionDiagnosis).HasForeignKey(c => c.DiagnosisDescriptorId).WillCascadeOnDelete(false); // FK_InterventionDiagnosis_DiagnosisDescriptor
@@ -39310,7 +39566,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.InterventionEducationContents).HasForeignKey(c => c.ContentIdentifier).WillCascadeOnDelete(false); // FK_InterventionEducationContent_EducationContent
@@ -39357,7 +39613,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionEducationOrganizationId).HasColumnName(@"InterventionPrescriptionEducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionInterventionPrescriptions).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionInterventionPrescription_Intervention
@@ -39382,7 +39638,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningResourceMetadataUri).HasColumnName(@"LearningResourceMetadataURI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionLearningResourceMetadataUris).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionLearningResourceMetadataURI_Intervention
@@ -39407,7 +39663,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndTime).HasColumnName(@"EndTime").HasColumnType("time").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StartTime).HasColumnName(@"StartTime").HasColumnType("time").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionMeetingTimes).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionMeetingTime_Intervention
@@ -39431,7 +39687,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PopulationServedDescriptorId).HasColumnName(@"PopulationServedDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionPopulationServeds).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionPopulationServed_Intervention
@@ -39460,8 +39716,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinDosage).HasColumnName(@"MinDosage").HasColumnType("int").IsOptional();
             Property(x => x.MaxDosage).HasColumnName(@"MaxDosage").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -39488,7 +39744,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.InterventionPrescriptionAppropriateGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_InterventionPrescriptionAppropriateGradeLevel_GradeLevelDescriptor
@@ -39513,7 +39769,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SexDescriptorId).HasColumnName(@"SexDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionPrescription).WithMany(b => b.InterventionPrescriptionAppropriateSexes).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionPrescriptionIdentificationCode }); // FK_InterventionPrescriptionAppropriateSex_InterventionPrescription
@@ -39538,7 +39794,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DiagnosisDescriptorId).HasColumnName(@"DiagnosisDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DiagnosisDescriptor).WithMany(b => b.InterventionPrescriptionDiagnosis).HasForeignKey(c => c.DiagnosisDescriptorId).WillCascadeOnDelete(false); // FK_InterventionPrescriptionDiagnosis_DiagnosisDescriptor
@@ -39563,7 +39819,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.InterventionPrescriptionEducationContents).HasForeignKey(c => c.ContentIdentifier).WillCascadeOnDelete(false); // FK_InterventionPrescriptionEducationContent_EducationContent
@@ -39588,7 +39844,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningResourceMetadataUri).HasColumnName(@"LearningResourceMetadataURI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionPrescription).WithMany(b => b.InterventionPrescriptionLearningResourceMetadataUris).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionPrescriptionIdentificationCode }); // FK_InterventionPrescriptionLearningResourceMetadataURI_InterventionPrescription
@@ -39612,7 +39868,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PopulationServedDescriptorId).HasColumnName(@"PopulationServedDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionPrescription).WithMany(b => b.InterventionPrescriptionPopulationServeds).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionPrescriptionIdentificationCode }); // FK_InterventionPrescriptionPopulationServed_InterventionPrescription
@@ -39637,7 +39893,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionPrescriptionIdentificationCode).HasColumnName(@"InterventionPrescriptionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Uri).HasColumnName(@"URI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionPrescription).WithMany(b => b.InterventionPrescriptionUris).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionPrescriptionIdentificationCode }); // FK_InterventionPrescriptionURI_InterventionPrescription
@@ -39661,7 +39917,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionStaffs).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionStaff_Intervention
@@ -39691,8 +39947,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DeliveryMethodDescriptorId).HasColumnName(@"DeliveryMethodDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.InterventionClassDescriptorId).HasColumnName(@"InterventionClassDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -39720,7 +39976,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.InterventionStudyAppropriateGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_InterventionStudyAppropriateGradeLevel_GradeLevelDescriptor
@@ -39745,7 +40001,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SexDescriptorId).HasColumnName(@"SexDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionStudy).WithMany(b => b.InterventionStudyAppropriateSexes).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionStudyIdentificationCode }); // FK_InterventionStudyAppropriateSex_InterventionStudy
@@ -39770,7 +40026,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ContentIdentifier).HasColumnName(@"ContentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(225).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationContent).WithMany(b => b.InterventionStudyEducationContents).HasForeignKey(c => c.ContentIdentifier).WillCascadeOnDelete(false); // FK_InterventionStudyEducationContent_EducationContent
@@ -39799,7 +40055,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PopulationServedDescriptorId).HasColumnName(@"PopulationServedDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ImprovementIndex).HasColumnName(@"ImprovementIndex").HasColumnType("int").IsOptional();
             Property(x => x.InterventionEffectivenessRatingDescriptorId).HasColumnName(@"InterventionEffectivenessRatingDescriptorId").HasColumnType("int").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DiagnosisDescriptor).WithMany(b => b.InterventionStudyInterventionEffectivenesses).HasForeignKey(c => c.DiagnosisDescriptorId).WillCascadeOnDelete(false); // FK_InterventionStudyInterventionEffectiveness_DiagnosisDescriptor
@@ -39827,7 +40083,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningResourceMetadataUri).HasColumnName(@"LearningResourceMetadataURI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionStudy).WithMany(b => b.InterventionStudyLearningResourceMetadataUris).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionStudyIdentificationCode }); // FK_InterventionStudyLearningResourceMetadataURI_InterventionStudy
@@ -39851,7 +40107,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PopulationServedDescriptorId).HasColumnName(@"PopulationServedDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionStudy).WithMany(b => b.InterventionStudyPopulationServeds).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionStudyIdentificationCode }); // FK_InterventionStudyPopulationServed_InterventionStudy
@@ -39876,7 +40132,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateAbbreviationDescriptorId).HasColumnName(@"StateAbbreviationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionStudy).WithMany(b => b.InterventionStudyStateAbbreviations).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionStudyIdentificationCode }); // FK_InterventionStudyStateAbbreviation_InterventionStudy
@@ -39901,7 +40157,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionStudyIdentificationCode).HasColumnName(@"InterventionStudyIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Uri).HasColumnName(@"URI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.InterventionStudy).WithMany(b => b.InterventionStudyUris).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionStudyIdentificationCode }); // FK_InterventionStudyURI_InterventionStudy
@@ -39925,7 +40181,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.InterventionIdentificationCode).HasColumnName(@"InterventionIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Uri).HasColumnName(@"URI").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Intervention).WithMany(b => b.InterventionUris).HasForeignKey(c => new { c.EducationOrganizationId, c.InterventionIdentificationCode }); // FK_InterventionURI_Intervention
@@ -40018,8 +40274,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ParentLearningObjectiveId).HasColumnName(@"ParentLearningObjectiveId").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.ParentNamespace).HasColumnName(@"ParentNamespace").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -40044,7 +40300,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AcademicSubjectDescriptorId).HasColumnName(@"AcademicSubjectDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicSubjectDescriptor).WithMany(b => b.LearningObjectiveAcademicSubjects).HasForeignKey(c => c.AcademicSubjectDescriptorId).WillCascadeOnDelete(false); // FK_LearningObjectiveAcademicSubject_AcademicSubjectDescriptor
@@ -40077,7 +40333,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MandatingEducationOrganizationId).HasColumnName(@"MandatingEducationOrganizationId").HasColumnType("int").IsOptional();
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.EducationOrganization).WithMany(b => b.LearningObjectiveContentStandards).HasForeignKey(c => c.MandatingEducationOrganizationId).WillCascadeOnDelete(false); // FK_LearningObjectiveContentStandard_EducationOrganization
@@ -40103,7 +40359,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Author).HasColumnName(@"Author").HasColumnType("nvarchar").IsRequired().HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningObjectiveContentStandard).WithMany(b => b.LearningObjectiveContentStandardAuthors).HasForeignKey(c => new { c.LearningObjectiveId, c.Namespace }); // FK_LearningObjectiveContentStandardAuthor_LearningObjectiveContentStandard
@@ -40127,7 +40383,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.LearningObjectiveGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_LearningObjectiveGradeLevel_GradeLevelDescriptor
@@ -40152,7 +40408,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningObjective).WithMany(b => b.LearningObjectiveLearningStandards).HasForeignKey(c => new { c.LearningObjectiveId, c.Namespace }); // FK_LearningObjectiveLearningStandard_LearningObjective
@@ -40184,8 +40440,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255);
             Property(x => x.LearningStandardCategoryDescriptorId).HasColumnName(@"LearningStandardCategoryDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -40210,7 +40466,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.AcademicSubjectDescriptorId).HasColumnName(@"AcademicSubjectDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicSubjectDescriptor).WithMany(b => b.LearningStandardAcademicSubjects).HasForeignKey(c => c.AcademicSubjectDescriptorId).WillCascadeOnDelete(false); // FK_LearningStandardAcademicSubject_AcademicSubjectDescriptor
@@ -40263,7 +40519,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MandatingEducationOrganizationId).HasColumnName(@"MandatingEducationOrganizationId").HasColumnType("int").IsOptional();
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.EducationOrganization).WithMany(b => b.LearningStandardContentStandards).HasForeignKey(c => c.MandatingEducationOrganizationId).WillCascadeOnDelete(false); // FK_LearningStandardContentStandard_EducationOrganization
@@ -40288,7 +40544,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.Author).HasColumnName(@"Author").HasColumnType("nvarchar").IsRequired().HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningStandardContentStandard).WithMany(b => b.LearningStandardContentStandardAuthors).HasForeignKey(c => c.LearningStandardId); // FK_LearningStandardContentStandardAuthor_LearningStandardContentStandard
@@ -40311,7 +40567,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.LearningStandardGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_LearningStandardGradeLevel_GradeLevelDescriptor
@@ -40336,7 +40592,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ContentStandardName).HasColumnName(@"ContentStandardName").HasColumnType("nvarchar").IsRequired().HasMaxLength(65).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningStandard).WithMany(b => b.LearningStandardIdentificationCodes).HasForeignKey(c => c.LearningStandardId); // FK_LearningStandardIdentificationCode_LearningStandard
@@ -40359,7 +40615,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PrerequisiteLearningStandardId).HasColumnName(@"PrerequisiteLearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningStandard_LearningStandardId).WithMany(b => b.LearningStandardPrerequisiteLearningStandards_LearningStandardId).HasForeignKey(c => c.LearningStandardId); // FK_LearningStandardPrerequisiteLearningStandard_LearningStandard
@@ -40540,7 +40796,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GunFreeSchoolsActReportingStatusDescriptorId).HasColumnName(@"GunFreeSchoolsActReportingStatusDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.SchoolChoiceImplementStatusDescriptorId).HasColumnName(@"SchoolChoiceImplementStatusDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.GunFreeSchoolsActReportingStatusDescriptor).WithMany(b => b.LocalEducationAgencyAccountabilities).HasForeignKey(c => c.GunFreeSchoolsActReportingStatusDescriptorId).WillCascadeOnDelete(false); // FK_LocalEducationAgencyAccountability_GunFreeSchoolsActReportingStatusDescriptor
@@ -40595,7 +40851,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SupplementalEducationalServicesFundsSpent).HasColumnName(@"SupplementalEducationalServicesFundsSpent").HasColumnType("money").IsOptional().HasPrecision(19,4);
             Property(x => x.SupplementalEducationalServicesPerPupilExpenditure).HasColumnName(@"SupplementalEducationalServicesPerPupilExpenditure").HasColumnType("money").IsOptional().HasPrecision(19,4);
             Property(x => x.StateAssessmentAdministrationFunding).HasColumnName(@"StateAssessmentAdministrationFunding").HasColumnType("decimal").IsOptional().HasPrecision(5,4);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LocalEducationAgency).WithMany(b => b.LocalEducationAgencyFederalFunds).HasForeignKey(c => c.LocalEducationAgencyId); // FK_LocalEducationAgencyFederalFunds_LocalEducationAgency
@@ -40725,12 +40981,35 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MaximumNumberOfSeats).HasColumnName(@"MaximumNumberOfSeats").HasColumnType("int").IsOptional();
             Property(x => x.OptimalNumberOfSeats).HasColumnName(@"OptimalNumberOfSeats").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.School).WithMany(b => b.Locations).HasForeignKey(c => c.SchoolId).WillCascadeOnDelete(false); // FK_Location_School
+        }
+    }
+
+    // Logs
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class LogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Log>
+    {
+        public LogConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public LogConfiguration(string schema)
+        {
+            ToTable("Logs", schema);
+            HasKey(x => x.LogId);
+
+            Property(x => x.LogId).HasColumnName(@"LogId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LogMessage).HasColumnName(@"LogMessage").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.LogType).HasColumnName(@"LogType").HasColumnType("nvarchar").IsRequired().HasMaxLength(450);
+            Property(x => x.DateTimeOfEvent).HasColumnName(@"DateTimeOfEvent").HasColumnType("datetime").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
         }
     }
 
@@ -40925,6 +41204,31 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // NotificationsToken
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class NotificationsTokenConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<NotificationsToken>
+    {
+        public NotificationsTokenConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public NotificationsTokenConfiguration(string schema)
+        {
+            ToTable("NotificationsToken", schema);
+            HasKey(x => x.NotificationTokenUsi);
+
+            Property(x => x.NotificationTokenUsi).HasColumnName(@"NotificationTokenUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PersonUniqueId).HasColumnName(@"PersonUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32);
+            Property(x => x.PersonType).HasColumnName(@"PersonType").HasColumnType("nvarchar").IsRequired().HasMaxLength(8);
+            Property(x => x.DeviceUuid).HasColumnName(@"DeviceUUID").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.Token).HasColumnName(@"Token").HasColumnType("nvarchar").IsRequired().HasMaxLength(500);
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
+        }
+    }
+
     // ObjectiveAssessment
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class ObjectiveAssessmentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ObjectiveAssessment>
@@ -40948,8 +41252,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.ParentIdentificationCode).HasColumnName(@"ParentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -40976,7 +41280,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AssessmentItemIdentificationCode).HasColumnName(@"AssessmentItemIdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentItem).WithMany(b => b.ObjectiveAssessmentAssessmentItems).HasForeignKey(c => new { c.AssessmentIdentifier, c.AssessmentItemIdentificationCode, c.Namespace }).WillCascadeOnDelete(false); // FK_ObjectiveAssessmentAssessmentItem_AssessmentItem
@@ -41003,7 +41307,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningObjectiveNamespace).HasColumnName(@"LearningObjectiveNamespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningObjective).WithMany(b => b.ObjectiveAssessmentLearningObjectives).HasForeignKey(c => new { c.LearningObjectiveId, c.LearningObjectiveNamespace }).WillCascadeOnDelete(false); // FK_ObjectiveAssessmentLearningObjective_LearningObjective
@@ -41029,7 +41333,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningStandard).WithMany(b => b.ObjectiveAssessmentLearningStandards).HasForeignKey(c => c.LearningStandardId).WillCascadeOnDelete(false); // FK_ObjectiveAssessmentLearningStandard_LearningStandard
@@ -41059,7 +41363,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinimumScore).HasColumnName(@"MinimumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.MaximumScore).HasColumnName(@"MaximumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResultDatatypeTypeDescriptor).WithMany(b => b.ObjectiveAssessmentPerformanceLevels).HasForeignKey(c => c.ResultDatatypeTypeDescriptorId).WillCascadeOnDelete(false); // FK_ObjectiveAssessmentPerformanceLevel_ResultDatatypeTypeDescriptor
@@ -41090,7 +41394,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MinimumScore).HasColumnName(@"MinimumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.MaximumScore).HasColumnName(@"MaximumScore").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResultDatatypeTypeDescriptor).WithMany(b => b.ObjectiveAssessmentScores).HasForeignKey(c => c.ResultDatatypeTypeDescriptorId).WillCascadeOnDelete(false); // FK_ObjectiveAssessmentScore_ResultDatatypeTypeDescriptor
@@ -41144,8 +41448,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DatePostingRemoved).HasColumnName(@"DatePostingRemoved").HasColumnType("date").IsOptional();
             Property(x => x.PostingResultDescriptorId).HasColumnName(@"PostingResultDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -41174,7 +41478,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AcademicSubjectDescriptorId).HasColumnName(@"AcademicSubjectDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RequisitionNumber).HasColumnName(@"RequisitionNumber").HasColumnType("nvarchar").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicSubjectDescriptor).WithMany(b => b.OpenStaffPositionAcademicSubjects).HasForeignKey(c => c.AcademicSubjectDescriptorId).WillCascadeOnDelete(false); // FK_OpenStaffPositionAcademicSubject_AcademicSubjectDescriptor
@@ -41199,7 +41503,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RequisitionNumber).HasColumnName(@"RequisitionNumber").HasColumnType("nvarchar").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.OpenStaffPositionInstructionalGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_OpenStaffPositionInstructionalGradeLevel_GradeLevelDescriptor
@@ -41342,8 +41646,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LoginId).HasColumnName(@"LoginId").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.ParentUniqueId).HasColumnName(@"ParentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -41380,7 +41684,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.CongressionalDistrict).HasColumnName(@"CongressionalDistrict").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
             Property(x => x.LocaleDescriptorId).HasColumnName(@"LocaleDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.LocaleDescriptor).WithMany(b => b.ParentAddresses).HasForeignKey(c => c.LocaleDescriptorId).WillCascadeOnDelete(false); // FK_ParentAddress_LocaleDescriptor
@@ -41408,7 +41712,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ParentUsi).HasColumnName(@"ParentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ParentAddress).WithMany(b => b.ParentAddressPeriods).HasForeignKey(c => new { c.AddressTypeDescriptorId, c.ParentUsi }); // FK_ParentAddressPeriod_ParentAddress
@@ -41460,6 +41764,38 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // ParentChatRecipients
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class ParentChatRecipientConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ParentChatRecipient>
+    {
+        public ParentChatRecipientConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public ParentChatRecipientConfiguration(string schema)
+        {
+            ToTable("ParentChatRecipients", schema);
+            HasKey(x => new { x.StudentUsi, x.StudentUniqueId, x.StudentFirstName, x.StudentLastSurname, x.StaffUsi, x.StaffUniqueId, x.FirstName, x.LastSurname, x.BeginDate, x.EndDate });
+
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentUniqueId).HasColumnName(@"StudentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentFirstName).HasColumnName(@"StudentFirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentMiddleName).HasColumnName(@"StudentMiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
+            Property(x => x.StudentLastSurname).HasColumnName(@"StudentLastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.RelationsToStudent).HasColumnName(@"RelationsToStudent").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
+            Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StaffUniqueId).HasColumnName(@"StaffUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.FirstName).HasColumnName(@"FirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.LastSurname).HasColumnName(@"LastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ReplyExpectations).HasColumnName(@"ReplyExpectations").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
+            Property(x => x.MostRecentMessageDate).HasColumnName(@"MostRecentMessageDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.UnreadMessageCount).HasColumnName(@"UnreadMessageCount").HasColumnType("int").IsOptional();
+            Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
     // ParentElectronicMail
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class ParentElectronicMailConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ParentElectronicMail>
@@ -41479,7 +41815,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ElectronicMailAddress).HasColumnName(@"ElectronicMailAddress").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.PrimaryEmailAddressIndicator).HasColumnName(@"PrimaryEmailAddressIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ElectronicMailTypeDescriptor).WithMany(b => b.ParentElectronicMails).HasForeignKey(c => c.ElectronicMailTypeDescriptorId).WillCascadeOnDelete(false); // FK_ParentElectronicMail_ElectronicMailTypeDescriptor
@@ -41512,7 +41848,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Longitude).HasColumnName(@"Longitude").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AddressTypeDescriptor).WithMany(b => b.ParentInternationalAddresses).HasForeignKey(c => c.AddressTypeDescriptorId).WillCascadeOnDelete(false); // FK_ParentInternationalAddress_AddressTypeDescriptor
@@ -41537,7 +41873,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ParentUsi).HasColumnName(@"ParentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageDescriptor).WithMany(b => b.ParentLanguages).HasForeignKey(c => c.LanguageDescriptorId).WillCascadeOnDelete(false); // FK_ParentLanguage_LanguageDescriptor
@@ -41562,7 +41898,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LanguageUseDescriptorId).HasColumnName(@"LanguageUseDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ParentUsi).HasColumnName(@"ParentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageUseDescriptor).WithMany(b => b.ParentLanguageUses).HasForeignKey(c => c.LanguageUseDescriptorId).WillCascadeOnDelete(false); // FK_ParentLanguageUse_LanguageUseDescriptor
@@ -41591,7 +41927,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MiddleName).HasColumnName(@"MiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
             Property(x => x.LastSurname).HasColumnName(@"LastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75);
             Property(x => x.GenerationCodeSuffix).HasColumnName(@"GenerationCodeSuffix").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.OtherNameTypeDescriptor).WithMany(b => b.ParentOtherNames).HasForeignKey(c => c.OtherNameTypeDescriptorId).WillCascadeOnDelete(false); // FK_ParentOtherName_OtherNameTypeDescriptor
@@ -41621,13 +41957,42 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IssuerDocumentIdentificationCode).HasColumnName(@"IssuerDocumentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.IssuerName).HasColumnName(@"IssuerName").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.IssuerCountryDescriptorId).HasColumnName(@"IssuerCountryDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CountryDescriptor).WithMany(b => b.ParentPersonalIdentificationDocuments).HasForeignKey(c => c.IssuerCountryDescriptorId).WillCascadeOnDelete(false); // FK_ParentPersonalIdentificationDocument_CountryDescriptor
             HasRequired(a => a.IdentificationDocumentUseDescriptor).WithMany(b => b.ParentPersonalIdentificationDocuments).HasForeignKey(c => c.IdentificationDocumentUseDescriptorId).WillCascadeOnDelete(false); // FK_ParentPersonalIdentificationDocument_IdentificationDocumentUseDescriptor
             HasRequired(a => a.Parent).WithMany(b => b.ParentPersonalIdentificationDocuments).HasForeignKey(c => c.ParentUsi); // FK_ParentPersonalIdentificationDocument_Parent
             HasRequired(a => a.PersonalInformationVerificationDescriptor).WithMany(b => b.ParentPersonalIdentificationDocuments).HasForeignKey(c => c.PersonalInformationVerificationDescriptorId).WillCascadeOnDelete(false); // FK_ParentPersonalIdentificationDocument_PersonalInformationVerificationDescriptor
+        }
+    }
+
+    // ParentPrincipalsChatRecipients
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class ParentPrincipalsChatRecipientConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ParentPrincipalsChatRecipient>
+    {
+        public ParentPrincipalsChatRecipientConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public ParentPrincipalsChatRecipientConfiguration(string schema)
+        {
+            ToTable("ParentPrincipalsChatRecipients", schema);
+            HasKey(x => new { x.StudentUsi, x.StudentUniqueId, x.StudentFirstName, x.StudentLastSurname, x.StaffUsi, x.StaffUniqueId, x.StaffFirstName, x.StaffLastSurname });
+
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentUniqueId).HasColumnName(@"StudentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentFirstName).HasColumnName(@"StudentFirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentMiddleName).HasColumnName(@"StudentMiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
+            Property(x => x.StudentLastSurname).HasColumnName(@"StudentLastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StaffUniqueId).HasColumnName(@"StaffUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StaffFirstName).HasColumnName(@"StaffFirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StaffLastSurname).HasColumnName(@"StaffLastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.RelationsToStudent).HasColumnName(@"RelationsToStudent").HasColumnType("nvarchar").IsOptional().HasMaxLength(100);
+            Property(x => x.MostRecentMessageDate).HasColumnName(@"MostRecentMessageDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.UnreadMessageCount).HasColumnName(@"UnreadMessageCount").HasColumnType("int").IsOptional();
         }
     }
 
@@ -41770,7 +42135,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.OrderOfPriority).HasColumnName(@"OrderOfPriority").HasColumnType("int").IsOptional();
             Property(x => x.TextMessageCapabilityIndicator).HasColumnName(@"TextMessageCapabilityIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Parent).WithMany(b => b.ParentTelephones).HasForeignKey(c => c.ParentUsi); // FK_ParentTelephone_Parent
@@ -41861,8 +42226,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.AmountToDate).HasColumnName(@"AmountToDate").HasColumnType("money").IsRequired().HasPrecision(19,4);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -41995,8 +42360,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PostSecondaryInstitutionId).HasColumnName(@"PostSecondaryInstitutionId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -42089,7 +42454,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.MediumOfInstructionDescriptorId).HasColumnName(@"MediumOfInstructionDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PostSecondaryInstitutionId).HasColumnName(@"PostSecondaryInstitutionId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.MediumOfInstructionDescriptor).WithMany(b => b.PostSecondaryInstitutionMediumOfInstructions).HasForeignKey(c => c.MediumOfInstructionDescriptorId).WillCascadeOnDelete(false); // FK_PostSecondaryInstitutionMediumOfInstruction_MediumOfInstructionDescriptor
@@ -42137,8 +42502,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramId).HasColumnName(@"ProgramId").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -42186,7 +42551,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramCharacteristicDescriptorId).HasColumnName(@"ProgramCharacteristicDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Program).WithMany(b => b.ProgramCharacteristics).HasForeignKey(c => new { c.EducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId }); // FK_ProgramCharacteristic_Program
@@ -42234,7 +42599,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningObjective).WithMany(b => b.ProgramLearningObjectives).HasForeignKey(c => new { c.LearningObjectiveId, c.Namespace }).WillCascadeOnDelete(false); // FK_ProgramLearningObjective_LearningObjective
@@ -42260,7 +42625,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LearningStandardId).HasColumnName(@"LearningStandardId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LearningStandard).WithMany(b => b.ProgramLearningStandards).HasForeignKey(c => c.LearningStandardId).WillCascadeOnDelete(false); // FK_ProgramLearningStandard_LearningStandard
@@ -42286,7 +42651,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ServiceDescriptorId).HasColumnName(@"ServiceDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Program).WithMany(b => b.ProgramServices).HasForeignKey(c => new { c.EducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId }); // FK_ProgramService_Program
@@ -42312,7 +42677,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramSponsorDescriptorId).HasColumnName(@"ProgramSponsorDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Program).WithMany(b => b.ProgramSponsors).HasForeignKey(c => new { c.EducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId }); // FK_ProgramSponsor_Program
@@ -42640,8 +43005,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.NumberOfDaysInAttendance).HasColumnName(@"NumberOfDaysInAttendance").HasColumnType("decimal").IsOptional().HasPrecision(18,4);
             Property(x => x.NumberOfDaysTardy).HasColumnName(@"NumberOfDaysTardy").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -42678,7 +43043,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Grade).WithMany(b => b.ReportCardGrades).HasForeignKey(c => new { c.BeginDate, c.GradeTypeDescriptorId, c.GradingPeriodDescriptorId, c.GradingPeriodSchoolYear, c.GradingPeriodSequence, c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SectionIdentifier, c.SessionName, c.StudentUsi }).WillCascadeOnDelete(false); // FK_ReportCardGrade_Grade
@@ -42709,7 +43074,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ObjectiveEducationOrganizationId).HasColumnName(@"ObjectiveEducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ObjectiveGradeLevelDescriptorId).HasColumnName(@"ObjectiveGradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ReportCard).WithMany(b => b.ReportCardStudentCompetencyObjectives).HasForeignKey(c => new { c.EducationOrganizationId, c.GradingPeriodDescriptorId, c.GradingPeriodSchoolId, c.GradingPeriodSchoolYear, c.GradingPeriodSequence, c.StudentUsi }); // FK_ReportCardStudentCompetencyObjective_ReportCard
@@ -42739,7 +43104,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LearningObjectiveId).HasColumnName(@"LearningObjectiveId").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ReportCard).WithMany(b => b.ReportCardStudentLearningObjectives).HasForeignKey(c => new { c.EducationOrganizationId, c.GradingPeriodDescriptorId, c.GradingPeriodSchoolId, c.GradingPeriodSchoolYear, c.GradingPeriodSequence, c.StudentUsi }); // FK_ReportCardStudentLearningObjective_ReportCard
@@ -42851,8 +43216,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EventDate).HasColumnName(@"EventDate").HasColumnType("date").IsRequired();
             Property(x => x.EducationalEnvironmentDescriptorId).HasColumnName(@"EducationalEnvironmentDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -42882,7 +43247,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.RestraintEventIdentifier).HasColumnName(@"RestraintEventIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Program).WithMany(b => b.RestraintEventPrograms).HasForeignKey(c => new { c.EducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId }).WillCascadeOnDelete(false); // FK_RestraintEventProgram_Program
@@ -42908,7 +43273,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.RestraintEventReasonDescriptorId).HasColumnName(@"RestraintEventReasonDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.RestraintEvent).WithMany(b => b.RestraintEventReasons).HasForeignKey(c => new { c.RestraintEventIdentifier, c.SchoolId, c.StudentUsi }); // FK_RestraintEventReason_RestraintEvent
@@ -43054,7 +43419,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.SchoolCategoryDescriptorId).HasColumnName(@"SchoolCategoryDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.School).WithMany(b => b.SchoolCategories).HasForeignKey(c => c.SchoolId); // FK_SchoolCategory_School
@@ -43141,7 +43506,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.GradeLevelDescriptorId).HasColumnName(@"GradeLevelDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.SchoolGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_SchoolGradeLevel_GradeLevelDescriptor
@@ -43248,8 +43613,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYearDescription).HasColumnName(@"SchoolYearDescription").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
             Property(x => x.CurrentSchoolYear).HasColumnName(@"CurrentSchoolYear").HasColumnType("bit").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
         }
     }
@@ -43284,8 +43649,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LocationSchoolId).HasColumnName(@"LocationSchoolId").HasColumnType("int").IsOptional();
             Property(x => x.LocationClassroomIdentificationCode).HasColumnName(@"LocationClassroomIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -43324,8 +43689,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EventDate).HasColumnName(@"EventDate").HasColumnType("date").IsRequired();
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -43355,7 +43720,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SectionCharacteristicDescriptorId).HasColumnName(@"SectionCharacteristicDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Section).WithMany(b => b.SectionCharacteristics).HasForeignKey(c => new { c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SectionIdentifier, c.SessionName }); // FK_SectionCharacteristic_Section
@@ -43404,7 +43769,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ClassPeriod).WithMany(b => b.SectionClassPeriods).HasForeignKey(c => new { c.ClassPeriodName, c.SchoolId }).WillCascadeOnDelete(false); // FK_SectionClassPeriod_ClassPeriod
@@ -43432,7 +43797,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CourseLevelCharacteristicDescriptor).WithMany(b => b.SectionCourseLevelCharacteristics).HasForeignKey(c => c.CourseLevelCharacteristicDescriptorId).WillCascadeOnDelete(false); // FK_SectionCourseLevelCharacteristic_CourseLevelCharacteristicDescriptor
@@ -43460,7 +43825,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.SectionOfferedGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_SectionOfferedGradeLevel_GradeLevelDescriptor
@@ -43490,7 +43855,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Program).WithMany(b => b.SectionPrograms).HasForeignKey(c => new { c.EducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId }).WillCascadeOnDelete(false); // FK_SectionProgram_Program
@@ -43583,8 +43948,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.TermDescriptorId).HasColumnName(@"TermDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.TotalInstructionalDays).HasColumnName(@"TotalInstructionalDays").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -43612,7 +43977,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.WeekIdentifier).HasColumnName(@"WeekIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(80).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicWeek).WithMany(b => b.SessionAcademicWeeks).HasForeignKey(c => new { c.SchoolId, c.WeekIdentifier }).WillCascadeOnDelete(false); // FK_SessionAcademicWeek_AcademicWeek
@@ -43639,7 +44004,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradingPeriod).WithMany(b => b.SessionGradingPeriods).HasForeignKey(c => new { c.GradingPeriodDescriptorId, c.PeriodSequence, c.SchoolId, c.SchoolYear }).WillCascadeOnDelete(false); // FK_SessionGradingPeriod_GradingPeriod
@@ -43766,8 +44131,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.HighlyQualifiedTeacher).HasColumnName(@"HighlyQualifiedTeacher").HasColumnType("bit").IsOptional();
             Property(x => x.StaffUniqueId).HasColumnName(@"StaffUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -43798,8 +44163,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AbsenceEventReason).HasColumnName(@"AbsenceEventReason").HasColumnType("nvarchar").IsOptional().HasMaxLength(40);
             Property(x => x.HoursAbsent).HasColumnName(@"HoursAbsent").HasColumnType("decimal").IsOptional().HasPrecision(18,2);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -43837,7 +44202,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.CongressionalDistrict).HasColumnName(@"CongressionalDistrict").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
             Property(x => x.LocaleDescriptorId).HasColumnName(@"LocaleDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.LocaleDescriptor).WithMany(b => b.StaffAddresses).HasForeignKey(c => c.LocaleDescriptorId).WillCascadeOnDelete(false); // FK_StaffAddress_LocaleDescriptor
@@ -43865,7 +44230,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StaffAddress).WithMany(b => b.StaffAddressPeriods).HasForeignKey(c => new { c.AddressTypeDescriptorId, c.StaffUsi }); // FK_StaffAddressPeriod_StaffAddress
@@ -43894,6 +44259,40 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
+        }
+    }
+
+    // StaffChatRecipients
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StaffChatRecipientConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StaffChatRecipient>
+    {
+        public StaffChatRecipientConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public StaffChatRecipientConfiguration(string schema)
+        {
+            ToTable("StaffChatRecipients", schema);
+            HasKey(x => new { x.StudentUsi, x.StudentUniqueId, x.StudentFirstName, x.StudentLastSurname, x.StaffUniqueId, x.BeginDate, x.EndDate });
+
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentUniqueId).HasColumnName(@"StudentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentFirstName).HasColumnName(@"StudentFirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.StudentMiddleName).HasColumnName(@"StudentMiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
+            Property(x => x.StudentLastSurname).HasColumnName(@"StudentLastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ParentUsi).HasColumnName(@"ParentUSI").HasColumnType("int").IsOptional();
+            Property(x => x.ParentUniqueId).HasColumnName(@"ParentUniqueId").HasColumnType("nvarchar").IsOptional().HasMaxLength(32);
+            Property(x => x.ParentFirstName).HasColumnName(@"ParentFirstName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
+            Property(x => x.ParentLastSurname).HasColumnName(@"ParentLastSurname").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
+            Property(x => x.LocalCourseTitle).HasColumnName(@"LocalCourseTitle").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
+            Property(x => x.MostRecentMessageDate).HasColumnName(@"MostRecentMessageDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.UnreadMessageCount).HasColumnName(@"UnreadMessageCount").HasColumnType("int").IsOptional();
+            Property(x => x.StaffUniqueId).HasColumnName(@"StaffUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ReplyExpectations).HasColumnName(@"ReplyExpectations").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
+            Property(x => x.LanguageCode).HasColumnName(@"LanguageCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
         }
     }
 
@@ -43939,8 +44338,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.StudentRecordAccess).HasColumnName(@"StudentRecordAccess").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -43966,7 +44365,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CredentialIdentifier).HasColumnName(@"CredentialIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateOfIssueStateAbbreviationDescriptorId).HasColumnName(@"StateOfIssueStateAbbreviationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Credential).WithMany(b => b.StaffCredentials).HasForeignKey(c => new { c.CredentialIdentifier, c.StateOfIssueStateAbbreviationDescriptorId }).WillCascadeOnDelete(false); // FK_StaffCredential_Credential
@@ -44001,8 +44400,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CredentialIdentifier).HasColumnName(@"CredentialIdentifier").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.StateOfIssueStateAbbreviationDescriptorId).HasColumnName(@"StateOfIssueStateAbbreviationDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44034,8 +44433,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ContactTypeDescriptorId).HasColumnName(@"ContactTypeDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.ElectronicMailAddress).HasColumnName(@"ElectronicMailAddress").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44076,7 +44475,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.CongressionalDistrict).HasColumnName(@"CongressionalDistrict").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
             Property(x => x.LocaleDescriptorId).HasColumnName(@"LocaleDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.LocaleDescriptor).WithMany(b => b.StaffEducationOrganizationContactAssociationAddresses).HasForeignKey(c => c.LocaleDescriptorId).WillCascadeOnDelete(false); // FK_StaffEducationOrganizationContactAssociationAddress_LocaleDescriptor
@@ -44105,7 +44504,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StaffEducationOrganizationContactAssociationAddress).WithMany(b => b.StaffEducationOrganizationContactAssociationAddressPeriods).HasForeignKey(c => new { c.ContactTitle, c.EducationOrganizationId, c.StaffUsi }); // FK_StaffEducationOrganizationContactAssociationAddressPeriod_StaffEducationOrganizationContactAssociationAddress
@@ -44134,7 +44533,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.OrderOfPriority).HasColumnName(@"OrderOfPriority").HasColumnType("int").IsOptional();
             Property(x => x.TextMessageCapabilityIndicator).HasColumnName(@"TextMessageCapabilityIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StaffEducationOrganizationContactAssociation).WithMany(b => b.StaffEducationOrganizationContactAssociationTelephones).HasForeignKey(c => new { c.ContactTitle, c.EducationOrganizationId, c.StaffUsi }); // FK_StaffEducationOrganizationContactAssociationTelephone_StaffEducationOrganizationContactAssociation
@@ -44170,8 +44569,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CredentialIdentifier).HasColumnName(@"CredentialIdentifier").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.StateOfIssueStateAbbreviationDescriptorId).HasColumnName(@"StateOfIssueStateAbbreviationDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44203,7 +44602,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ElectronicMailAddress).HasColumnName(@"ElectronicMailAddress").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.PrimaryEmailAddressIndicator).HasColumnName(@"PrimaryEmailAddressIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ElectronicMailTypeDescriptor).WithMany(b => b.StaffElectronicMails).HasForeignKey(c => c.ElectronicMailTypeDescriptorId).WillCascadeOnDelete(false); // FK_StaffElectronicMail_ElectronicMailTypeDescriptor
@@ -44229,7 +44628,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60);
             Property(x => x.AssigningOrganizationIdentificationCode).HasColumnName(@"AssigningOrganizationIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Staff).WithMany(b => b.StaffIdentificationCodes).HasForeignKey(c => c.StaffUsi); // FK_StaffIdentificationCode_Staff
@@ -44259,7 +44658,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IssuerDocumentIdentificationCode).HasColumnName(@"IssuerDocumentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.IssuerName).HasColumnName(@"IssuerName").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.IssuerCountryDescriptorId).HasColumnName(@"IssuerCountryDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CountryDescriptor).WithMany(b => b.StaffIdentificationDocuments).HasForeignKey(c => c.IssuerCountryDescriptorId).WillCascadeOnDelete(false); // FK_StaffIdentificationDocument_CountryDescriptor
@@ -44315,7 +44714,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Longitude).HasColumnName(@"Longitude").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AddressTypeDescriptor).WithMany(b => b.StaffInternationalAddresses).HasForeignKey(c => c.AddressTypeDescriptorId).WillCascadeOnDelete(false); // FK_StaffInternationalAddress_AddressTypeDescriptor
@@ -44340,7 +44739,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageDescriptor).WithMany(b => b.StaffLanguages).HasForeignKey(c => c.LanguageDescriptorId).WillCascadeOnDelete(false); // FK_StaffLanguage_LanguageDescriptor
@@ -44365,7 +44764,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LanguageUseDescriptorId).HasColumnName(@"LanguageUseDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageUseDescriptor).WithMany(b => b.StaffLanguageUses).HasForeignKey(c => c.LanguageUseDescriptorId).WillCascadeOnDelete(false); // FK_StaffLanguageUse_LanguageUseDescriptor
@@ -44394,8 +44793,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Reason).HasColumnName(@"Reason").HasColumnType("nvarchar").IsOptional().HasMaxLength(40);
             Property(x => x.SubstituteAssigned).HasColumnName(@"SubstituteAssigned").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44446,7 +44845,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MiddleName).HasColumnName(@"MiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
             Property(x => x.LastSurname).HasColumnName(@"LastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75);
             Property(x => x.GenerationCodeSuffix).HasColumnName(@"GenerationCodeSuffix").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.OtherNameTypeDescriptor).WithMany(b => b.StaffOtherNames).HasForeignKey(c => c.OtherNameTypeDescriptorId).WillCascadeOnDelete(false); // FK_StaffOtherName_OtherNameTypeDescriptor
@@ -44476,7 +44875,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IssuerDocumentIdentificationCode).HasColumnName(@"IssuerDocumentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.IssuerName).HasColumnName(@"IssuerName").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.IssuerCountryDescriptorId).HasColumnName(@"IssuerCountryDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CountryDescriptor).WithMany(b => b.StaffPersonalIdentificationDocuments).HasForeignKey(c => c.IssuerCountryDescriptorId).WillCascadeOnDelete(false); // FK_StaffPersonalIdentificationDocument_CountryDescriptor
@@ -44627,8 +45026,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.StudentRecordAccess).HasColumnName(@"StudentRecordAccess").HasColumnType("bit").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44653,7 +45052,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.RaceDescriptorId).HasColumnName(@"RaceDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.RaceDescriptor).WithMany(b => b.StaffRaces).HasForeignKey(c => c.RaceDescriptorId).WillCascadeOnDelete(false); // FK_StaffRace_RaceDescriptor
@@ -44689,7 +45088,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.RecognitionDescription).HasColumnName(@"RecognitionDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(80);
             Property(x => x.RecognitionAwardDate).HasColumnName(@"RecognitionAwardDate").HasColumnType("date").IsOptional();
             Property(x => x.RecognitionAwardExpiresDate).HasColumnName(@"RecognitionAwardExpiresDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.AchievementCategoryDescriptor).WithMany(b => b.StaffRecognitions).HasForeignKey(c => c.AchievementCategoryDescriptorId).WillCascadeOnDelete(false); // FK_StaffRecognition_AchievementCategoryDescriptor
@@ -44718,8 +45117,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CalendarCode).HasColumnName(@"CalendarCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44749,7 +45148,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramAssignmentDescriptorId).HasColumnName(@"ProgramAssignmentDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AcademicSubjectDescriptor).WithMany(b => b.StaffSchoolAssociationAcademicSubjects).HasForeignKey(c => c.AcademicSubjectDescriptorId).WillCascadeOnDelete(false); // FK_StaffSchoolAssociationAcademicSubject_AcademicSubjectDescriptor
@@ -44775,7 +45174,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramAssignmentDescriptorId).HasColumnName(@"ProgramAssignmentDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GradeLevelDescriptor).WithMany(b => b.StaffSchoolAssociationGradeLevels).HasForeignKey(c => c.GradeLevelDescriptorId).WillCascadeOnDelete(false); // FK_StaffSchoolAssociationGradeLevel_GradeLevelDescriptor
@@ -44810,8 +45209,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.TeacherStudentDataLinkExclusion).HasColumnName(@"TeacherStudentDataLinkExclusion").HasColumnType("bit").IsOptional();
             Property(x => x.PercentageContribution).HasColumnName(@"PercentageContribution").HasColumnType("decimal").IsOptional().HasPrecision(5,4);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -44841,7 +45240,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.OrderOfPriority).HasColumnName(@"OrderOfPriority").HasColumnType("int").IsOptional();
             Property(x => x.TextMessageCapabilityIndicator).HasColumnName(@"TextMessageCapabilityIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Staff).WithMany(b => b.StaffTelephones).HasForeignKey(c => c.StaffUsi); // FK_StaffTelephone_Staff
@@ -44865,7 +45264,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.TribalAffiliationDescriptorId).HasColumnName(@"TribalAffiliationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Staff).WithMany(b => b.StaffTribalAffiliations).HasForeignKey(c => c.StaffUsi); // FK_StaffTribalAffiliation_Staff
@@ -44889,7 +45288,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.VisaDescriptorId).HasColumnName(@"VisaDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Staff).WithMany(b => b.StaffVisas).HasForeignKey(c => c.StaffUsi); // FK_StaffVisa_Staff
@@ -44956,7 +45355,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateEducationAgencyId).HasColumnName(@"StateEducationAgencyId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.CteGraduationRateInclusion).HasColumnName(@"CTEGraduationRateInclusion").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.SchoolYearType).WithMany(b => b.StateEducationAgencyAccountabilities).HasForeignKey(c => c.SchoolYear).WillCascadeOnDelete(false); // FK_StateEducationAgencyAccountability_SchoolYearType
@@ -44981,7 +45380,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.FiscalYear).HasColumnName(@"FiscalYear").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StateEducationAgencyId).HasColumnName(@"StateEducationAgencyId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.FederalProgramsFundingAllocation).HasColumnName(@"FederalProgramsFundingAllocation").HasColumnType("money").IsOptional().HasPrecision(19,4);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StateEducationAgency).WithMany(b => b.StateEducationAgencyFederalFunds).HasForeignKey(c => c.StateEducationAgencyId); // FK_StateEducationAgencyFederalFunds_StateEducationAgency
@@ -45020,8 +45419,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CitizenshipStatusDescriptorId).HasColumnName(@"CitizenshipStatusDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.StudentUniqueId).HasColumnName(@"StudentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45046,7 +45445,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             ToTable("StudentABCSummary", schema);
             HasKey(x => new { x.StudentUsi, x.StudentUniqueId, x.FirstName, x.LastSurname });
 
-            Property(x => x.StudentUsi).HasColumnName(@"StudentUsi").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.StudentUniqueId).HasColumnName(@"StudentUniqueId").HasColumnType("nvarchar").IsRequired().HasMaxLength(32).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.FirstName).HasColumnName(@"FirstName").HasColumnType("nvarchar").IsRequired().HasMaxLength(75).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.MiddleName).HasColumnName(@"MiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
@@ -45101,8 +45500,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SessionGradePointsEarned).HasColumnName(@"SessionGradePointsEarned").HasColumnType("decimal").IsOptional().HasPrecision(18,4);
             Property(x => x.SessionGradePointAverage).HasColumnName(@"SessionGradePointAverage").HasColumnType("decimal").IsOptional().HasPrecision(18,4);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45148,7 +45547,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ImageUrl).HasColumnName(@"ImageURL").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.HonorAwardDate).HasColumnName(@"HonorAwardDate").HasColumnType("date").IsOptional();
             Property(x => x.HonorAwardExpiresDate).HasColumnName(@"HonorAwardExpiresDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.AchievementCategoryDescriptor).WithMany(b => b.StudentAcademicRecordAcademicHonors).HasForeignKey(c => c.AchievementCategoryDescriptorId).WillCascadeOnDelete(false); // FK_StudentAcademicRecordAcademicHonor_AchievementCategoryDescriptor
@@ -45179,7 +45578,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.TotalNumberInClass).HasColumnName(@"TotalNumberInClass").HasColumnType("int").IsRequired();
             Property(x => x.PercentageRanking).HasColumnName(@"PercentageRanking").HasColumnType("int").IsOptional();
             Property(x => x.ClassRankingDate).HasColumnName(@"ClassRankingDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentAcademicRecord).WithOptional(b => b.StudentAcademicRecordClassRanking); // FK_StudentAcademicRecordClassRanking_StudentAcademicRecord
@@ -45219,7 +45618,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CteCompleter).HasColumnName(@"CTECompleter").HasColumnType("bit").IsOptional();
             Property(x => x.DiplomaDescription).HasColumnName(@"DiplomaDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(80);
             Property(x => x.DiplomaAwardExpiresDate).HasColumnName(@"DiplomaAwardExpiresDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.AchievementCategoryDescriptor).WithMany(b => b.StudentAcademicRecordDiplomas).HasForeignKey(c => c.AchievementCategoryDescriptorId).WillCascadeOnDelete(false); // FK_StudentAcademicRecordDiploma_AchievementCategoryDescriptor
@@ -45260,7 +45659,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.RecognitionDescription).HasColumnName(@"RecognitionDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(80);
             Property(x => x.RecognitionAwardDate).HasColumnName(@"RecognitionAwardDate").HasColumnType("date").IsOptional();
             Property(x => x.RecognitionAwardExpiresDate).HasColumnName(@"RecognitionAwardExpiresDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.AchievementCategoryDescriptor).WithMany(b => b.StudentAcademicRecordRecognitions).HasForeignKey(c => c.AchievementCategoryDescriptorId).WillCascadeOnDelete(false); // FK_StudentAcademicRecordRecognition_AchievementCategoryDescriptor
@@ -45291,7 +45690,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.TermDescriptorId).HasColumnName(@"TermDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ReportCard).WithMany(b => b.StudentAcademicRecordReportCards).HasForeignKey(c => new { c.EducationOrganizationId, c.GradingPeriodDescriptorId, c.GradingPeriodSchoolId, c.GradingPeriodSchoolYear, c.GradingPeriodSequence, c.StudentUsi }).WillCascadeOnDelete(false); // FK_StudentAcademicRecordReportCard_ReportCard
@@ -45329,8 +45728,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EventDescription).HasColumnName(@"EventDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45365,7 +45764,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentAssessmentIdentifier).HasColumnName(@"StudentAssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AccommodationDescriptor).WithMany(b => b.StudentAssessmentAccommodations).HasForeignKey(c => c.AccommodationDescriptorId).WillCascadeOnDelete(false); // FK_StudentAssessmentAccommodation_AccommodationDescriptor
@@ -45398,7 +45797,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.AssessmentItemResultDescriptorId).HasColumnName(@"AssessmentItemResultDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.RawScoreResult).HasColumnName(@"RawScoreResult").HasColumnType("int").IsOptional();
             Property(x => x.TimeAssessed).HasColumnName(@"TimeAssessed").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.ResponseIndicatorDescriptor).WithMany(b => b.StudentAssessmentItems).HasForeignKey(c => c.ResponseIndicatorDescriptorId).WillCascadeOnDelete(false); // FK_StudentAssessmentItem_ResponseIndicatorDescriptor
@@ -45429,7 +45828,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentAssessmentIdentifier).HasColumnName(@"StudentAssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PerformanceLevelMet).HasColumnName(@"PerformanceLevelMet").HasColumnType("bit").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentReportingMethodDescriptor).WithMany(b => b.StudentAssessmentPerformanceLevels).HasForeignKey(c => c.AssessmentReportingMethodDescriptorId).WillCascadeOnDelete(false); // FK_StudentAssessmentPerformanceLevel_AssessmentReportingMethodDescriptor
@@ -45459,7 +45858,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Result).HasColumnName(@"Result").HasColumnType("nvarchar").IsRequired().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentReportingMethodDescriptor).WithMany(b => b.StudentAssessmentScoreResults).HasForeignKey(c => c.AssessmentReportingMethodDescriptorId).WillCascadeOnDelete(false); // FK_StudentAssessmentScoreResult_AssessmentReportingMethodDescriptor
@@ -45487,7 +45886,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Namespace).HasColumnName(@"Namespace").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentAssessmentIdentifier).HasColumnName(@"StudentAssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ObjectiveAssessment).WithMany(b => b.StudentAssessmentStudentObjectiveAssessments).HasForeignKey(c => new { c.AssessmentIdentifier, c.IdentificationCode, c.Namespace }).WillCascadeOnDelete(false); // FK_StudentAssessmentStudentObjectiveAssessment_ObjectiveAssessment
@@ -45518,7 +45917,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Nomenclature).HasColumnName(@"Nomenclature").HasColumnType("nvarchar").IsOptional().HasMaxLength(35);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.ParentIdentificationCode).HasColumnName(@"ParentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
 
@@ -45544,7 +45943,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentAssessmentIdentifier).HasColumnName(@"StudentAssessmentIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PerformanceLevelMet).HasColumnName(@"PerformanceLevelMet").HasColumnType("bit").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentReportingMethodDescriptor).WithMany(b => b.StudentAssessmentStudentObjectiveAssessmentPerformanceLevels).HasForeignKey(c => c.AssessmentReportingMethodDescriptorId).WillCascadeOnDelete(false); // FK_StudentAssessmentStudentObjectiveAssessmentPerformanceLevel_AssessmentReportingMethodDescriptor
@@ -45575,7 +45974,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Result).HasColumnName(@"Result").HasColumnType("nvarchar").IsRequired().HasMaxLength(35);
             Property(x => x.ResultDatatypeTypeDescriptorId).HasColumnName(@"ResultDatatypeTypeDescriptorId").HasColumnType("int").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AssessmentReportingMethodDescriptor).WithMany(b => b.StudentAssessmentStudentObjectiveAssessmentScoreResults).HasForeignKey(c => c.AssessmentReportingMethodDescriptorId).WillCascadeOnDelete(false); // FK_StudentAssessmentStudentObjectiveAssessmentScoreResult_AssessmentReportingMethodDescriptor
@@ -45625,8 +46024,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45658,7 +46057,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Section).WithMany(b => b.StudentCohortAssociationSections).HasForeignKey(c => new { c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SectionIdentifier, c.SessionName }).WillCascadeOnDelete(false); // FK_StudentCohortAssociationSection_Section
@@ -45691,8 +46090,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CompetencyLevelDescriptorId).HasColumnName(@"CompetencyLevelDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.DiagnosticStatement).HasColumnName(@"DiagnosticStatement").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45730,7 +46129,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GeneralStudentProgramAssociation).WithMany(b => b.StudentCompetencyObjectiveGeneralStudentProgramAssociations).HasForeignKey(c => new { c.BeginDate, c.EducationOrganizationId, c.ProgramEducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId, c.StudentUsi }).WillCascadeOnDelete(false); // FK_StudentCompetencyObjectiveGeneralStudentProgramAssociation_GeneralStudentProgramAssociation
@@ -45766,7 +46165,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentCompetencyObjective).WithMany(b => b.StudentCompetencyObjectiveStudentSectionAssociations).HasForeignKey(c => new { c.GradingPeriodDescriptorId, c.GradingPeriodSchoolId, c.GradingPeriodSchoolYear, c.GradingPeriodSequence, c.Objective, c.ObjectiveEducationOrganizationId, c.ObjectiveGradeLevelDescriptorId, c.StudentUsi }); // FK_StudentCompetencyObjectiveStudentSectionAssociation_StudentCompetencyObjective
@@ -45828,7 +46227,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CipCode).HasColumnName(@"CIPCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(120);
             Property(x => x.PrimaryCteProgramIndicator).HasColumnName(@"PrimaryCTEProgramIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.CteProgramCompletionIndicator).HasColumnName(@"CTEProgramCompletionIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CareerPathwayDescriptor).WithMany(b => b.StudentCteProgramAssociationCtePrograms).HasForeignKey(c => c.CareerPathwayDescriptorId).WillCascadeOnDelete(false); // FK_StudentCTEProgramAssociationCTEProgram_CareerPathwayDescriptor
@@ -45860,7 +46259,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ServiceDescriptor).WithMany(b => b.StudentCteProgramAssociationServices).HasForeignKey(c => c.ServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentCTEProgramAssociationService_ServiceDescriptor
@@ -45887,8 +46286,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentParticipationCodeDescriptorId).HasColumnName(@"StudentParticipationCodeDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45917,7 +46316,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.BehaviorDetailedDescription).HasColumnName(@"BehaviorDetailedDescription").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.BehaviorDescriptor).WithMany(b => b.StudentDisciplineIncidentAssociationBehaviors).HasForeignKey(c => c.BehaviorDescriptorId).WillCascadeOnDelete(false); // FK_StudentDisciplineIncidentAssociationBehavior_BehaviorDescriptor
@@ -45948,8 +46347,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LimitedEnglishProficiencyDescriptorId).HasColumnName(@"LimitedEnglishProficiencyDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.LoginId).HasColumnName(@"LoginId").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -45991,7 +46390,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.CongressionalDistrict).HasColumnName(@"CongressionalDistrict").HasColumnType("nvarchar").IsOptional().HasMaxLength(30);
             Property(x => x.LocaleDescriptorId).HasColumnName(@"LocaleDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.LocaleDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationAddresses).HasForeignKey(c => c.LocaleDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationAddress_LocaleDescriptor
@@ -46020,7 +46419,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociationAddress).WithMany(b => b.StudentEducationOrganizationAssociationAddressPeriods).HasForeignKey(c => new { c.AddressTypeDescriptorId, c.EducationOrganizationId, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationAddressPeriod_StudentEducationOrganizationAssociationAddress
@@ -46045,7 +46444,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.CohortYearTypeDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationCohortYears).HasForeignKey(c => c.CohortYearTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationCohortYear_CohortYearTypeDescriptor
@@ -46074,7 +46473,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DisabilityDiagnosis).HasColumnName(@"DisabilityDiagnosis").HasColumnType("nvarchar").IsOptional().HasMaxLength(80);
             Property(x => x.OrderOfDisability).HasColumnName(@"OrderOfDisability").HasColumnType("int").IsOptional();
             Property(x => x.DisabilityDeterminationSourceTypeDescriptorId).HasColumnName(@"DisabilityDeterminationSourceTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.DisabilityDeterminationSourceTypeDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationDisabilities).HasForeignKey(c => c.DisabilityDeterminationSourceTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationDisability_DisabilityDeterminationSourceTypeDescriptor
@@ -46101,7 +46500,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DisabilityDesignationDescriptorId).HasColumnName(@"DisabilityDesignationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DisabilityDesignationDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationDisabilityDesignations).HasForeignKey(c => c.DisabilityDesignationDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationDisabilityDesignation_DisabilityDesignationDescriptor
@@ -46129,7 +46528,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ElectronicMailAddress).HasColumnName(@"ElectronicMailAddress").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
             Property(x => x.PrimaryEmailAddressIndicator).HasColumnName(@"PrimaryEmailAddressIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ElectronicMailTypeDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationElectronicMails).HasForeignKey(c => c.ElectronicMailTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationElectronicMail_ElectronicMailTypeDescriptor
@@ -46163,7 +46562,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.Longitude).HasColumnName(@"Longitude").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.AddressTypeDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationInternationalAddresses).HasForeignKey(c => c.AddressTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationInternationalAddress_AddressTypeDescriptor
@@ -46189,7 +46588,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationLanguages).HasForeignKey(c => c.LanguageDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationLanguage_LanguageDescriptor
@@ -46215,7 +46614,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.LanguageDescriptorId).HasColumnName(@"LanguageDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.LanguageUseDescriptorId).HasColumnName(@"LanguageUseDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageUseDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationLanguageUses).HasForeignKey(c => c.LanguageUseDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationLanguageUse_LanguageUseDescriptor
@@ -46243,7 +46642,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.BeginDate).HasColumnName(@"BeginDate").HasColumnType("date").IsOptional();
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.DesignatedBy).HasColumnName(@"DesignatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ProgramTypeDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationProgramParticipations).HasForeignKey(c => c.ProgramTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationProgramParticipation_ProgramTypeDescriptor
@@ -46269,7 +46668,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramCharacteristicDescriptorId).HasColumnName(@"ProgramCharacteristicDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ProgramCharacteristicDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationProgramParticipationProgramCharacteristics).HasForeignKey(c => c.ProgramCharacteristicDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationProgramParticipationProgramCharacteristic_ProgramCharacteristicDescriptor
@@ -46294,7 +46693,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RaceDescriptorId).HasColumnName(@"RaceDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.RaceDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationRaces).HasForeignKey(c => c.RaceDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationRace_RaceDescriptor
@@ -46320,7 +46719,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentCharacteristicDescriptorId).HasColumnName(@"StudentCharacteristicDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.DesignatedBy).HasColumnName(@"DesignatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentCharacteristicDescriptor).WithMany(b => b.StudentEducationOrganizationAssociationStudentCharacteristics).HasForeignKey(c => c.StudentCharacteristicDescriptorId).WillCascadeOnDelete(false); // FK_StudentEducationOrganizationAssociationStudentCharacteristic_StudentCharacteristicDescriptor
@@ -46347,7 +46746,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentCharacteristicDescriptorId).HasColumnName(@"StudentCharacteristicDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociationStudentCharacteristic).WithMany(b => b.StudentEducationOrganizationAssociationStudentCharacteristicPeriods).HasForeignKey(c => new { c.EducationOrganizationId, c.StudentCharacteristicDescriptorId, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationStudentCharacteristicPeriod_StudentEducationOrganizationAssociationStudentCharacterist
@@ -46373,7 +46772,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentIdentificationSystemDescriptorId).HasColumnName(@"StudentIdentificationSystemDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdentificationCode).HasColumnName(@"IdentificationCode").HasColumnType("nvarchar").IsRequired().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociation).WithMany(b => b.StudentEducationOrganizationAssociationStudentIdentificationCodes).HasForeignKey(c => new { c.EducationOrganizationId, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationStudentIdentificationCode_StudentEducationOrganizationAssociation
@@ -46401,7 +46800,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IndicatorGroup).HasColumnName(@"IndicatorGroup").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.Indicator).HasColumnName(@"Indicator").HasColumnType("nvarchar").IsRequired().HasMaxLength(35);
             Property(x => x.DesignatedBy).HasColumnName(@"DesignatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociation).WithMany(b => b.StudentEducationOrganizationAssociationStudentIndicators).HasForeignKey(c => new { c.EducationOrganizationId, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationStudentIndicator_StudentEducationOrganizationAssociation
@@ -46427,7 +46826,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IndicatorName).HasColumnName(@"IndicatorName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociationStudentIndicator).WithMany(b => b.StudentEducationOrganizationAssociationStudentIndicatorPeriods).HasForeignKey(c => new { c.EducationOrganizationId, c.IndicatorName, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationStudentIndicatorPeriod_StudentEducationOrganizationAssociationStudentIndicator
@@ -46455,7 +46854,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.OrderOfPriority).HasColumnName(@"OrderOfPriority").HasColumnType("int").IsOptional();
             Property(x => x.TextMessageCapabilityIndicator).HasColumnName(@"TextMessageCapabilityIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.DoNotPublishIndicator).HasColumnName(@"DoNotPublishIndicator").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociation).WithMany(b => b.StudentEducationOrganizationAssociationTelephones).HasForeignKey(c => new { c.EducationOrganizationId, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationTelephone_StudentEducationOrganizationAssociation
@@ -46480,7 +46879,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationOrganizationId).HasColumnName(@"EducationOrganizationId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.TribalAffiliationDescriptorId).HasColumnName(@"TribalAffiliationDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentEducationOrganizationAssociation).WithMany(b => b.StudentEducationOrganizationAssociationTribalAffiliations).HasForeignKey(c => new { c.EducationOrganizationId, c.StudentUsi }); // FK_StudentEducationOrganizationAssociationTribalAffiliation_StudentEducationOrganizationAssociation
@@ -46508,8 +46907,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.EndDate).HasColumnName(@"EndDate").HasColumnType("date").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -46548,8 +46947,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CompetencyLevelDescriptorId).HasColumnName(@"CompetencyLevelDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.DiagnosticStatement).HasColumnName(@"DiagnosticStatement").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -46636,7 +47035,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.HomelessProgramServiceDescriptor).WithMany(b => b.StudentHomelessProgramAssociationHomelessProgramServices).HasForeignKey(c => c.HomelessProgramServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentHomelessProgramAssociationHomelessProgramService_HomelessProgramServiceDescriptor
@@ -46666,7 +47065,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IssuerDocumentIdentificationCode).HasColumnName(@"IssuerDocumentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.IssuerName).HasColumnName(@"IssuerName").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.IssuerCountryDescriptorId).HasColumnName(@"IssuerCountryDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CountryDescriptor).WithMany(b => b.StudentIdentificationDocuments).HasForeignKey(c => c.IssuerCountryDescriptorId).WillCascadeOnDelete(false); // FK_StudentIdentificationDocument_CountryDescriptor
@@ -46719,8 +47118,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DiagnosticStatement).HasColumnName(@"DiagnosticStatement").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.Dosage).HasColumnName(@"Dosage").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -46752,7 +47151,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ImprovementIndex).HasColumnName(@"ImprovementIndex").HasColumnType("int").IsOptional();
             Property(x => x.InterventionEffectivenessRatingDescriptorId).HasColumnName(@"InterventionEffectivenessRatingDescriptorId").HasColumnType("int").IsRequired();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DiagnosisDescriptor).WithMany(b => b.StudentInterventionAssociationInterventionEffectivenesses).HasForeignKey(c => c.DiagnosisDescriptorId).WillCascadeOnDelete(false); // FK_StudentInterventionAssociationInterventionEffectiveness_DiagnosisDescriptor
@@ -46787,8 +47186,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EventDuration).HasColumnName(@"EventDuration").HasColumnType("decimal").IsOptional().HasPrecision(3,2);
             Property(x => x.InterventionDuration).HasColumnName(@"InterventionDuration").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -46851,7 +47250,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProficiencyDescriptorId).HasColumnName(@"ProficiencyDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.ProgressDescriptorId).HasColumnName(@"ProgressDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.MonitoredDescriptorId).HasColumnName(@"MonitoredDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.MonitoredDescriptor).WithMany(b => b.StudentLanguageInstructionProgramAssociationEnglishLanguageProficiencyAssessments).HasForeignKey(c => c.MonitoredDescriptorId).WillCascadeOnDelete(false); // FK_StudentLanguageInstructionProgramAssociationEnglishLanguageProficiencyAssessment_MonitoredDescriptor
@@ -46887,7 +47286,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.LanguageInstructionProgramServiceDescriptor).WithMany(b => b.StudentLanguageInstructionProgramAssociationLanguageInstructionProgramServices).HasForeignKey(c => c.LanguageInstructionProgramServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentLanguageInstructionProgramAssociationLanguageInstructionProgramService_LanguageInstructionProgramServiceDescriptor
@@ -46919,8 +47318,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CompetencyLevelDescriptorId).HasColumnName(@"CompetencyLevelDescriptorId").HasColumnType("int").IsRequired();
             Property(x => x.DiagnosticStatement).HasColumnName(@"DiagnosticStatement").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -46957,7 +47356,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.GeneralStudentProgramAssociation).WithMany(b => b.StudentLearningObjectiveGeneralStudentProgramAssociations).HasForeignKey(c => new { c.BeginDate, c.EducationOrganizationId, c.ProgramEducationOrganizationId, c.ProgramName, c.ProgramTypeDescriptorId, c.StudentUsi }).WillCascadeOnDelete(false); // FK_StudentLearningObjectiveGeneralStudentProgramAssociation_GeneralStudentProgramAssociation
@@ -46992,7 +47391,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.SectionIdentifier).HasColumnName(@"SectionIdentifier").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SessionName).HasColumnName(@"SessionName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.StudentLearningObjective).WithMany(b => b.StudentLearningObjectiveStudentSectionAssociations).HasForeignKey(c => new { c.GradingPeriodDescriptorId, c.GradingPeriodSchoolId, c.GradingPeriodSchoolYear, c.GradingPeriodSequence, c.LearningObjectiveId, c.Namespace, c.StudentUsi }); // FK_StudentLearningObjectiveStudentSectionAssociation_StudentLearningObjective
@@ -47060,7 +47459,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.MigrantEducationProgramServiceDescriptor).WithMany(b => b.StudentMigrantEducationProgramAssociationMigrantEducationProgramServices).HasForeignKey(c => c.MigrantEducationProgramServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentMigrantEducationProgramAssociationMigrantEducationProgramService_MigrantEducationProgramServiceDescriptor
@@ -47124,7 +47523,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.NeglectedOrDelinquentProgramServiceDescriptor).WithMany(b => b.StudentNeglectedOrDelinquentProgramAssociationNeglectedOrDelinquentProgramServices).HasForeignKey(c => c.NeglectedOrDelinquentProgramServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentNeglectedOrDelinquentProgramAssociationNeglectedOrDelinquentProgramService_NeglectedOrDelinquentProgramServiceDescript
@@ -47153,7 +47552,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.MiddleName).HasColumnName(@"MiddleName").HasColumnType("nvarchar").IsOptional().HasMaxLength(75);
             Property(x => x.LastSurname).HasColumnName(@"LastSurname").HasColumnType("nvarchar").IsRequired().HasMaxLength(75);
             Property(x => x.GenerationCodeSuffix).HasColumnName(@"GenerationCodeSuffix").HasColumnType("nvarchar").IsOptional().HasMaxLength(10);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.OtherNameTypeDescriptor).WithMany(b => b.StudentOtherNames).HasForeignKey(c => c.OtherNameTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentOtherName_OtherNameTypeDescriptor
@@ -47184,8 +47583,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ContactPriority).HasColumnName(@"ContactPriority").HasColumnType("int").IsOptional();
             Property(x => x.ContactRestrictions).HasColumnName(@"ContactRestrictions").HasColumnType("nvarchar").IsOptional().HasMaxLength(250);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -47238,7 +47637,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.IssuerDocumentIdentificationCode).HasColumnName(@"IssuerDocumentIdentificationCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.IssuerName).HasColumnName(@"IssuerName").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.IssuerCountryDescriptorId).HasColumnName(@"IssuerCountryDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.CountryDescriptor).WithMany(b => b.StudentPersonalIdentificationDocuments).HasForeignKey(c => c.IssuerCountryDescriptorId).WillCascadeOnDelete(false); // FK_StudentPersonalIdentificationDocument_CountryDescriptor
@@ -47298,7 +47697,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ServiceDescriptor).WithMany(b => b.StudentProgramAssociationServices).HasForeignKey(c => c.ServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentProgramAssociationService_ServiceDescriptor
@@ -47331,8 +47730,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationalEnvironmentDescriptorId).HasColumnName(@"EducationalEnvironmentDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.EventDuration).HasColumnName(@"EventDuration").HasColumnType("decimal").IsOptional().HasPrecision(3,2);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -47378,8 +47777,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.CalendarCode).HasColumnName(@"CalendarCode").HasColumnType("nvarchar").IsOptional().HasMaxLength(60);
             Property(x => x.SchoolYear).HasColumnName(@"SchoolYear").HasColumnType("smallint").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -47415,7 +47814,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EntryDate).HasColumnName(@"EntryDate").HasColumnType("date").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SchoolId).HasColumnName(@"SchoolId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.EducationPlanDescriptor).WithMany(b => b.StudentSchoolAssociationEducationPlans).HasForeignKey(c => c.EducationPlanDescriptorId).WillCascadeOnDelete(false); // FK_StudentSchoolAssociationEducationPlan_EducationPlanDescriptor
@@ -47447,8 +47846,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationalEnvironmentDescriptorId).HasColumnName(@"EducationalEnvironmentDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.EventDuration).HasColumnName(@"EventDuration").HasColumnType("decimal").IsOptional().HasPrecision(3,2);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -47511,7 +47910,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.SchoolFoodServiceProgramServiceDescriptor).WithMany(b => b.StudentSchoolFoodServiceProgramAssociationSchoolFoodServiceProgramServices).HasForeignKey(c => c.SchoolFoodServiceProgramServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentSchoolFoodServiceProgramAssociationSchoolFoodServiceProgramService_SchoolFoodServiceProgramServiceDescriptor
@@ -47546,8 +47945,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.TeacherStudentDataLinkExclusion).HasColumnName(@"TeacherStudentDataLinkExclusion").HasColumnType("bit").IsOptional();
             Property(x => x.AttemptStatusDescriptorId).HasColumnName(@"AttemptStatusDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -47584,8 +47983,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.EducationalEnvironmentDescriptorId).HasColumnName(@"EducationalEnvironmentDescriptorId").HasColumnType("int").IsOptional();
             Property(x => x.EventDuration).HasColumnName(@"EventDuration").HasColumnType("decimal").IsOptional().HasPrecision(3,2);
             Property(x => x.Discriminator).HasColumnName(@"Discriminator").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
-            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
+            Property(x => x.LastModifiedDate).HasColumnName(@"LastModifiedDate").HasColumnType("datetime2").IsRequired();
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("uniqueidentifier").IsRequired();
 
             // Foreign keys
@@ -47657,7 +48056,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.DisabilityDiagnosis).HasColumnName(@"DisabilityDiagnosis").HasColumnType("nvarchar").IsOptional().HasMaxLength(80);
             Property(x => x.OrderOfDisability).HasColumnName(@"OrderOfDisability").HasColumnType("int").IsOptional();
             Property(x => x.DisabilityDeterminationSourceTypeDescriptorId).HasColumnName(@"DisabilityDeterminationSourceTypeDescriptorId").HasColumnType("int").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.DisabilityDeterminationSourceTypeDescriptor).WithMany(b => b.StudentSpecialEducationProgramAssociationDisabilities).HasForeignKey(c => c.DisabilityDeterminationSourceTypeDescriptorId).WillCascadeOnDelete(false); // FK_StudentSpecialEducationProgramAssociationDisability_DisabilityDeterminationSourceTypeDescriptor
@@ -47688,7 +48087,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.ProgramName).HasColumnName(@"ProgramName").HasColumnType("nvarchar").IsRequired().HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ProgramTypeDescriptorId).HasColumnName(@"ProgramTypeDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.DisabilityDesignationDescriptor).WithMany(b => b.StudentSpecialEducationProgramAssociationDisabilityDesignations).HasForeignKey(c => c.DisabilityDesignationDescriptorId).WillCascadeOnDelete(false); // FK_StudentSpecialEducationProgramAssociationDisabilityDesignation_DisabilityDesignationDescriptor
@@ -47718,7 +48117,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.StaffUsi).HasColumnName(@"StaffUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.PrimaryProvider).HasColumnName(@"PrimaryProvider").HasColumnType("bit").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Staff).WithMany(b => b.StudentSpecialEducationProgramAssociationServiceProviders).HasForeignKey(c => c.StaffUsi).WillCascadeOnDelete(false); // FK_StudentSpecialEducationProgramAssociationServiceProvider_Staff
@@ -47750,7 +48149,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.SpecialEducationProgramServiceDescriptor).WithMany(b => b.StudentSpecialEducationProgramAssociationSpecialEducationProgramServices).HasForeignKey(c => c.SpecialEducationProgramServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentSpecialEducationProgramAssociationSpecialEducationProgramService_SpecialEducationProgramServiceDescriptor
@@ -47810,7 +48209,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             Property(x => x.PrimaryIndicator).HasColumnName(@"PrimaryIndicator").HasColumnType("bit").IsOptional();
             Property(x => x.ServiceBeginDate).HasColumnName(@"ServiceBeginDate").HasColumnType("date").IsOptional();
             Property(x => x.ServiceEndDate).HasColumnName(@"ServiceEndDate").HasColumnType("date").IsOptional();
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.ServiceDescriptor).WithMany(b => b.StudentTitleIPartAProgramAssociationServices).HasForeignKey(c => c.ServiceDescriptorId).WillCascadeOnDelete(false); // FK_StudentTitleIPartAProgramAssociationService_ServiceDescriptor
@@ -47834,7 +48233,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.VisaDescriptorId).HasColumnName(@"VisaDescriptorId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CreateDate).HasColumnName(@"CreateDate").HasColumnType("datetime2").IsRequired();
 
             // Foreign keys
             HasRequired(a => a.Student).WithMany(b => b.StudentVisas).HasForeignKey(c => c.StudentUsi); // FK_StudentVisa_Student
@@ -47944,27 +48343,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             // Foreign keys
             HasRequired(a => a.Descriptor).WithOptional(b => b.TermDescriptor); // FK_TermDescriptor_Descriptor
-        }
-    }
-
-    // Test1
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
-    public class Test1Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Test1>
-    {
-        public Test1Configuration()
-            : this("dbo")
-        {
-        }
-
-        public Test1Configuration(string schema)
-        {
-            ToTable("Test1", schema);
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nchar").IsOptional().IsFixedLength().HasMaxLength(10);
-            Property(x => x.Type).HasColumnName(@"Type").HasColumnType("nchar").IsOptional().IsFixedLength().HasMaxLength(10);
-            Property(x => x.Value).HasColumnName(@"Value").HasColumnType("int").IsOptional();
         }
     }
 
@@ -48167,10 +48545,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             HasRequired(a => a.Descriptor).WithOptional(b => b.WeaponDescriptor); // FK_WeaponDescriptor_Descriptor
         }
     }
-
-    #endregion
-
-    #region Stored procedure return models
 
     #endregion
 

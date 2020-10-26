@@ -1,0 +1,62 @@
+﻿<main role="main" class="container">
+    <h1>{{'Group Messaging' | translate}}, <span>{{'Communication' | translate}}</span></h1>
+    <div class="row m-b-20">
+        <section class="section-height-equals">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100pc">
+                    <div class="card-body">
+                        <h4>{{'Filters'  | translate}}</h4>
+                        <form>
+                            <div class="row m-b-10 m-t-15">
+                                <div class="col-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="sectionsSelect"> {{'Classes' | translate}}: </label>
+                                        <select class="form-control" name="repeatSelect" id="sectionsSelect"
+                                                ng-model="ctrl.selectedSection"
+                                                ng-change="ctrl.sectionChanged();  ctrl.saveState();"
+                                                ng-options="item as ( item.courseTitle +  (item.classPeriodName ? ' (' + item.classPeriodName + ') ' : ' ')) for item in ctrl.sections"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-9">
+                <div class="card h-100pc">
+                    <div class="card-body p-b-0">
+                        <h3>{{'Quick Messaging Title' | translate}} <span>{{'Quick Messaging Description' | translate}}</span></h3>
+                        <form name="messageForm" novalidate>
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <input type="text" class="form-control" id="messageSubject" ng-model="ctrl.message.subject" placeholder="{{'Quick Messaging Subject Placeholder' | translate}}" required ng-class="ctrl.resetStylesInput" ng-change="ctrl.resetStylesInput = ' ng-touched'" ng-keyup="ctrl.saveState();"/>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <div class="form-group m-b-0">
+                                        <textarea ng-model="ctrl.message.body" class="form-control" id="messageBody" rows="6" placeholder="{{'Quick Messaging Message Placeholder' | translate}}" required ng-class="ctrl.resetStylesTextArea" ng-change="ctrl.resetStylesTextArea = ' ng-touched'" ng-keyup="ctrl.saveState();"></textarea>
+                                        <span class="m-b-0 m-t-10">
+                                            <b>{{'Audience' | translate}}:</b> {{'Quick Messaging Note' | translate }} <b class="material-500-light-blue">{{ctrl.familyCount.familyMembersCount}}</b> {{'Quick Messaging Note 2' | translate }} <b class="material-500-light-blue">{{ctrl.familyCount.studentsCount}}</b> {{'Quick Messaging Note 3' | translate }} <b class="material-500-light-blue">{{ctrl.selectedSection.courseTitle}}</b>.
+                                            {{'Quick Messaging Note 4' | translate}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-5">
+                                <div class="col align-self-end">
+                                    <submit-button promise-to-execute="ctrl.confirmSend();" form="messageForm" ng-if="ctrl.familyCount.familyMembersCount > 1 || ctrl.familyCount.familyMembersCount < 1" label="{{'Send to people'| translate: {'count': ctrl.familyCount.familyMembersCount } }}" class="float-right"></submit-button>
+                                    <submit-button promise-to-execute="ctrl.confirmSend();" form="messageForm" ng-if="ctrl.familyCount.familyMembersCount == 1" label="{{'Send to one person'| translate }}" class="float-right"></submit-button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+</main>

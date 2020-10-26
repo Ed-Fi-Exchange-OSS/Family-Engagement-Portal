@@ -1,9 +1,4 @@
-﻿// SPDX-License-Identifier: Apache-2.0
-// Licensed to the Ed-Fi Alliance under one or more agreements.
-// The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
-// See the LICENSE and NOTICES files in the project root for more information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -141,7 +136,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                            .Include(x => x.Parent.ParentTelephones)
                                                    on s.StudentUsi equals spa.StudentUsi
                                                join palerts in _edFiDb.ParentAlerts
-                                                            .Include(x => x.MethodOfContactType)
                                                             .Include(x => x.AlertTypes)
                                                      on spa.Parent.ParentUniqueId equals palerts.ParentUniqueId into ppa
                                                from pa in ppa.DefaultIfEmpty()
@@ -205,8 +199,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                            .Include(x => x.Parent.ParentTelephones)
                                                    on s.StudentUsi equals spa.StudentUsi
                                                join palerts in _edFiDb.ParentAlerts
-                                                            .Include(x => x.MethodOfContactType)
-                                                            .Include(x => x.AlertTypes)
+                                                           .Include(x => x.AlertTypes)
                                                      on spa.Parent.ParentUniqueId equals palerts.ParentUniqueId into ppa
                                                from pa in ppa.DefaultIfEmpty()
                                                join pro in _edFiDb.ParentProfiles
@@ -267,7 +260,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                            .Include(x => x.Parent.ParentTelephones)
                                                    on s.StudentUsi equals spa.StudentUsi
                                                join palerts in _edFiDb.ParentAlerts
-                                                            .Include(x => x.MethodOfContactType)
                                                             .Include(x => x.AlertTypes)
                                                      on spa.Parent.ParentUniqueId equals palerts.ParentUniqueId into ppa
                                                from pa in ppa.DefaultIfEmpty()
@@ -318,7 +310,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
             return result;
         }
 
-        public async Task<List<StudentAlertModel>> studentsOverThresholdAssignment(decimal assignmentThreshold, string[] gradeBookMissingAssignmentTypeDescriptors)
+        public async Task<List<StudentAlertModel>> studentsOverThresholdAssignment(decimal assignmentThreshold, string[] gradeBookMissingAssignmentTypeDescriptors, string missingAssignmentLetterGrade)
         {
 
             var studentsOverThreshold = await (from s in _edFiDb.Students
@@ -327,7 +319,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                            .Include(x => x.Parent.ParentTelephones)
                                                    on s.StudentUsi equals spa.StudentUsi
                                                join palerts in _edFiDb.ParentAlerts
-                                                            .Include(x => x.MethodOfContactType)
                                                             .Include(x => x.AlertTypes)
                                                      on spa.Parent.ParentUniqueId equals palerts.ParentUniqueId into ppa
                                                from pa in ppa.DefaultIfEmpty()
@@ -343,7 +334,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                where pa.AlertsEnabled
                                                && sge.DateFulfilled == null 
                                                && sge.GradebookEntry.GradebookEntryTypeId != null
-                                               && sge.DateFulfilled == null
+                                               && sge.LetterGradeEarned == missingAssignmentLetterGrade
                                                && gradeBookMissingAssignmentTypeDescriptors.Contains(sge.GradebookEntry.GradebookEntryType.CodeValue)
                                                && sy.CurrentSchoolYear
                                                group new { s, pa, profile, spa } by new { s.StudentUsi, pa.ParentUniqueId } into g
@@ -390,7 +381,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                                            .Include(x => x.Parent.ParentTelephones)
                                                    on s.StudentUsi equals spa.StudentUsi
                                                join palerts in _edFiDb.ParentAlerts
-                                                            .Include(x => x.MethodOfContactType)
                                                             .Include(x => x.AlertTypes)
                                                      on spa.Parent.ParentUniqueId equals palerts.ParentUniqueId into ppa
                                                from pa in ppa.DefaultIfEmpty()
@@ -462,6 +452,12 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
             return wasSentBefore;
         }
 
+        public async Task<bool> unreadMessageAlertWasSentBefore()
+        {
+            var today = DateTime.Today;
+            return await _edFiDb.AlertLogs.AnyAsync(x => DbFunctions.TruncateTime(x.UtcSentDate) == today && x.AlertTypeId == AlertTypeEnum.Message.Value);
+        }
+
         public async Task<List<ParentStudentAlertLogModel>> GetParentStudentUnreadAlerts(string parentUniqueId, string studentUniqueId)
         {
             return await _edFiDb.AlertLogs
@@ -502,6 +498,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
 
             parentModel.ParentAlert.PreferredMethodOfContactTypeId = profile?.PreferredMethodOfContactTypeId;
             parentModel.ParentAlert.AlertTypeIds = parentAlert.AlertTypes.Select(x => x.AlertTypeId).ToList();
+            parentModel.LanguageCode = profile.LanguageCode;
 
             return parentModel;
         }
@@ -537,7 +534,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                                 .Include(x => x.ParentElectronicMails)
                                 .Include(x => x.ParentTelephones)
                                  join palerts in _edFiDb.ParentAlerts
-                                                .Include(x => x.MethodOfContactType)
                                                 .Include(x => x.AlertTypes)
                                          on p.ParentUniqueId equals palerts.ParentUniqueId into ppa
                                  from pa in ppa.DefaultIfEmpty()

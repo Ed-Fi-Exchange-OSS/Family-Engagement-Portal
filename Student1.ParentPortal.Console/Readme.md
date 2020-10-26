@@ -9,5 +9,12 @@ Notes and Setup
 2. Update the Student1.ParentPortal.Console.exe.config -> appSettings -> apiEndpointForSendingAlerts to point to your API.
 3. Create Zip with all files in ~/bin/release/*.*
 4. Upload to Azure App Services -> app -> settings -> WebJobs and set the schedule to 0 */30 * * * * (Every 30 mins)
+5. Ensure you do both WebJobs: Alerts and Comms
+	http://~/api/alerts/send
+	http://~/api/communications/groupMessages/send
 
-**Notes: Make sure you update the apiEndpointForSendingAlerts in the app.config**
+
+
+**Notes: -- Make sure you update the apiEndpointForSendingAlerts in the app.config**
+**       -- We now need 2 WebJobs: One for AlertMessages every 30 minutes and 
+            One for Group Messages every minute.

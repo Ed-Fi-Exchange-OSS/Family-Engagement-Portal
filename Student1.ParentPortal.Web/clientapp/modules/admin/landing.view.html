@@ -1,0 +1,30 @@
+﻿<main role="main" class="container">
+    <h1>{{ 'view.admin.title' | translate}}</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-height-fix">
+                <div class="card-body">
+                    <h2>{{ 'view.admin.impersonate.section' | translate}} </h2>
+                    <form name="adminLanding" novalidate></form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{ 'view.admin.impersonate.description' | translate}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inpersonEmail">{{ 'view.admin.view.input.email' | translate }} </label>
+                                <input id="inpersonEmail" type="email" class="form-control" ng-model="ctrl.model.emailInterpeson" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col p-r-0"><submit-button promise-to-execute="ctrl.save()" form="adminLanding" label="{{ 'view.admin.view.as' | translate }}" class="float-right"></submit-button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

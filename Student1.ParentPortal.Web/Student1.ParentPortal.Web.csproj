@@ -15,15 +15,16 @@
     <RootNamespace>Student1.ParentPortal.Web</RootNamespace>
     <AssemblyName>Student1.ParentPortal.Web</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
-    <Use64BitIISExpress />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>443</IISExpressSSLPort>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -168,6 +169,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.4.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -206,8 +208,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
@@ -221,13 +221,13 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.6\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="clientapp\app.config.js" />
@@ -277,6 +277,7 @@
     <Content Include="clientapp\assets\img\demo\teacher\Male-Native_Hawaiian_-_Pacific_Islander-2.png" />
     <Content Include="clientapp\assets\img\demo\teacher\male-white-1.png" />
     <Content Include="clientapp\assets\img\demo\teacher\Male-White-2.png" />
+    <Content Include="clientapp\assets\img\favicon-district.ico" />
     <Content Include="clientapp\assets\img\favicon.ico" />
     <Content Include="clientapp\assets\img\logo.png" />
     <Content Include="clientapp\assets\img\profile-default.png" />
@@ -306,13 +307,91 @@
     <Content Include="clientapp\assets\img\teacher\58.png" />
     <Content Include="clientapp\assets\img\teacher\59.png" />
     <Content Include="clientapp\assets\img\teacher\54.png" />
+    <Content Include="clientapp\assets\img\yes_prerp_icon_notification.png" />
     <Content Include="clientapp\css\material-colors.css" />
     <Content Include="clientapp\css\preloader.css" />
     <Content Include="clientapp\css\StyleSheet.css" />
+    <Content Include="clientapp\languages\af-af.js" />
+    <Content Include="clientapp\languages\ar-ar.js" />
+    <Content Include="clientapp\languages\bg-bg.js" />
+    <Content Include="clientapp\languages\bn-bd.js" />
+    <Content Include="clientapp\languages\bs-ba.js" />
+    <Content Include="clientapp\languages\ca-ct.js" />
+    <Content Include="clientapp\languages\cs-cz.js" />
+    <Content Include="clientapp\languages\cy-gb.js" />
+    <Content Include="clientapp\languages\da-dk.js" />
+    <Content Include="clientapp\languages\de-de.js" />
+    <Content Include="clientapp\languages\el-gl.js" />
+    <Content Include="clientapp\languages\et-ee.js" />
+    <Content Include="clientapp\languages\fa-ir.js" />
+    <Content Include="clientapp\languages\fi-fi.js" />
+    <Content Include="clientapp\languages\fil-ph.js" />
+    <Content Include="clientapp\languages\fj-fj.js" />
+    <Content Include="clientapp\languages\fr-fr.js" />
+    <Content Include="clientapp\languages\ga-ie.js" />
+    <Content Include="clientapp\languages\gu-in.js" />
+    <Content Include="clientapp\languages\he-il.js" />
+    <Content Include="clientapp\languages\hi-in.js" />
+    <Content Include="clientapp\languages\hr-hr.js" />
+    <Content Include="clientapp\languages\ht-ht.js" />
+    <Content Include="clientapp\languages\hu-hu.js" />
+    <Content Include="clientapp\languages\id-id.js" />
+    <Content Include="clientapp\languages\is-is.js" />
+    <Content Include="clientapp\languages\it-it.js" />
+    <Content Include="clientapp\languages\ja-ja.js" />
+    <Content Include="clientapp\languages\kk-kz.js" />
+    <Content Include="clientapp\languages\kmr-iq.js" />
+    <Content Include="clientapp\languages\kn-in.js" />
+    <Content Include="clientapp\languages\ko-ko.js" />
+    <Content Include="clientapp\languages\ku-iq.js" />
     <Content Include="clientapp\languages\languages.module.js" />
+    <Content Include="clientapp\languages\lt-lt.js" />
+    <Content Include="clientapp\languages\lv-lv.js" />
+    <Content Include="clientapp\languages\mg-mg.js" />
+    <Content Include="clientapp\languages\mi-nz.js" />
+    <Content Include="clientapp\languages\ml-in.js" />
+    <Content Include="clientapp\languages\mr-in.js" />
+    <Content Include="clientapp\languages\ms-my.js" />
+    <Content Include="clientapp\languages\mt-mt.js" />
+    <Content Include="clientapp\languages\mww-cn.js" />
+    <Content Include="clientapp\languages\nb-no.js" />
+    <Content Include="clientapp\languages\nl-nl.js" />
+    <Content Include="clientapp\languages\or-in.js" />
+    <Content Include="clientapp\languages\otq-mx.js" />
+    <Content Include="clientapp\languages\pa-in.js" />
+    <Content Include="clientapp\languages\pl-pl.js" />
+    <Content Include="clientapp\languages\prs-af.js" />
+    <Content Include="clientapp\languages\ps-af.js" />
+    <Content Include="clientapp\languages\pt-br.js" />
+    <Content Include="clientapp\languages\pt-pt.js" />
+    <Content Include="clientapp\languages\ro-ro.js" />
+    <Content Include="clientapp\languages\ru-ru.js" />
+    <Content Include="clientapp\languages\sk-sk.js" />
+    <Content Include="clientapp\languages\sl-si.js" />
+    <Content Include="clientapp\languages\sm-ws.js" />
+    <Content Include="clientapp\languages\sr-Cyrl-sr.js" />
+    <Content Include="clientapp\languages\sr-Latn-sr.js" />
+    <Content Include="clientapp\languages\sv-se.js" />
+    <Content Include="clientapp\languages\sw-ke.js" />
+    <Content Include="clientapp\languages\ta-my.js" />
+    <Content Include="clientapp\languages\te-in.js" />
+    <Content Include="clientapp\languages\th-th.js" />
+    <Content Include="clientapp\languages\tlh-Latn-Klingon %28Latin%29.js" />
+    <Content Include="clientapp\languages\tlh-Piqd-Klingon %28pIqaD%29.js" />
+    <Content Include="clientapp\languages\to-to.js" />
+    <Content Include="clientapp\languages\tr-tr.js" />
+    <Content Include="clientapp\languages\ty-pf.js" />
+    <Content Include="clientapp\languages\uk-ua.js" />
+    <Content Include="clientapp\languages\ur-in.js" />
+    <Content Include="clientapp\languages\vi-vn.js" />
+    <Content Include="clientapp\languages\yua-mx.js" />
+    <Content Include="clientapp\languages\yue-cn.js" />
+    <Content Include="clientapp\languages\zh-Hans-cn.js" />
+    <Content Include="clientapp\languages\zh-Hant-cn.js" />
     <Content Include="clientapp\lib\angular-animate\angular-animate.js" />
     <Content Include="clientapp\lib\angular-animate\angular-animate.min.js" />
     <Content Include="clientapp\lib\angular-chart\angular-chart.min.js" />
+    <Content Include="clientapp\lib\angular-jwt\angular-jwt.min.js" />
     <Content Include="clientapp\lib\angular-masonry\angular-masonry.js" />
     <Content Include="clientapp\lib\angular-masonry\angular-masonry.min.js" />
     <Content Include="clientapp\lib\angular-touch\angular-touch.min.js" />
@@ -866,10 +945,25 @@
     <Content Include="clientapp\lib\toastr\toastr.min.css" />
     <Content Include="clientapp\lib\toastr\toastr.min.js" />
     <Content Include="clientapp\lib\ui-bootstrap\ui-bootstrap-tpls-3.0.6.min.js" />
+    <Content Include="clientapp\modules\admin\landing.module.js" />
     <Content Include="clientapp\modules\alert\alert.module.js" />
     <Content Include="clientapp\modules\alert\alert.view.html" />
+    <Content Include="clientapp\modules\campusLeader\groupMessages\groupMessages.module.js" />
+    <Content Include="clientapp\modules\campusLeader\individualMessages\individualMessages.module.js" />
+    <Content Include="clientapp\modules\campusLeader\individualMessages\individualMessages.view.html" />
+    <Content Include="clientapp\modules\campusLeader\messagesLog\messagesLog.module.js" />
+    <Content Include="clientapp\modules\campusLeader\messagesLog\messagesLog.view.html" />
+    <Content Include="clientapp\modules\campusLeader\landing\landing.module.js" />
+    <Content Include="clientapp\modules\campusLeader\landing\landing.view.html" />
     <Content Include="clientapp\modules\directives\feedback\feedback.module.js" />
     <Content Include="clientapp\modules\directives\feedback\feedback.view.html" />
+    <Content Include="clientapp\modules\directives\modals\inactivity\inactivity.module.js" />
+    <Content Include="clientapp\modules\directives\modals\inactivity\inactivity.view.html" />
+    <Content Include="clientapp\modules\teacher\groupMessaging\groupMessaging.module.js" />
+    <Content Include="clientapp\modules\teacher\groupMessaging\groupMessaging.view.html" />
+    <Content Include="clientapp\modules\directives\modals\confirmation\confirmation.module.js" />
+    <Content Include="clientapp\modules\directives\modals\confirmation\confirmation.view.html" />
+    <Content Include="clientapp\modules\directives\onScroll\onScroll.directive.js" />
     <Content Include="clientapp\modules\directives\studentStaarAssessment\studentStaarAssessment.module.js" />
     <Content Include="clientapp\modules\directives\studentStaarAssessment\studentStaarAssessment.view.html" />
     <Content Include="clientapp\modules\filters\bold.filter.js" />
@@ -949,12 +1043,17 @@
     <Content Include="clientapp\modules\teacher\landing\landing.view.html" />
     <Content Include="clientapp\modules\communications\communications.module.js" />
     <Content Include="clientapp\modules\communications\communications.view.html" />
+    <Content Include="clientapp\modules\tools\langTransPack\langTranslate.module.js" />
+    <Content Include="clientapp\modules\tools\langTransPack\langTranslate.view.html" />
     <Content Include="clientapp\modules\userProfile\userProfile.module.js" />
     <Content Include="clientapp\modules\userProfile\userProfile.view.html" />
+    <Content Include="clientapp\services\api\apiAdmin.js" />
     <Content Include="clientapp\services\api\apiApplication.js" />
     <Content Include="clientapp\services\api\apiAlerts.js" />
     <Content Include="clientapp\services\api\apiImage.js" />
     <Content Include="clientapp\services\api\apiFeedback.js" />
+    <Content Include="clientapp\services\api\apiLog.js" />
+    <Content Include="clientapp\services\api\apiSchools.js" />
     <Content Include="clientapp\services\api\apiTranslate.js" />
     <Content Include="clientapp\services\api\apiCommunications.js" />
     <Content Include="clientapp\services\api\apiTypes.js" />
@@ -963,12 +1062,20 @@
     <Content Include="clientapp\services\api\apiStudents.js" />
     <Content Include="clientapp\services\api\apiParents.js" />
     <Content Include="clientapp\services\api\apiTeachers.js" />
+    <Content Include="clientapp\services\communicationService.js" />
     <Content Include="clientapp\services\appServicesModule.js" />
+    <Content Include="clientapp\services\impersonateService.js" />
+    <Content Include="clientapp\services\stateStorageService.js" />
+    <Content Include="clientapp\services\unreadMessagesService.js" />
     <Content Include="clientapp\services\userAuthenticationService.js" />
     <Content Include="clientapp\services\signalRService.js" />
     <Content Include="clientapp\services\customParams.js" />
     <Content Include="clientapp\services\landingRouteService.js" />
     <Content Include="index.html" />
+    <Content Include="clientapp\modules\admin\landing.view.html" />
+    <Content Include="clientapp\modules\campusLeader\groupMessages\groupMessages.view.html" />
+    <None Include="Properties\PublishProfiles\HeroProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\NelticProfile.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -978,15 +1085,26 @@
     <Content Include="Templates\Email\AlertEmailTemplate.html" />
     <Content Include="Templates\Email\UnreadMessageAlertEmailTemplate.html" />
     <Content Include="Templates\SMS\AlertSMSTemplate.txt" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CacheController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\CommunicationsController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\MobileController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\OAuth\Admin\OAuthAdminRequest.cs" />
+    <Compile Include="Controllers\OAuth\Admin\OAuthAdminResponse.cs" />
+    <Compile Include="Controllers\OAuth\OAuthController.cs" />
+    <Compile Include="Controllers\OAuth\OAuthRequest.cs" />
+    <Compile Include="Controllers\OAuth\OAuthResponse.cs" />
+    <Compile Include="Controllers\OAuth\OAuthIdentityIdRequest.cs" />
+    <Compile Include="Controllers\OAuth\OAuthTokenExchangeRequest.cs" />
+    <Compile Include="Controllers\RedirectController.cs" />
+    <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Controllers\TranslateController.cs" />
     <Compile Include="Controllers\ApplicationOfflineController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -997,6 +1115,8 @@
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\CustomParametersController.cs" />
+    <Compile Include="Filters\ExceptionFilter.cs" />
+    <Compile Include="Filters\UnauthorizedFilter.cs" />
     <Compile Include="Filters\ActionExecutionTimerFilter.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Infrastructure\Cache\CacheInterceptor.cs" />
@@ -1028,12 +1148,6 @@
     <Content Include="customizableParametersEdFi31.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Dev - ToolWise.net.pubxml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
