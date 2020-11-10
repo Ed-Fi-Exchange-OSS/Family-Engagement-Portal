@@ -116,7 +116,7 @@ ALTER TABLE [ParentPortal].[AlertLog] ADD  CONSTRAINT [DF_AlertLog_LastModifiedD
 GO
 ALTER TABLE [ParentPortal].[AlertLog] ADD  CONSTRAINT [DF_AlertLog_Id]  DEFAULT (newid()) FOR [Id]
 GO
-ALTER TABLE [ParentPortal].[Alertlog] ADD  CONSTRAINT [DF_AlertLog_Read]  DEFAULT (0) FOR [Read];
+ALTER TABLE [ParentPortal].[Alertlog] ADD  CONSTRAINT [DF_AlertLog_Read]  DEFAULT (0) FOR [Read]
 GO
 ALTER TABLE [ParentPortal].[MethodOfContactType] ADD  CONSTRAINT [MethodOfContactType_DF_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
@@ -612,10 +612,13 @@ INSERT INTO [ParentPortal].[ThresholdType](ThresholdTypeId, Description, ShortDe
 GO
 SET IDENTITY_INSERT [ParentPortal].[ThresholdType] OFF
 GO
-INSERT INTO [ParentPortal].[AlertTypeThresholdAssociation] VALUES (1,1),(1,2),(1,3),(2,4),(3,5),(4,6);
+INSERT INTO [ParentPortal].[AlertTypeThresholdAssociation] VALUES (1,1),(1,2),(1,3),(2,4),(3,5),(4,6)
 GO
 
-/****** Object:  Table [ParentPortal].[ChatLog]    Script Date: 3/22/2019 11:51:41 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE TABLE [ParentPortal].[ChatLog] (
     [StudentUniqueId]        NVARCHAR (32)    NOT NULL,
     [SenderTypeId]           INT              NOT NULL,
@@ -629,19 +632,17 @@ CREATE TABLE [ParentPortal].[ChatLog] (
     [Id]                     UNIQUEIDENTIFIER CONSTRAINT [ChatLog_DF_Id] DEFAULT (newid()) NOT NULL,
     [TranslatedLanguageCode] NVARCHAR (5)     NULL,
     CONSTRAINT [ChatLog_PK] PRIMARY KEY NONCLUSTERED ([StudentUniqueId] ASC, [SenderTypeId] ASC, [SenderUniqueId] ASC, [RecipientTypeId] ASC, [RecipientUniqueId] ASC, [DateSent] ASC, [Id] ASC),
-    CONSTRAINT [FK_ChatLog_RecipientType] FOREIGN KEY ([RecipientTypeId]) REFERENCES [ParentPortal].[ChatLogPersonType] ([ChatLogPersonTypeId]),
-    CONSTRAINT [FK_ChatLog_SenderType] FOREIGN KEY ([SenderTypeId]) REFERENCES [ParentPortal].[ChatLogPersonType] ([ChatLogPersonTypeId])
-);
+)
 GO
 
 CREATE NONCLUSTERED INDEX [ChatLog_RecipientUniqueId]
-    ON [ParentPortal].[ChatLog]([RecipientUniqueId] ASC);
+    ON [ParentPortal].[ChatLog]([RecipientUniqueId] ASC)
 GO
 
 CREATE NONCLUSTERED INDEX [ChatLog_SenderUniqueId]
-    ON [ParentPortal].[ChatLog]([SenderUniqueId] ASC);
+    ON [ParentPortal].[ChatLog]([SenderUniqueId] ASC)
 GO
-/****** Object:  Table [ParentPortal].[[ThresholdType]]    Script Date: 05/02/2019 3:50:00 PM ******/
+
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [ParentPortal].[ChatLogPersonType](
@@ -657,7 +658,7 @@ CREATE TABLE [ParentPortal].[ChatLogPersonType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [ParentPortal].[ChatLogPersonType] ADD  CONSTRAINT [DF_ChatLogPersonType_CreateDate]  DEFAULT (getdate()) FOR [CreateDate];
+ALTER TABLE [ParentPortal].[ChatLogPersonType] ADD  CONSTRAINT [DF_ChatLogPersonType_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
 ALTER TABLE [ParentPortal].[ChatLogPersonType] ADD  CONSTRAINT [ChatLogPersonType_DF_LastModifiedDate]  DEFAULT (getdate()) FOR [LastModifiedDate]
 GO
@@ -674,9 +675,10 @@ GO
 ALTER TABLE [ParentPortal].[ChatLog] CHECK CONSTRAINT [FK_ChatLog_SenderType]
 GO
 
+
 SET IDENTITY_INSERT [ParentPortal].[ChatLogPersonType] ON 
 GO
-INSERT INTO [ParentPortal].[ChatLogPersonType](ChatLogPersonTypeId,Description,ShortDescription) VALUES (1, 'Parent', 'Parent'), (2, 'Staff', 'Staff');    
+INSERT INTO [ParentPortal].[ChatLogPersonType](ChatLogPersonTypeId,Description,ShortDescription) VALUES (1, 'Parent', 'Parent'), (2, 'Staff', 'Staff')
 GO
 SET IDENTITY_INSERT [ParentPortal].[ChatLogPersonType] OFF
 GO
@@ -693,7 +695,7 @@ CREATE TABLE [ParentPortal].[AppOffline](
 ) ON [PRIMARY]
 GO
 /*Set Default to NOT offline*/
-INSERT INTO [ParentPortal].[AppOffline] (IsAppOffline) VALUES (0);
+INSERT INTO [ParentPortal].[AppOffline] (IsAppOffline) VALUES (0)
 GO
 /****** Object:  Table [ParentPortal].[FeedbackLog]    Script Date: 5/03/2019 2:40:00 PM ******/
 SET QUOTED_IDENTIFIER ON
@@ -717,7 +719,7 @@ CREATE TABLE [ParentPortal].[FeedbackLog] (
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [ParentPortal].[FeedbackLog] ADD  CONSTRAINT [DF_FeedbackLog_CreateDate]  DEFAULT (getdate()) FOR [CreateDate];
+ALTER TABLE [ParentPortal].[FeedbackLog] ADD  CONSTRAINT [DF_FeedbackLog_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
 ALTER TABLE [ParentPortal].[FeedbackLog] ADD  CONSTRAINT [FeedbackLog_DF_LastModifiedDate]  DEFAULT (getdate()) FOR [LastModifiedDate]
 GO
@@ -752,7 +754,7 @@ CREATE TABLE [ParentPortal].[UrlType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [ParentPortal].[UrlType] ADD  CONSTRAINT [DF_UrlType_CreateDate]  DEFAULT (getdate()) FOR [CreateDate];
+ALTER TABLE [ParentPortal].[UrlType] ADD  CONSTRAINT [DF_UrlType_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
 ALTER TABLE [ParentPortal].[UrlType] ADD  CONSTRAINT [UrlType_DF_LastModifiedDate]  DEFAULT (getdate()) FOR [LastModifiedDate]
 GO
@@ -765,7 +767,7 @@ ALTER TABLE [ParentPortal].[SpotlightIntegration] CHECK CONSTRAINT [FK_Spotlight
 GO
 SET IDENTITY_INSERT [ParentPortal].[UrlType] ON 
 GO
-INSERT INTO [ParentPortal].[UrlType](UrlTypeId,Description,ShortDescription) VALUES (1, 'Video Url', 'Video'), (2, 'PDF Url', 'PDF');    
+INSERT INTO [ParentPortal].[UrlType](UrlTypeId,Description,ShortDescription) VALUES (1, 'Video Url', 'Video'), (2, 'PDF Url', 'PDF')
 GO
 SET IDENTITY_INSERT [ParentPortal].[UrlType] OFF
 GO
@@ -890,7 +892,7 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 			AND  gtd.CodeValue = 'Final'
 			AND g.NumericGradeEarned IS NOT NULL)
 			as [FinalAvg]
-FROM edfi.Student as s;
+FROM edfi.Student as s
 GO
 CREATE TABLE [ParentPortal].[Logs](
 	[LogId] [int] IDENTITY(1,1) NOT NULL,
@@ -905,7 +907,7 @@ CREATE TABLE [ParentPortal].[Logs](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [DF_Logs_DateTimeOfEvent]  DEFAULT (getdate()) FOR [DateTimeOfEvent];
+ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [DF_Logs_DateTimeOfEvent]  DEFAULT (getdate()) FOR [DateTimeOfEvent]
 GO
 ALTER TABLE [ParentPortal].[Logs] ADD  CONSTRAINT [Logs_DF_LastModifiedDate]  DEFAULT (getdate()) FOR [LastModifiedDate]
 GO
