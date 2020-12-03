@@ -307,12 +307,12 @@ values('STAAR SOCIAL STUDIES', 218, 'uri://ed-fi.org/Assessment/Assessment.xml',
 GO
 
 -- Adding Messages
-insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, OriginalMessage, DateSent, RecipientHasRead)
+insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, EnglishMessage, DateSent, RecipientHasRead)
 values(605541, 2, 207260, 1, 777779, 'Message for Demo', '2011-04-2', 0);
 
-insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, OriginalMessage, DateSent, RecipientHasRead)
+insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, EnglishMessage, DateSent, RecipientHasRead)
 values(605255, 2, 207272, 1, 777779, 'Hello', '2011-04-2', 0);
-insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, OriginalMessage, DateSent, RecipientHasRead)
+insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, EnglishMessage, DateSent, RecipientHasRead)
 values(605255, 2, 207272, 1, 777779, 'This is a message', '2011-04-3', 0);
 GO
 
