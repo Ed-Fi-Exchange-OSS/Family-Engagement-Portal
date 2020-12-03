@@ -2,7 +2,7 @@
     .config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('app.alert', {
             url: '/alert',
-                requireADLogin: true,
+                //requireADLogin: true,
                 views: {
                     'content@': { component:'alert' }
                 },

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="clientapp/lib/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="clientapp/lib/animate/animate.min.css">
     <link rel="stylesheet" href="clientapp/lib/toastr/toastr.min.css">
+    <link rel="stylesheet" href="clientapp/lib/angular-tags/ng-tags-input.min.css">
 
     <!-- Icon Fonts -->
     <link href="https://unpkg.com/ionicons@4.6.1/dist/css/ionicons.min.css" rel="stylesheet">
@@ -32,7 +33,8 @@
     <script src="clientapp/lib/popper/popper.min.js"></script>
     <script src="clientapp/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="clientapp/lib/chartjs/Chart.min.js"></script>
-    <script src="clientapp/lib/azureAD/adal.js"></script>
+    <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+    <!--<script src="clientapp/lib/azureAD/adal.js"></script>-->
     <script src="clientapp/lib/toastr/toastr.min.js"></script>
     <script src="clientapp/lib/moment/moment.min.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
@@ -114,7 +116,7 @@
     <script src="clientapp/languages/zh-Hans-cn.js"></script>
     <script src="clientapp/languages/zh-Hant-cn.js"></script>
     <script src="clientapp/lib/angular-chart/angular-chart.min.js"></script>
-    <script src="clientapp/lib/azureAD/adal-angular.js"></script>
+    <!--<script src="clientapp/lib/azureAD/adal-angular.js"></script>-->
     <script src="clientapp/lib/angular-touch/angular-touch.min.js"></script>
     <script src="clientapp/lib/ui-bootstrap/ui-bootstrap-tpls-3.0.6.min.js"></script>
     <script src="clientapp/lib/moment/angular-moment.min.js"></script>
@@ -124,10 +126,12 @@
     <script src="clientapp/lib/masonry/masonry.pkgd.min.js"></script>
     <script src="clientapp/lib/imagesLoaded/imagesloaded.pkgd.min.js"></script>
     <script src="clientapp/lib/angular-masonry/angular-masonry.js"></script>
+    <script src="clientapp/lib/angular-tags/ng-tags-input.min.js"></script>
 
     <script src="clientapp/app.js"></script>
     <script src="clientapp/app.config.js"></script>
-    <script src="clientapp/app.config.authentication.azure.js"></script>
+    <!--<script src="clientapp/app.config.authentication.azure.js"></script>-->
+    <script src="clientapp/app.config.jwt.js"></script>
 
     <!-- Angular.Services -->
     <script src="clientapp/services/appServicesModule.js"></script>
@@ -142,6 +146,7 @@
 
     <!-- Angular.Apis -->
     <script src="clientapp/services/api/api.js"></script>
+    <script src="clientapp/services/api/apiOAuth.js"></script>
     <script src="clientapp/services/api/apiParents.js"></script>
     <script src="clientapp/services/api/apiStudents.js"></script>
     <script src="clientapp/services/api/apiTeachers.js"></script>
@@ -156,6 +161,7 @@
     <script src="clientapp/services/api/apiLog.js"></script>
     <script src="clientapp/services/api/apiAdmin.js"></script>
     <script src="clientapp/services/api/apiSchools.js"></script>
+    <script src="clientapp/services/api/apiFeatures.js"></script>
     <!-- Angular.Directives -->
     <script src="clientapp/modules/directives/directives.module.js"></script>
     <script src="clientapp/modules/directives/preloader/preloader.module.js"></script>
@@ -197,6 +203,9 @@
     <script src="clientapp/modules/teacher/groupMessaging/groupMessaging.module.js"></script>
     <script src="clientapp/modules/directives/modals/confirmation/confirmation.module.js"></script>
     <script src="clientapp/modules/directives/modals/inactivity/inactivity.module.js"></script>
+    <script src="clientapp/modules/directives/studentARC/studentARC.module.js"></script>
+    <script src="clientapp/modules/directives/studentGoals/studentGoals.module.js"></script>
+    <script src="clientapp/modules/directives/studentAllAboutMe/studentAllAboutMe.module.js"></script>
     <!--Angular.Components-->
     <script src="clientapp/modules/componentSkeleton/skeleton.module.js"></script>
     <script src="clientapp/modules/login/login.module.js"></script>
@@ -208,9 +217,10 @@
     <script src="clientapp/modules/userProfile/userProfile.module.js"></script>
     <script src="clientapp/modules/communications/communications.module.js"></script>
     <script src="clientapp/modules/alert/alert.module.js"></script>
-    <script src="clientapp/modules/admin/landing.module.js"></script>
+    <script src="clientapp/modules/admin/landing/landing.module.js"></script>
     <script src="clientapp/modules/campusLeader/landing/landing.module.js"></script>
     <script src="clientapp/modules/tools/langTransPack/langTranslate.module.js"></script>
+    <script src="clientapp/modules/admin/studentdetailfeatures/studentdetailfeatures.module.js"></script>
     <!--Angular.Filters-->
     <script src="clientapp/modules/filters/recipientSearch.filter.js"></script>
     <script src="clientapp/modules/filters/bold.filter.js"></script>

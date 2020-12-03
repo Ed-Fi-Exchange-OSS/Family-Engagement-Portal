@@ -54,6 +54,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<Admin> Admins { get; set; } // Admin
         System.Data.Entity.DbSet<AdministrationEnvironmentDescriptor> AdministrationEnvironmentDescriptors { get; set; } // AdministrationEnvironmentDescriptor
         System.Data.Entity.DbSet<AdministrativeFundingControlDescriptor> AdministrativeFundingControlDescriptors { get; set; } // AdministrativeFundingControlDescriptor
+        System.Data.Entity.DbSet<AdminStudentDetailFeature> AdminStudentDetailFeatures { get; set; } // AdminStudentDetailFeatures
         System.Data.Entity.DbSet<AlertLog> AlertLogs { get; set; } // AlertLog
         System.Data.Entity.DbSet<AlertType> AlertTypes { get; set; } // AlertType
         System.Data.Entity.DbSet<AppOffline> AppOfflines { get; set; } // AppOffline
@@ -228,6 +229,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<GroupMessagesQueueLog> GroupMessagesQueueLogs { get; set; } // GroupMessagesQueueLog
         System.Data.Entity.DbSet<GunFreeSchoolsActReportingStatusDescriptor> GunFreeSchoolsActReportingStatusDescriptors { get; set; } // GunFreeSchoolsActReportingStatusDescriptor
         System.Data.Entity.DbSet<HomelessPrimaryNighttimeResidenceDescriptor> HomelessPrimaryNighttimeResidenceDescriptors { get; set; } // HomelessPrimaryNighttimeResidenceDescriptor
+		System.Data.Entity.DbSet<StudentAllAbout> StudentAllAbouts { get; set; } // StudentAllAbout
         System.Data.Entity.DbSet<HomelessProgramServiceDescriptor> HomelessProgramServiceDescriptors { get; set; } // HomelessProgramServiceDescriptor
         System.Data.Entity.DbSet<IdentificationDocumentUseDescriptor> IdentificationDocumentUseDescriptors { get; set; } // IdentificationDocumentUseDescriptor
         System.Data.Entity.DbSet<IncidentLocationDescriptor> IncidentLocationDescriptors { get; set; } // IncidentLocationDescriptor
@@ -570,7 +572,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         System.Data.Entity.DbSet<VersionLevel> VersionLevels { get; set; } // VersionLevel
         System.Data.Entity.DbSet<VisaDescriptor> VisaDescriptors { get; set; } // VisaDescriptor
         System.Data.Entity.DbSet<WeaponDescriptor> WeaponDescriptors { get; set; } // WeaponDescriptor
-
+        System.Data.Entity.DbSet<StudentGoal> StudentGoals { get; set; } // StudentGoal
+        System.Data.Entity.DbSet<StudentGoalIntervention> StudentGoalInterventions { get; set; } // StudentGoalIntervention
+        System.Data.Entity.DbSet<StudentGoalLabel> StudentGoalLabels { get; set; } // StudentGoalLabel
+        System.Data.Entity.DbSet<StudentGoalStep> StudentGoalSteps { get; set; } // StudentGoalStep
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
         System.Threading.Tasks.Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken);
@@ -592,6 +597,11 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class EdFi31Context : System.Data.Entity.DbContext, IEdFi31Context
     {
+		public System.Data.Entity.DbSet<StudentAllAbout> StudentAllAbouts { get; set; } // StudentAllAbout
+        public System.Data.Entity.DbSet<StudentGoal> StudentGoals { get; set; } // StudentGoal
+        public System.Data.Entity.DbSet<StudentGoalIntervention> StudentGoalInterventions { get; set; } // StudentGoalIntervention
+        public System.Data.Entity.DbSet<StudentGoalLabel> StudentGoalLabels { get; set; } // StudentGoalLabel
+        public System.Data.Entity.DbSet<StudentGoalStep> StudentGoalSteps { get; set; } // StudentGoalStep
         public System.Data.Entity.DbSet<AbsenceEventCategoryDescriptor> AbsenceEventCategoryDescriptors { get; set; } // AbsenceEventCategoryDescriptor
         public System.Data.Entity.DbSet<AcademicHonorCategoryDescriptor> AcademicHonorCategoryDescriptors { get; set; } // AcademicHonorCategoryDescriptor
         public System.Data.Entity.DbSet<AcademicSubjectDescriptor> AcademicSubjectDescriptors { get; set; } // AcademicSubjectDescriptor
@@ -710,6 +720,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<DisabilityDescriptor> DisabilityDescriptors { get; set; } // DisabilityDescriptor
         public System.Data.Entity.DbSet<DisabilityDesignationDescriptor> DisabilityDesignationDescriptors { get; set; } // DisabilityDesignationDescriptor
         public System.Data.Entity.DbSet<DisabilityDeterminationSourceTypeDescriptor> DisabilityDeterminationSourceTypeDescriptors { get; set; } // DisabilityDeterminationSourceTypeDescriptor
+        public System.Data.Entity.DbSet<AdminStudentDetailFeature> AdminStudentDetailFeatures { get; set; } // AdminStudentDetailFeatures
         public System.Data.Entity.DbSet<DisciplineAction> DisciplineActions { get; set; } // DisciplineAction
         public System.Data.Entity.DbSet<DisciplineActionDiscipline> DisciplineActionDisciplines { get; set; } // DisciplineActionDiscipline
         public System.Data.Entity.DbSet<DisciplineActionLengthDifferenceReasonDescriptor> DisciplineActionLengthDifferenceReasonDescriptors { get; set; } // DisciplineActionLengthDifferenceReasonDescriptor
@@ -1351,6 +1362,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new InterventionConfiguration());
             modelBuilder.Configurations.Add(new InterventionAppropriateGradeLevelConfiguration());
             modelBuilder.Configurations.Add(new InterventionAppropriateSexConfiguration());
+			modelBuilder.Configurations.Add(new StudentAllAboutConfiguration());
             modelBuilder.Configurations.Add(new InterventionClassDescriptorConfiguration());
             modelBuilder.Configurations.Add(new InterventionDiagnosiConfiguration());
             modelBuilder.Configurations.Add(new InterventionEducationContentConfiguration());
@@ -1368,6 +1380,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new InterventionPrescriptionPopulationServedConfiguration());
             modelBuilder.Configurations.Add(new InterventionPrescriptionUriConfiguration());
             modelBuilder.Configurations.Add(new InterventionStaffConfiguration());
+            modelBuilder.Configurations.Add(new AdminStudentDetailFeatureConfiguration());
             modelBuilder.Configurations.Add(new InterventionStudyConfiguration());
             modelBuilder.Configurations.Add(new InterventionStudyAppropriateGradeLevelConfiguration());
             modelBuilder.Configurations.Add(new InterventionStudyAppropriateSexConfiguration());
@@ -1684,6 +1697,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new VersionLevelConfiguration());
             modelBuilder.Configurations.Add(new VisaDescriptorConfiguration());
             modelBuilder.Configurations.Add(new WeaponDescriptorConfiguration());
+            modelBuilder.Configurations.Add(new StudentGoalConfiguration());
+            modelBuilder.Configurations.Add(new StudentGoalInterventionConfiguration());
+            modelBuilder.Configurations.Add(new StudentGoalLabelConfiguration());
+            modelBuilder.Configurations.Add(new StudentGoalStepConfiguration());
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
@@ -2000,8 +2017,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new PerformanceLevelDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new PersonalInformationVerificationDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new PopulationServedDescriptorConfiguration(schema));
+			modelBuilder.Configurations.Add(new StudentAllAboutConfiguration(schema));
             modelBuilder.Configurations.Add(new PostingResultDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new PostSecondaryEventConfiguration(schema));
+            modelBuilder.Configurations.Add(new AdminStudentDetailFeatureConfiguration(schema));
             modelBuilder.Configurations.Add(new PostSecondaryEventCategoryDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new PostSecondaryInstitutionConfiguration(schema));
             modelBuilder.Configurations.Add(new PostSecondaryInstitutionLevelDescriptorConfiguration(schema));
@@ -2221,6 +2240,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             modelBuilder.Configurations.Add(new VersionLevelConfiguration(schema));
             modelBuilder.Configurations.Add(new VisaDescriptorConfiguration(schema));
             modelBuilder.Configurations.Add(new WeaponDescriptorConfiguration(schema));
+            modelBuilder.Configurations.Add(new StudentGoalConfiguration(schema));
+            modelBuilder.Configurations.Add(new StudentGoalInterventionConfiguration(schema));
+            modelBuilder.Configurations.Add(new StudentGoalLabelConfiguration(schema));
+            modelBuilder.Configurations.Add(new StudentGoalStepConfiguration(schema));
             return modelBuilder;
         }
     }
@@ -2243,6 +2266,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class FakeEdFi31Context : IEdFi31Context
     {
+        public System.Data.Entity.DbSet<StudentGoal> StudentGoals { get; set; }
+        public System.Data.Entity.DbSet<StudentGoalIntervention> StudentGoalInterventions { get; set; }
+        public System.Data.Entity.DbSet<StudentGoalLabel> StudentGoalLabels { get; set; }
+        public System.Data.Entity.DbSet<StudentGoalStep> StudentGoalSteps { get; set; }
         public System.Data.Entity.DbSet<AbsenceEventCategoryDescriptor> AbsenceEventCategoryDescriptors { get; set; }
         public System.Data.Entity.DbSet<AcademicHonorCategoryDescriptor> AcademicHonorCategoryDescriptors { get; set; }
         public System.Data.Entity.DbSet<AcademicSubjectDescriptor> AcademicSubjectDescriptors { get; set; }
@@ -2381,6 +2408,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<EducationContentLanguage> EducationContentLanguages { get; set; }
         public System.Data.Entity.DbSet<EducationOrganization> EducationOrganizations { get; set; }
         public System.Data.Entity.DbSet<EducationOrganizationAddress> EducationOrganizationAddresses { get; set; }
+		public System.Data.Entity.DbSet<StudentAllAbout> StudentAllAbouts { get; set; }
         public System.Data.Entity.DbSet<EducationOrganizationAddressPeriod> EducationOrganizationAddressPeriods { get; set; }
         public System.Data.Entity.DbSet<EducationOrganizationCategory> EducationOrganizationCategories { get; set; }
         public System.Data.Entity.DbSet<EducationOrganizationCategoryDescriptor> EducationOrganizationCategoryDescriptors { get; set; }
@@ -2668,6 +2696,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public System.Data.Entity.DbSet<StaffTelephone> StaffTelephones { get; set; }
         public System.Data.Entity.DbSet<StaffTribalAffiliation> StaffTribalAffiliations { get; set; }
         public System.Data.Entity.DbSet<StaffVisa> StaffVisas { get; set; }
+        public System.Data.Entity.DbSet<AdminStudentDetailFeature> AdminStudentDetailFeatures { get; set; }
         public System.Data.Entity.DbSet<StateAbbreviationDescriptor> StateAbbreviationDescriptors { get; set; }
         public System.Data.Entity.DbSet<StateEducationAgency> StateEducationAgencies { get; set; }
         public System.Data.Entity.DbSet<StateEducationAgencyAccountability> StateEducationAgencyAccountabilities { get; set; }
@@ -2938,6 +2967,10 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             EducationOrganizationInternationalAddresses = new FakeDbSet<EducationOrganizationInternationalAddress>("AddressTypeDescriptorId", "EducationOrganizationId");
             EducationOrganizationInterventionPrescriptionAssociations = new FakeDbSet<EducationOrganizationInterventionPrescriptionAssociation>("EducationOrganizationId", "InterventionPrescriptionEducationOrganizationId", "InterventionPrescriptionIdentificationCode");
             EducationOrganizationNetworks = new FakeDbSet<EducationOrganizationNetwork>("EducationOrganizationNetworkId");
+            StudentGoals = new FakeDbSet<StudentGoal>("StudentGoalId");
+            StudentGoalInterventions = new FakeDbSet<StudentGoalIntervention>("StudentGoalInterventionId");
+            StudentGoalLabels = new FakeDbSet<StudentGoalLabel>("StudentGoalLabelId");
+            StudentGoalSteps = new FakeDbSet<StudentGoalStep>("StudentGoalStepId");
             EducationOrganizationNetworkAssociations = new FakeDbSet<EducationOrganizationNetworkAssociation>("EducationOrganizationNetworkId", "MemberEducationOrganizationId");
             EducationOrganizationPeerAssociations = new FakeDbSet<EducationOrganizationPeerAssociation>("EducationOrganizationId", "PeerEducationOrganizationId");
             EducationOrganizationToStaffUsiAssignments = new FakeDbSet<EducationOrganizationToStaffUsiAssignment>("EducationOrganizationId", "StaffUsi", "BeginDate");
@@ -2947,6 +2980,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             ElectronicMailTypeDescriptors = new FakeDbSet<ElectronicMailTypeDescriptor>("ElectronicMailTypeDescriptorId");
             EmploymentStatusDescriptors = new FakeDbSet<EmploymentStatusDescriptor>("EmploymentStatusDescriptorId");
             EntryGradeLevelReasonDescriptors = new FakeDbSet<EntryGradeLevelReasonDescriptor>("EntryGradeLevelReasonDescriptorId");
+			StudentAllAbouts = new FakeDbSet<StudentAllAbout>("StudentAllAboutId");
             EntryTypeDescriptors = new FakeDbSet<EntryTypeDescriptor>("EntryTypeDescriptorId");
             EventCircumstanceDescriptors = new FakeDbSet<EventCircumstanceDescriptor>("EventCircumstanceDescriptorId");
             ExitWithdrawTypeDescriptors = new FakeDbSet<ExitWithdrawTypeDescriptor>("ExitWithdrawTypeDescriptorId");
@@ -3316,6 +3350,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             VersionLevels = new FakeDbSet<VersionLevel>("ScriptSource", "ScriptType", "DatabaseType", "VersionLevel_");
             VisaDescriptors = new FakeDbSet<VisaDescriptor>("VisaDescriptorId");
             WeaponDescriptors = new FakeDbSet<WeaponDescriptor>("WeaponDescriptorId");
+            AdminStudentDetailFeatures = new FakeDbSet<AdminStudentDetailFeature>("AdminStudentDetailFeaturesId");
         }
 
         public int SaveChangesCount { get; private set; }
@@ -5085,6 +5120,32 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // AdminStudentDetailFeatures
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class AdminStudentDetailFeature
+    {
+        public int AdminStudentDetailFeaturesId { get; set; } // AdminStudentDetailFeaturesId (Primary key)
+        public bool Profile { get; set; } // Profile
+        public bool AttendanceIndicator { get; set; } // AttendanceIndicator
+        public bool CourseAverageIndicator { get; set; } // CourseAverageIndicator
+        public bool BehaviorIndicator { get; set; } // BehaviorIndicator
+        public bool MissingAssignmentsIndicator { get; set; } // MissingAssignmentsIndicator
+        public bool AllAboutMe { get; set; } // AllAboutMe
+        public bool Goals { get; set; } // Goals
+        public bool AttendanceLog { get; set; } // AttendanceLog
+        public bool BehaviorLog { get; set; } // BehaviorLog
+        public bool CourseGrades { get; set; } // CourseGrades
+        public bool MissingAssignments { get; set; } // MissingAssignments
+        public bool Calendar { get; set; } // Calendar
+        public bool SuccessTeam { get; set; } // SuccessTeam
+        public bool CollegeInitiativeCorner { get; set; } // CollegeInitiativeCorner
+        public bool Arc { get; set; } // ARC
+        public bool StaarAssessment { get; set; } // STAARAssessment
+        public bool Assessment { get; set; } // Assessment
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
+    }
+
     // AssessmentItem
     ///<summary>
     /// This entity represents one of many single measures that make up an assessment.
@@ -5299,6 +5360,25 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         {
             StudentAssessmentItems = new System.Collections.Generic.List<StudentAssessmentItem>();
         }
+    }
+
+	// StudentAllAbout
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentAllAbout
+    {
+        public int StudentAllAboutId { get; set; } // StudentAllAboutId (Primary key)
+        public int StudentUsi { get; set; } // StudentUSI
+        public string PrefferedName { get; set; } // PrefferedName
+        public string FunFact { get; set; } // FunFact
+        public string TypesOfBook { get; set; } // TypesOfBook
+        public string FavoriteAnimal { get; set; } // FavoriteAnimal
+        public string FavoriteThingToDo { get; set; } // FavoriteThingToDo
+        public string FavoriteSubjectSchool { get; set; } // FavoriteSubjectSchool
+        public string OneThingWant { get; set; } // OneThingWant
+        public string LearnToDo { get; set; } // LearnToDo
+        public string LearningThings { get; set; } // LearningThings
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
     }
 
     // AssessmentLanguage
@@ -12904,6 +12984,81 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             StudentCompetencyObjectiveGeneralStudentProgramAssociations = new System.Collections.Generic.List<StudentCompetencyObjectiveGeneralStudentProgramAssociation>();
             StudentLearningObjectiveGeneralStudentProgramAssociations = new System.Collections.Generic.List<StudentLearningObjectiveGeneralStudentProgramAssociation>();
         }
+    }
+
+    // StudentGoal
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoal
+    {
+        public int StudentGoalId { get; set; } // StudentGoalId (Primary key)
+        public int StudentUsi { get; set; } // StudentUSI
+        public string GoalType { get; set; } // GoalType (length: 10)
+        public string Goal { get; set; } // Goal
+        public string GradeLevel { get; set; } // GradeLevel
+        public System.DateTime DateGoalCreated { get; set; } // DateGoalCreated
+        public System.DateTime DateScheduled { get; set; } // DateScheduled
+        public System.DateTime? DateCompleted { get; set; } // DateCompleted
+        public string Additional { get; set; } // Additional
+        public string Completed { get; set; } // Completed (length: 10)
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
+        public string Labels { get; set; } // Labels
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child StudentGoalSteps where [StudentGoalStep].[StudentGoalId] point to this entity (FK_StudentGoalStep_StudentGoal)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<StudentGoalStep> StudentGoalSteps { get; set; } // StudentGoalStep.FK_StudentGoalStep_StudentGoal
+
+        public StudentGoal()
+        {
+            StudentGoalSteps = new System.Collections.Generic.List<StudentGoalStep>();
+        }
+    }
+
+    // StudentGoalIntervention
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalIntervention
+    {
+        public int StudentGoalInterventionId { get; set; } // StudentGoalInterventionId (Primary key)
+        public int StudentUsi { get; set; } // StudentUSI
+        public int StudentGoalId { get; set; } // StudentGoalId
+        public string Description { get; set; } // Description
+        public System.DateTime InterventionStart { get; set; } // InterventionStart
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
+    }
+
+    // StudentGoalLabel
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalLabel
+    {
+        public int StudentGoalLabelId { get; set; } // StudentGoalLabelId (Primary key)
+        public string Label { get; set; } // Label
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
+    }
+
+    // StudentGoalStep
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalStep
+    {
+        public int StudentGoalStepId { get; set; } // StudentGoalStepId (Primary key)
+        public int StudentGoalId { get; set; } // StudentGoalId
+        public string StepName { get; set; } // StepName
+        public bool Completed { get; set; } // Completed
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
+        public bool IsActive { get; set; } // IsActive
+        public int? StudentGoalInterventionId { get; set; } // StudentGoalInterventionId
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent StudentGoal pointed by [StudentGoalStep].([StudentGoalId]) (FK_StudentGoalStep_StudentGoal)
+        /// </summary>
+        public virtual StudentGoal StudentGoal { get; set; } // FK_StudentGoalStep_StudentGoal
     }
 
     // Grade
@@ -41204,6 +41359,43 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // AdminStudentDetailFeatures
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class AdminStudentDetailFeatureConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AdminStudentDetailFeature>
+    {
+        public AdminStudentDetailFeatureConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public AdminStudentDetailFeatureConfiguration(string schema)
+        {
+            ToTable("AdminStudentDetailFeatures", schema);
+            HasKey(x => x.AdminStudentDetailFeaturesId);
+
+            Property(x => x.AdminStudentDetailFeaturesId).HasColumnName(@"AdminStudentDetailFeaturesId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Profile).HasColumnName(@"Profile").HasColumnType("bit").IsRequired();
+            Property(x => x.AttendanceIndicator).HasColumnName(@"AttendanceIndicator").HasColumnType("bit").IsRequired();
+            Property(x => x.CourseAverageIndicator).HasColumnName(@"CourseAverageIndicator").HasColumnType("bit").IsRequired();
+            Property(x => x.BehaviorIndicator).HasColumnName(@"BehaviorIndicator").HasColumnType("bit").IsRequired();
+            Property(x => x.MissingAssignmentsIndicator).HasColumnName(@"MissingAssignmentsIndicator").HasColumnType("bit").IsRequired();
+            Property(x => x.AllAboutMe).HasColumnName(@"AllAboutMe").HasColumnType("bit").IsRequired();
+            Property(x => x.Goals).HasColumnName(@"Goals").HasColumnType("bit").IsRequired();
+            Property(x => x.AttendanceLog).HasColumnName(@"AttendanceLog").HasColumnType("bit").IsRequired();
+            Property(x => x.BehaviorLog).HasColumnName(@"BehaviorLog").HasColumnType("bit").IsRequired();
+            Property(x => x.CourseGrades).HasColumnName(@"CourseGrades").HasColumnType("bit").IsRequired();
+            Property(x => x.MissingAssignments).HasColumnName(@"MissingAssignments").HasColumnType("bit").IsRequired();
+            Property(x => x.Calendar).HasColumnName(@"Calendar").HasColumnType("bit").IsRequired();
+            Property(x => x.SuccessTeam).HasColumnName(@"SuccessTeam").HasColumnType("bit").IsRequired();
+            Property(x => x.CollegeInitiativeCorner).HasColumnName(@"CollegeInitiativeCorner").HasColumnType("bit").IsRequired();
+            Property(x => x.Arc).HasColumnName(@"ARC").HasColumnType("bit").IsRequired();
+            Property(x => x.StaarAssessment).HasColumnName(@"STAARAssessment").HasColumnType("bit").IsRequired();
+            Property(x => x.Assessment).HasColumnName(@"Assessment").HasColumnType("bit").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
+        }
+    }
+
     // NotificationsToken
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class NotificationsTokenConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<NotificationsToken>
@@ -42659,6 +42851,109 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         }
     }
 
+    // StudentGoal
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StudentGoal>
+    {
+        public StudentGoalConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public StudentGoalConfiguration(string schema)
+        {
+            ToTable("StudentGoal", schema);
+            HasKey(x => x.StudentGoalId);
+
+            Property(x => x.StudentGoalId).HasColumnName(@"StudentGoalId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired();
+            Property(x => x.GoalType).HasColumnName(@"GoalType").HasColumnType("nvarchar").IsRequired().HasMaxLength(10);
+            Property(x => x.Goal).HasColumnName(@"Goal").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.GradeLevel).HasColumnName(@"GradeLevel").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.DateGoalCreated).HasColumnName(@"DateGoalCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateScheduled).HasColumnName(@"DateScheduled").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateCompleted).HasColumnName(@"DateCompleted").HasColumnType("datetime").IsOptional();
+            Property(x => x.Additional).HasColumnName(@"Additional").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.Completed).HasColumnName(@"Completed").HasColumnType("nvarchar").IsRequired().HasMaxLength(10);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
+            Property(x => x.Labels).HasColumnName(@"Labels").HasColumnType("nvarchar(max)").IsOptional();
+        }
+    }
+
+    // StudentGoalIntervention
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalInterventionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StudentGoalIntervention>
+    {
+        public StudentGoalInterventionConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public StudentGoalInterventionConfiguration(string schema)
+        {
+            ToTable("StudentGoalIntervention", schema);
+            HasKey(x => x.StudentGoalInterventionId);
+
+            Property(x => x.StudentGoalInterventionId).HasColumnName(@"StudentGoalInterventionId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired();
+            Property(x => x.StudentGoalId).HasColumnName(@"StudentGoalId").HasColumnType("int").IsRequired();
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.InterventionStart).HasColumnName(@"InterventionStart").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
+        }
+    }
+
+    // StudentGoalLabel
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalLabelConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StudentGoalLabel>
+    {
+        public StudentGoalLabelConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public StudentGoalLabelConfiguration(string schema)
+        {
+            ToTable("StudentGoalLabel", schema);
+            HasKey(x => x.StudentGoalLabelId);
+
+            Property(x => x.StudentGoalLabelId).HasColumnName(@"StudentGoalLabelId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Label).HasColumnName(@"Label").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
+        }
+    }
+
+    // StudentGoalStep
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentGoalStepConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StudentGoalStep>
+    {
+        public StudentGoalStepConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public StudentGoalStepConfiguration(string schema)
+        {
+            ToTable("StudentGoalStep", schema);
+            HasKey(x => x.StudentGoalStepId);
+
+            Property(x => x.StudentGoalStepId).HasColumnName(@"StudentGoalStepId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StudentGoalId).HasColumnName(@"StudentGoalId").HasColumnType("int").IsRequired();
+            Property(x => x.StepName).HasColumnName(@"StepName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.Completed).HasColumnName(@"Completed").HasColumnType("bit").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+            Property(x => x.StudentGoalInterventionId).HasColumnName(@"StudentGoalInterventionId").HasColumnType("int").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.StudentGoal).WithMany(b => b.StudentGoalSteps).HasForeignKey(c => c.StudentGoalId).WillCascadeOnDelete(false); // FK_StudentGoalStep_StudentGoal
+        }
+    }
+
     // ProgramSponsor
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
     public class ProgramSponsorConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ProgramSponsor>
@@ -43774,6 +44069,36 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             // Foreign keys
             HasRequired(a => a.ClassPeriod).WithMany(b => b.SectionClassPeriods).HasForeignKey(c => new { c.ClassPeriodName, c.SchoolId }).WillCascadeOnDelete(false); // FK_SectionClassPeriod_ClassPeriod
             HasRequired(a => a.Section).WithMany(b => b.SectionClassPeriods).HasForeignKey(c => new { c.LocalCourseCode, c.SchoolId, c.SchoolYear, c.SectionIdentifier, c.SessionName }); // FK_SectionClassPeriod_Section
+        }
+    }
+	
+	// StudentAllAbout
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.2.0")]
+    public class StudentAllAboutConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StudentAllAbout>
+    {
+        public StudentAllAboutConfiguration()
+            : this("ParentPortal")
+        {
+        }
+
+        public StudentAllAboutConfiguration(string schema)
+        {
+            ToTable("StudentAllAbout", schema);
+            HasKey(x => x.StudentAllAboutId);
+
+            Property(x => x.StudentAllAboutId).HasColumnName(@"StudentAllAboutId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StudentUsi).HasColumnName(@"StudentUSI").HasColumnType("int").IsRequired();
+            Property(x => x.PrefferedName).HasColumnName(@"PrefferedName").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.FunFact).HasColumnName(@"FunFact").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.TypesOfBook).HasColumnName(@"TypesOfBook").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.FavoriteAnimal).HasColumnName(@"FavoriteAnimal").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.FavoriteThingToDo).HasColumnName(@"FavoriteThingToDo").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.FavoriteSubjectSchool).HasColumnName(@"FavoriteSubjectSchool").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.OneThingWant).HasColumnName(@"OneThingWant").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.LearnToDo).HasColumnName(@"LearnToDo").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.LearningThings).HasColumnName(@"LearningThings").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
         }
     }
 

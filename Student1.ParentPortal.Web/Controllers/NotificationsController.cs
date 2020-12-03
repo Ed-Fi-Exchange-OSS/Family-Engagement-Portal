@@ -25,7 +25,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> SetNotificationsIdentifier(NotificationsIdentifierModel model)
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
             model.PersonType = role;
             await _notificationsService.PersistNotificationToken(model);
             return Ok(true);

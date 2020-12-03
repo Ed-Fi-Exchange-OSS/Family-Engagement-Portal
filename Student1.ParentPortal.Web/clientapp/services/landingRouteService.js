@@ -3,33 +3,36 @@
 
         var getRouteForCurentUser = function () {
             // Get the users role and set appropriate landing page route.
-            return api.me.getRole().then(function (role) {
-                switch (role) {
+            return api.me.getMyBriefProfile().then(function (profile) {
+                switch (profile.role) {
                     case 'Parent':
-                        return 'app.parentLanding';
-                        break;
+                        return { route: 'app.parentLanding' };
                     case 'Staff':
-                        return'app.teacherLanding';
-                        break;
+                        return { route: 'app.teacherLanding' };
                     case 'Admin':
-                        return 'app.adminLanding';
+                        return { route: 'app.adminLanding' };
                     case 'CampusLeader':
-                        return 'app.campusLeaderLanding';
+                        return { route: 'app.campusLeaderLanding' };
+                    case 'Student':
+                        return { route: 'app.studentdetail', studentId: profile.usi };
                     default:
-                        return 'app.parentLanding';
+                        return { route: 'app.parentLanding' };
                 }
             });
         };
 
         return {
             getRoute: function () {
-                return getRouteForCurentUser().then(function (route) {
-                    return route;
+                return getRouteForCurentUser().then(function (data) {
+                    return data.route;
                 });
             },
             redirectToLanding: function () {
-                return getRouteForCurentUser().then(function (route) {
-                    $state.go(route);
+                return getRouteForCurentUser().then(function (data) {
+                    if (data.studentId)
+                        $state.go(data.route, { studentId: data.studentId });
+                    else
+                        $state.go(data.route);
                 });
             }
         };

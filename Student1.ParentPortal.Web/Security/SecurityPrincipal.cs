@@ -50,7 +50,7 @@ namespace Student1.ParentPortal.Web.Security
         }
         public string Role
         {
-            get { return Current.Claims.FirstOrDefault(x => x.Type == "role")?.Value; }
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "person_role")?.Value; }
         }
 
         public string Email
@@ -66,6 +66,11 @@ namespace Student1.ParentPortal.Web.Security
         public string LastSurname
         {
             get { return Current.Claims.FirstOrDefault(x => x.Type == "lastsurname")?.Value; }
+        }
+
+        public string TestRole
+        {
+            get { return Current.Claims.FirstOrDefault(x => x.Type == "test1")?.Value; }
         }
     }
 }

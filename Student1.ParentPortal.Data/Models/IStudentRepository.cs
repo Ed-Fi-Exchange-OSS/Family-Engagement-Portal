@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.Student;
+using Student1.ParentPortal.Models.User;
 
 namespace Student1.ParentPortal.Data.Models
 {
@@ -34,5 +35,29 @@ namespace Student1.ParentPortal.Data.Models
         Task<List<StudentParentAssociationModel>> GetParentAssociation(int studentUsi);
         Task<List<ParentStudentsModel>> GetParentsBySection(int staffUsi, StaffSectionModel model, string[] validEmailTypeDescriptors, DateTime today);
         Task<ParentStudentCountModel> GetFamilyMembersBySection(int staffUsi, StaffSectionModel model, string[] validParentDescriptors, DateTime today);
+
+        // New assessment methods
+        Task<Assessment> GetStudentAssesmentScore(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle);
+        Task<Assessment> GetStudentAssesmentPerformanceLevel(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle);
+        Task<List<Assessment>> GetACCESSStudentAssesmentScore(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle);
+        Task<List<StudentObjectiveAssessment>> GetStudentObjectiveAssessments(int studentUsi);
+        Task<int> getTotalInstructionalDays(int studentUsi, StudentCalendar studentCalendar);
+
+        // Student Goals methods
+        Task<StudentGoal> AddStudentGoal(StudentGoal studentGoal);
+        Task<StudentGoal> UpdateStudentGoal(StudentGoal studentGoal);
+        Task<bool> AddStudentGoalStep(StudentGoalStep studentGoalStep);
+        Task<bool> UpdateStudentGoalStep(StudentGoalStep studentGoalStep);
+        Task<List<StudentGoal>> GetStudentGoals(int studentUsi);
+        Task<List<StudentGoalLabel>> GetStudentGoalLabels();
+        Task<StudentGoal> UpdateStudentGoalIntervention(StudentGoalIntervention entity);
+
+        //Student All about Me
+        Task<StudentAllAbout> AddStudentAllAbout(StudentAllAbout studentGoal);
+        Task<StudentAllAbout> UpdateStudentAllAbout(StudentAllAbout studentGoal);
+        Task<StudentAllAbout> GetStudentAllAbout(int studentUsi);
+
+        Task<List<PersonIdentityModel>> GetStudentIdentityByEmailAsync(string email);
+        Task<UserProfileModel> GetStudentProfileAsync(int studentUsi);
     }
 }

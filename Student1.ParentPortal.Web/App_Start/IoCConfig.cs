@@ -25,6 +25,9 @@ using IApplicationSettingsProvider = Student1.ParentPortal.Resources.Providers.C
 using Student1.ParentPortal.Resources.Providers.Logger;
 using Student1.ParentPortal.Resources.Providers.Notifications;
 using Student1.ParentPortal.Resources.Providers.Message;
+using Student1.ParentPortal.Data.Models.EdFi26;
+using Microsoft.Owin.Security.OAuth;
+using Student1.ParentPortal.Web.Security;
 
 namespace Student1.ParentPortal.Web.App_Start
 {
@@ -76,10 +79,11 @@ namespace Student1.ParentPortal.Web.App_Start
 
         private static void RegisterRepositoriesByConvention<TMarker>(Container container, string databaseVersion)
         {
-            //if(databaseVersion == "EdFi25")
-                container.Register<EdFi25Context, EdFi25Context>(Lifestyle.Scoped);
-            //else
-                container.Register<EdFi31Context, EdFi31Context>(Lifestyle.Scoped);
+            container.Register<EdFi25Context, EdFi25Context>(Lifestyle.Scoped);
+
+            container.Register<EdFi26Context, EdFi26Context>(Lifestyle.Scoped);
+
+            container.Register<EdFi31Context, EdFi31Context>(Lifestyle.Scoped);
 
             var types = typeof(TMarker).Assembly.ExportedTypes;
 
@@ -100,6 +104,7 @@ namespace Student1.ParentPortal.Web.App_Start
         private static void RegisterProviders(Container container)
         {
             container.Register<IApplicationSettingsProvider, ApplicationSettingsProvider>();
+            container.Register<IOAuthBearerAuthenticationProvider, CustomJwtOAuthBearerAuthenticationProvider>();
             container.Register<IDatabaseIdentityProvider, DatabaseIdentityProvider>();
             container.Register<IMessagingProvider, EmailMessagingProvider>();
             container.Register<ISMSProvider, SMSMessagingProvider>();
@@ -155,7 +160,8 @@ namespace Student1.ParentPortal.Web.App_Start
                 typeof(ParentIdeintityProvider),
                 typeof(StaffIdeintityProvider),
                 typeof(AdminIdeintityProvider),
-                typeof(CampusLeaderIdentityProvider)
+                typeof(CampusLeaderIdentityProvider),
+                typeof(StudentIdeintityProvider)
             });
 
             container.Collection.Register(typeof(IRoleResourceAccessValidator), assemblies);

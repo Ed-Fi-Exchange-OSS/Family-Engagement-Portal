@@ -58,6 +58,11 @@ namespace Student1.ParentPortal.Resources.Services.Communications
         Task<List<GroupMessagesQueueLogModel>> GetGroupMessagesQueues(string personUniqueId, int schoolId, QueuesFilterModel model);
         [NoCache]
         Task<ParentStudentCountModel> GetFamilyMemberCountBySection(int staffUsi, TeacherStudentsRequestModel sectionModel);
+        [NoCache]
+        Task<List<ParentStudentsModel>> GetParentStudentByTermAndGradeLevel(string personUniqueId, string term, GradesLevelModel model, int schoolId);
+        [NoCache]
+        Task<int> GetParentStudentByTermAndGradeLevelCount(string personUniqueId, string term, GradesLevelModel model, int schoolId);
+
     }
 
     public class CommunicationsService : ICommunicationsService
@@ -638,5 +643,16 @@ namespace Student1.ParentPortal.Resources.Services.Communications
             return Regex.Replace(input, "<.*?>", String.Empty);
         }
 
+        public async Task<List<ParentStudentsModel>> GetParentStudentByTermAndGradeLevel(string personUniqueId, string term, GradesLevelModel model, int schoolId)
+        {
+            var validParentDescriptors = _customParametersProvider.GetParameters().descriptors.validParentDescriptors;
+            return await _communicationsRepository.GetParentsByGradeLevelsAndSearchTerm(personUniqueId, term, model, validParentDescriptors, _dateProvider.Today(), schoolId);
+        }
+
+        public async Task<int> GetParentStudentByTermAndGradeLevelCount(string personUniqueId, string term, GradesLevelModel model, int schoolId)
+        {
+            var validParentDescriptors = _customParametersProvider.GetParameters().descriptors.validParentDescriptors;
+            return await _communicationsRepository.GetParentsByGradeLevelsAndSearchTermCount(personUniqueId, term, model, validParentDescriptors, _dateProvider.Today(), schoolId);
+        }
     }
 }

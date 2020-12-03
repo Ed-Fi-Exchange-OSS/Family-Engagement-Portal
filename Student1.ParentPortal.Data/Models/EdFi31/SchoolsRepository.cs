@@ -12,7 +12,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
     {
         private readonly EdFi31Context _edFiDb;
 
-        public SchoolsRepository(EdFi31Context edFiDb) 
+        public SchoolsRepository(EdFi31Context edFiDb)
         {
             _edFiDb = edFiDb;
         }
@@ -40,6 +40,20 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                   Id = p.ProgramTypeDescriptorId,
                                   Name = d.CodeValue
                               }).Distinct().ToListAsync();
+            return data;
+        }
+
+        public async Task<List<SchoolBriefDetailModel>> GetSchoolsByPrincipal(int staffUsi)
+        {
+            var data = await (from s in _edFiDb.Schools
+                                           .Include(x => x.EducationOrganization)
+                              join sf in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.SchoolId equals sf.EducationOrganizationId
+                              where sf.StaffUsi == staffUsi
+                              select new SchoolBriefDetailModel
+                              {
+                                  SchoolId = s.EducationOrganization.EducationOrganizationId,
+                                  NameOfInstitution = s.EducationOrganization.NameOfInstitution
+                              }).OrderBy(x => x.NameOfInstitution).ToListAsync();
             return data;
         }
     }

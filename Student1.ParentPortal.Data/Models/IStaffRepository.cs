@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Student;
@@ -15,5 +16,7 @@ namespace Student1.ParentPortal.Data.Models
         Task<PersonIdentityModel> GetStaffIdentityByUniqueId(string staffUniqueId);
         Task<List<PersonIdentityModel>> GetStaffPrincipalIdentityByEmailAsync(string email, string[] validCampusLeaderDescriptors);
         Task<List<PersonIdentityModel>> GetStaffPrincipalIdentityByProfileEmailAsync(string email, string[] validCampusLeaderDescriptors);
+        Task<List<PersonIdentityModel>> GetStaffPrincipalIdentityByEmailAsync(string email, string[] validCampusLeaderDescriptors, DateTime today);
+        Task<List<PersonIdentityModel>> GetStaffPrincipalIdentityByProfileEmailAsync(string email, string[] validCampusLeaderDescriptors, DateTime today);
     }
 }

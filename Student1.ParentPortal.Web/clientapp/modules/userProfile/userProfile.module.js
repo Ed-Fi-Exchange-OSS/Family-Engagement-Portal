@@ -2,7 +2,7 @@
     .config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('app.userProfile', {
             url: '/userProfile',
-                requireADLogin: true,
+                //requireADLogin: true,
                 views: {
                     'content@': { component:'userProfile' }
                 },

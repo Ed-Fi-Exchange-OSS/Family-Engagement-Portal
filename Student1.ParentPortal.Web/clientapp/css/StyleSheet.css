@@ -42,6 +42,7 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 .info { background-color: #F5A3E3 !important; color: white; }
 .warning { background-color: #fae596 !important; color: white; }
 .danger  { background-color: #c43235 !important; color: white; }
+.bluestar { background-color:#2196f3 !important; color: white !important; }
 
 /*Indicator Icons*/
 .icon-round-border {
@@ -101,6 +102,9 @@ a.btn.btn-primary { color: white; }
 .btn-fill-search { float:right; height: 46px; background-color: #03a9f4; border-color: #03a9f4; position: relative; color: white !important; }
 .btn-fill-search:hover { background-color: #0277bd; }
 .btn-fill-search:focus, .btn-fill-search.focus { box-shadow: 0 0 0 .2rem #29b6f6 }
+.btn-round-small { border-radius:50%; width: 25px; height: 25px; color: #03a9f4!important; border: 2px solid #03a9f4; position: relative; }
+.btn-round-small:hover { color:white!important; background-color: #03a9f4; border-color: #03a9f4;}
+.btn-round-small:focus { box-shadow: 0 0 0 .2rem #81d4fa }
 
 /*Nav bar styles*/
 .navbar-light, bg-light {
@@ -339,12 +343,20 @@ li.person:hover { background-color: #eeeeee; }
 .bg-warning { background-color: #ff8a65!important; }
 .bg-danger  { background-color: #ffb74d!important; }
 .bg-info    { background-color: #64b5f6!important; }
+.bg-salmon { background-color: #ef5350!important; }
+.bg-amber { background-color: #FFB300!important; }
+.bg-green { background-color: #66BB6A!important; }
+.bg-dark { background-color: #454545!important; }
 
 .text-primary { color: #9575cd!important; }
 .text-success { color: #4dd0e1!important; }
 .text-warning { color: #ff8a65!important; }
 .text-danger  { color: #ffb74d!important; }
 .text-info    { color: #64b5f6!important; }
+.text-salmon { color: #ef5350!important; }
+.text-amber { color: #FFB300!important; }
+.text-green { color: #66BB6A!important; }
+.text-dark { color: #454545!important; }
 
 /*Other Colors*/
 .text-with-bg-red  { color:#fff; background-color: #ef9a9a; }
@@ -1186,4 +1198,241 @@ mark {
 .button-card {
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.star-table {
+}
+
+    .star-table thead, tr, td {
+        border: 0px !important;
+    }
+
+.star-header {
+    color: #454545;
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0 !important;
+    padding-bottom: 10px;
+}
+
+.star-percent-title {
+    min-width: 35px;
+    width: 35px;
+    max-width: 35px;
+    position: absolute;
+    margin-left: -17.5px;
+    text-align: center;
+}
+
+.star-label {
+    min-width: 90%;
+    padding: 5px 5px;
+}
+
+.star-meter-container {
+    position: relative;
+}
+
+.star-meter {
+    display: inline-block;
+    min-height: 34px;
+    /* 34 + 1 for the border = 35 */
+    min-width: 34px;
+    width: 10%;
+    border-left: 1px solid white !important;
+}
+
+.star-meter-bad {
+    background-color: #ef9a9a;
+}
+
+.star-meter-warning {
+    background-color: #FFE082;
+}
+
+.star-meter-good {
+    background-color: #C8E6C9;
+}
+
+.star-meter-score, .star-meter-score-alt {
+    font-size: 14px;
+    line-height: 31px;
+    font-weight: 900;
+    position: absolute;
+    top: 0px;
+    border-radius: 100%;
+    width: 34px;
+    height: 34px;
+    background-color: white;
+    text-align: center;
+    color: #454545;
+    border: 2px solid #454545;
+    margin-left: -17px; /* This has to be the half of the width */
+}
+
+/*.star-meter-score:hover, .star-meter-score-alt:hover, .star-meter-score:hover * .star-meter-score-alt:hover * {
+    background: transparent;
+    color: transparent;
+    border-color: transparent;
+}*/
+
+.star-meter-score-alt {
+    color: white;
+    background-color: #454545;
+    border: 2px solid black;
+}
+
+
+
+.mastery-table {
+    border: 1px solid #454545 !important;
+    border-collapse: separate !important;
+}
+
+    .mastery-table td {
+        border: 1px solid #454545 !important;
+    }
+
+.mastery-indicator-dark {
+    background-color: #454545;
+}
+
+.can-do-descriptor-text {
+    white-space: pre-line;
+}
+
+.h-35px {
+    height: 35px;
+}
+
+.student-profile-max-height {
+    max-height: 720px !important;
+}
+
+.domain-header {
+    color: #454545;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+.domain-section {
+    /*border-bottom: 1px solid #eee !important;
+    border-top: 1px solid #eee !important;*/
+}
+
+.domain-table tr:last-child {
+    border-bottom: 1px solid gray !important;
+}
+
+
+.main-header-master {
+    border-top: 1px solid gray !important;
+    border-bottom: 1px solid gray !important;
+}
+
+
+.card-no-margin-top {
+    margin-top: -35px !important;
+}
+
+.link-underlined {
+    text-decoration: underline !important;
+}
+
+.table-border-force {
+    border: 1px solid #dee2e6 !important;
+}
+
+.card-min-height {
+    min-height: 350px !important;
+}
+
+.arc-table-header {
+    background-color: #F7921C;
+    color: black;
+}
+
+/*Marker*/
+.pin1 {
+    position: absolute;
+    margin-top: 15px;
+    border-radius: 50% 50% 50% 0;
+    border: 1px solid #fff;
+    width: 25px;
+    height: 25px;
+    transform: rotate(135deg);
+}
+
+    .pin1::after {
+        position: absolute;
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        margin-left: -5px;
+        margin-top: -5px;
+        background-color: #fff;
+    }
+
+/*Marker text*/
+.pinText1 {
+    font-size: 10px;
+    position: absolute;
+    margin-top: 40px;
+    color: black;
+    min-width: 40px;
+    text-align: center
+}
+
+
+.add-goal-btn {
+    color: #03a9f4 !important;
+    float: right;
+    margin-top: -15px;
+    cursor: pointer;
+}
+
+
+.row .older-goal-link {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 15px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.click-element {
+    color: #03a9f4 !important;
+}
+
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 90%;
+        max-width: 1200px;
+    }
+}
+
+.btn-outline-primary-custom {
+    background-color: white;
+    color: #03a9f4 !important;
+    border-color: #03a9f4;
+}
+
+    .btn-outline-primary-custom:hover {
+        color: white !important;
+        background-color: #03a9f4;
+        border-color: #03a9f4;
+    }
+
+    .btn-outline-primary-custom:focus, .btn-outline-primary-custom.focus {
+        box-shadow: 0 0 0 .2rem #81d4fa
+    }
+
+.click-element-complete {
+    color: #03a9f4 !important;
+    cursor: pointer;
+    text-decoration: underline;
 }

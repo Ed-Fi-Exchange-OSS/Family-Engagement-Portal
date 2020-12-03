@@ -20,6 +20,7 @@ namespace Student1.ParentPortal.Models.User
         public int PreferredMethodOfContactTypeId { get; set; }
         public string ReplyExpectations { get; set; }
         public string LanguageCode { get; set; }
+        public string IdentificationCode { get; set; }
 
         public List<AddressModel> Addresses { get; set; }
         public List<TelephoneModel> TelephoneNumbers { get; set; }

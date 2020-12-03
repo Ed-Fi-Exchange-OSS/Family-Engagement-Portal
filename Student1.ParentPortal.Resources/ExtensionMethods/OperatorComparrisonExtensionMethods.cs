@@ -36,6 +36,15 @@ namespace Student1.ParentPortal.Resources.ExtensionMethods
             throw new ArgumentOutOfRangeException("Could not evaluate value within rules thresholds.");
         }
 
+        public static ThresholdRule<string> GetRuleThatApplies(this List<ThresholdRule<string>> rules, string valueToCompare)
+        {
+            foreach (var rule in rules)
+                if (rule.Evaluate(valueToCompare))
+                    return rule;
+
+            throw new ArgumentOutOfRangeException("Could not evaluate value within rules thresholds.");
+        }
+
         public static bool Evaluate(this ThresholdRule<int> rule, int valueToCompare)
         {
             return Evaluate(valueToCompare, rule.@operator, rule.value);
@@ -94,6 +103,24 @@ namespace Student1.ParentPortal.Resources.ExtensionMethods
         }
 
         public static bool Evaluate(bool operand1, string @operator, bool operand2)
+        {
+            switch (@operator)
+            {
+                case "==":
+                    return operand1 == operand2;
+                case "!=":
+                    return operand1 != operand2;
+                default:
+                    throw new NotImplementedException($"Operator ({@operator}) has not been implemented.");
+            }
+        }
+
+        public static bool Evaluate(this ThresholdRule<string> rule, string valueToCompare)
+        {
+            return Evaluate(valueToCompare, rule.@operator, rule.value);
+        }
+
+        public static bool Evaluate(string operand1, string @operator, string operand2)
         {
             switch (@operator)
             {

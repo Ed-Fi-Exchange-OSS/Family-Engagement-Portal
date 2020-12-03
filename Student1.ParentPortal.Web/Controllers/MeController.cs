@@ -12,6 +12,7 @@ using Student1.ParentPortal.Models.User;
 using Student1.ParentPortal.Resources.Services;
 using Student1.ParentPortal.Resources.Services.Admin;
 using Student1.ParentPortal.Resources.Services.Parents;
+using Student1.ParentPortal.Resources.Services.Students;
 using Student1.ParentPortal.Web.Security;
 
 namespace Student1.ParentPortal.Web.Controllers
@@ -22,12 +23,18 @@ namespace Student1.ParentPortal.Web.Controllers
         private readonly IParentsService _parentsService;
         private readonly ITeachersService _teachersService;
         private readonly IAdminService _adminService;
+        private readonly IStudentsService _studentsService;
 
-        public MeController(IParentsService parentsService, ITeachersService teachersService, IAdminService adminService)
+        public MeController(
+            IParentsService parentsService, 
+            ITeachersService teachersService, 
+            IAdminService adminService,
+            IStudentsService studentsService)
         {
             _parentsService = parentsService;
             _teachersService = teachersService;
             _adminService = adminService;
+            _studentsService = studentsService;
         }
 
         [HttpGet]
@@ -35,12 +42,15 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> GetProfile()
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             // TODO: If this application grows into something bigger it is important to 
             // refactor this into a more extensible pattern like a chain of responsibility.
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _parentsService.GetParentProfileAsync(person.PersonUSI));
+
+            if (role.Equals("Student", System.StringComparison.InvariantCultureIgnoreCase))
+                return Ok(await _studentsService.GetStudentProfileAsync(person.PersonUSI));
 
             return Ok(await _teachersService.GetStaffProfileAsync(person.PersonUSI));
         }
@@ -50,16 +60,16 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> GetBriefProfile()
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
-            // TODO: If this application grows into something bigger it is important to 
-            // refactor this into a more extensible pattern like a chain of responsibility.
-            BriefProfileModel response = null;
             if (role.Equals("Admin", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _teachersService.GetBriefStaffProfileAsync(person.PersonUSI));
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _parentsService.GetBriefParentProfileAsync(person.PersonUSI));
+
+            if (role.Equals("Student", System.StringComparison.InvariantCultureIgnoreCase))
+                return Ok(await _studentsService.GetPersonBriefModelAsync(person.PersonUSI));
 
             return Ok(await _teachersService.GetBriefStaffProfileAsync(person.PersonUSI));
         }
@@ -69,7 +79,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> SaveProfile(UserProfileModel model)
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             // TODO: If this application grows into something bigger it is important to 
             // refactor this into a more extensible pattern like a chain of responsibility.
@@ -85,7 +95,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public IHttpActionResult Get()
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
             return Ok(role);
         }
 
@@ -106,7 +116,7 @@ namespace Student1.ParentPortal.Web.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
             var file = HttpContext.Current.Request.Files[0];
             var fileLength = file.ContentLength;
             byte[] filebytes = new byte[fileLength];
@@ -128,7 +138,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> ProfileLanguage(ProfileLanguageModel model) 
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
             // TODO: If this application grows into something bigger it is important to 
             // refactor this into a more extensible pattern like a chain of responsibility.
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase)) 

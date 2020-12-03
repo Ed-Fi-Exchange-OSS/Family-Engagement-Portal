@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.Student;
+using Student1.ParentPortal.Models.User;
 
 namespace Student1.ParentPortal.Data.Models.EdFi31
 {
@@ -330,7 +331,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             // Ed-Fi does not define a assignment due date.
 
             var missingAssignments = await (from gbe in _edFiDb.GradebookEntries
-                                            join gbed in _edFiDb.Descriptors on gbe.GradebookEntryTypeDescriptorId equals gbed.DescriptorId
                                             join ssa in _edFiDb.StudentSectionAssociations
                                                     on new { gbe.LocalCourseCode, gbe.SchoolId, gbe.SchoolYear, gbe.SectionIdentifier, gbe.SessionName}
                                                 equals new { ssa.LocalCourseCode, ssa.SchoolId, ssa.SchoolYear, ssa.SectionIdentifier, ssa.SessionName}
@@ -344,6 +344,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                             join c in _edFiDb.Courses
                                                     on new { co.EducationOrganizationId, co.CourseCode }
                                                     equals new { c.EducationOrganizationId, c.CourseCode }
+                                            from gbed in _edFiDb.Descriptors.Where(x => x.DescriptorId == gbe.GradebookEntryTypeDescriptorId)
                                             from sge in _edFiDb.StudentGradebookEntries.Where(x => x.StudentUsi == studentUsi
                                                                                                  && x.DateAssigned == gbe.DateAssigned
                                                                                                  && x.GradebookEntryTitle == gbe.GradebookEntryTitle
@@ -355,8 +356,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                             where ssa.StudentUsi == studentUsi
                                                   && sge.DateFulfilled == null // Not delivered
                                                   && sge.LetterGradeEarned == missingAssignmentLetterGrade
-                                                  && gbe.GradebookEntryTypeDescriptorId != null // They have to be categorized
-                                                  && gradeBookMissingAssignmentTypeDescriptors.Contains(gbed.CodeValue) // Only Homework and Assignments
                                                   && gbe.DateAssigned >= _edFiDb.Sessions.Where(x => x.SchoolId == ssa.SchoolId).Max(x => x.BeginDate)
                                             group new { gbe, co, c, staff} by c.CourseTitle into g
                                             select new StudentAssignmentSection
@@ -1252,6 +1251,564 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                       }).ToList();
 
             return gr;
+        }
+
+        public async Task<ParentPortal.Models.Student.Assessment> GetStudentAssesmentScore(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle)
+        {
+            var data = await (from sa in _edFiDb.StudentAssessments
+                              join a in _edFiDb.Assessments
+                                    on new { sa.AssessmentIdentifier, sa.Namespace }
+                                    equals new { a.AssessmentIdentifier, a.Namespace }
+                              join sasr in _edFiDb.StudentAssessmentScoreResults
+                                            .Include(x => x.AssessmentReportingMethodDescriptor)
+                                    on new { sa.AssessmentIdentifier, sa.Namespace, sa.StudentAssessmentIdentifier, sa.StudentUsi }
+                                    equals new { sasr.AssessmentIdentifier, sasr.Namespace, sasr.StudentAssessmentIdentifier, sasr.StudentUsi }
+                              where sa.StudentUsi == studentUsi && a.AssessmentTitle == assessmentTitle
+                              orderby sa.AdministrationDate descending
+                              select new ParentPortal.Models.Student.Assessment
+                              {
+                                  //Version = a.Version,
+                                  Title = a.AssessmentTitle,
+                                  Identifier = a.AssessmentIdentifier,
+                                  MaxRawScore = a.MaxRawScore,
+                                  AdministrationDate = sa.AdministrationDate,
+                                  Result = sasr.Result,
+                                  //ReportingMethodCodeValue = sasr.AssessmentReportingMethodType.CodeValue
+                              }).FirstOrDefaultAsync();
+            return data;
+        }
+
+        public async Task<ParentPortal.Models.Student.Assessment> GetStudentAssesmentPerformanceLevel(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle)
+        {
+            var data = await (from sa in _edFiDb.StudentAssessments
+                              join a in _edFiDb.Assessments on new { sa.AssessmentIdentifier, sa.Namespace } equals new { a.AssessmentIdentifier, a.Namespace }
+                              join sapl in _edFiDb.StudentAssessmentPerformanceLevels
+                                    .Include(x => x.AssessmentReportingMethodDescriptor)
+                                    on new { sa.StudentUsi, sa.AssessmentIdentifier, sa.StudentAssessmentIdentifier, sa.Namespace }
+                                    equals new { sapl.StudentUsi, sapl.AssessmentIdentifier, sapl.StudentAssessmentIdentifier, sapl.Namespace }
+                              join d in _edFiDb.Descriptors
+                                    on sapl.PerformanceLevelDescriptorId equals d.DescriptorId
+                              where sa.StudentUsi == studentUsi
+                                    && a.AssessmentTitle == assessmentTitle
+                                    && sapl.PerformanceLevelMet == true
+                              orderby sa.AdministrationDate descending
+                              select new ParentPortal.Models.Student.Assessment
+                              {
+                                  //Version = a.Version,
+                                  Title = a.AssessmentTitle,
+                                  Identifier = a.AssessmentIdentifier,
+                                  MaxRawScore = a.MaxRawScore,
+                                  AdministrationDate = sa.AdministrationDate,
+                                  PerformanceLevelMet = d.CodeValue,
+                                  //ReportingMethodCodeValue = sapl.AssessmentReportingMethodType.CodeValue
+                              }).FirstOrDefaultAsync();
+            return data;
+        }
+
+        public async Task<List<ParentPortal.Models.Student.Assessment>> GetACCESSStudentAssesmentScore(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle)
+        {
+            var data = await (from sa in _edFiDb.StudentAssessments
+                              join d in _edFiDb.Descriptors on sa.WhenAssessedGradeLevelDescriptorId equals d.DescriptorId
+                              join a in _edFiDb.Assessments
+                                    on new { sa.AssessmentIdentifier, sa.Namespace }
+                                    equals new { a.AssessmentIdentifier, a.Namespace }
+                              join sasr in _edFiDb.StudentAssessmentScoreResults
+                                            .Include(x => x.AssessmentReportingMethodDescriptor)
+                                    on new { sa.AssessmentIdentifier, sa.Namespace, sa.StudentAssessmentIdentifier, sa.StudentUsi }
+                                    equals new { sasr.AssessmentIdentifier, sasr.Namespace, sasr.StudentAssessmentIdentifier, sasr.StudentUsi }
+                              where sa.StudentUsi == studentUsi
+                                //&& sasr.AssessmentReportingMethodType.CodeValue == assessmentReportingMethodTypeDescriptor
+                                && a.AssessmentTitle == assessmentTitle
+                              select new ParentPortal.Models.Student.Assessment
+                              {
+                                  //Version = a.Version,
+                                  Title = a.AssessmentTitle,
+                                  Identifier = a.AssessmentIdentifier,
+                                  MaxRawScore = a.MaxRawScore,
+                                  AdministrationDate = sa.AdministrationDate,
+                                  Result = sasr.Result,
+                                  //ReportingMethodCodeValue = sasr.AssessmentReportingMethodType.CodeValue,
+                                  Gradelevel = d.CodeValue
+                              }).Take(3).ToListAsync();
+            return data;
+        }
+
+        public async Task<List<StudentObjectiveAssessment>> GetStudentObjectiveAssessments(int studentUsi)
+        {
+            var list = await (from sasoa in _edFiDb.StudentAssessmentStudentObjectiveAssessments
+                              join sasoasr in _edFiDb.StudentAssessmentStudentObjectiveAssessmentScoreResults
+                                     on new { sasoa.AssessmentIdentifier, sasoa.IdentificationCode, sasoa.Namespace, sasoa.StudentAssessmentIdentifier, sasoa.StudentUsi }
+                                     equals new { sasoasr.AssessmentIdentifier, sasoasr.IdentificationCode, sasoasr.Namespace, sasoasr.StudentAssessmentIdentifier, sasoasr.StudentUsi }
+                              join sa in _edFiDb.StudentAssessments
+                                     on new { sasoa.AssessmentIdentifier, sasoa.Namespace, sasoa.StudentAssessmentIdentifier, sasoa.StudentUsi }
+                                     equals new { sa.AssessmentIdentifier, sa.Namespace, sa.StudentAssessmentIdentifier, sa.StudentUsi }
+                              join oe in _edFiDb.ObjectiveAssessments
+                                     on new { sasoa.AssessmentIdentifier, sasoa.Namespace, sasoa.IdentificationCode }
+                                     equals new { oe.AssessmentIdentifier, oe.Namespace, oe.IdentificationCode }
+                              where sasoa.StudentUsi == studentUsi
+                              select new
+                              {
+                                  Title = oe.Description,
+                                  sasoasr.Result,
+                                  sa.AdministrationDate,
+                                  oe.ParentIdentificationCode,
+                                  sasoa.AssessmentIdentifier,
+                                  oe.IdentificationCode
+                              }).ToListAsync();
+
+            var result = list.GroupBy(x => x.Title).Select(x => new StudentObjectiveAssessment
+            {
+                Title = x.Key,
+                EnglishResult = x.FirstOrDefault(r => !r.AssessmentIdentifier.Contains("Spanish") && r.AdministrationDate == x.Where(d => !d.AssessmentIdentifier.Contains("Spanish")).Max(d => d.AdministrationDate))?.Result,
+                SpanishResult = x.FirstOrDefault(r => r.AssessmentIdentifier.Contains("Spanish") && r.AdministrationDate == x.Where(d => d.AssessmentIdentifier.Contains("Spanish")).Max(d => d.AdministrationDate))?.Result,
+                ParentIdentificationCode = x.FirstOrDefault().ParentIdentificationCode,
+                IdentificationCode = x.FirstOrDefault().IdentificationCode,
+                AssessmentIdentifier = x.FirstOrDefault().AssessmentIdentifier,
+                AdministrationDate = x.Max(p => p.AdministrationDate)
+            }).ToList();
+
+            return result;
+        }
+
+        public Task<int> getTotalInstructionalDays(int studentUsi, StudentCalendar studentCalendar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ParentPortal.Models.Student.StudentGoal> AddStudentGoal(ParentPortal.Models.Student.StudentGoal studentGoal)
+        {
+            ParentPortal.Models.Student.StudentGoal result = new ParentPortal.Models.Student.StudentGoal();
+            try
+            {
+                StudentGoal newGoal = new StudentGoal
+                {
+                    Additional = studentGoal.Additional,
+                    Completed = studentGoal.Completed == "" ? "NA" : studentGoal.Completed,
+                    DateGoalCreated = studentGoal.DateGoalCreated,
+                    DateScheduled = studentGoal.DateScheduled,
+                    Goal = studentGoal.Goal,
+                    StudentUsi = studentGoal.StudentUsi,
+                    GoalType = studentGoal.GoalType,
+                    DateCompleted = studentGoal.DateCompleted,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    GradeLevel = studentGoal.GradeLevel,
+                    Labels = studentGoal.Labels
+                };
+
+                newGoal = _edFiDb.StudentGoals.Add(newGoal);
+                await _edFiDb.SaveChangesAsync();
+
+                if (newGoal.StudentGoalId > 0)
+                {
+                    foreach (var step in studentGoal.Steps)
+                    {
+                        step.StudentGoalId = newGoal.StudentGoalId;
+                        await AddStudentGoalStep(step);
+                    }
+                }
+
+                result = await (from sg in _edFiDb.StudentGoals
+                                where sg.StudentGoalId == newGoal.StudentGoalId
+                                select new ParentPortal.Models.Student.StudentGoal
+                                {
+                                    Labels = sg.Labels,
+                                    GradeLevel = sg.GradeLevel,
+                                    DateCompleted = sg.DateCompleted,
+                                    Goal = sg.Goal,
+                                    GoalType = sg.GoalType,
+                                    Additional = sg.Additional,
+                                    Completed = sg.Completed == "NA" ? "" : sg.Completed,
+                                    DateCreated = sg.DateCreated,
+                                    DateGoalCreated = sg.DateGoalCreated,
+                                    DateScheduled = sg.DateScheduled,
+                                    DateUpdated = sg.DateUpdated,
+                                    StudentGoalId = sg.StudentGoalId,
+                                    Steps = sg.StudentGoalSteps.Select(p => new ParentPortal.Models.Student.StudentGoalStep
+                                    {
+                                        StudentGoalId = p.StudentGoalId,
+                                        Completed = p.Completed,
+                                        DateCreated = p.DateCreated,
+                                        DateUpdated = p.DateUpdated,
+                                        StepName = p.StepName,
+                                        StudentGoalStepId = p.StudentGoalStepId,
+                                        IsActive = p.IsActive,
+                                        StudentGoalInterventionId = p.StudentGoalInterventionId
+                                    }).ToList()
+                                }).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                return null;
+            }
+            return result;
+        }
+
+        public async Task<ParentPortal.Models.Student.StudentGoal> UpdateStudentGoal(ParentPortal.Models.Student.StudentGoal studentGoal)
+        {
+            ParentPortal.Models.Student.StudentGoal result = new ParentPortal.Models.Student.StudentGoal();
+            try
+            {
+                StudentGoal currentGoal = await _edFiDb.StudentGoals.FirstOrDefaultAsync(p => p.StudentGoalId == studentGoal.StudentGoalId);
+                currentGoal.Goal = studentGoal.Goal;
+                currentGoal.DateGoalCreated = studentGoal.DateGoalCreated;
+                currentGoal.DateScheduled = studentGoal.DateScheduled;
+                currentGoal.Labels = studentGoal.Labels;
+                currentGoal.Additional = studentGoal.Additional;
+                currentGoal.Completed = studentGoal.Completed ?? "NA";
+                currentGoal.DateCompleted = studentGoal.DateCompleted;
+                currentGoal.DateUpdated = DateTime.Now;
+                await _edFiDb.SaveChangesAsync();
+
+                var listSteps = await _edFiDb.StudentGoalSteps.Where(p => p.StudentGoalId == studentGoal.StudentGoalId).ToListAsync();
+                foreach (var currentStep in listSteps)
+                {
+                    var existStep = studentGoal.Steps.FirstOrDefault(p => p.StudentGoalStepId == currentStep.StudentGoalStepId);
+                    if (existStep == null)
+                    {
+                        _edFiDb.StudentGoalSteps.Remove(currentStep);
+                    }
+                }
+                await _edFiDb.SaveChangesAsync();
+
+                foreach (var step in studentGoal.Steps)
+                {
+                    if (step.StudentGoalStepId == 0)
+                    {
+                        step.StudentGoalId = studentGoal.StudentGoalId;
+                        await AddStudentGoalStep(step);
+                    }
+                    else
+                    {
+                        await UpdateStudentGoalStep(step);
+                    }
+                }
+
+                result = await (from sg in _edFiDb.StudentGoals
+                                where sg.StudentGoalId == studentGoal.StudentGoalId
+                                select new ParentPortal.Models.Student.StudentGoal
+                                {
+                                    Labels = sg.Labels,
+                                    GradeLevel = sg.GradeLevel,
+                                    DateCompleted = sg.DateCompleted,
+                                    Goal = sg.Goal,
+                                    GoalType = sg.GoalType,
+                                    Additional = sg.Additional,
+                                    Completed = sg.Completed == "NA" ? "" : sg.Completed,
+                                    DateCreated = sg.DateCreated,
+                                    DateGoalCreated = sg.DateGoalCreated,
+                                    DateScheduled = sg.DateScheduled,
+                                    DateUpdated = sg.DateUpdated,
+                                    StudentGoalId = sg.StudentGoalId,
+                                    Steps = sg.StudentGoalSteps.Select(p => new ParentPortal.Models.Student.StudentGoalStep
+                                    {
+                                        StudentGoalId = p.StudentGoalId,
+                                        Completed = p.Completed,
+                                        DateCreated = p.DateCreated,
+                                        DateUpdated = p.DateUpdated,
+                                        StepName = p.StepName,
+                                        StudentGoalStepId = p.StudentGoalStepId,
+                                        IsActive = p.IsActive,
+                                        StudentGoalInterventionId = p.StudentGoalInterventionId
+                                    }).ToList()
+                                }).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                return null;
+            }
+            return result;
+        }
+
+        public async Task<bool> AddStudentGoalStep(ParentPortal.Models.Student.StudentGoalStep studentGoalStep)
+        {
+            try
+            {
+                StudentGoalStep newStep = new StudentGoalStep
+                {
+                    Completed = studentGoalStep.Completed,
+                    StepName = studentGoalStep.StepName,
+                    StudentGoalId = studentGoalStep.StudentGoalId,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    IsActive = studentGoalStep.IsActive,
+                    StudentGoalInterventionId = studentGoalStep.StudentGoalInterventionId
+                };
+
+                _edFiDb.StudentGoalSteps.Add(newStep);
+                await _edFiDb.SaveChangesAsync();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> UpdateStudentGoalStep(ParentPortal.Models.Student.StudentGoalStep studentGoalStep)
+        {
+            try
+            {
+                StudentGoalStep currentStep = await _edFiDb.StudentGoalSteps.FirstOrDefaultAsync(p => p.StudentGoalStepId == studentGoalStep.StudentGoalStepId);
+                currentStep.IsActive = studentGoalStep.IsActive;
+                currentStep.StudentGoalInterventionId = studentGoalStep.StudentGoalInterventionId;
+                currentStep.Completed = studentGoalStep.Completed;
+                currentStep.DateUpdated = DateTime.Now;
+                await _edFiDb.SaveChangesAsync();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<ParentPortal.Models.Student.StudentGoal> UpdateStudentGoalIntervention(ParentPortal.Models.Student.StudentGoalIntervention entity)
+        {
+            ParentPortal.Models.Student.StudentGoal result = new ParentPortal.Models.Student.StudentGoal();
+            try
+            {
+                var listSteps = await _edFiDb.StudentGoalSteps.Where(p => p.StudentGoalId == entity.StudentGoalId).ToListAsync();
+                foreach (var step in listSteps)
+                {
+                    step.IsActive = false;
+                    step.DateUpdated = DateTime.Now;
+                }
+
+                var entityResult = _edFiDb.StudentGoalInterventions.Add(new StudentGoalIntervention
+                {
+                    StudentGoalId = entity.StudentGoalId,
+                    StudentUsi = entity.StudentUsi,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    Description = entity.Description,
+                    InterventionStart = entity.InterventionStart,
+                });
+
+                await _edFiDb.SaveChangesAsync();
+
+                foreach (var step in entity.Steps)
+                {
+                    _edFiDb.StudentGoalSteps.Add(new StudentGoalStep
+                    {
+                        Completed = false,
+                        StepName = step.StepName,
+                        StudentGoalId = entity.StudentGoalId,
+                        DateCreated = DateTime.Now,
+                        DateUpdated = DateTime.Now,
+                        IsActive = true,
+                        StudentGoalInterventionId = entityResult.StudentGoalInterventionId
+                    });
+                }
+
+                await _edFiDb.SaveChangesAsync();
+
+                result = await (from sg in _edFiDb.StudentGoals
+                                where sg.StudentGoalId == entity.StudentGoalId
+                                select new ParentPortal.Models.Student.StudentGoal
+                                {
+                                    Labels = sg.Labels,
+                                    GradeLevel = sg.GradeLevel,
+                                    DateCompleted = sg.DateCompleted,
+                                    Goal = sg.Goal,
+                                    GoalType = sg.GoalType,
+                                    Additional = sg.Additional,
+                                    Completed = sg.Completed == "NA" ? "" : sg.Completed,
+                                    DateCreated = sg.DateCreated,
+                                    DateGoalCreated = sg.DateGoalCreated,
+                                    DateScheduled = sg.DateScheduled,
+                                    DateUpdated = sg.DateUpdated,
+                                    StudentGoalId = sg.StudentGoalId,
+                                    Steps = sg.StudentGoalSteps.Select(p => new ParentPortal.Models.Student.StudentGoalStep
+                                    {
+                                        StudentGoalId = p.StudentGoalId,
+                                        Completed = p.Completed,
+                                        DateCreated = p.DateCreated,
+                                        DateUpdated = p.DateUpdated,
+                                        StepName = p.StepName,
+                                        StudentGoalStepId = p.StudentGoalStepId,
+                                        IsActive = p.IsActive,
+                                        StudentGoalInterventionId = p.StudentGoalInterventionId
+                                    }).ToList()
+                                }).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                return null;
+            }
+            return result;
+        }
+
+        public async Task<List<ParentPortal.Models.Student.StudentGoal>> GetStudentGoals(int studentUsi)
+        {
+            var list = await (from sg in _edFiDb.StudentGoals
+                              where sg.StudentUsi == studentUsi
+                              select new ParentPortal.Models.Student.StudentGoal
+                              {
+                                  Labels = sg.Labels,
+                                  GradeLevel = sg.GradeLevel,
+                                  DateCompleted = sg.DateCompleted,
+                                  StudentUsi = sg.StudentUsi,
+                                  Goal = sg.Goal,
+                                  GoalType = sg.GoalType,
+                                  Additional = sg.Additional,
+                                  Completed = sg.Completed == "NA" ? "" : sg.Completed,
+                                  DateCreated = sg.DateCreated,
+                                  DateGoalCreated = sg.DateGoalCreated,
+                                  DateScheduled = sg.DateScheduled,
+                                  DateUpdated = sg.DateUpdated,
+                                  StudentGoalId = sg.StudentGoalId,
+                                  Steps = sg.StudentGoalSteps.Select(p => new ParentPortal.Models.Student.StudentGoalStep
+                                  {
+                                      StudentGoalId = p.StudentGoalId,
+                                      Completed = p.Completed,
+                                      DateCreated = p.DateCreated,
+                                      DateUpdated = p.DateUpdated,
+                                      StepName = p.StepName,
+                                      StudentGoalStepId = p.StudentGoalStepId,
+                                      IsActive = p.IsActive,
+                                      StudentGoalInterventionId = p.StudentGoalInterventionId
+                                  }).ToList()
+
+                              }).ToListAsync();
+            return list;
+        }
+
+        public async Task<List<ParentPortal.Models.Student.StudentGoalLabel>> GetStudentGoalLabels()
+        {
+            var list = await (from sg in _edFiDb.StudentGoalLabels
+                              select new ParentPortal.Models.Student.StudentGoalLabel
+                              {
+                                  StudentGoalLabelId = sg.StudentGoalLabelId,
+                                  Label = sg.Label,
+                                  DateCreated = sg.DateCreated,
+                                  DateUpdated = sg.DateUpdated
+
+                              }).ToListAsync();
+            return list;
+        }
+
+        public async Task<ParentPortal.Models.Student.StudentAllAbout> AddStudentAllAbout(ParentPortal.Models.Student.StudentAllAbout newRecord)
+        {
+            ParentPortal.Models.Student.StudentAllAbout result = new ParentPortal.Models.Student.StudentAllAbout();
+            try
+            {
+                StudentAllAbout record = new StudentAllAbout
+                {
+                    FavoriteAnimal = newRecord.FavoriteAnimal,
+                    StudentAllAboutId = newRecord.StudentAllAboutId,
+                    FavoriteSubjectSchool = newRecord.FavoriteSubjectSchool,
+                    FavoriteThingToDo = newRecord.FavoriteThingToDo,
+                    FunFact = newRecord.FunFact,
+                    LearningThings = newRecord.LearningThings,
+                    LearnToDo = newRecord.LearnToDo,
+                    OneThingWant = newRecord.OneThingWant,
+                    PrefferedName = newRecord.PrefferedName,
+                    TypesOfBook = newRecord.TypesOfBook,
+                    StudentUsi = newRecord.StudentUsi,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                };
+
+                record = _edFiDb.StudentAllAbouts.Add(record);
+                await _edFiDb.SaveChangesAsync();
+                result = await GetStudentAllAbout(record.StudentUsi);
+            }
+            catch
+            {
+                return null;
+            }
+            return result;
+        }
+
+        public async Task<ParentPortal.Models.Student.StudentAllAbout> UpdateStudentAllAbout(ParentPortal.Models.Student.StudentAllAbout updatedRecord)
+        {
+            ParentPortal.Models.Student.StudentAllAbout result = new ParentPortal.Models.Student.StudentAllAbout();
+            try
+            {
+                StudentAllAbout currentRecord = await _edFiDb.StudentAllAbouts.FirstOrDefaultAsync(p => p.StudentAllAboutId == updatedRecord.StudentAllAboutId);
+                currentRecord.FavoriteAnimal = updatedRecord.FavoriteAnimal;
+                currentRecord.FavoriteSubjectSchool = updatedRecord.FavoriteSubjectSchool;
+                currentRecord.FavoriteThingToDo = updatedRecord.FavoriteThingToDo;
+                currentRecord.FunFact = updatedRecord.FunFact;
+                currentRecord.LearningThings = updatedRecord.LearningThings;
+                currentRecord.LearnToDo = updatedRecord.LearnToDo;
+                currentRecord.OneThingWant = updatedRecord.OneThingWant;
+                currentRecord.PrefferedName = updatedRecord.PrefferedName;
+                currentRecord.TypesOfBook = updatedRecord.TypesOfBook;
+                currentRecord.DateUpdated = DateTime.Now;
+                await _edFiDb.SaveChangesAsync();
+                result = await GetStudentAllAbout(currentRecord.StudentUsi);
+            }
+            catch
+            {
+                return null;
+            }
+            return result;
+        }
+
+        public async Task<ParentPortal.Models.Student.StudentAllAbout> GetStudentAllAbout(int studentUsi)
+        {
+            var record = await (from sg in _edFiDb.StudentAllAbouts
+                                select new ParentPortal.Models.Student.StudentAllAbout
+                                {
+                                    StudentAllAboutId = sg.StudentAllAboutId,
+                                    StudentUsi = sg.StudentUsi,
+                                    FavoriteAnimal = sg.FavoriteAnimal,
+                                    FavoriteSubjectSchool = sg.FavoriteSubjectSchool,
+                                    FavoriteThingToDo = sg.FavoriteThingToDo,
+                                    FunFact = sg.FunFact,
+                                    LearningThings = sg.LearningThings,
+                                    LearnToDo = sg.LearnToDo,
+                                    OneThingWant = sg.OneThingWant,
+                                    PrefferedName = sg.PrefferedName,
+                                    TypesOfBook = sg.TypesOfBook,
+                                    DateCreated = sg.DateCreated,
+                                    DateUpdated = sg.DateUpdated
+
+                                }).FirstOrDefaultAsync();
+            return record;
+        }
+
+        public async Task<List<PersonIdentityModel>> GetStudentIdentityByEmailAsync(string email)
+        {
+            var identity = await (from s in _edFiDb.Students
+                                  join sa in _edFiDb.StudentEducationOrganizationAssociationElectronicMails on s.StudentUsi equals sa.StudentUsi
+                                  where sa.ElectronicMailAddress == email
+                                  select new PersonIdentityModel
+                                  {
+                                      Usi = s.StudentUsi,
+                                      UniqueId = s.StudentUniqueId,
+                                      PersonTypeId = ChatLogPersonTypeEnum.Student.Value,
+                                      FirstName = s.FirstName,
+                                      LastSurname = s.LastSurname,
+                                      Email = sa.ElectronicMailAddress
+                                  }).ToListAsync();
+
+            return identity;
+        }
+
+        public async Task<UserProfileModel> GetStudentProfileAsync(int studentUsi)
+        {
+            var edfiProfile = await (from s in _edFiDb.Students
+                                     where s.StudentUsi == studentUsi
+                                     select s).FirstOrDefaultAsync();
+
+            return ToUserProfileModel(edfiProfile);
+        }
+
+        private UserProfileModel ToUserProfileModel(Student student)
+        {
+            var model = new UserProfileModel
+            {
+                Usi = student.StudentUsi,
+                UniqueId = student.StudentUniqueId,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastSurname = student.LastSurname
+            };
+
+            return model;
         }
     }
 }

@@ -2,7 +2,6 @@
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('app.adminLanding', {
             url: '/adminLanding',
-            requireADLogin: true,
             views: {
                 'content@': { component: 'adminLanding' }
             }
@@ -12,9 +11,9 @@
         bindings: {
             model: "<"
         },
-        templateUrl: 'clientapp/modules/admin/landing.view.html',
+        templateUrl: 'clientapp/modules/admin/landing/landing.view.html',
         controllerAs: 'ctrl',
-        controller: ['api', '$translate', 'adalAuthenticationService', '$state', 'impersonateService', '$rootScope', function (api, $translate, adalService, $state, impersonateService, $rootScope) {
+        controller: ['api', '$translate', '$state', 'impersonateService', '$rootScope', function (api, $translate, $state, impersonateService, $rootScope) {
             var ctrl = this;
             
             ctrl.save = function () {

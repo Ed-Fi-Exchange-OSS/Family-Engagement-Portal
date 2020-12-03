@@ -1,0 +1,1333 @@
+﻿{
+  "IMPORTANT_READ": {
+    "info": "This file holds customizable parameters, values, rules and textual descriptions that can be changed through the application.",
+    "NOTE": "Do not save critical/sensible information in here. (i.e. Credentials, connection strings, etc..)"
+  },
+  "attendance": {
+    "ADA": {
+      "maxAbsencesCountThreshold": 10,
+      "excused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<",
+            "value": 5
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "unexcused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<",
+            "value": 5
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "tardy": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 1
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<",
+            "value": 5
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      }
+    },
+    "periodLevelAttendance": {
+      "maxAbsencesCountThreshold": 10,
+      "excused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<",
+            "value": 5
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "unexcused": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 2
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<",
+            "value": 5
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "tardy": {
+        "maxAbsencesCountThreshold": 10,
+        "thresholdRules": [
+          {
+            "interpretation": "good",
+            "operator": "<",
+            "value": 1
+          },
+          {
+            "interpretation": "warning",
+            "operator": "<",
+            "value": 5
+          },
+          {
+            "interpretation": "bad",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      }
+    }
+  },
+  "behavior": {
+    "maxDisciplineIncidentsCountThreshold": 3,
+    "linkToSystemWithDetails": {
+      "title": "Hero K12",
+      "linkText": "Hero",
+      "url": "https://www.herok12.com/"
+    },
+    "thresholdRules": [
+      {
+        "interpretation": "good",
+        "operator": "<=",
+        "value": 1
+      },
+      {
+        "interpretation": "warning",
+        "operator": "<=",
+        "value": 2
+      },
+      {
+        "interpretation": "bad",
+        "operator": ">=",
+        "value": 3
+      }
+    ]
+  },
+  "assessmentResult": {
+    "thresholdRules": [
+      {
+        "interpretation": "good",
+        "operator": "<=",
+        "value": 8
+      },
+      {
+        "interpretation": "warning",
+        "operator": "<=",
+        "value": 6
+      },
+      {
+        "interpretation": "bad",
+        "operator": ">",
+        "value": 6
+      }
+    ]
+  },
+  "assessmentPerformanceLevel": {
+    "thresholdRules": [
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": "At/Above Benchmark"
+      },
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": "Above Benchmark"
+      },
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": "At Benchmark"
+      },
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": "Exceeding"
+      },
+      {
+        "interpretation": "warning",
+        "operator": "==",
+        "value": "On Watch"
+      },
+      {
+        "interpretation": "warning",
+        "operator": "==",
+        "value": "Meeting"
+      },
+      {
+        "interpretation": "warning",
+        "operator": "==",
+        "value": "Approaching Benchmark"
+      },
+      {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": "Intervention"
+      },
+      {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": "Urgent Intervention"
+      },
+      {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": "Partially Meeting"
+      },
+      {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": "Not Meeting"
+      },
+      {
+        "interpretation": "",
+        "operator": "!=",
+        "value": "Urgent Intervention"
+      }
+    ]
+  },
+  "courseGrades": {
+    "linkToSystemWithDetails": {
+      "title": "HAC - Detail",
+      "linkText": "Home Access Center",
+      "url": "https://hac.yesprep.org/HomeAccess"
+    },
+    "gpa": {
+      "nationalAverage": 3.38,
+      "thresholdRules": [
+        {
+          "interpretation": "good",
+          "operator": ">=",
+          "value": 3.38
+        },
+        {
+          "interpretation": "bad",
+          "operator": "<",
+          "value": 3.38
+        }
+      ]
+    },
+    "courseAverage": {
+      "thresholdRules": [
+        {
+          "interpretation": "good",
+          "operator": ">=",
+          "value": 80
+        },
+        {
+          "interpretation": "warning",
+          "operator": ">=",
+          "value": 70
+        },
+        {
+          "interpretation": "bad",
+          "operator": "<",
+          "value": 70
+        }
+      ]
+    }
+  },
+  "assignments": {
+    "maxAssigmentsCountThreshold": 3,
+    "linkToSystemWithDetails": {
+      "title": "HAC - Detail",
+      "linkText": "Home Access Control",
+      "url": "https://hac.yesprep.org/HomeAccess"
+    },
+    "thresholdRules": [
+      {
+        "interpretation": "good",
+        "operator": "<=",
+        "value": 2
+      },
+      {
+        "interpretation": "warning",
+        "operator": "<",
+        "value": 10
+      },
+      {
+        "interpretation": "bad",
+        "operator": ">=",
+        "value": 10
+      }
+    ]
+  },
+  "graduationReadiness": {
+    "thresholdRules": [
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": true
+      },
+      {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": false
+      }
+    ]
+  },
+  "studentProfileExternalLinks": [
+    {
+      "title": "Spotlight report X",
+      "linkText": "Spotlight",
+      "url": "https://www.spotlight-education.com/"
+    }
+  ],
+  "descriptors": {
+    "excusedAbsenceDescriptorCodeValue": "Excused Absence", //"Excused Absence",
+    "unexcusedAbsenceDescriptorCodeValue": "Unexcused Absence", //"Unexcused Absence",
+    "tardyDescriptorCodeValue": "Tardy", //"Tardy",
+    "absentDescriptorCodeValue": "A",
+    "gradeBookMissingAssignmentTypeDescriptors": [ "Assignment", "Homework" ], //[2,4]
+    "gradeTypeGradingPeriodDescriptor": "Grading Period", // 4
+    "gradeTypeSemesterDescriptor": "Semester", // 7
+    "gradeTypeExamDescriptor": "Exam",
+    "gradeTypeFinalDescriptor": "Final", // 3
+    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster" ], // [ "Father", "Mother", "Step", "Guardian", "Foster" ]
+    "validCampusLeaderDescriptors": [ "Assistant Principal", "Counselor", "Principal", "School Administrator", "School Leader" ],
+    "schoolGradingPeriodDescriptors": [ "A1", "A2", "A3", "A4", "A5", "A6" ], // They have to be in order
+    "examGradingPeriods": [ "A3", "A6" ],
+    "disciplineIncidentDescriptor": "Perpetrator",
+    "missingAssignmentLetterGrade": "M",
+    "suspensionDescriptors": [ "In School Suspension", "Out of School Suspension" ],
+    "assessmentLengthOfTime": "Length of Time in LEP/ELL Program",
+    "ellDescriptor": {
+      "CodeValue": "Limited",
+      "DisplayName": "Multilingual Learner"
+    },
+    "accommodationDescriptor": {
+      "CodeValue": "Section 504 Placement",
+      "DisplayName": "504"
+    },
+    "specialEducationDescriptor": {
+      "CodeValue": "Special Education",
+      "DisplayName": "Specialized Instruction",
+      "Url": "http://www.powerschool.com"
+    },
+    "instructionalDayDescriptorCodeValue": "Instructional day",
+    "nonInstrunctionalDayDescriptorCodeValue": "Other"
+  },
+  "assessments": [
+    {
+      "title": "STAR 360", // EoC  -- STAAR Algebra II, STAAR English III
+      "assessmentIdentifiers": [ "STAR Early Literacy", "STAR Reading", "STAR Spanish", "STAR Math" ],
+      "assessmentReportingMethodTypeDescriptor": "Scale score",
+      "shortDescription": "Renaissance 360 degree view of students' reading and math mastery.",
+      "externalLink": ""
+    }
+    //,
+    //{
+    //  "title": "PSAT",
+    //  "assessmentIdentifiers": [ "PSAT EBRW", "PSAT MATH" ],
+    //  "assessmentReportingMethodTypeDescriptor": "Scale score",
+    //  "shortDescription": "Preliminary Scholastic Aptitude Test",
+    //  "externalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks"
+    //},
+    //{
+    //  "title": "SAT",
+    //  "assessmentIdentifiers": [ "SAT EBRW", "SAT MATH" ],
+    //  "assessmentReportingMethodTypeDescriptor": "Scale score",
+    //  "shortDescription": "Scholastic Aptitude Test",
+    //  "externalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks"
+    //}
+  ],
+  "assessmentIndicators": [
+    {
+      "title": "Access Scores",
+      "assessmentReportingMethodTypeDescriptor": "Composite (Overall) Proficiency Level",
+      "getPerformanceLevel": false
+    },
+    {
+      "title": "STAR Early Literacy",
+      "assessmentReportingMethodTypeDescriptor": "RICAS",
+      "getPerformanceLevel": true
+    },
+    {
+      "title": "STAR Math",
+      "assessmentReportingMethodTypeDescriptor": "RICAS",
+      "getPerformanceLevel": true
+    },
+    {
+      "title": "STAR Reading",
+      "assessmentReportingMethodTypeDescriptor": "RICAS",
+      "getPerformanceLevel": true
+    }
+  ],
+  "starAssessments": [
+    {
+      "title": "STAR Early Literacy",
+      "assessmentReportingMethodTypeDescriptor": "Percentile rank"
+    },
+    {
+      "title": "STAR Math",
+      "assessmentReportingMethodTypeDescriptor": "Percentile rank"
+    },
+    {
+      "title": "STAR Reading",
+      "assessmentReportingMethodTypeDescriptor": "Percentile rank"
+    }
+  ],
+  "accessAssessments": [
+    {
+      "title": "Access Scores",
+      "assessmentReportingMethodTypeDescriptor": "Composite (Overall) Scale Score",
+      "assessmentReportingMethodTypeDescriptorProficiency": "Composite (Overall) Proficiency Level"
+    },
+    {
+      "title": "Access Scores",
+      "assessmentReportingMethodTypeDescriptor": "Listening Scale Score",
+      "assessmentReportingMethodTypeDescriptorProficiency": "Literacy Proficiency Level"
+    },
+    {
+      "title": "Access Scores",
+      "assessmentReportingMethodTypeDescriptor": "Reading Scale Score",
+      "assessmentReportingMethodTypeDescriptorProficiency": "Reading Proficiency Level"
+    },
+    {
+      "title": "Access Scores",
+      "assessmentReportingMethodTypeDescriptor": "Speaking Scale Score",
+      "assessmentReportingMethodTypeDescriptorProficiency": "Speaking Proficiency Level"
+    },
+    {
+      "title": "Access Scores",
+      "assessmentReportingMethodTypeDescriptor": "Writing Scale Score",
+      "assessmentReportingMethodTypeDescriptorProficiency": "Writing Proficiency Level"
+    }
+  ],
+  "objectiveAssessmentsIdentifiers": {
+    "mathAssessmentIdentifier": "",
+    "readingAssessmentIdentifier": "",
+    "earlyLiteracyEnglishAssessmentIdentifier": "EarlyLiteracy_2",
+    "earlyLiteracySpanishAssessmentIdentifier": "EarlyLiteracy_Spanish_2"
+  },
+  "staarAssessmentHistory": {
+    "title": "STAAR", // Elementary and Middle School
+    "assessmentIdentifiers": [ "STAAR READING", "STAAR MATHEMATICS", "STAAR WRITING", "STAAR SCIENCE", "STAAR SOCIAL STUDIES" ],
+    "assessmentReportingMethodTypeDescriptor": "Scale score",
+    "shortDescription": "State of Texas Assessments of Academic Readiness"
+  },
+  "feedbackExternalUrl": "https://www.yesprep.org/parents/family-dashboards/portal-help",
+  "mostCommonLanguageCodes": [ "en", "es", "vi" ],
+  "staarExternalLink": "https://txparentportal.emetric.net/login",
+  "psatSATExternalLink": "https://collegereadiness.collegeboard.org/about/scores/benchmarks",
+  "featureToggle": [
+    {
+      "page": "ParentLanding",
+      "route": "landing",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "false"
+        }
+      ]
+    },
+    {
+      "page": "TeacherLanding",
+      "route": "teacherLanding",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "false"
+        }
+      ]
+    },
+    {
+      "page": "StudentDetail",
+      "route": "studentdetail",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "false"
+        },
+        {
+          "name": "gradesDetail",
+          "enabled": "false"
+        },
+        {
+          "name": "gpaTableDetail",
+          "enabled": "false"
+        },
+        {
+          "name": "missingAssignmentsDetail",
+          "enabled": "false"
+        },
+        {
+          "name": "scheduleDetail",
+          "enabled": "false"
+        },
+        {
+          "name": "gpaIndicator",
+          "enabled": "false"
+        },
+        {
+          "name": "onTrackIndicator",
+          "enabled": "false"
+        }
+      ]
+    },
+    {
+      "page": "UserProfile",
+      "route": "userProfile",
+      "features": [
+        {
+          "name": "comms",
+          "enabled": "false"
+        }
+      ]
+    }
+  ],
+  "canDoDescriptors": [
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Listening",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Mimicking gestures or movement associated with oral commands\n• Matching key words or expressions in songs, chants, and poems to illustrations\nProcess explanations by\n• Identifying reallife objects based on descriptive oral phrases or short sentences\n• Pointing to objects or people reflective of content-related vocabulary (e.g., family members)\nProcess arguments by\n• Answering questions about likes and preferences\n• Identifying words or phrases that express opinions"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Speaking",
+      "proficiency": 1,
+      "description": "Recount by\n• Repeating words, phrases and memorized chunks of language related to different topics\n• Answering yes or no questions about stories or experiences\nExplain by\n• Answering questions with words or phrases (e.g., “Go washroom.”)\n• Describing pictures or classroom objects\nArgue by\n• Expressing preferences in naming and pointing to objects\n• Repeating language to express agreement or disagreement"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Reading",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Using pictures and illustrations to identify themes or storylines\n• Matching vocabulary to illustrated stories\nProcess explanations by\n• Identifying icons from illustrated texts or media with a partner\n• Sorting objects according to their use based on labeled illustrations\nProcess arguments by\n• Categorizing labeled pictures or photographs\n• Identifying opinions from illustrated statements (e.g., likes and dislikes)"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Writing",
+      "proficiency": 1,
+      "description": "Recount by\n• Forming words using a variety of strategies\n• Answering Wh- oral questions or using icons to plan stories\nExplain by\n• Designing, drawing and labeling content-specific models\n• Identifying topics through photographs, illustrated word walls, or software\nArgue by\n• Indicating agreement with opinions of others using labeled drawings\n• Drawing icons or symbols to represent preferencesArgue by\n• Indicating agreement with opinions of others using labeled drawings\n• Drawing icons or symbols to represent preferences"
+    },
+
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Listening",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Acting out oral statements using manipulatives or real-life objects\n• Pointing to objects, characters or places from oral descriptions\nProcess explanations by\n• Classifying real-life objects according to their function based on oral directions\n• Interpreting oral descriptions and matching them to illustrations\nProcess arguments by\n• Evaluating options to make personal choices from oral simple sentences\n• Signaling agreement or disagreement with short oral statements using gestures (e.g., “Today is Monday.” “Clap one time for yes. Clap two times for no.”)"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Speaking",
+      "proficiency": 2,
+      "description": "Recount by\n• Stating contentrelated facts in context (e.g., playing telephone)\n• Describing characters or places in picture books\nExplain by\n• Demonstrating how to do something using gestures or real-life objects (e.g., tie a bow)\n• Describing what people do from action pictures (e.g., jobs of community workers)\nArgue by\n• Responding to short statements or questions about choices (e.g., “I am sure.” “I am not sure.”)\n• Stating likes and dislikes to participate in conversations with peers"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Reading",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Pointing to icons, letters, or illustrated words that represent ideas\n• Identifying repetitive words and phrases in texts\nProcess explanations by\n• Matching descriptive labels or headings to illustrated text\n• Identifying labeled illustrations signaled by Wh- questions\nProcess arguments by\n• Identifying information related to events from graphics (e.g., birthday charts, weather calendars)\n• Sharing likes and dislikes using environmental print"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Writing",
+      "proficiency": 2,
+      "description": "Recount by\n• Providing information in graphic organizers\n• Presenting contentrelated information labeling visuals or graphics\nExplain by\n• Labeling and illustrating observations over time (e.g., growing plants)\n• Describing people, places, or objects from illustrated examples\nArgue by\n• Producing simple sentences from models about likes, wants, and needs (e.g., “I like…, I don’t like…”)\n• Supplying facts about topics"
+    },
+
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Listening",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Sequencing pictures of stories read aloud (e.g., beginning, middle, end)\n• Following modeled oral instructions related to content\nProcess explanations by\n• Following peer statements to create projects\n• Identifying illustrated cycles or processes described orally\nProcess arguments by\n• Classifying objects according to descriptive oral statements\n• Following conditional directions (e.g., “Raise two hands if you like ice cream.”)"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Speaking",
+      "proficiency": 3,
+      "description": "Recount by\n• Retelling simple stories from picture cues\n• Participating in dialog with peers on familiar topics\nExplain by\n• Stating associations between two objects, people, or events (e.g., “Lidia is my sister and Lisa is my sister.”)\n• Telling why something happened\nArgue by\n• Describing characters or objects using pictures or actions\n• Stating choices of materials or supplies and reasons for their selection"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Reading",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Identifying Whwords in questions (e.g., who, what, when)\n• Recalling contentrelated information from illustrated texts read aloud\nProcess explanations by\n• Sorting illustrated content words and phrases into categories\n• Matching labeled illustrations to “how” or “why” questions\nProcess arguments by\n• Identifying persuasive words in written phrases or statements in context (e.g., “have to,” “must”)\n• Identifying language of wants and needs in illustrated short stories read aloud"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Writing",
+      "proficiency": 3,
+      "description": "Recount by\n• Describing feelings or reactions to personal events orsituations\n• Recalling information from events or experiences\nExplain by\n• Classifying illustrated words and phrases into groups (e.g., “Animals that fly. Animals that swim.”)\n• Comparing real-life objects, numbers, or animals using models\nArgue by\n• Participating in interactive journals with peers\n• Stating preferences related to social and academic topics (e.g., “I want to go…”)"
+    },
+
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Listening",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Identifying characters, plots, and settings from oral stories\n• Finding details in illustrated narrative or informational text read aloud\nProcess explanations by\n• Following illustrated content-related procedures shared orally\n• Organizing real-life objects based on oral comparisons\nProcess arguments by\n• Organizing information from oral comparisons of people or objects\n• Identifying claims about real-life objects or events based on observations or experiences"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Speaking",
+      "proficiency": 4,
+      "description": "Recount by\n• Restating information with some details\n• Summarizing a series of familiar events or routines\nExplain by\n• Connecting ideas by building on guided conversations with peers\n• Describing in detail the function of objects or roles of people\nArgue by\n• Justifying the use of objects for particular purposes\n• Supporting contentrelated ideas with examples"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Reading",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Identifying the main topic of texts\n• Ordering illustrations based on sequence of events from texts read aloud\nProcess explanations by\n• Finding details in illustrated narrative or informational texts read aloud\n• Identifying what authors say in oral stories\nProcess arguments by\n• Distinguishing characters’ opinions or preferences from illustrated text read aloud\n• Determining the author’s point of view from illustrated texts"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Writing",
+      "proficiency": 4,
+      "description": "Recount by\n• Producing a series of related sentences from transition word starters (e.g., first, next, last)\n• Describing observations firsthand or from media\nExplain by\n• Describing models related to contentrelated phenomena in pictures or reallife\n• Expressing feelings and a reason related to situations or events\nArgue by\n• Describing patterns in processes and stories to use as evidence\n• Stating reasons for particular claims or opinions in contentrelated topics"
+    },
+
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Listening",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Constructing models based on instructions from extended oral discourse with a partner\n• Following multistep oral directions during contentrelated activities\nProcess explanations by\n• Organizing causes and effects of various phenomena presented orally\n• Using strategies and procedures shared by peers\nProcess arguments by\n• Identifying claims and reasons from oral discourse\n• Identifying reasons for choices from oral stories"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Speaking",
+      "proficiency": 5,
+      "description": "Recount by\n• Presenting information on content-related topics\n• Sharing details about personal experiences with peers and adults\nExplain by\n• Stating conditions for cause and effect (e.g., “If it rains, I play inside.”)\n• Elaborating on details of contentrelated procedures\nArgue by\n• Comparing and contrasting contentrelated ideas (e.g., “Winter is hot in Hawaii. Winter is cold in Alaska.”)\n• Providing evidence for specific claims"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Reading",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Distinguishing among characters, settings, and events in narratives\n• Reconstructing texts read orally using drawings or reenacting text with performances\nProcess explanations by\n• Ordering contentrelated events according to information in illustrated texts\n• Identifying steps or stages of contentrelated processes or events from informational or explanatory texts\nProcess arguments by\n• Determining what happens next from illustrated observations\n• Identifying evidence or reasons in peers’ written text"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Writing",
+      "proficiency": 5,
+      "description": "Recount by\n• Composing stories or narratives using sequential language\n• Editing personal narratives based on criteria for success\nExplain by\n• Describing causes and effects of actions and strategies\n• Sequencing steps in solving problems using short sentences, illustrations, and symbols\nArgue by\n• Providing simple edits to peers’ writing\n• Elaborating contentrelated claims with examples"
+    },
+
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Listening",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Matching relevant details to main ideas presented in oral discourse\n• Identifying different genres through multiple readings of text by adults (e.g., rhymes, stories, informational text)\nProcess explanations by\n• Identifying details from oral descriptions of processes or procedures\n• Representing ideas from oral discussions or multimedia\nProcess arguments by\n• Identifying reasons authors give to support points in text read aloud\n• Distinguishing opinions from reasons in oral discourse"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Speaking",
+      "proficiency": 6,
+      "description": "Recount by\n• Producing discourse appropriate to task and situation\n• Rehearsing contentrelated presentations with peers\nExplain by\n• Asking and answering contentrelated “how” and “why” questions\n• Expressing connected ideas with supporting details\nArgue by\n• Defending solutions to simple problems\n• Elaborating reasons to justify contentrelated ideas"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Reading",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying who is telling the story at various points in texts\n• Matching original text to paraphrased versions\nProcess explanations by\n• Identifying words and phrases related to cause and effect\n• Identifying reasons for actions in stories, songs, and poems\nProcess arguments by\n• Predicting meaning of words based on clues from sentencelevel context\n• Identifying similarities in and differences between two texts on the same topic (e.g., in illustrations, descriptions, or procedures)"
+    },
+    {
+      "gradeLevels": [ 1 ],
+      "subject": "Writing",
+      "proficiency": 6,
+      "description": "Recount by\n• Producing narratives with at least two sequential events\n• Producing narrative sequences from timelines and labeled drawings\nExplain by\n• Predicting how stories, events, or situations might end\n• Producing texts that can name a topic and supply topicrelated facts\nArgue by\n• Using persuasive language in a variety of sentences\n• Producing opinion pieces by stating an opinion and providing a connected reason"
+    },
+
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Listening",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Showing what happens next based on familiar oral stories (e.g., by pointing or drawing)\n• Drawing or providing other visual displays of people, animals, or objects in response to oral prompts\nProcess explanations by\n• Pointing to visual characteristics of models or real-life objects from oral clues\n• Pairing objects, pictures, or equations as directed by a partner\nProcess arguments by\n• Indicating personal points of view in response to oral phrases or short sentences (e.g., by thumbs up/thumbs down; agree/disagree cards)\n• Identifying preferences from short oral statements"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Speaking",
+      "proficiency": 1,
+      "description": "Recount by\n• Responding to questions related to stories or experiences (e.g., “Who came to the door?”)\n• Acting out and naming events or experiences throughout the school day\nExplain by\n• Describing the outcomes of experiments or stories with guidance and visual support\n• Naming or answering Whquestions related to classroom routines (e.g., “What do we do now?”)\nArgue by\n• Stating a claim or position from models or examples\n• Sharing facts as evidence using sentence starters or sentence frames"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Reading",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Identifying key words and phrases in illustrated text\n• Signaling language associated with content-related information (e.g., during preview, view, & review)\nProcess explanations by\n• Identifying words and phrases in titles and highlighted texts\n• Matching pictures with graphic information from illustrated texts\nProcess arguments by\n• Identifying facts in illustrated informational text read orally\n• Identifying language related to likes, needs, and wants in labeled illustrations"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Writing",
+      "proficiency": 1,
+      "description": "Recount by\n• Labeling images that illustrate the steps for different processes (e.g., writing workshop)\n• Creating visual representations of ideas or stories\nExplain by\n• Listing and illustrating ideas\n• Stating facts associated with images or illustrations\nArgue by\n• Indicating decisions or preferences through labeled pictures, words, or phrases\n• Providing evidence of natural phenomena or opinions through labeled drawings"
+    },
+
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Listening",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Identifying the “who,” “where” and “when” of illustrated statements\n• Identifying main materials or resources from oral descriptions\nProcess explanations by\n• Matching oral descriptions to photos, pictures, or icons\n• Following simple sequences presented orally to create patterns or sequences\nProcess arguments by\n• Distinguishing opinions from facts from peers’ oral presentations\n• Categorizing content-based pictures or objects from oral descriptions (e.g., “animals that form groups to help members survive”)"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Speaking",
+      "proficiency": 2,
+      "description": "Recount by\n• Reproducing facts or statements in context\n• Participating in multi-media presentations based on research\nExplain by\n• Naming steps in processes or procedures\n• Describing familiar phenomena in words or phrases\nArgue by\n• Telling what comes next and showing why\n• Sharing reasons for opinions or claims (e.g., science experiments)"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Reading",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Identifying timerelated language in context (e.g., in biographies)\n• Illustrating experiences of characters in illustrated statements\nProcess explanations by\n• Interpreting images, illustrations, and graphics\n• Identifying elements of expository texts (e.g., graphs, captions) in illustrated texts\nProcess arguments by\n• Distinguishing fact from fiction (e.g., using sentence strips or highlighting texts)\n• Identifying claims or opinions in illustrated texts"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Writing",
+      "proficiency": 2,
+      "description": "Recount by\n• Listing ideas using graphic organizers\n• Describing visual information\nExplain by\n• Describing elements of processes or procedures\n• Stating how something happens using illustrations and sequential language (e.g., eruption of volcanoes)\nArgue by\n• Participating in shared opinion writing experiences\n• Connecting preferences, choices, or opinions to reasons"
+    },
+
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Listening",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Identifying linking words or phrases related to passage of time in speech (e.g., “on Monday” “the next day”)\n• Illustrating events in response to audio recordings of stories or poems\nProcess explanations by\n• Carrying out steps described orally to solve problems\n• Completing graphic organizers or representations from oral comparisons\nProcess arguments by\n• Identifying similarities and differences from oral contentrelated materials or equipment\n• Identifying different points of view in short oral dialogues"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Speaking",
+      "proficiency": 3,
+      "description": "Recount by\n• Retelling simple stories from picture cues\n• Stating information from personal or school-related experiences\nExplain by\n• Describe relationships between objects or uses for tools\n• Expressing cause and effect of behaviors or events\nArgue by\n• Describing organizing categories for content-related information (e.g., fish/birds, forests/ deserts)\n• Asking and answering questions in collaborative groups"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Reading",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Creating timelines or graphic organizers from illustrated related statements or paragraphs\n• Identifying temporal-related words that signal order of events (e.g., “In the beginning…”)\nProcess explanations by\n• Sequencing sentences descriptive of processes or procedures in informational texts\n• Locating details in content area texts or media\nProcess arguments by\n• Identifying different ideas or opinions in written texts\n• Identifying general academic and content-related words and phrases in text relevant to the genre/key use (e.g., “once upon a time” indicates a fairy tale)"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Writing",
+      "proficiency": 3,
+      "description": "Recount by\n• Retelling past experiences\n• Expressing ideas in various genres (e.g., poetry, interactive journals)\nExplain by\n• Comparing causes of different phenomena\n• Stating ideas about content-related topics\nArgue by\n• Communicating different contentrelated ideas or opinions \n• Describing pros and cons related to social issues or familiar topics"
+    },
+
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Listening",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Re-enacting content-related situations or events from oral descriptions\n• Identifying contentrelated ideas from oral discourse using multi-media (e.g., retracing steps of a process)\nProcess explanations by\n• Identifying connectors in speech or text read aloud\n• Identifying contentrelated ideas and details in oral discourse\nProcess arguments by\n• Interpreting oral information from different sides\n• Identifying opposing sides of arguments in dialogues"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Speaking",
+      "proficiency": 4,
+      "description": "Recount by\n• Sequencing events in stories with temporal transitions (e.g., “After the sun set...”)\n• Describing situations and events from school and the community\nExplain by\n• Stating details of processes or procedures\n• Describing consequences of behaviors or occurrences\nArgue by\n• Defend claims or opinions to contentrelated topics\n• Posing different solutions to content-related issues or problems"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Reading",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Ordering a series of events based on familiar texts\n• Identifying main ideas and details in illustrated texts\nProcess explanations by\n• Illustrating cause/effect relationships in content area texts\n• Classifying main ideas and details in informational or explanatory texts\nProcess arguments by\n• Sorting contentrelated information according to specific criteria (e.g., pros and cons)\n• Identifying reasons to strengthen arguments"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Writing",
+      "proficiency": 4,
+      "description": "Recount by\n• Describing a series of events or procedures\n• Creating stories with details about characters and events\nExplain by\n• Relating details and illustrating stages of different cycles (e.g. frogs, plants)\n• Describing strategies to solve problems\nArgue by\n• Supporting main ideas or opinions with evidence from texts\n• Providing evidence to support or refute peers’ ideas"
+    },
+
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Listening",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Identifying details of content-related topics from oral discourse\n• Making designs or models following oral directions and specifications (e.g., maps, origami)\nProcess explanations by\n• Identifying the purpose of language/the message in each content area\n• Following a series of short oral directions to create models of content-area phenomena or processes\nProcess arguments by\n• Comparing oral arguments with representations and models\n• Identifying claims in oral presentations"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Speaking",
+      "proficiency": 5,
+      "description": "Recount by\n• Describing main ideas of contentrelated information\n• Asking and answering questions about information from speakers\nExplain by\n• Connecting ideas in content-related presentations\n• Elaborating on the cause of various phenomena (e.g., shooting stars, sunsets)\nArgue by\n• Expressing and supporting different ideas with examples\n• Providing evidence to defend own ideas"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Reading",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Paraphrasing narratives or informational text with support (e.g., arranging paragraph strips)\n• Highlighting relevant information in grade-level texts to produce summaries\nProcess explanations by\n• Identifying relevant information from texts on the same content area topic (e.g., in open sorts)\n• Identifying the main purpose of texts\nProcess arguments by\n• Identifying data from written sources to support positions\n• Matching opinions to reasons in informational texts and literature"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Writing",
+      "proficiency": 5,
+      "description": "Recount by\n• Describing the sequence of contentrelated ideas\n• Providing details and examples about narratives\nExplain by\n• Describing details of processes, procedures, and events\n• Producing “how to” manuals based on personal experiences or scientific experiments\nArgue by\n• Producing persuasive pieces supported by multiple reasons or details\n• Stating reasoning for content-related choices"
+    },
+
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Listening",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying key ideas or details from texts read aloud or information presented orally\n• Determining the main ideas and supporting details of texts read aloud or information in diverse media and formats\nProcess explanations by\n• Distinguishing shades of meaning among closely related words in oral discourse (e.g., jump/leap, huge/ enormous)\n• Comparing strategies from extended oral discourse\nProcess arguments by\n• Identifying evidence to support claims/opinions from multimedia\n• Following agreedupon rules for discussions around differing opinions"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Speaking",
+      "proficiency": 6,
+      "description": "Recount by\n• Providing descriptive details of content-related information or activities\n• Naming the steps for producing multimedia presentations with some detail\nExplain by\n• Elaborating on ideas in light of conversations among students\n• Synthesizing main ideas from supporting details of text read aloud or information obtained from diverse media\nArgue by\n• Connecting personal comments to the remarks of others to build a case for ideas or opinions\n• Summarizing ideas or opinions from two sides"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Reading",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying setting and character details from grade-level text\n• Determining the central messages, lessons, or morals of fables and folktales from diverse cultures\nProcess explanations by\n• Describing the connection between a series of historical events, scientific ideas, or steps in technical procedures in texts\n• Connecting ideas with details in extended content area texts\nProcess arguments by\n• Identifying authors’ point of view in texts\n• Evaluating characters, settings, and events from a variety of media"
+    },
+    {
+      "gradeLevels": [ 2, 3 ],
+      "subject": "Writing",
+      "proficiency": 6,
+      "description": "Recount by\n• Signaling order of events using temporal words and phrases\n• Relating real or imagined experiences or events\nExplain by\n• Elaborating topics with facts, definitions, and details\n• Comparing different strategies related to procedures or problem-solving\nArgue by\n• Elaborating on opinions and reasons\n• Comparing and contrasting important points and details presented in two texts on the same topic"
+    },
+
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Listening",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Matching oral words and phrases to content-related pictures or objects\n• Identifying the topic in oral statements\nProcess explanations by\n• Sequencing oral procedures or cycles with images\n• Distinguishing key words and phrases related to phenomena\nProcess arguments by\n• Matching illustrations with oral points of view\n• Identifying language related to facts or opinions from oral presentations"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Speaking",
+      "proficiency": 1,
+      "description": "Recount by\n• Stating key words and phrases associated with the content using visual or graphic support\n• Communicating personal experiences orally\nExplain by\n• Naming components of phenomena using illustrations, photographs, or diagrams\n• Demonstrating procedures using realia\nArgue by\n• Stating reasons for choices using words or phrases\n• Answering yes/no or choice questions across content or personal preferences"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Reading",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Identifying words in context during oral reading of illustrated text on familiar topics or experiences\n• Highlighting previewed or familiar phrases\nProcess explanations by\n• Matching illustrated words/ phrases to causal or sequential language\n• Sequencing sentences strips to show content-area processes from illustrated texts\nProcess arguments by\n• Identifying key words and phrases of claims\n• Identifying a claim or an opinion in multimedia with a partner"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Writing",
+      "proficiency": 1,
+      "description": "Recount by\n• Communicating personal experiences through drawings and words\n• Reproducing a series of events through illustrated text\nExplain by\n• Producing shortanswer responses to questions using word/ phrase banks\n• Labeling charts and graphs to describe phenomena (e.g., organisms in ecosystems)\nArgue by\n• Selecting words and phrases to represent points of view using facts from illustrated text or posters\n• Using key words or phrases related to the topic"
+    },
+
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Listening",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Classifying timerelated language in oral statements (e.g., present, past, future)\n• Connecting the context of narratives (e.g., the who, what, when, & where) to illustrations\nProcess explanations by\n• Organizing routine causal or sequential relationships described orally \n• Following oral directions to show recurring steps in cycles or problemsolving\nProcess arguments by\n• Sorting evidence and claims from oral descriptions\n• Distinguishing words and phrases related to opinions or facts from oral statements"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Speaking",
+      "proficiency": 2,
+      "description": "Recount by\n• Retelling short stories or contentrelated events\n• Stating procedural steps across content areas\nExplain by\n• Giving reasons why or how something works using diagrams, charts or images\n• Stating key words or phrases in processes in a sequential order\nArgue by\n• Stating opinions based on experiences\n• Responding to opinion statements of others with personal preferences"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Reading",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Classifying timerelated language in text as present or past\n• Identifying the “who,” “what,” “where,” and “when” in narrative text with a partner\nProcess explanations by\n• Identifying different types of connectors (e.g., first, next, because, so)\n• Identifying key words and phrases that describe the topic or phenomena\nProcess arguments by\n• Identifying language indicative of points of view\n• Organizing evidence based on sequential language in texts\n• Differentiating between claims and evidence"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Writing",
+      "proficiency": 2,
+      "description": "Recount by\n• Listing procedural steps across content areas\n• Listing positive and negative effects of events in informational or narrative text\nExplain by\n• Using key terms related to phenomena\n• Ordering linear and cyclical sequences of phenomena (e.g., the steps of how a volcano erupts)\nArgue by\n• Stating reasons for particular points of view\n• Listing pros and cons of issues"
+    },
+
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Listening",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Identifying the beginning, middle and end in oral retelling of a text\n• Following tasks and directions retold by peers\nProcess explanations by\n• Interpreting cause and effect relationships in conversations\n• Recognizing relationships in a series of oral statements\nProcess arguments by\n• Identifying different perspectives, stances, or points of view\n• Recognizing reasons for positions in oral presentations"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Speaking",
+      "proficiency": 3,
+      "description": "Recount by\n• Presenting detailed content-related information that has been rehearsed\n• Stating main ideas in classroom conversations on social and academic topics\nExplain by\n• Stating clear sequential procedures to peers\n• Comparing data or information\nArgue by\n• Expressing opinions using content-area specific language\n• Presenting contentbased facts that support a positionProcess arguments by\n• Identifying evidence from multiple places within text\n• Identifying different perspectives, stances, or points of view"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Reading",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Sequencing events in stories or content-related processes\n• Identifying main ideas in narrative and informational text\nProcess explanations by\n• Matching causes with effects\n• Identifying words or phrases to determine the type of explanation (e.g.,linear sequence, cycle, system)\nProcess arguments by\n• Hypothesizing or predicting based on evidence\n• Comparing multiple points of view on a topic"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Writing",
+      "proficiency": 3,
+      "description": "Recount by\n• Using key words and phrases reflective of main ideas\n• Conveying details using concrete words and phrases\nExplain by\n• Connecting related ideas or concepts using linking words and phrases\n• Answering “how” or “why questions (e.g., “How does the water cycle work?” “Why are there three branches of government?”)\nArgue by\n• Comparing and contrasting evidence for claims\n• Providing reasons and evidence which support particular points"
+    },
+
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Listening",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Sequencing events or steps based on oral reading of informational text\n• Recognizing the language of related genres (e.g., news reports, historical ccounts)\nProcess explanations by\n• Identifying precise details, descriptions, or comparisons that support conversation\n• Following oral information on how or why phenomena occur\nProcess arguments by\n• Identifying evidence that supports predictions or hypotheses\n• Differentiating between multiple points of view in class discussions"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Speaking",
+      "proficiency": 4,
+      "description": "Recount by\n• Giving contentrelated oral reports\n• Sequencing steps to solve a problem\nExplain by\n• Connecting the sequential, cyclical, or causal relationships of content-related issues and concepts\n• Presenting detailed information in small groups\nArgue by\n• Stating relevant evidence for claims\n• Responding to opinion statements of others with reasons or evidence"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Reading",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Connecting details to main ideas or themes\n• Identifying conclusions in multi-paragraph text\nProcess explanations by\n• Identifying the different words or phrases that are used to describe the same topic or phenomena\n• Organizing information on how or why phenomena occur\nProcess arguments by\n• Hypothesizing or predicting based on evidence\n• Comparing multiple points of view on a topic"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Writing",
+      "proficiency": 4,
+      "description": "Recount by\n• Relating a sequence of events using a variety of transitional words, phrases, and clauses\n• Synthesizing information across related texts (e.g., author study)\nExplain by\n• Presenting information on processes or phenomena from a variety of sources\n• Elaborating topics with facts, definitions, concrete details, or quotations and examples\nArgue by\n• Comparing and contrasting evidence for claims\n• Providing reasons and evidence which support particular points"
+    },
+
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Listening",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Identifing related information from multiple sources presented orally\n• Recognizing the key historical, scientific or technical language used in a mini-lecture\nProcess explanations by\n• Recognizing language used to enhance the specificity of phenomena in class discussions\n• Identifying components of systems (e.g., ecosystems, branches of government) in small group interactions\nProcess arguments by\n• Distinguishing certainty from uncertainty of spoken words or phrases in context\n• Identifying the degree of formality in oral presentations"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Speaking",
+      "proficiency": 5,
+      "description": "Recount by\n• Conveying personal and content-related experiences in a team\n• Using technical and specific vocabulary when sharing content information\nExplain by\n• Elaborating by adding precision and details to content-related sequence or causal phenomena\n• Describing relationships of components within systems (e.g., ecosystems, government)\nArgue by\n• Supporting claims with evidence from various sources\n• Using claims and evidence to persuade an audience"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Reading",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Becoming familiar with the language of related genres (e.g., news reports, historical accounts)\n• Summarizing information from multiple related sources\nProcess explanations by\n• Identifying how text provides clear details of the topic or phenomena\n• Identifying components of systems (e.g., ecosystems, government)\nProcess arguments by\n• Connecting personal experience with textual evidence to strengthen an interpretation of the text\n• Evaluating the strength of evidence as support for claims"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Writing",
+      "proficiency": 5,
+      "description": "Recount by\n• Producing contentrelated reports\n• Creating narratives that connect personal experiences and content\nExplain by\n• Describing how factors contribute to events or outcomes\n• Describing how systems relate or interact\nArgue by\n• Evaluating positive and negative implications associated with various positions (e.g., historical events, scientific discoveries)\n• Including evidence from multiple sources"
+    },
+
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Listening",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying the overall structure (e.g., chronology) of events, ideas, concepts, or information in oral presentations\n• Differentiating similarities and differences of information presented through multimedia and written text\nProcess explanations by\n• Interpreting the specific language used to enhance descriptions of phenomena\n• Attending to the language related to events or phenomena in peer presentations\nProcess arguments by\n• Recognizing the strength of the quality of evidence presented in oral discourse\n• Identifying the purpose of arguments"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Speaking",
+      "proficiency": 6,
+      "description": "Recount by\n• Summarizing discussions on content-related topics\n• Expanding on topics with descriptive details using varied vocabulary\nExplain by\n• Analyzing how variables contribute to events or outcomes\n• Maintaining a formal register\nArgue by\n• Countering with a different point of view\n• Stating conclusions based on a summary of information from the various sides"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Reading",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying the overall structure (e.g., chronology) of events, ideas, concepts, or information in text\n• Highlighting events or procedures that happened in historical, scientific, or technical text\nProcess explanations by\n• Identifying how text presents information in a factual or neutral manner\n• Evaluating the specific language used to enhance descriptions of phenomena\nProcess arguments by\n• Evaluating claims and evidence by drawing from multiple print sources\n• Differentiating from the strength of different pieces of evidence as support for claims"
+    },
+    {
+      "gradeLevels": [ 3, 4 ],
+      "subject": "Writing",
+      "proficiency": 6,
+      "description": "Recount by\n• Summarizing content-related information\n• Using narrative themes to extend the storyline\nExplain by\n• Presenting information on processes or phenomena supported by facts and details in essays and reports\n• Selecting the appropriate organizational structure for the particular purpose\nArgue by\n• Organizing ideas and information logically and coherently\n• Integrating information from multiple sources to provide evidence for claims"
+    },
+
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Listening",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Identifying familiar objects or places from oral statements\n• Pointing to objects, people, or places based on short oral descriptions\nProcess explanations by\n• Matching instructional language, given orally, with visual representation (e.g., “Show me your schedule.”)\n• Identifying functions of content-related topics based on short oral statements reinforced visually (e.g., organisms in ecosystems)\nProcess arguments by\n• Signaling agreement or disagreement of short oral statements or questions\n• Identifying points of view (e.g., first or third person) from short statements"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Speaking",
+      "proficiency": 1,
+      "description": "Recount by\n• Answering select Wh-questions\n• Naming and briefly describing past community or school events using visual support (e.g., posters, photographs)\nExplain by\n• Comparing attributes of reallife objects with a partner\n• Showing how to solve real-world problems using symbols, numerals, graphs, or diagrams\nArgue by\n• Responding yes or no to short statements or questions related to a claim\n• Expressing personal points of view (in home language and English) in support of or against a claim"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Reading",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Identifying responses to Whquestions in charts or illustrated text\n• Identifying icons in graphs, charts, and environmental print related to familiar topics\nProcess explanations by\n• Matching contentrelated objects, pictures, or media to words and phrases\n• Identifying social or academic topics highlighted in text\nProcess arguments by\n• Identifying words or phrases associated with topic choices\n• Classifying true from false short statements"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Writing",
+      "proficiency": 1,
+      "description": "Recount by\n• Producing labeled illustrations of conclusions reached in problem-solving with a partner\n• Reproducing words and phrases related to topics (e.g., including cognates)\nExplain by\n• Indicating relationships by drawing and labeling contentrelated pictures on familiar topics\n• Describing processes or cycles by labeling diagrams and graphs\nArgue by\n• Generating words and phrases that represent opinions (e.g., “I think…”)\n• Making lists of topic choices with peers"
+    },
+
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Listening",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Sequencing labeled visuals per oral directions\n• Identifying settings or time frames in narrative or informational scenarios read aloud\nProcess explanations by\n• Classifying contentrelated visuals per oral descriptions (e.g., environmental v. genetic factors)\n• Matching oral sentences of cause and effect to illustrations (e.g., weather or climate conditions)\nProcess arguments by\n• Identifying claims from a series of oral statements\n• Identifying evidence to support claims from charts and tables"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Speaking",
+      "proficiency": 2,
+      "description": "Recount by\n• Stating main ideas or points of classroom conversations\n• Restating details of content-related topics (in home language and English) in small groups\nExplain by\n• Describing situations from modeled sentences\n• Connecting two content-related ideas that define “how” or “why”\nArgue by\n• Answering simple questions related to claims\n• Stating evidence to support claims (in home language and English)"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Reading",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Sequencing illustrated text of narrative or informational events\n• Locating main ideas in a series of simple sentences\nProcess explanations by\n• Comparing ideas on the same topic in a series of simple sentences\n• Identifying how content-related phenomena relate to one another in illustrated text or media\nProcess arguments by\n• Distinguishing facts from opinions in text\n• Identifying features associated with content-related claims"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Writing",
+      "proficiency": 2,
+      "description": "Recount by\n• Completing sentences using word banks\n• Producing statements related to main ideas on familiar topics in home language and English\nExplain by\n• Connecting short sentences\n• Comparing illustrated descriptions of content-related concepts (e.g., mitosis v. meiosis)\nArgue by\n• Stating opinions using evaluative language related to content (e.g., “I agree. Metric is better.”)\n• Connecting simple sentences to form content-related ideas"
+    },
+
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Listening",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Matching main ideas of familiar text read aloud to visuals\n• Stating the next event in a series based on clues from narrative or informational oral texts\nProcess explanations by\n• Matching main ideas of familiar text read aloud with visuals\n• Showing differences between or among content-related phenomena described orally (e.g., descriptive statistics)\nProcess arguments by\n• Illustrating claims or reasons from oral narratives\n• Identifying opposing perspectives from oral text (e.g., sides in wars, regimes, or revolutions)"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Speaking",
+      "proficiency": 3,
+      "description": "Recount by\n• Relating a series of events by expressing time in multiple tenses\n• Connecting ideas in content-related discourse using transitions\nExplain by\n• Demonstrating how to conduct experiments, engage in processes, or solve problems with supports\n• Stating why events occur, phenomena exist, or some things happen\nArgue by\n• Critiquing opposing claims\n• Evaluating the value of options in content-based situations"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Reading",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Identifying topic sentences, main ideas, and details in paragraphs\n• Connecting people to actions based on oral descriptions with details\nProcess explanations by\n• Illustrating relationships between main ideas and details in paragraphs\n• Sequencing steps or events to describe processes (e.g., solving math problems)\nProcess arguments by\n• Identifying claims and the reasons for each claim\n• Identifying opposing points of view"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Writing",
+      "proficiency": 3,
+      "description": "Recount by\n• Producing short paragraphs with main ideas and some details\n• Composing dialogues or blogs based on personal experiences\nExplain by\n• Comparing and contrasting information, events, or characters\n• Producing descriptive paragraphs around a central idea\nArgue by\n• Substantiating opinions with content-related examples and evidence\n• Providing feedback to peers on language used for claims and evidence"
+    },
+
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Listening",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Identifying main ideas and details in oral discourse\n• Evaluating oral presentations of peers based on criteria for success\nProcess explanations by\n• Identifying relationships between people, ideas, or events in oral discourse\n• Matching complex oral descriptions to images, graphs, or formulas\nProcess arguments by\n• Matching evidence to claims in oral discourse\n• Formulating opinions based on evidence presented within oral discourse"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Speaking",
+      "proficiency": 4,
+      "description": "Recount by\n• Paraphrasing and summarizing content-related ideas presented orally\n• Connecting ideas with supporting details in a variety of oral venues\nExplain by\n• Comparing contentrelated concepts\n• Connecting ideas with supporting details to show relationships (e.g., characters’ actions to their feelings)\nArgue by\n• Connecting ideas with supporting details or evidence\n• Taking stances and summarizing ideas supporting them"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Reading",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Ordering paragraphs in narrative and informational text\n• Identifying summaries of passages in a variety of genres\nProcess explanations by\n• Matching contentrelated cause to effect in graphicallysupported text\n• Highlighting text evidence that points to how systems function (e.g., different forms of government)\nProcess arguments by\n• Identifying evidence to support analysis of what texts say (e.g., position papers)\n• Classifying pros and cons of claims and evidence presented within written texts"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Writing",
+      "proficiency": 4,
+      "description": "Recount by\n• Producing contentrelated reports • Reproducing a sequence of events or experiences using transitional words\nExplain by\n• Describing relationships between details or examples and supporting ideas\n• Connecting content-related themes or topics to main ideas\nArgue by\n• Crafting persuasive pieces (e.g., editorials) with a series of substantiated content-related claims\n• Composing scripts with protagonists and antagonists"
+    },
+
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Listening",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Categorizing details of content-related main ideas seen and heard in videos or other technologies\n• Sequencing a series of illustrated events from oral passages (e.g., historical recaps)\nProcess explanations by\n• Carrying out a series of oral directions to construct mathematical or scientific models\n• Connecting details to main ideas based on extended oral discourse\nProcess arguments by\n• Establishing connections among claims, arguments, and supporting evidence within oral discourse\n• Comparing opposing pointsof-view presented within oral discourse"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Speaking",
+      "proficiency": 5,
+      "description": "Recount by\n• Producing oral multimedia, content-related reports based on research from multiple sources\n• Tracing the evolution of literary characters, themes, and plots from different venues (e.g., digital text or video)\nExplain by\n• Giving demonstrations with step-by-step details (e.g., converting Fahrenheit to Celsius)\n• Evaluating the significance of events, people, or phenomena in oral presentations\nArgue by\n• Engaging in debates on content-related topics with claims and counterclaims along with reasonable evidence\n• Defending points of view with specific claims"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Reading",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Sequencing main ideas, events, and conclusions in narrative and informational text • Matching details of content-related topics to main ideas\nProcess explanations by\n• Sorting grade-level text by highlighting elements of the genre (e.g., differentiating the “how” from the “why”)\n• Sequencing events based on cause and effect (e.g., how machines operate)\nProcess arguments by\n• Evaluating evidence presented in support of claims\n• Developing a stance in favor of or against claims presented within contentrelated text"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Writing",
+      "proficiency": 5,
+      "description": "Recount by\n• Producing research reports using multiple sources\n• Summarizing conclusions reached from steps in problem-solving or conducting experiments\nExplain by\n• Producing informational text around graphs and charts\n• Comparing contentrelated ideas from multiple sources in essays, reports, and narratives\nArgue by\n• Presenting opinions in persuasive essays or reports backed by content-related research\n• Justifying ideas using multiple sources"
+    },
+
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Listening",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying key ideas expressed orally\n• Identifying new information expressed by others\nProcess explanations by\n• Evaluating main ideas and supporting details presented in diverse media and oral formats\n• Developing models from oral discourse and multimedia (e.g., YouTube videos)\nProcess arguments by\n• Evaluating the soundness of opposing claims presented orally\n• Identifying bias within claims in oral discourse"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Speaking",
+      "proficiency": 6,
+      "description": "Recount by\n• Restating new information expressed by others in extended speech\n• Posing questions that elicit elaboration and responding to others’ questions and comments\nExplain by\n• Adapting speech to a variety of contexts and tasks (e.g., use of register)\n• Posing questions that connect several speakers’ ideas and responding to others’ ideas\nArgue by\n• Paraphrasing new information expressed by others and, when warranted, modifying views or positions\n• Making presentations with multimedia components to clarify claims and emphasize salient points"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Reading",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Identifying a central idea of a text and how it is conveyed through particular details; summarizing text absent personal opinions or judgments\n• Evaluating how a central event is introduced, illustrated, and elaborated in text (e.g., through examples or anecdotes)\nProcess explanations by\n• Comparing and contrasting information from experiments, simulations, videos, or multimedia sources with that of text on the same topics\n• Identifying factors that contribute to phenomena in explanations\nProcess arguments by\n• Identifying specific evidence to support analyses of content area text\n• Distinguishing among facts, reasoned judgment, and speculation in text"
+    },
+    {
+      "gradeLevels": [ 6, 7, 8 ],
+      "subject": "Writing",
+      "proficiency": 6,
+      "description": "Recount by\n• Providing a concluding statement or section that follows from and supports the information presented\n• Conveying sequence, signaling shifts from one time frame to another, and showing the relationships among experiences and events\nExplain by\n• Determining two or more central ideas in text and tracing their development\n• Evaluating the interactions between individuals, events, and ideas in text (e.g., how ideas influence individuals or events and the converse)\nArgue by\n• Introducing claims and opposing claims, along with their associated reasons and evidence\n• Closing with concluding statements or paragraphs that support claims"
+    },
+
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Listening",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Matching everyday oral contentrelated words and phrases to pictures, diagrams, or photographs\n• Selecting resources, places, products, or figures from oral statements and visual supports\nProcess explanations by\n• Ordering events or stages of phenomena from oral statements\n• Identifying words and phrases related to sequence\nProcess arguments by\n• Matching oral information to pictures, diagrams, or photographs that show points of view\n• Distinguishing words and phrases related to opinions or facts from oral statements"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Speaking",
+      "proficiency": 1,
+      "description": "Recount by\n• Naming and briefly describing content topics using visual support (e.g., posters, diagrams, pictures)\n• Answering select yes/no or Whquestions\nExplain by\n• Ordering events or stages of phenomena with sequential language (e.g., first, next, step 1)\n• Using words and phrases to identify visually supported phenomena\nArgue by\n• Relating points of view with visual support (e.g., posters, photographs)\n• Stating pros and cons listed visually on a topic"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Reading",
+      "proficiency": 1,
+      "description": "Process recounts by\n• Matching key content-related terms and ideas to images, graphs, icons, or diagrams\n• Sequencing illustrated text of narrative or informational events\nProcess explanations by\n• Identifying key words and phrases that describe the topics or phenomena\n• Recognizing sequence statements and illustrations that describe phenomena\nProcess arguments by\n• Matching media (e.g., posters, photos, banners) with point of view words and phrases\n• Connecting characters/historical figures with positions or stances on various issues"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Writing",
+      "proficiency": 1,
+      "description": "Recount by\n• Listing content words or phrases that relate to the topic\n• Including images, diagrams, and charts to add details to the topic\nExplain by\n• Producing short responses to questions using word/phrase banks\n• Labeling charts, graphs, timelines, or cycles to describe phenomena\nArgue by\n• Selecting words and phrases to represent points of view\n• Listing pros and cons of issues"
+    },
+
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Listening",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Matching oral descriptions of characters or main events in contentrelated topics\n• Following modeled oral commands\nProcess explanations by\n• Sequencing steps in processes or procedures described orally\n• Comparing information, symbols, or icons on charts or tables described orally\nProcess arguments by\n• Recognizing the pros or cons of issues from short oral statements\n• Identifying claims in oral statements"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Speaking",
+      "proficiency": 2,
+      "description": "Recount by\n• Restating information using content-specific terms\n• Providing examples of content-related information previously studied\nExplain by\n• Naming properties, characteristics or features of illustrated contentrelated topics\n• Posing and responding to Whquestions that relate to phenomena\nArgue by\n• Responding to oral or written claims\n• Offering facts or opinion statements as appropriate to discussion"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Reading",
+      "proficiency": 2,
+      "description": "Process recounts by\n• Identifying patterns specific to narrative or informational text (e.g., orientation, presentation of events, conclusion)\n• Locating main ideas in a series of related sentences\nProcess explanations by\n• Identifying different types of connectors that show relationships between topics and phenomena\n• Differentiating between technical and everyday vocabulary that describe phenomena\nProcess arguments by\n• Making connections between statements that make claims and those providing evidence\n• Distinguishing language that identifies facts and opinions"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Writing",
+      "proficiency": 2,
+      "description": "Recount by\n• Following patterns specific to narrative or informational text (e.g., orientation, presentation of events, conclusion)\n• Sequencing narratives or informational text using linking words and phrases\nExplain by\n• Using transitions and connectors to show causal relationships or procedures\n• Choosing everyday or technical language to describe phenomena\nArgue by\n• Expressing claims with evidence (e.g., “Socialism is a good government system because...”)\n• Listing contentrelated ideas that represent different points of view on issues"
+    },
+
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Listening",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Identifying main ideas from short content-related oral presentations\n• Classifying examples of genres read aloud (e.g., types of narration)\nProcess explanations by\n• Recognizing relationships in a series of oral statements\n• Identifying causes for particular events or phenomena in short oral presentations\nProcess arguments by\n• Organizing information related to different perspectives presented orally\n• Identifying language choices that represent specific points of view from a series of oral statements"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Speaking",
+      "proficiency": 3,
+      "description": "Recount by\n• Posing and responding to questions in small group discussions\n• Describing the sequence of processes, cycles, procedures, or events with details\nExplain by\n• Connecting causes to effects in a series of statements\n• Sequencing processes, cycles, or procedures in short extended discourse\nArgue by\n• Stating claims matched to evidence using a series of related sentences\n• Suggesting details or reasons to reinforce points of view"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Reading",
+      "proficiency": 3,
+      "description": "Process recounts by\n• Recognizing lexical chains that show how characters and ideas are labeled across the text\n• Identifying detailed descriptions, procedures, and information in paragraphs\nProcess explanations by\n• Identifying how language provides clarity and precision in describing topics or phenomena\n• Summarizing information with diagrams, models, flow charts, or illustrations\nProcess arguments by\n• Identifying their purposes and audiences\n• Evaluating the strength of evidence statements"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Writing",
+      "proficiency": 3,
+      "description": "Recount by\n• Summarizing content-related material\n• Including important information and related details\nExplain by\n• Choosing words and phrases to provide precise details, descriptions, comparisons, and ordered procedures\n• Integrating headings, introductory statements, and other features to organize text\nArgue by\n• Justifying reasons or opinions with evidence\n• Summarizing opposing positions with evidence"
+    },
+
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Listening",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Following the steps of content-related tasks or assignments given orally\n• Identifying details from oral discussions (e.g., when, who, where, what, and why)\nProcess explanations by\n• Identifying components of systems from multimedia\n• Interpreting cause and effect from oral discourse\nProcess arguments by\n• Classifying claims and evidence from oral presentations\n• Differentiating multiple perspectives presented orally"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Speaking",
+      "proficiency": 4,
+      "description": "Recount by\n• Presenting factual information on content-related topics to the class\n• Paraphrasing and summarizing content-related ideas in large and small groups\nExplain by\n• Describing components of systems in small groups and class discussions\n• Providing precise words and phrases to provide details, descriptions, classifications, comparisons, causes/effects, or procedures\nArgue by\n• Taking stances and defending them with evidence (e.g., using data or citations)\n• Comparing and contrasting different points of view"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Reading",
+      "proficiency": 4,
+      "description": "Process recounts by\n• Identifying how the authors make language choices and adjusts for audience and purpose\n• Reflecting on various accounts of a subject told in different media (e.g., print and multimedia)\nProcess explanations by\n• Identifying the interdependence of parts of systems (e.g., technical, government, chemical)\n• Comparing information on phenomena across a variety of multimedia sources\nProcess arguments by\n• Identifying persuasive language across content areas\n• Following the progression of logical reasoning"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Writing",
+      "proficiency": 4,
+      "description": "Recount by\n• Creating narrative or informational extended text of past events or experiences (e.g., lab reports, current events)\n• Connecting main points, events, and central ideas to conclusions\nExplain by\n• Presenting information objectively by using a neutral tone appropriate to the content area\n• Integrating images, diagrams, formulas, or charts to describe phenomena\nArgue by\n• Evaluating and challenging evidence presented\n• Creating persuasive essays or reports making adjustments for specific audiences"
+    },
+
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Listening",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Reconstructing past experiences or series of events based on oral discourse\n• Recognizing nuanced meanings of words and phrases in extended oral discourse\nProcess explanations by\n• Identifying effects and consequences of events and phenomena from class discussions\n• Identifying interdependence of different parts of systems from multimedia presentations\nProcess arguments by\n• Identifying how language choices connect to particular audiences\n• Evaluating the purpose of arguments presented by others"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Speaking",
+      "proficiency": 5,
+      "description": "Recount by\n• Engaging in extended discussion of effects, impacts, or events related to content topics\n• Giving multimedia oral presentations on content-related material learned from various sources\nExplain by\n• Presenting information using an objective, neutral tone in extended discourse\n• Using nominalization to compress information and maintain coherence (e.g., “This expansion…,” “Weathering…,” “An implication...”)\nArgue by\n• Challenging evidence and claims in debates\n• Convincing audiences of personal points of view using persuasive language"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Reading",
+      "proficiency": 5,
+      "description": "Process recounts by\n• Identifying how text structure supports comprehension and retrieval of information and details\n• Identifying the central idea or theme and how it is supported by clear descriptions and extended details\nProcess explanations by\n• Identifying how authors connect related ideas across paragraphs with abstraction, complex sentences, and technical terms\n• Tracing the central idea of text and how it develops, including how it is shaped by specific details, extended definitions, facts, quotes, or examples\nProcess arguments by\n• Recognizing multiple perspectives and points of view on any given issue\n• Identifying evidence of bias and credibility of sources"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Writing",
+      "proficiency": 5,
+      "description": "Recount by\n• Sequencing using language that creates coherence\n• Organizing information according to content-specific expectations\nExplain by\n• Synthesizing information and details about phenomena from a variety of sources\n• Organizing information and details logically and cohesively\nArgue by\n• Organizing information to show logical reasoning\n• Integrating multiple perspectives and evidence from a variety of sources"
+    },
+
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Listening",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Categorizing perspectives of multiple speakers\n• Identifying important information on specific events and concepts from lectures and presentations\nProcess explanations by\n• Recognizing specific language used to enhance clarity and precision\n• Recognizing and following language related to the same event or phenomenon throughout presentations\nProcess arguments by\n• Identifying strengths, limitations, and potential biases from oral presentations\n• Organizing claims and counter claims presented in debates"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Speaking",
+      "proficiency": 6,
+      "description": "Recount by\n• Adjusting presentation style, degree of formality, word choice, tone, and information to the context and audience\n• Presenting information that follows disciplinespecific organization (e.g., orientation to topic, sequence of events, conclusion)\nExplain by\n• Providing precision and accuracy in classifications, procedures, processes, and accounts using abstraction, technical language, and a variety of active/passive verb forms\n• Following discipline-specific organization (e.g., orienting the reader, details, conclusion) and supporting presentations with graphs, formulas, quotes or other media\nArgue by\n• Organizing claims and counter claims in debates with evidence from multiple sources\n• Negotiating differing cultural perspectives in pairs or small groups"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Reading",
+      "proficiency": 6,
+      "description": "Process recounts by\n• Analyzing and comparing how authors use language for specific purposes and audiences\n• Identifying how authors develop and maintain cohesion by connecting ideas or events in extended texts\nProcess explanations by\n• Recognizing discipline-specific patterns(e.g., orienting the reader, part-whole classification, neutral/ authoritative tone)\n• Identifying authors’ precision and accuracy in classifications, comparisons, accounts, or procedures as a result of clear language choices\nProcess arguments by\n• Evaluating word choice and nuance as tools for distinguishing facts, claims, reasoned judgment, and opinions\n• Identifying the logical connections among claims, counterclaims, reasons, and evidence"
+    },
+    {
+      "gradeLevels": [ 9, 10, 11, 12 ],
+      "subject": "Writing",
+      "proficiency": 6,
+      "description": "Recount by\n• Summarizing content-related notes from lectures or readings\n• Producing research reports using multiple sources of information\nExplain by\n• Developing ideas about phenomena with relevant and sufficient facts, extended descriptions, concrete details, or quotations\n• Maintaining discipline-specific patterns that bridge across key uses (e.g., explanation to argument in history, explanation to recount for information reports)\nArgue by\n• Evaluating positive and negative implications associated with various positions (e.g., historical events, scientific discoveries, individuals)\n• Organizing information logically and coherently to represent contrasting views"
+    }
+  ],
+  "arcAssessments": [
+    {
+      "title": "ARC ENIL Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Reading Level (Baseline)"
+    },
+    {
+      "title": "ARC ENIL Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Days on Current Power Goal"
+    },
+    {
+      "title": "ARC ENIL Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Power Goal Abbreviation"
+    },
+    {
+      "title": "ARC ENIL Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Reading Level"
+    },
+    {
+      "title": "ARC ENIL Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Score"
+    },
+    {
+      "title": "ARC ENIL Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Baseline Reporting Date"
+    },
+    {
+      "title": "ARC IRLA Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Reading Level (Baseline)"
+    },
+    {
+      "title": "ARC IRLA Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Days on Current Power Goal"
+    },
+    {
+      "title": "ARC IRLA Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Power Goal Abbreviation"
+    },
+    {
+      "title": "ARC IRLA Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Reading Level"
+    },
+    {
+      "title": "ARC IRLA Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Score"
+    },
+    {
+      "title": "ARC IRLA Scores",
+      "assessmentReportingMethodTypeDescriptor": "ARC Baseline Reporting Date"
+    }
+  ]
+}

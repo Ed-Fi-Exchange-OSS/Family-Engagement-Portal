@@ -12,5 +12,6 @@ namespace Student1.ParentPortal.Data.Models
     {
         Task<List<GradeModel>> GetGradeLevelsBySchoolId(int schoolId);
         Task<List<ProgramsModel>> GetProgramsBySchoolId(int schoolId);
+        Task<List<SchoolBriefDetailModel>> GetSchoolsByPrincipal(int staffUsi);
     }
 }

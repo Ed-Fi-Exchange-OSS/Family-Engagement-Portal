@@ -2,7 +2,7 @@
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('app.langTranslate', {
             url: '/langTranslate',
-            requireADLogin: true,
+            //requireADLogin: true,
             views: {
                 'content@': { component: 'langTranslate' }
             },

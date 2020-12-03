@@ -19,5 +19,12 @@
             getStudentSchedule: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/schedule').then(function (response) { return response.data; }); },
             getStudentAssessments: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/assessments').then(function (response) { return response.data; }); },
             getStudentStaarAssessmentHistory: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/staarAssessmentHistory').then(function (response) { return response.data; }); },
+            addStudentGoal: function (item) { return $http.post(apiResourceUri + '/AddStudentGoal', item).then(function (response) { return response.data; }); },
+            updateStudentGoal: function (item) { return $http.post(apiResourceUri + '/UpdateStudentGoal', item).then(function (response) { return response.data; }); },
+            updateStudentGoalStep: function (item) { return $http.post(apiResourceUri + '/UpdateStudentGoalStep', item).then(function (response) { return response.data; }); },
+            getStudentGoalLabels: function () { return $http.get(apiResourceUri + '/StudentLabels').then(function (response) { return response.data; }); },
+            addStudentAllAboutMe: function (item) { return $http.post(apiResourceUri + '/AddStudentAllAbout', item).then(function (response) { return response.data; }); },
+            updateStudentAllAboutMe: function (item) { return $http.post(apiResourceUri + '/UpdateStudentAllAbout', item).then(function (response) { return response.data; }); },
+            updateStudentGoalIntervention: function (item) { return $http.post(apiResourceUri + '/UpdateStudentGoalIntervention', item).then(function (response) { return response.data; }); }
         };
     }]);

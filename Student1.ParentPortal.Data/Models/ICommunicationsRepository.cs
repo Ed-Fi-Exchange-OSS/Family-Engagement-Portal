@@ -32,5 +32,8 @@ namespace Student1.ParentPortal.Data.Models
         Task<GroupMessagesQueueLogModel> GetGroupMessagesQueue(Guid Id);
         Task<List<ParentStudentsModel>> GetParentsByPanrentUsisAndGradeLevels(string personUniqueId, int[] parentUsis, int[] gradeLevels, string[] validParentDescriptors, string[] validEmailTypeDescriptors, DateTime today);
         Task<int> GetParentsByGradeLevelsAndSearchTermCount(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today);
+        Task<List<ParentStudentsModel>> GetParentsByGradeLevelsAndSearchTerm(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today, int schoolId);
+        Task<int> GetParentsByGradeLevelsAndSearchTermCount(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today, int schoolId);
+
     }
 }

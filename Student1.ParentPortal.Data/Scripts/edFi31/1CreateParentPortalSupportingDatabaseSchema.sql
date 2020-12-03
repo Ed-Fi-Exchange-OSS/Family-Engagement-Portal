@@ -798,7 +798,7 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 		INNER JOIN edfi.Descriptor as aecd on ssae.AttendanceEventCategoryDescriptorId = aecd.DescriptorId
 		WHERE (sy.CurrentSchoolYear = 1) 
 			AND (ssae.StudentUSI = s.StudentUSI)
-			AND (aecd.CodeValue NOT IN ('In Attendance'))) as [Absences],
+			AND (aecd.CodeValue IN ('Excused Absence', 'Unexcused Absence'))) as [Absences],
 -- Missing Assignment Count --
   (SELECT Count(*) 
 	FROM edfi.GradebookEntry as gbe

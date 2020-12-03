@@ -30,6 +30,7 @@ namespace Student1.ParentPortal.Models.Chat
         public DateTime DateSent { get; set; }
         public bool RecipientHasRead { get; set; }
         public string TranslatedLanguageCode { get; set; }
+        public string OriginalMessage { get; set; }
     }
     
     public class ChatLogHistoryModel

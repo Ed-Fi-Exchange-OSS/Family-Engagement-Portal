@@ -10,5 +10,7 @@ namespace Student1.ParentPortal.Data.Models
     public interface IAdminRepository
     {
         Task<List<PersonIdentityModel>> GetAdminIdentityByEmailAsync(string email);
+        Task<AdminStudentDetailFeatureModel> GetStudentDetailFeatures();
+        Task<AdminStudentDetailFeatureModel> SaveStudentDetailFeatures(AdminStudentDetailFeatureModel model);
     }
 }

@@ -12,5 +12,7 @@ namespace Student1.ParentPortal.Models.Shared
         public string PersonType { get; set; }
         public int PersonTypeId { get; set; }
         public int? SchoolId { get; set; }
+        public string PositionTitle { get; set; }
+        public string IdentificationCode { get; set; }
     }
 }

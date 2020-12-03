@@ -58,6 +58,8 @@
     <Compile Include="Notifications\NotificationItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schools\ProgramsModel.cs" />
+    <Compile Include="Schools\SchoolBriefDetailModel.cs" />
+    <Compile Include="Shared\AdminStudentDetailFeatureModel.cs" />
     <Compile Include="Shared\GradeTypeEnum.cs" />
     <Compile Include="Shared\GroupMessagesFilterParamsModel.cs" />
     <Compile Include="Shared\GroupMessagesStatusEnum.cs" />

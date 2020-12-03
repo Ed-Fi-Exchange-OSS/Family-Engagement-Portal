@@ -12,6 +12,7 @@ using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Services.Communications;
 using Student1.ParentPortal.Resources.ExtensionMethods;
 using Student1.ParentPortal.Resources.Cache;
+using Student1.ParentPortal.Models.User;
 
 namespace Student1.ParentPortal.Resources.Services.Students
 {
@@ -23,6 +24,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
         Task<StudentDetailModel> GetStudentBriefDetailAsync(int studentUsi, string recipientUniqueId, int recipientTypeId);
         Task<PersonBriefModel> GetPersonBriefModelAsync(int studentUsi);
         Task<List<StudentSummary>> GetStudentsSummary(List<int> StudentUsis);
+        Task<UserProfileModel> GetStudentProfileAsync(int studentUsi);
     }
 
     public class StudentsService : IStudentsService
@@ -42,7 +44,9 @@ namespace Student1.ParentPortal.Resources.Services.Students
         private readonly ICommunicationsService _communicationsService;
         private readonly ISpotlightIntegrationsService _spotlightIntegrationsService;
         private readonly ICustomParametersProvider _customParametersProvider;
-        
+        private readonly IStudentGoalService _studentGoalService;
+        private readonly IStudentAllAboutService _studentAllAboutService;
+
         public StudentsService(IStudentRepository studentRepository, 
                                IImageProvider imageUrlProvider, 
                                IStudentAttendanceService studentAttendanceService, 
@@ -57,7 +61,9 @@ namespace Student1.ParentPortal.Resources.Services.Students
                                IStudentGraduationReadinessService studentGraduationReadinessService, 
                                ICommunicationsService communicationsService, 
                                ISpotlightIntegrationsService spotlightIntegrationsService, 
-                               ICustomParametersProvider customParametersProvider)
+                               ICustomParametersProvider customParametersProvider,
+                               IStudentGoalService studentGoalService, 
+                               IStudentAllAboutService studentAllAboutService)
         {
             _studentRepository = studentRepository;
             _imageUrlProvider = imageUrlProvider;
@@ -74,6 +80,8 @@ namespace Student1.ParentPortal.Resources.Services.Students
             _communicationsService = communicationsService;
             _spotlightIntegrationsService = spotlightIntegrationsService;
             _customParametersProvider = customParametersProvider;
+            _studentGoalService = studentGoalService;
+            _studentAllAboutService = studentAllAboutService;
         }
 
         public async Task<StudentDetailModel> GetStudentDetailAsync(int studentUsi, string recipientUniqueId, int recipientTypeId)
@@ -98,6 +106,9 @@ namespace Student1.ParentPortal.Resources.Services.Students
             student.ExternalLinks = await _spotlightIntegrationsService.GetStudentExternalLinks(student.StudentUniqueId);
             student.StaarAssessmentHistory = await _studentAssessmentService.GetStudentStaarAssessmentHistoryAsync(student.StudentUsi);
 
+            student.StudentGoals = await _studentGoalService.GetStudentGoals(student.StudentUsi);
+            student.StudentAllAboutMe = await _studentAllAboutService.GetStudentAllAbout(student.StudentUsi);
+
             return student;
         }
 
@@ -113,14 +124,18 @@ namespace Student1.ParentPortal.Resources.Services.Students
             student.Indicators = await _studentIndicatorService.GetStudentIndicatorsAsync(student.StudentUsi);
             student.UnreadMessageCount = await _communicationsService.UnreadMessageCount(student.StudentUsi, recipientUniqueId, recipientTypeId, null, null);
             student.ExternalLinks = await _spotlightIntegrationsService.GetStudentExternalLinks(student.StudentUniqueId);
+
+            student.StudentGoals = await _studentGoalService.GetStudentGoals(student.StudentUsi);
+            student.StudentAllAboutMe = await _studentAllAboutService.GetStudentAllAbout(student.StudentUsi);
+
             return student;
         }
 
         public async Task<PersonBriefModel> GetPersonBriefModelAsync(int studentUsi)
         {
             var student = await _studentRepository.GetStudentBriefModelAsync(studentUsi);
-
             student.ImageUrl = await _imageUrlProvider.GetStudentImageUrlAsync(student.UniqueId);
+            student.FeedbackExternalUrl = _customParametersProvider.GetParameters().feedbackExternalUrl;
             return student;
         }
 
@@ -162,11 +177,19 @@ namespace Student1.ParentPortal.Resources.Services.Students
         {
             return _customParametersProvider.GetParameters().assignments.thresholdRules.GetRuleThatApplies(missingAssignmentsCount).interpretation;
         }
+        
         private string InterpretGPA(decimal gpa)
         {
             return _customParametersProvider.GetParameters()
                             .courseGrades.gpa.thresholdRules
                             .GetRuleThatApplies(gpa).interpretation;
+        }
+
+        public async Task<UserProfileModel> GetStudentProfileAsync(int studentUsi)
+        {
+            var model = await _studentRepository.GetStudentProfileAsync(studentUsi);
+            model.ImageUrl = await _imageUrlProvider.GetStudentImageUrlAsync(model.UniqueId);
+            return model;
         }
     }
 }

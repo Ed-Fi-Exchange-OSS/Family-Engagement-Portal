@@ -5,7 +5,8 @@
             grades: '<',
             programs: '<',
             queues: '<',
-            execute: '<'
+            execute: '<',
+            school: '<'
         },
         templateUrl: 'clientapp/modules/campusLeader/messagesLog/messagesLog.view.html',
         controllerAs: 'ctrl',
@@ -52,22 +53,23 @@
             };
 
             ctrl.getAllQueues = function () {
-                api.me.getSchool().then(function (schoolId) {
-                    api.communications.getGroupMessagesQueues(schoolId, {
-                        from: null,
-                        to: null,
-                        gradeLevels: [],
-                        programs: []
-                    }).then(function (data) {
-                        ctrl.queues = data;
-                        if (ctrl.queues.length > 0) {
-                            ctrl.selectQueue(ctrl.queues[0]);
-                        };
-                    });
+                api.communications.getGroupMessagesQueues(ctrl.school, {
+                    from: null,
+                    to: null,
+                    gradeLevels: [],
+                    programs: []
+                }).then(function (data) {
+                    ctrl.queues = data;
+                    if (ctrl.queues.length > 0) {
+                        ctrl.selectQueue(ctrl.queues[0]);
+                    };
                 });
+
             };
 
             ctrl.OnGradeChange = function () {
+                if (ctrl.selectedGrade == undefined)
+                    ctrl.selectedGrade = ctrl.grades[0];
                 if (ctrl.selectedGrade.id != 0) {
                     ctrl.gradeLevelIds = [];
                     ctrl.gradeLevelIds.push(ctrl.selectedGrade.id);
@@ -79,6 +81,8 @@
             };
 
             ctrl.OnProgramChange = function () {
+                if (ctrl.selectedProgram == undefined)
+                    ctrl.selectedProgram = ctrl.programs[0];
                 if (ctrl.selectedProgram.id != 0) {
                     ctrl.programIds = [];
                     ctrl.programIds.push(ctrl.selectedProgram.id);
@@ -106,22 +110,22 @@
                 if (ctrl.filters) {
                     fromDate = ctrl.filters.fromDate
                     toDate = ctrl.filters.toDate;
-                } 
-                api.me.getSchool().then(function (schoolId) {
-                    api.communications.getGroupMessagesQueues(schoolId, {
-                        from: fromDate,
-                        to: toDate,
-                        gradeLevels: ctrl.gradeLevelIds,
-                        programs: ctrl.programIds,
-                        searchTerm: ctrl.searchMessageLog.value
-                    }).then(function (data) {
-                        ctrl.queues = data;
-                        if (ctrl.queues.length > 0) {
+                }
 
-                            ctrl.selectQueue(ctrl.queues[0]);
-                        };
-                    });
+                api.communications.getGroupMessagesQueues(ctrl.school, {
+                    from: fromDate,
+                    to: toDate,
+                    gradeLevels: ctrl.gradeLevelIds,
+                    programs: ctrl.programIds,
+                    searchTerm: ctrl.searchMessageLog.value
+                }).then(function (data) {
+                    ctrl.queues = data;
+                    if (ctrl.queues.length > 0) {
+
+                        ctrl.selectQueue(ctrl.queues[0]);
+                    };
                 });
+
 
             };
 
@@ -166,12 +170,12 @@
             chatHub.on('messageReceived', function (message) {
                 var model = JSON.parse(message);
                 // Only add message if the message is for the current user.
-                    ctrl.recipients.conversation.messages.push(model);
-                    // Update that message was read while online
-                    if (ctrl.sender.uniqueId === model.recipientUniqueId && ctrl.sender.personTypeId === model.recipientTypeId) {
-                        model.read = true;
-                        api.communications.recipientRead(model);
-                    }
+                ctrl.recipients.conversation.messages.push(model);
+                // Update that message was read while online
+                if (ctrl.sender.uniqueId === model.recipientUniqueId && ctrl.sender.personTypeId === model.recipientTypeId) {
+                    model.read = true;
+                    api.communications.recipientRead(model);
+                }
 
                 ctrl.scrollToEndOfChat();
 
@@ -190,7 +194,7 @@
                     recipientUniqueId: ctrl.recipient.uniqueId,
                     recipientTypeId: 1,
                     englishMessage: ctrl.message.value,
-                    translatedMessage: ctrl.recipient.translatedMessage ,
+                    translatedMessage: ctrl.recipient.translatedMessage,
                     translatedLanguageCode: ctrl.recipient.languageCode
                 };
                 // Call API that will persist and call the SignalR Hub to update clients.
@@ -210,7 +214,7 @@
                     ctrl.imDetail = true;
                     ctrl.gmDetail = false;
                 }
-                    
+
             };
 
             ctrl.selectQueue = function (queue) {
@@ -267,7 +271,7 @@
                 if (table.offsetHeight + table.scrollTop >= table.scrollHeight) {
                     ctrl.onlyOnePerScroll++
                     if (ctrl.onlyOnePerScroll == 1) {
-                       ctrl.getPrincipalRecipientMessages(true);
+                        ctrl.getPrincipalRecipientMessages(true);
                     }
                 }
             }
@@ -279,7 +283,7 @@
 
                 api.communications.getChatThread(request).then(function (chatModel) {
                     ctrl.recipients.conversation.endOfMessageHistory = chatModel.conversation.endOfMessageHistory;
-                    ctrl.recipients.conversation.messages =  chatModel.conversation.messages.concat(ctrl.recipients.conversation.messages);
+                    ctrl.recipients.conversation.messages = chatModel.conversation.messages.concat(ctrl.recipients.conversation.messages);
                 });
             };
 

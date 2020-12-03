@@ -39,7 +39,18 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public string feedbackExternalUrl { get; set; }
         public string[] mostCommonLanguageCodes { get; set; }
         public List<Page> featureToggle { get; set; }
+        public List<Assessment> arcAssessments { get; set; }
+        public List<Assessment> assessmentIndicators { get; set; }
+        public List<Assessment> starAssessments { get; set; }
+        public List<Assessment> accessAssessments { get; set; }
+        public AssessmentPerformanceLevel assessmentPerformanceLevel { get; set; }
     }
+
+    public class AssessmentPerformanceLevel
+    {
+        public List<ThresholdRule<string>> thresholdRules { get; set; }
+    }
+
     public class ThresholdRule<T>
     {
         public string interpretation { get; set; }
@@ -110,7 +121,7 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public string assessmentReportingMethodTypeDescriptor { get; set; }
         public string shortDescription { get; set; }
         public string externalLink { get; set; }
-
+        public bool getPerformanceLevel { get; set; }
     }
 
     public class GraduationReadiness

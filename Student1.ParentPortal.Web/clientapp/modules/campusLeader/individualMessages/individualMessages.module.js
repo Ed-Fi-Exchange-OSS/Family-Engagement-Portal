@@ -2,7 +2,8 @@
     .component('individualMessages', {
         bindings: {
             grades: '<',
-            languages: '<'
+            languages: '<',
+            schoolId: '<'
         },
         templateUrl: 'clientapp/modules/campusLeader/individualMessages/individualMessages.view.html',
         controllerAs: 'ctrl',
@@ -20,7 +21,6 @@
             ctrl.parentsCheckeds = [];
             ctrl.parentsLanguages = [];
             ctrl.showResultEmptyMessage = false;
-            ctrl.schoolId = 0;
             ctrl.familyMembersCount = 0;
             ctrl.resetStylesTextArea = '';
             ctrl.resetStylesInput = '';
@@ -36,8 +36,6 @@
                 ctrl.gradesIds = ctrl.grades.map(function (g) {
                     return g.id;
                 });
-
-                api.me.getSchool().then(function (schoolId) { ctrl.schoolId = schoolId; });
 
                 var state = JSON.parse(stateStorage.getState(ctrl.stateKey));
                 if (state != null) {
@@ -61,12 +59,19 @@
                         ctrl.isFromCacheStorage = true;
                     }
 
-                   
+
                     if (state.parentsCheckeds != null && state.parentsCheckeds.length > 0) {
                         ctrl.storageParentsCheckeds = state.parentsCheckeds;
                     }
                 }
+
+                $rootScope.$on('changeSchoolEvent', function ($event, data, current) {
+                    ctrl.parents = [];
+                    ctrl.parentsCheckeds = [];
+                    ctrl.parentsLanguages = [];
+                });
             }
+
 
             ctrl.checkedCheckBox = function (data) {
                 var p = ctrl.parents.find(function (s) {
@@ -116,7 +121,7 @@
                     ctrl.search.value = '';
 
                 api.communications
-                    .getParentStudentInGradesAndSearchTerm({ searchTerm: ctrl.search.value, gradeLevels: { grades: ctrl.gradesIds, pageSize: 100, skipRows: ctrl.parents.length } }).then(function (data) {
+                    .getParentStudentInGradesAndSearchTerm({ searchTerm: ctrl.search.value, schoolId: ctrl.schoolId, gradeLevels: { grades: ctrl.gradesIds, pageSize: 100, skipRows: ctrl.parents.length } }).then(function (data) {
                         if (data.length == 0 && ctrl.parents.length == 0)
                             ctrl.showResultEmptyMessage = true;
 
@@ -145,7 +150,7 @@
                             ctrl.storageParentsCheckeds.forEach(function (pc) {
                                 ctrl.checkedCheckBox(pc);
                             });
-                            ctrl.simulTran(ctrl.message.body); 
+                            ctrl.simulTran(ctrl.message.body);
                             ctrl.isFromCacheStorage = false;
                         }
                     });
@@ -159,7 +164,7 @@
                 if (!ctrl.search.value || ctrl.search.value == undefined)
                     ctrl.search.value = '';
 
-                api.communications.getParentsCountInGreadesAndSearchTermCount({ searchTerm: ctrl.search.value, gradeLevels: { grades: ctrl.gradesIds, pageSize: null, skipRows: 0 } })
+                api.communications.getParentsCountInGreadesAndSearchTermCount({ searchTerm: ctrl.search.value, schoolId: ctrl.schoolId, gradeLevels: { grades: ctrl.gradesIds, pageSize: null, skipRows: 0 } })
                     .then(function (data) {
                         ctrl.familyMembersCount = data;
                     });
@@ -187,6 +192,8 @@
 
             ctrl.changeGradeLevel = function () {
                 ctrl.isCheckedAll = false;
+                if (ctrl.selectedGrade == undefined)
+                    ctrl.selectedGrade = ctrl.grades[0];
                 if (ctrl.selectedGrade.id == 0) {
                     ctrl.gradesIds = ctrl.grades.map(function (g) {
                         return g.id;
@@ -235,7 +242,7 @@
 
             ctrl.filterByLanguage = function () {
                 if (ctrl.parentsCheckeds.length > 0) {
-                    var groupLanguage = ctrl.parentsCheckeds.reduce(function(r, a) {
+                    var groupLanguage = ctrl.parentsCheckeds.reduce(function (r, a) {
                         r[a.languageCode] = [...r[a.languageCode] || [], a];
                         return r;
                     }, {});

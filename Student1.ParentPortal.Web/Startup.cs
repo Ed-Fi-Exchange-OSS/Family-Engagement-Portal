@@ -60,19 +60,12 @@ namespace Student1.ParentPortal.Web
         {
             using (AsyncScopedLifestyle.BeginScope(ioCContainer))
             {
-                var mode = ConfigurationManager.AppSettings["authentication.azure.mode"];
-                var tenant = ConfigurationManager.AppSettings["authentication.azure.tenant"];
-                var audience = ConfigurationManager.AppSettings["authentication.azure.audience"];
-                var instance = ConfigurationManager.AppSettings["authentication.azure.instance"];
-                var policy = ConfigurationManager.AppSettings["authentication.azure.policy"];
-
                 var jwtAudience = ConfigurationManager.AppSettings["Jwt:Audience"];
                 var jwtKey = ConfigurationManager.AppSettings["Jwt:Key"];
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
                 var jwtIssuer = ConfigurationManager.AppSettings["Jwt:Issuer"];
+                var customJwtOAuthBearerAuthenticationProvider = ioCContainer.GetInstance<IOAuthBearerAuthenticationProvider>();
 
-                var customJwtAzureOAuthBearerAuthenticationProvider = ioCContainer.GetInstance<CustomAzureAdOAuthBearerAuthenticationProvider>();
-                
                 app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
                 {
                     TokenValidationParameters = new TokenValidationParameters
@@ -86,47 +79,8 @@ namespace Student1.ParentPortal.Web
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key
                     },
-                    Provider = customJwtAzureOAuthBearerAuthenticationProvider
+                    Provider = customJwtOAuthBearerAuthenticationProvider
                 });
-
-
-                if (mode == "B2C")
-                {
-                    var stsDiscoveryEndpoint = string.Format(instance, tenant, policy);
-                    var configManager = new ConfigurationManager<OpenIdConnectConfiguration>(stsDiscoveryEndpoint, new OpenIdConnectConfigurationRetriever());
-                    var config = configManager.GetConfigurationAsync().Result;
-
-                    var customAzureAdOAuthBearerAuthenticationProvider = ioCContainer.GetInstance<CustomAzureAdOAuthBearerAuthenticationProvider>();
-
-                    app.UseWindowsAzureActiveDirectoryBearerAuthentication(
-                        new WindowsAzureActiveDirectoryBearerAuthenticationOptions
-                        {
-                            Tenant = tenant,
-                            TokenValidationParameters = new TokenValidationParameters
-                            {
-                                ValidAudience = audience,
-                                ValidIssuer = config.Issuer,
-                                IssuerSigningKeys = config.SigningKeys.ToList(),
-                            },
-                            Provider = customJwtAzureOAuthBearerAuthenticationProvider
-                        });
-                }
-
-                if (mode == "B2B")
-                {
-                    var customAzureAdOAuthBearerAuthenticationProvider = ioCContainer.GetInstance<CustomAzureAdOAuthBearerAuthenticationProvider>();
-
-                    app.UseWindowsAzureActiveDirectoryBearerAuthentication(
-                        new WindowsAzureActiveDirectoryBearerAuthenticationOptions
-                        {
-                            Tenant = tenant,
-                            TokenValidationParameters = new TokenValidationParameters
-                            {
-                                ValidAudience = audience,
-                            },
-                            Provider = customJwtAzureOAuthBearerAuthenticationProvider
-                        });
-                }
             }
         }
     }

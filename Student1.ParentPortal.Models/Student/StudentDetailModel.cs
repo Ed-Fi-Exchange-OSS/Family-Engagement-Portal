@@ -17,6 +17,7 @@ namespace Student1.ParentPortal.Models.Student
             Programs = new List<StudentProgram>();
             Indicators = new List<StudentIndicator>();
             ExternalLinks = new List<StudentExternalLink>();
+            StudentGoals = new List<StudentGoal>();
         }
 
         public int StudentUsi { get; set; }
@@ -48,6 +49,18 @@ namespace Student1.ParentPortal.Models.Student
         public StudentScheduleEntry Schedule { get; set; }
         public StudentAssessment Assessment{ get; set; }
         public List<AssessmentSubSection> StaarAssessmentHistory { get; set; }
+        public string OtherFirstName { get; set; }
+        public string OtherMiddleName { get; set; }
+        public string OtherLastSurname { get; set; }
+        public string StudentIdentificationCode { get; set; }
+        public string OtherName => $"{OtherFirstName} {OtherMiddleName} {OtherLastSurname}";
+        public int GradeLevelTypeId { get; set; }
+        public DateTime EntryDate { get; set; }
+        public int TotalInstructionalDays { get; set; }
+        public StudentCalendar StudentCalendar { get; set; }
+        public List<StudentDomainMastery> StudentDomainMastery { get; set; }
+        public List<StudentGoal> StudentGoals { get; set; }
+        public StudentAllAbout StudentAllAboutMe { get; set; }
     }
 
     public class Address
@@ -125,6 +138,7 @@ namespace Student1.ParentPortal.Models.Student
         public DateTime IncidentDate { get; set; }
         public string Description { get; set; }
         public IEnumerable<DisciplineActionTaken> DisciplineActionsTaken { get; set; }
+        public string DisciplineActionCodeValue { get; set; }
     }
 
     public class DisciplineActionTaken
@@ -331,8 +345,18 @@ namespace Student1.ParentPortal.Models.Student
         public StudentAssessment()
         {
             Assessments = new List<Assessment>();
+            ArcAssessments = new List<Assessment>();
         }
+
         public List<Assessment> Assessments { get; set; }
+        public List<Assessment> AssessmentIndicators { get; set; }
+        public List<Assessment> StarAssessments { get; set; }
+        public List<Assessment> AccessAssessments { get; set; }
+        public string StarPerformanceLevel { get; set; }
+        public string StarPerformanceLevelInterpretation { get; set; }
+        public string AccessResult { get; set; }
+        public string AccessResultInterpretation { get; set; }
+        public List<Assessment> ArcAssessments { get; set; }
     }
 
     public class AssessmentRecord
@@ -363,6 +387,13 @@ namespace Student1.ParentPortal.Models.Student
         public int SubsectionCount { get { return SubSections.Count(); } }
         public List<AssessmentSubSection> SubSections { get; set; }
         public string ExternalLink { get; set; }
+        public string Interpretation { get; set; }
+        public string Result { get; set; }
+        public string ProficiencyLevel { get; set; }
+        public string PerformanceLevelMet { get; set; }
+        public string ReportingMethodCodeValue { get; set; }
+        public string Gradelevel { get; set; }
+        public int? Version { get; set; }
     }
 
     public class AssessmentSubSection
@@ -384,5 +415,125 @@ namespace Student1.ParentPortal.Models.Student
     {
         public string Url { get; set; }
         public string UrlType { get; set; }
+    }
+
+    //////////////////////////////////
+    public class StudentObjectiveAssessment
+    {
+        public string Title { get; set; }
+        public string EnglishResult { get; set; }
+        public string SpanishResult { get; set; }
+        public string ParentIdentificationCode { get; set; }
+        public string IdentificationCode { get; set; }
+        public string AssessmentIdentifier { get; set; }
+        public DateTime AdministrationDate { get; set; }
+        public List<StudentObjectiveAssessment> SkillAreas { get; set; }
+    }
+
+    public class StudentDomainMastery
+    {
+        public DateTime AdministrationDate { get; set; }
+        public string MainName { get; set; }
+        public string FamilyName { get; set; }
+        public List<StudentObjectiveAssessment> Domains { get; set; }
+    }
+
+    public class StudentCalendar
+    {
+        public List<StudentCalendarDay> Days { get => InstructionalDays.Concat(NonInstructionalDays).Concat(AttendanceEventDays).ToList(); }
+        public List<StudentCalendarDay> InstructionalDays { get; set; }
+        public List<StudentCalendarDay> NonInstructionalDays { get; set; }
+        public List<StudentCalendarDay> AttendanceEventDays { get; set; }
+        public DateTime StartDate { get => Days.Min(x => x.Date); }
+        public DateTime EndDate { get => Days.Max(x => x.Date); }
+    }
+
+    public class StudentCalendarDay
+    {
+        public DateTime Date { get; set; }
+        public StudentCalendarEvent Event { get; set; }
+    }
+
+    public class StudentCalendarEvent
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+    public class StudentGoal
+    {
+        public int StudentGoalId { get; set; }
+        public int StudentUsi { get; set; }
+        public string Goal { get; set; }
+        public string Additional { get; set; }
+        public string Labels { get; set; }
+        public string Completed { get; set; }
+        public DateTime? DateCompleted { get; set; }
+        public DateTime DateGoalCreated { get; set; }
+        public DateTime DateScheduled { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public string GoalType { get; set; }
+        public string GradeLevel { get; set; }
+
+        public List<StudentGoalStep> Steps { get; set; }
+
+        public StudentGoal()
+        {
+            Steps = new List<StudentGoalStep>();
+        }
+    }
+
+    public class StudentGoalStep
+    {
+        public int StudentGoalStepId { get; set; }
+        public int StudentGoalId { get; set; }
+        public string StepName { get; set; }
+        public bool Completed { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public bool IsActive { get; set; }
+        public int? StudentGoalInterventionId { get; set; }
+    }
+
+    public class StudentGoalIntervention
+    {
+        public int StudentGoalInterventionId { get; set; } // StudentGoalInterventionId (Primary key)
+        public int StudentUsi { get; set; } // StudentUSI
+        public int StudentGoalId { get; set; } // StudentGoalId
+        public string Description { get; set; } // Description
+        public System.DateTime InterventionStart { get; set; } // InterventionStart
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
+        public List<StudentGoalStep> Steps { get; set; }
+
+        public StudentGoalIntervention()
+        {
+            Steps = new List<StudentGoalStep>();
+        }
+    }
+
+    public class StudentGoalLabel
+    {
+        public int StudentGoalLabelId { get; set; }
+        public string Label { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+    }
+
+    public class StudentAllAbout
+    {
+        public int StudentAllAboutId { get; set; } // StudentAllAboutId (Primary key)
+        public int StudentUsi { get; set; } // StudentUSI
+        public string PrefferedName { get; set; } // PrefferedName
+        public string FunFact { get; set; } // FunFact
+        public string TypesOfBook { get; set; } // TypesOfBook
+        public string FavoriteAnimal { get; set; } // FavoriteAnimal
+        public string FavoriteThingToDo { get; set; } // FavoriteThingToDo
+        public string FavoriteSubjectSchool { get; set; } // FavoriteSubjectSchool
+        public string OneThingWant { get; set; } // OneThingWant
+        public string LearnToDo { get; set; } // LearnToDo
+        public string LearningThings { get; set; } // LearningThings
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime DateUpdated { get; set; } // DateUpdated
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using System.Web.Http;
-using Student1.ParentPortal.Models.Shared;
-using Student1.ParentPortal.Models.Student;
+﻿using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Resources.Services.Students;
 using Student1.ParentPortal.Web.Security;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Student1.ParentPortal.Web.Controllers
 {
@@ -18,6 +18,8 @@ namespace Student1.ParentPortal.Web.Controllers
         private readonly IStudentSuccessTeamService _studentSuccessTeamService;
         private readonly IStudentScheduleService _studentScheduleService;
         private readonly IStudentAssessmentService _studentAssessmentService;
+        private readonly IStudentGoalService _studentGoalService;
+        private readonly IStudentAllAboutService _studentAllAboutService;
 
         public StudentsController(IStudentsService studentsService,
                                   IStudentAttendanceService studentAttendanceService,
@@ -26,7 +28,9 @@ namespace Student1.ParentPortal.Web.Controllers
                                   IStudentAssignmentService studentAssignmentService,
                                   IStudentSuccessTeamService studentSuccessTeamService,
                                   IStudentScheduleService studentScheduleService,
-                                  IStudentAssessmentService studentAssessmentService)
+                                  IStudentAssessmentService studentAssessmentService,
+                                  IStudentGoalService studentGoalService, 
+                                  IStudentAllAboutService studentAllAboutService)
         {
             _studentsService = studentsService;
             _studentAttendanceService = studentAttendanceService;
@@ -36,6 +40,8 @@ namespace Student1.ParentPortal.Web.Controllers
             _studentSuccessTeamService = studentSuccessTeamService;
             _studentScheduleService = studentScheduleService;
             _studentAssessmentService = studentAssessmentService;
+            _studentGoalService = studentGoalService;
+            _studentAllAboutService = studentAllAboutService;
         }
 
         [HttpGet, Route("{id:int}")]
@@ -66,7 +72,6 @@ namespace Student1.ParentPortal.Web.Controllers
         [HttpGet, Route("{id:int}/detail")]
         public async Task<IHttpActionResult> GetBriefDetail(int id)
         {
-
             var recipient = SecurityPrincipal.Current;
 
             var model = await _studentsService.GetStudentBriefDetailAsync(id, recipient.PersonUniqueId, recipient.PersonTypeId);
@@ -165,6 +170,55 @@ namespace Student1.ParentPortal.Web.Controllers
                 return NotFound();
 
             return Ok(model);
+        }
+
+        [HttpPost, Route("AddStudentGoal")]
+        public async Task<IHttpActionResult> AddStudentGoal(StudentGoal entity)
+        {
+            StudentGoal result = await _studentGoalService.AddStudentGoal(entity);
+            return Ok(result);
+        }
+
+        [HttpPost, Route("UpdateStudentGoal")]
+        public async Task<IHttpActionResult> UpdateStudentGoal(StudentGoal entity)
+        {
+            StudentGoal result = await _studentGoalService.UpdateStudentGoal(entity);
+            return Ok(result);
+        }
+
+        [HttpPost, Route("UpdateStudentGoalStep")]
+        public async Task<IHttpActionResult> UpdateStudentGoalStep(StudentGoalStep step)
+        {
+            bool result = await _studentGoalService.UpdateStudentGoalStep(step);
+            return Ok(result);
+        }
+
+        [HttpGet, Route("StudentLabels")]
+        public async Task<IHttpActionResult> StudentLabels()
+        {
+            List<StudentGoalLabel> result = await _studentGoalService.GetStudentGoalLabels();
+            return Ok(result);
+        }
+
+        [HttpPost, Route("AddStudentAllAbout")]
+        public async Task<IHttpActionResult> AddStudentAllAbout(StudentAllAbout entity)
+        {
+            StudentAllAbout result = await _studentAllAboutService.AddStudentAllAbout(entity);
+            return Ok(result);
+        }
+
+        [HttpPost, Route("UpdateStudentAllAbout")]
+        public async Task<IHttpActionResult> UpdateStudentAllAbout(StudentAllAbout entity)
+        {
+            StudentAllAbout result = await _studentAllAboutService.UpdateStudentAllAbout(entity);
+            return Ok(result);
+        }
+
+        [HttpPost, Route("UpdateStudentGoalIntervention")]
+        public async Task<IHttpActionResult> UpdateStudentGoalIntervention(StudentGoalIntervention entity)
+        {
+            StudentGoal result = await _studentGoalService.UpdateStudentGoalIntervention(entity);
+            return Ok(result);
         }
     }
 }

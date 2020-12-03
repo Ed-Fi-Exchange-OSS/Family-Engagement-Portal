@@ -21,14 +21,13 @@ namespace Student1.ParentPortal.Web.Security
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-
             if (isAllowedAnonymous(actionContext))
                 return;
 
             var validationRequest = new SecurityContext
             {
                 UserUSIAccessingResource = SecurityPrincipal.Current.PersonUSI,
-                UserRoleAccessingResource = SecurityPrincipal.Current.Claims.Single(x => x.Type.Equals("role", StringComparison.InvariantCultureIgnoreCase)).Value,
+                UserRoleAccessingResource = SecurityPrincipal.Current.Role,
                 ResourceName = actionContext.ControllerContext.ControllerDescriptor.ControllerName,
                 ActionName = actionContext.ActionDescriptor.ActionName,
                 ActionParameters = actionContext.ActionArguments

@@ -48,5 +48,6 @@ namespace Student1.ParentPortal.Models.Student
         public IEnumerable<StudentExternalLink> ExternalLinks { get; set; }
         public IEnumerable<ParentStudentAlertLogModel> Alerts { get; set; } 
         public int UnreadMessageCount { get; set; }
+        public string StudentIdentificationCode { get; set; }
     }
 }

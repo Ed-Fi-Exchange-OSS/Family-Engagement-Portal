@@ -2,7 +2,7 @@
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('app.groupMessaging', {
             url: '/messaging',
-            requireADLogin: true,
+            //requireADLogin: true,
             views: {
                 'content@': { component: 'groupMessaging' }
             },

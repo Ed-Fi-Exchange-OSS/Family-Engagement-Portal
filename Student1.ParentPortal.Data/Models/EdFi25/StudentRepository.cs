@@ -1194,5 +1194,147 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
 
             return gr;
         }
+
+        public Task<ParentPortal.Models.Student.Assessment> GetStudentAssesmentScore(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ParentPortal.Models.Student.Assessment> GetStudentAssesmentPerformanceLevel(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ParentPortal.Models.Student.Assessment>> GetACCESSStudentAssesmentScore(int studentUsi, string assessmentReportingMethodTypeDescriptor, string assessmentTitle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<StudentObjectiveAssessment>> GetStudentObjectiveAssessments(int studentUsi)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> getTotalInstructionalDays(int studentUsi, StudentCalendar studentCalendar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<StudentGoal> AddStudentGoal(StudentGoal studentGoal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<StudentGoal> UpdateStudentGoal(StudentGoal studentGoal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddStudentGoalStep(StudentGoalStep studentGoalStep)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateStudentGoalStep(StudentGoalStep studentGoalStep)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<StudentGoal>> GetStudentGoals(int studentUsi)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<StudentGoalLabel>> GetStudentGoalLabels()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<StudentGoal> UpdateStudentGoalIntervention(StudentGoalIntervention entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<StudentAllAbout> AddStudentAllAbout(StudentAllAbout studentGoal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<StudentAllAbout> UpdateStudentAllAbout(StudentAllAbout studentGoal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<StudentAllAbout> GetStudentAllAbout(int studentUsi)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<PersonIdentityModel>> GetStudentIdentityByEmailAsync(string email)
+        {
+            var identity = await (from s in _edFiDb.Students
+                                  join sa in _edFiDb.StudentElectronicMails on s.StudentUsi equals sa.StudentUsi
+                                  where sa.ElectronicMailAddress == email
+                                  select new PersonIdentityModel
+                                  {
+                                      Usi = s.StudentUsi,
+                                      UniqueId = s.StudentUniqueId,
+                                      PersonTypeId = ChatLogPersonTypeEnum.Student.Value,
+                                      FirstName = s.FirstName,
+                                      LastSurname = s.LastSurname,
+                                      Email = sa.ElectronicMailAddress
+                                  }).ToListAsync();
+
+            return identity;
+        }
+
+        public async Task<UserProfileModel> GetStudentProfileAsync(int studentUsi)
+        {
+            var edfiProfile = await (from s in _edFiDb.Students
+                                          .Include(x => x.StudentAddresses.Select(y => y.AddressType))
+                                          .Include(x => x.StudentElectronicMails.Select(y => y.ElectronicMailType))
+                                          .Include(x => x.StudentTelephones.Select(y => y.TelephoneNumberType))
+                                          .Include(x => x.StudentIdentificationCodes)
+                                     where s.StudentUsi == studentUsi
+                                     select s).FirstOrDefaultAsync();
+
+            return ToUserProfileModel(edfiProfile);
+        }
+
+        private UserProfileModel ToUserProfileModel(Student student)
+        {
+            var model = new UserProfileModel
+            {
+                Usi = student.StudentUsi,
+                UniqueId = student.StudentUniqueId,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastSurname = student.LastSurname,
+                IdentificationCode = student.StudentIdentificationCodes.FirstOrDefault(x => x.AssigningOrganizationIdentificationCode == "LASID")?.IdentificationCode,
+                Addresses = student.StudentAddresses.Select(x => new AddressModel
+                {
+                    AddressTypeId = x.AddressTypeId,
+                    StreetNumberName = x.StreetNumberName,
+                    ApartmentRoomSuiteNumber = x.ApartmentRoomSuiteNumber,
+                    City = x.City,
+                    StateAbbreviationTypeId = x.StateAbbreviationTypeId,
+                    PostalCode = x.PostalCode
+                }).ToList(),
+                ElectronicMails = student.StudentElectronicMails.Select(x => new ElectronicMailModel
+                {
+                    ElectronicMailAddress = x.ElectronicMailAddress,
+                    ElectronicMailTypeId = x.ElectronicMailTypeId,
+                    PrimaryEmailAddressIndicator = x.PrimaryEmailAddressIndicator
+                }).ToList(),
+                TelephoneNumbers = student.StudentTelephones.Select(x => new TelephoneModel
+                {
+                    TelephoneNumber = x.TelephoneNumber,
+                    TextMessageCapabilityIndicator = x.TextMessageCapabilityIndicator,
+                    TelephoneNumberTypeId = x.TelephoneNumberTypeId
+                }).ToList()
+            };
+
+            return model;
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace Student1.ParentPortal.Resources.Services.Schools
         Task<List<GradeModel>> GetGradeLevelsBySchoolId(int schoolId);
         [NoCache]
         Task<List<ProgramsModel>> GetProgramssBySchoolId(int schoolId);
+        [NoCache]
+        Task<List<SchoolBriefDetailModel>> GetSchoolsByPrincipal(int staffUsi);
     }
     public class SchoolsService : ISchoolsService
     {
@@ -39,6 +41,11 @@ namespace Student1.ParentPortal.Resources.Services.Schools
             var programs = await _schoolsRepository.GetProgramsBySchoolId(schoolId);
             programs.Insert(0, new ProgramsModel { Id = 0, Name = "All Programs" });
             return programs;
+        }
+
+        public async Task<List<SchoolBriefDetailModel>> GetSchoolsByPrincipal(int staffUsi)
+        {
+            return await _schoolsRepository.GetSchoolsByPrincipal(staffUsi);
         }
     }
 }

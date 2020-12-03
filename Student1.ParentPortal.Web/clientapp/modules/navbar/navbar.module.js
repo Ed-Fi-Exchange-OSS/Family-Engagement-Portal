@@ -10,8 +10,8 @@
     .component('navbar', {
         templateUrl: 'clientapp/modules/navbar/navbar.view.html',
         controllerAs: 'ctrl',
-        controller: ['adalAuthenticationService', 'landingRouteService', 'api', '$window', '$translate', '$location', '$rootScope', 'impersonateService', '$state', 'communicationService',
-            function (adalService, landingRouteService, api, $window, $translate, $location, $rootScope, impersonateService, $state, communicationService) {
+        controller: ['landingRouteService', 'api', '$window', '$translate', '$location', '$rootScope', 'impersonateService', '$state', 'communicationService',
+            function (landingRouteService, api, $window, $translate, $location, $rootScope, impersonateService, $state, communicationService) {
 
                 var ctrl = this;
                 ctrl.role = "";
@@ -26,8 +26,6 @@
 
                 ctrl.model = {
                     user: {
-                        name: adalService.userInfo.profile ? adalService.userInfo.profile.name : null,
-                        email: adalService.userInfo.userName
                     },
                     urls: []
                 };
@@ -41,7 +39,7 @@
                 });
 
                 api.me.getMyBriefProfile().then(function (data) {
-                    ctrl.name = data.name;
+                    ctrl.name = data.fullName;
                     ctrl.role = data.role;
                     ctrl.externalUrl = data.feedbackExternalUrl;
                     $rootScope.$broadcast('showProfileDescription', { methodOfContact: data.deliveryMethodOfContact, language: data.languageCode })
@@ -56,6 +54,8 @@
                         ctrl.showGroupMessaging = true;
                     if (role == 'CampusLeader')
                         ctrl.showCommButton = false;
+                    if (role == 'Admin')
+                        ctrl.isAdminUser = true;
                 });
 
                 ctrl.inLoginScreen = function () {
@@ -63,11 +63,8 @@
                 };
 
                 ctrl.logOutSSO = function () {
-                    /*remove all the sessions impersonate variables*/
-                    sessionStorage.removeItem('adal.oldidtoken');
-                    sessionStorage.removeItem('adal.impersonate');
-
-                    adalService.logOut();
+                    localStorage.removeItem('access_token');
+                    $rootScope.isAuthenticated = false;
                 };
 
                 ctrl.showFeedbackModal = function () {

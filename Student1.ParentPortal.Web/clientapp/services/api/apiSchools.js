@@ -6,5 +6,6 @@
         return {
             getGrades: function (schoolId) { return $http.get(apiResourceUri + '/' + schoolId + '/gradesLevels').then(function (resopnse) { return resopnse.data; }); },
             getPrograms: function (schoolId) { return $http.get(apiResourceUri + '/' + schoolId + '/programs').then(function (response) { return response.data; }); },
+            getSchools: function () { return $http.get(apiResourceUri).then(function (response) { return response.data; }); }
         }
     }]);

@@ -33,10 +33,12 @@
 
             ctrl.styleStudentAbc = function () {
                 let countInactives = 0;
-                Object.keys($rootScope.featureToggles.comms.studentAbc).forEach(function (key) {
-                    if (!$rootScope.featureToggles.comms.studentAbc[key])
-                        countInactives++
-                });
+                if ($rootScope.featureToggles.comms.studentAbc != undefined) {
+                    Object.keys($rootScope.featureToggles.comms.studentAbc).forEach(function (key) {
+                        if (!$rootScope.featureToggles.comms.studentAbc[key])
+                            countInactives++
+                    });
+                }
                 switch (countInactives) {
                     case 0:
                         ctrl.indicatorStyle = 'col-3';

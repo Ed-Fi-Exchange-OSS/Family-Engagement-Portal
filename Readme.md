@@ -96,6 +96,29 @@ Production Deployment Notes
 
 As mentioned before the main goal of this application was to make it as simple as possible to standup and deploy.
 
+For a successfull production implementation we recommend the following:
+
+1. A server to host the application. (Any of the options below)
+    * Phisical Server
+    * Virtual Machine 
+    * Cloud hosted VM
+    * Azure AppService
+2. A custom domain to access the application. We recommend something like https://familyportal.mydistrict.org  or https://learnerprofile.mydistrict.org. The "mydistrict.org" portion of the domain should be your district's domain.
+3. A SSL certificate. Most likely your district already has a star certificate. This kind of certificates can be installed on any subdomain for your district. For example. *.mydistrict.org which would work for familyportal.mydistrict.org
+4. Choose an Identity provider. As of when this was written the Family Engagement Portal \ Learner Profile application can use Azure AD B2B, B2C and google.
+5. A storage for staff and student images. The following image storages are supported:
+    * Local storage (A folder on the server.)
+    * Azure Blob Storage
+6. An email provider to be able to send alerts and communication to the student's parents. There are many smtp providers out there that you can use.
+    * Local SMTP
+    * Sendgrid
+    * Mailgun
+7. An SMS provider to be able to send text messages to any of the users of the application. We have tested it with https://www.twilio.org/
+8. If you want to enable translations in the application you will have to create an account in Azure Cognitive services and provide the parametrs in the web.config. Alternatively you could develop a provider for google or AWS translation services.
+9. The live chat is powered by SignalR and can run natively on a server. If you have more than 8k students we recommend you use the Azure cloud scalable version.
+10. If you are implementing mobile phone push notifications then you will have to create an account for the google Firebase Cloud Messaging service.
+
+
 The main things needed to change for this application to run in production are:
 
 * Authentication parameters for AzureAd:

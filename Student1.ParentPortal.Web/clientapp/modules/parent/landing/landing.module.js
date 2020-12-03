@@ -2,7 +2,7 @@
     .config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('app.parentLanding', {
                 url: '/landing',
-                requireADLogin: true,
+                //requireADLogin: true,
                 views: {
                     'content@': { component:'parentLanding' }
                 },

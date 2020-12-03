@@ -11,10 +11,8 @@ namespace Student1.ParentPortal.Web.Filters
     {
         public override void OnAuthorization(HttpActionContext context)
         {
-            base.OnAuthorization(context);
-            
+            base.OnAuthorization(context);            
         }
-
 
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {

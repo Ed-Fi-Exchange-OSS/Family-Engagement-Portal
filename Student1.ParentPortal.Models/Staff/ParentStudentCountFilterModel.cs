@@ -10,5 +10,6 @@ namespace Student1.ParentPortal.Models.Staff
     {
         public int[] Grades { get; set; }
         public int[] Programs { get; set; }
+        public int SchoolId { get; set; }
     }
 }

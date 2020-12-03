@@ -2,6 +2,7 @@
 using Student1.ParentPortal.Web.Security;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Linq;
 
 namespace Student1.ParentPortal.Web.Controllers
 {
@@ -38,6 +39,16 @@ namespace Student1.ParentPortal.Web.Controllers
             return Ok(model);
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> GetSchoolsByPrincipal()
+        {
+            var person = SecurityPrincipal.Current;
+            var role = person.Claims.SingleOrDefault(x => x.Type == "person_role").Value;
 
+            if (role.Equals("CampusLeader", System.StringComparison.InvariantCultureIgnoreCase))
+                return Ok(await _schoolsService.GetSchoolsByPrincipal(person.PersonUSI));
+
+            return NotFound();
+        }
     }
 }

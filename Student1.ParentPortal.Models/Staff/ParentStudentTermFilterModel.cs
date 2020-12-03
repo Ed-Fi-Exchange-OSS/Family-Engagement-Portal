@@ -7,5 +7,6 @@ namespace Student1.ParentPortal.Models.Staff
     {
         public string SearchTerm { get; set; }
         public GradesLevelModel GradeLevels { get; set; }
+        public int SchoolId { get; set; }
     }
 }

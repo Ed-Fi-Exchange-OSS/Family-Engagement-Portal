@@ -1,0 +1,110 @@
+﻿<main role="main" class="container">
+    <h1>{{ 'view.admin.student.detail.features.title' | translate}}</h1>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-height-fix">
+                        <div class="card-body">
+                            <div>
+                                <input type="checkbox" id="cbProfile" ng-checked="ctrl.studentDetailFeatures.profile" ng-model="ctrl.studentDetailFeatures.profile" />
+                                <label for="cbProfile">{{ 'view.admin.student.detail.features.profile' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbAttendanceIndicator" ng-checked="ctrl.studentDetailFeatures.attendanceIndicator" ng-model="ctrl.studentDetailFeatures.attendanceIndicator" />
+                                <label for="cbAttendanceIndicator">{{ 'view.admin.student.detail.features.attendance.indicator' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbCourseAverage" ng-checked="ctrl.studentDetailFeatures.courseAverageIndicator" ng-model="ctrl.studentDetailFeatures.courseAverageIndicator" />
+                                <label for="cbCourseAverage">{{ 'view.admin.student.detail.features.course.average' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbBehaviorIndicator" ng-checked="ctrl.studentDetailFeatures.behaviorIndicator" ng-model="ctrl.studentDetailFeatures.behaviorIndicator" />
+                                <label for="cbBehaviorIndicator">{{ 'view.admin.student.detail.features.behavior.indicator' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbMissingAssignmentsI" ng-checked="ctrl.studentDetailFeatures.missingAssignmentsIndicator" ng-model="ctrl.studentDetailFeatures.missingAssignmentsIndicator" />
+                                <label for="cbMissingAssignmentsI">{{ 'view.admin.student.detail.features.missing.assignmentsI' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbAllAboutMe" ng-checked="ctrl.studentDetailFeatures.allAboutMe" ng-model="ctrl.studentDetailFeatures.allAboutMe" />
+                                <label for="cbAllAboutMe">{{ 'view.admin.student.detail.features.all.about.me' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-height-fix">
+                        <div class="card-body">
+                            <div>
+                                <input type="checkbox" id="cbGoals" ng-checked="ctrl.studentDetailFeatures.goals" ng-model="ctrl.studentDetailFeatures.goals" />
+                                <label for="cbGoals">{{ 'view.admin.student.detail.features.goals' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbAttendanceLog" ng-checked="ctrl.studentDetailFeatures.attendanceLog" ng-model="ctrl.studentDetailFeatures.attendanceLog" />
+                                <label for="cbAttendanceLog">{{ 'view.admin.student.detail.features.attendance.log' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbBehaviorLog" ng-checked="ctrl.studentDetailFeatures.behaviorLog" ng-model="ctrl.studentDetailFeatures.behaviorLog" />
+                                <label for="cbBehaviorLog">{{ 'view.admin.student.detail.features.behavior.log' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbCourseGrades" ng-checked="ctrl.studentDetailFeatures.courseGrades" ng-model="ctrl.studentDetailFeatures.courseGrades" />
+                                <label for="cbCourseGrades">{{ 'view.admin.student.detail.features.course.grades' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbMissingAssignments" ng-checked="ctrl.studentDetailFeatures.missingAssignments" ng-model="ctrl.studentDetailFeatures.missingAssignments" />
+                                <label for="cbMissingAssignments">{{ 'view.admin.student.detail.features.missing.assignments' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbCalendar" ng-checked="ctrl.studentDetailFeatures.calendar" ng-model="ctrl.studentDetailFeatures.calendar" />
+                                <label for="cbCalendar">{{ 'view.admin.student.detail.features.calendar' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-height-fix">
+                        <div class="card-body">
+                            <div>
+                                <input type="checkbox" id="cbSuccessTeam" ng-checked="ctrl.studentDetailFeatures.successTeam" ng-model="ctrl.studentDetailFeatures.successTeam" />
+                                <label for="cbSuccessTeam">{{ 'view.admin.student.detail.features.success.team' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbCollegeInitiativeCorner" ng-checked="ctrl.studentDetailFeatures.collegeInitiativeCorner" ng-model="ctrl.studentDetailFeatures.collegeInitiativeCorner" />
+                                <label for="cbCollegeInitiativeCorner">{{ 'view.admin.student.detail.features.college.initiative.corner' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbArc" ng-checked="ctrl.studentDetailFeatures.arc" ng-model="ctrl.studentDetailFeatures.arc" />
+                                <label for="cbArc">{{ 'view.admin.student.detail.features.arc' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbSTAARAssessment" ng-checked="ctrl.studentDetailFeatures.staarAssessment" ng-model="ctrl.studentDetailFeatures.staarAssessment" />
+                                <label for="cbSTAARAssessment">{{ 'view.admin.student.detail.features.staar.assessment' | translate}}</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cbAssessment" ng-checked="ctrl.studentDetailFeatures.assessment" ng-model="ctrl.studentDetailFeatures.assessment" />
+                                <label for="cbAssessment">{{ 'view.admin.student.detail.features.assessment' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group text-center">
+                <button type="button" class="btn btn-info" style="display:inline!important" ng-click="ctrl.save()">
+                    <i class="ion ion-md-checkmark-circle"></i>
+                    {{'view.studentDetail.myGoals.Save' | translate}}
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</main>

@@ -72,6 +72,27 @@
     <Compile Include="Models\EdFi25\SpotlightIntegrationRepository.cs" />
     <Compile Include="Models\EdFi25\TypesRepository.cs" />
     <Compile Include="Models\EdFi25\TeacherRepository.cs" />
+    <Compile Include="Models\EdFi26\AdminRepository.cs" />
+    <Compile Include="Models\EdFi26\AlertRepository.cs" />
+    <Compile Include="Models\EdFi26\ApplicationRepository.cs" />
+    <Compile Include="Models\EdFi26\CommunicationsRepository.cs" />
+    <Compile Include="Models\EdFi26\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EdFi26\FeedbackRepository.cs" />
+    <Compile Include="Models\EdFi26\ImageRepository.cs" />
+    <Compile Include="Models\EdFi26\LogRepository.cs" />
+    <Compile Include="Models\EdFi26\NotificationsRepository.cs" />
+    <Compile Include="Models\EdFi26\ParentRepository.cs" />
+    <Compile Include="Models\EdFi26\PeopleRepository.cs" />
+    <Compile Include="Models\EdFi26\SchoolsRepository.cs" />
+    <Compile Include="Models\EdFi26\SpotlightIntegrationRepository.cs" />
+    <Compile Include="Models\EdFi26\StaffRepository.cs" />
+    <Compile Include="Models\EdFi26\StudentRepository.cs" />
+    <Compile Include="Models\EdFi26\TeacherRepository.cs" />
+    <Compile Include="Models\EdFi26\TypesRepository.cs" />
     <Compile Include="Models\EdFi31\AdminRepository.cs" />
     <Compile Include="Models\EdFi31\Database.cs">
       <AutoGen>True</AutoGen>
@@ -99,6 +120,7 @@
     <Compile Include="Models\ICommunicationsRepository.cs" />
     <Compile Include="Models\IFeedbackRepository.cs" />
     <Compile Include="Models\INotificationsRepository.cs" />
+    <Compile Include="Models\IPeopleRepository.cs" />
     <Compile Include="Models\ISchoolsRepository.cs" />
     <Compile Include="Models\ITeacherRepository.cs" />
     <Compile Include="Models\IImageRepository.cs" />
@@ -114,6 +136,8 @@
     <None Include="App.config" />
     <None Include="Models\EdFi25\EF.Reverse.POCO.Core.ttinclude" />
     <None Include="Models\EdFi25\EF.Reverse.POCO.ttinclude" />
+    <None Include="Models\EdFi26\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="Models\EdFi26\EF.Reverse.POCO.ttinclude" />
     <None Include="Models\EdFi31\EF.Reverse.POCO.Core.ttinclude" />
     <None Include="Models\EdFi31\EF.Reverse.POCO.ttinclude" />
     <None Include="packages.config" />
@@ -123,19 +147,39 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\EdFi26\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\EdFi31\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\EdFi25\1CreateParentPortalSupportingDatabaseSchema.sql" />
+    <Content Include="Scripts\EdFi25\AdminStudentDetailFeatures.sql" />
     <Content Include="Scripts\EdFi25\2ODSExtensions.sql" />
+    <Content Include="Scripts\EdFi25\StudentAllAbout.sql" />
+    <Content Include="Scripts\EdFi25\StudentGoalIntervention.sql" />
+    <Content Include="Scripts\EdFi25\StudentGoalsSchema.sql" />
+    <Content Include="Scripts\Edfi26\1CreateParentPortalSupportingDatabaseSchema.sql" />
+    <Content Include="Scripts\Edfi26\2ODSExtensions.sql" />
+    <Content Include="Scripts\Edfi26\99SampleDataNeededForDemo.sql" />
+    <Content Include="Scripts\Edfi26\AdminStudentDetailFeatures.sql" />
+    <Content Include="Scripts\Edfi26\Common.sql" />
+    <Content Include="Scripts\Edfi26\StudentAllAbout.sql" />
+    <Content Include="Scripts\Edfi26\StudentGoalIntervention.sql" />
+    <Content Include="Scripts\Edfi26\StudentGoalsSchema.sql" />
     <Content Include="Scripts\edFi31\1CreateParentPortalSupportingDatabaseSchema.sql" />
     <Content Include="Scripts\edFi31\2ODSExtensions.sql" />
     <Content Include="Scripts\edFi31\98Parent Portal QA Scripts.sql" />
     <Content Include="Scripts\edFi31\99SampleDataNeededForDemo.sql" />
+    <Content Include="Scripts\edFi31\AdminStudentDetailFeatures.sql" />
     <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentCreationDemoData.sql" />
     <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentDeleteDemoData.sql" />
     <Content Include="Scripts\edFi31\CreateFakeSchoolInformationScript.sql" />
+    <Content Include="Scripts\edFi31\StudentAllAbout.sql" />
+    <Content Include="Scripts\edFi31\StudentGoalIntervention.sql" />
+    <Content Include="Scripts\edFi31\StudentGoalsSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -146,5 +190,6 @@
       <Name>Student1.ParentPortal.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

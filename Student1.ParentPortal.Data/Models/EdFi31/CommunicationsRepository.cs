@@ -23,44 +23,44 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
         public async Task<ChatLogHistoryModel> GetThreadByParticipantsAsync(string studentUniqueId, string senderUniqueId, int senderTypeid, string recipientUniqueId, int recipientTypeId, int rowsToSkip, int? unreadMessageCount, int rowsToRetrieve = 15)
         {
-                var messagesToTake = 0;
-                var unreadMessages = unreadMessageCount.HasValue ? unreadMessageCount.Value : await _edFiDb.ChatLogs.CountAsync(x => x.StudentUniqueId == studentUniqueId && x.SenderUniqueId == recipientUniqueId && x.SenderTypeId == recipientTypeId && x.RecipientTypeId == senderTypeid && x.RecipientUniqueId == senderUniqueId);
+            var messagesToTake = 0;
+            var unreadMessages = unreadMessageCount.HasValue ? unreadMessageCount.Value : await _edFiDb.ChatLogs.CountAsync(x => x.StudentUniqueId == studentUniqueId && x.SenderUniqueId == recipientUniqueId && x.SenderTypeId == recipientTypeId && x.RecipientTypeId == senderTypeid && x.RecipientUniqueId == senderUniqueId);
 
-                messagesToTake = unreadMessages > rowsToRetrieve ? unreadMessages : rowsToRetrieve;
+            messagesToTake = unreadMessages > rowsToRetrieve ? unreadMessages : rowsToRetrieve;
 
-                var dataNeeded = await (from c in _edFiDb.ChatLogs
-                                        where c.StudentUniqueId == studentUniqueId
-                                              && (c.SenderUniqueId == senderUniqueId && c.RecipientUniqueId == recipientUniqueId && c.RecipientTypeId == recipientTypeId && c.SenderTypeId == senderTypeid
-                                              || (c.SenderUniqueId == recipientUniqueId && c.RecipientUniqueId == senderUniqueId && c.RecipientTypeId == senderTypeid && c.SenderTypeId == recipientTypeId))
-                                        orderby c.DateSent descending
-                                        select c)
-                                  .Skip(rowsToSkip)
-                                  .Take(messagesToTake)
-                                  .ToListAsync();
+            var dataNeeded = await (from c in _edFiDb.ChatLogs
+                                    where c.StudentUniqueId == studentUniqueId
+                                          && (c.SenderUniqueId == senderUniqueId && c.RecipientUniqueId == recipientUniqueId && c.RecipientTypeId == recipientTypeId && c.SenderTypeId == senderTypeid
+                                          || (c.SenderUniqueId == recipientUniqueId && c.RecipientUniqueId == senderUniqueId && c.RecipientTypeId == senderTypeid && c.SenderTypeId == recipientTypeId))
+                                    orderby c.DateSent descending
+                                    select c)
+                              .Skip(rowsToSkip)
+                              .Take(messagesToTake)
+                              .ToListAsync();
 
-                dataNeeded.Reverse();
+            dataNeeded.Reverse();
 
-                var returnList = dataNeeded.Select(x => new ChatLogItemModel
-                {
-                    StudentUniqueId = x.StudentUniqueId,
-                    SenderUniqueId = x.SenderUniqueId,
-                    RecipientUniqueId = x.RecipientUniqueId,
-                    TranslatedMessage = x.TranslatedMessage,
-                    EnglishMessage = x.EnglishMessage,
-                    DateSent = x.DateSent,
-                    RecipientTypeId = x.RecipientTypeId,
-                    SenderTypeId = x.SenderTypeId,
-                    RecipientHasRead = x.RecipientHasRead,
-                    TranslatedLanguageCode = x.TranslatedLanguageCode
-                }).ToList();
+            var returnList = dataNeeded.Select(x => new ChatLogItemModel
+            {
+                StudentUniqueId = x.StudentUniqueId,
+                SenderUniqueId = x.SenderUniqueId,
+                RecipientUniqueId = x.RecipientUniqueId,
+                TranslatedMessage = x.TranslatedMessage,
+                EnglishMessage = x.EnglishMessage,
+                DateSent = x.DateSent,
+                RecipientTypeId = x.RecipientTypeId,
+                SenderTypeId = x.SenderTypeId,
+                RecipientHasRead = x.RecipientHasRead,
+                TranslatedLanguageCode = x.TranslatedLanguageCode
+            }).ToList();
 
-                var result = new ChatLogHistoryModel
-                {
-                    Messages = returnList,
-                    EndOfMessageHistory = rowsToSkip + rowsToRetrieve >= dataNeeded.Count()
-                };
+            var result = new ChatLogHistoryModel
+            {
+                Messages = returnList,
+                EndOfMessageHistory = rowsToSkip + rowsToRetrieve >= dataNeeded.Count()
+            };
 
-                return result;
+            return result;
         }
 
         public async Task SetRecipientsRead(string studentUniqueId, string senderUniqueId, int senderTypeid, string recipientUniqueId, int recipientTypeId)
@@ -71,7 +71,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                       select c).ToList();
             unreadMessagesData.ForEach(x => x.RecipientHasRead = true);
             await _edFiDb.SaveChangesAsync();
-        }    
+        }
 
         public async Task<ChatLogItemModel> PersistMessage(ChatLogItemModel model)
         {
@@ -110,7 +110,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
         public async Task<List<UnreadMessageModel>> RecipientUnreadMessages(string recipientUniqueId, int recipientTypeId)
         {
-
             var result = new List<UnreadMessageModel>();
 
             if (recipientTypeId == ChatLogPersonTypeEnum.Staff.Value)
@@ -202,13 +201,13 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                               || x.LastSurname.Contains(searchTerm)
                                               || x.StudentFirstName.Contains(searchTerm)
                                               || x.StudentLastSurname.Contains(searchTerm)
-                                              || (x.FirstName + " "+ x.LastSurname).Contains(searchTerm)
+                                              || (x.FirstName + " " + x.LastSurname).Contains(searchTerm)
                                               || (x.LastSurname + " " + x.FirstName).Contains(searchTerm)
                                               || (x.StudentFirstName + " " + x.StudentLastSurname).Contains(searchTerm)
                                               || (x.StudentLastSurname + " " + x.StudentFirstName).Contains(searchTerm));
             }
 
-            if (rowsToSkip > 0 )
+            if (rowsToSkip > 0)
             {
                 baseQuery = baseQuery.Skip(rowsToSkip);
             }
@@ -389,7 +388,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             foreach (var ss in studentStaff)
             {
-                if(studentLeaderStaff.Count() > 0)
+                if (studentLeaderStaff.Count() > 0)
                 {
                     var recipientsLeaders = studentLeaderStaff.FirstOrDefault(x => x.StudentUsi == ss.StudentUsi).Recipients;
                     ss.Recipients.InsertRange(0, recipientsLeaders);
@@ -446,8 +445,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             //Here we got the information for the school first 
             var school = await (from s in _edFiDb.Schools
                                             .Include(x => x.EducationOrganization)
-                                join sf in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.LocalEducationAgencyId equals sf.EducationOrganizationId
-                                where sf.StaffUsi == staffUsi
+                                join sf in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.SchoolId equals sf.EducationOrganizationId
+                                where sf.StaffUsi == staffUsi && s.SchoolId == model.SchoolId
                                 select new
                                 {
                                     s.EducationOrganization.EducationOrganizationId,
@@ -470,7 +469,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                              // Left join
                              from seoapp in _edFiDb.StudentEducationOrganizationAssociationProgramParticipations.Where(x => x.EducationOrganizationId == ssa.SchoolId).DefaultIfEmpty()
                              from ptd in _edFiDb.Descriptors.Where(x => x.DescriptorId == seoapp.ProgramTypeDescriptorId).DefaultIfEmpty()
-                             where sess.SchoolId == school.EducationOrganizationId
+                             where sess.SchoolId == model.SchoolId
                                   && validParentDescriptors.Contains(dspa.CodeValue)
                                   && sy.CurrentSchoolYear
                                   && sess.BeginDate <= today && sess.EndDate >= today
@@ -826,7 +825,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             return returnModel;
         }
 
-        public async Task<List<ParentStudentsModel>> GetParentsByGradeLevelsAndSearchTerm(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today)
+        public async Task<List<ParentStudentsModel>> GetParentsByGradeLevelsAndSearchTerm(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today, int schoolId)
         {
             int studentUniqueId = 0;
             string firstName = "", lastName = "";
@@ -839,13 +838,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                 firstName = searchName[0];
                 lastName = searchName.Count > 1 ? searchName[1] : string.Empty;
             }
-
-            //Here we got the information for the school first 
-            var schoolId = await (from s in _edFiDb.Schools
-                                  join sf in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.LocalEducationAgencyId equals sf.EducationOrganizationId
-                                  join stf in _edFiDb.Staffs on sf.StaffUsi equals stf.StaffUsi
-                                  where stf.StaffUniqueId == personUniqueId
-                                  select s.SchoolId).FirstOrDefaultAsync();
 
 
             var queryBase = (from p in _edFiDb.Parents
@@ -877,8 +869,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
                                  // This validation is for prod database, the PreferredMethodOfContactTypeId some times is null
                                  PreferredMethodOfContactTypeId = pp.PreferredMethodOfContactTypeId != null ? pp.PreferredMethodOfContactTypeId : 0,
-                                 ParentRelation = spa.EmergencyContactStatus == true ? "Emergency Contact" : dspa.Description,
-
+                                 //ParentRelation = spa.EmergencyContactStatus == true ? "Emergency Contact" : dspa.Description,
+                                 ParentRelation = dspa.Description,
                                  StudentFirstName = s.FirstName,
                                  StudentLastSurname = s.LastSurname,
                                  StudentUsi = s.StudentUsi,
@@ -957,7 +949,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             return students;
         }
 
-        public async Task<int> GetParentsByGradeLevelsAndSearchTermCount(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today)
+        public async Task<int> GetParentsByGradeLevelsAndSearchTermCount(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today, int schoolId)
         {
             int studentUniqueId = 0;
             string firstName = "", lastName = "";
@@ -971,12 +963,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                 lastName = searchName.Count > 1 ? searchName[1] : string.Empty;
             }
 
-            //Here we got the information for the school first 
-            var schoolId = await (from s in _edFiDb.Schools
-                                  join sf in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.SchoolId equals sf.EducationOrganizationId
-                                  join stf in _edFiDb.Staffs on sf.StaffUsi equals stf.StaffUsi
-                                  where stf.StaffUniqueId == personUniqueId
-                                  select s.SchoolId).FirstOrDefaultAsync();
 
 
             var queryBase = (from p in _edFiDb.Parents
@@ -1153,6 +1139,16 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             var students = await query.ToListAsync();
 
             return students;
+        }
+
+        public Task<List<ParentStudentsModel>> GetParentsByGradeLevelsAndSearchTerm(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetParentsByGradeLevelsAndSearchTermCount(string personUniqueId, string term, GradesLevelModel model, string[] validParentDescriptors, DateTime today)
+        {
+            throw new NotImplementedException();
         }
     }
 }

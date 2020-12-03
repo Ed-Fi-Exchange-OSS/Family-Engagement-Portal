@@ -41,7 +41,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> GetParentAlerts()
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _alertsService.GetParentAlertTypes(person.PersonUSI));
@@ -55,7 +55,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> ParentHasReadStudentAlerts(string uniqueId)
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
             {
@@ -71,7 +71,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> SaveParentAlerts(ParentAlertTypeModel model)
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _alertsService.SaveParentAlertTypes(model, person.PersonUSI));
@@ -84,7 +84,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> GetParentUnreadAlerts(string studentUniqueId) 
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _alertsService.GetParentStudentUnreadAlerts(person.PersonUniqueId, studentUniqueId));

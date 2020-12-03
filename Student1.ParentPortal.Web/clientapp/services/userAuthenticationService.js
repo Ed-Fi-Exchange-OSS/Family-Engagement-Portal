@@ -1,8 +1,8 @@
 ﻿angular.module('app.services')
-    .service('userAuthenticationService', ['adalAuthenticationService', function (adalService) {
+    .service('userAuthenticationService', ['$rootScope', function ($rootScope) {
         return {
             isUserAuthenticated: function () {
-                return adalService.userInfo.isAuthenticated;
+                return $rootScope.isAuthenticated;
             }
         };
     }]);

@@ -15,7 +15,7 @@ namespace Student1.ParentPortal.Resources.Providers.Security.Access.Implementati
 
         public bool CanHandle(SecurityContext securityContext)
         {
-            return true;
+            return securityContext.ResourceName.Equals("OAuth", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

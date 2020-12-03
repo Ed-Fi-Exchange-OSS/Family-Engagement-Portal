@@ -2,7 +2,7 @@
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('app.communications', {
             url: '/communications/:?studentUsi/:&recipientUniqueId/:&recipientTypeId/&:{unreadData:json}',
-            requireADLogin: true,
+            //requireADLogin: true,
             views: {
                 'content@': { component: 'communications' }
             },

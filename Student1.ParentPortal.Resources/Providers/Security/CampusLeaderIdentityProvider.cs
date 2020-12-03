@@ -7,6 +7,7 @@ using SimpleInjector;
 using Student1.ParentPortal.Data.Models;
 using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Resources.Providers.Configuration;
+using Student1.ParentPortal.Resources.Providers.Date;
 
 namespace Student1.ParentPortal.Resources.Providers.Security
 {
@@ -14,10 +15,12 @@ namespace Student1.ParentPortal.Resources.Providers.Security
     {
         private readonly Container _container;
         private readonly ICustomParametersProvider _customParametersProvider;
-        public CampusLeaderIdentityProvider(Container container, ICustomParametersProvider customParametersProvider) 
+        private readonly IDateProvider _dateProvider;
+        public CampusLeaderIdentityProvider(Container container, ICustomParametersProvider customParametersProvider, IDateProvider dateProvider)
         {
             _container = container;
             _customParametersProvider = customParametersProvider;
+            _dateProvider = dateProvider;
         }
         public int Order => -50;
 
@@ -27,10 +30,10 @@ namespace Student1.ParentPortal.Resources.Providers.Security
 
             var validCampusLeaderDescriptors = _customParametersProvider.GetParameters().descriptors.validCampusLeaderDescriptors;
 
-            var staffIdentity = await staffRepo.GetStaffPrincipalIdentityByEmailAsync(email, validCampusLeaderDescriptors);
+            var staffIdentity = await staffRepo.GetStaffPrincipalIdentityByEmailAsync(email, validCampusLeaderDescriptors, _dateProvider.Today());
 
             if (staffIdentity == null || !staffIdentity.Any())
-                staffIdentity = await staffRepo.GetStaffPrincipalIdentityByProfileEmailAsync(email, validCampusLeaderDescriptors);
+                staffIdentity = await staffRepo.GetStaffPrincipalIdentityByProfileEmailAsync(email, validCampusLeaderDescriptors, _dateProvider.Today());
 
             // If email doesnt exist on edfi emails or profile emails it isn't a staff, it can't handle so it returns null.
             if (staffIdentity == null || !staffIdentity.Any())

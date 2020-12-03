@@ -2,7 +2,6 @@
     .config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('app.teacherLanding', {
                 url: '/teacherLanding',
-                requireADLogin: true,
                 views: {
                     'content@': { component:'teacherLanding' }
                 },

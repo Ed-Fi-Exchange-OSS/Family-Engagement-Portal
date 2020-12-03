@@ -201,6 +201,10 @@ var AuthenticationContext = (function () {
      * Initiates the login process by redirecting the user to Azure AD authorization endpoint.
      */
     AuthenticationContext.prototype.login = function () {
+
+        console.log('1');
+        //alert('206');
+
         if (this._loginInProgress) {
             this.info("Login in progress");
             return;
@@ -213,6 +217,8 @@ var AuthenticationContext = (function () {
         this.config.state = expectedState;
         this._idTokenNonce = this._guid();
         var loginStartPage = this._getItem(this.CONSTANTS.STORAGE.ANGULAR_LOGIN_REQUEST);
+
+        console.log(loginStartPage);
 
         if (!loginStartPage || loginStartPage === "") {
             loginStartPage = window.location.href;
@@ -229,6 +235,9 @@ var AuthenticationContext = (function () {
         this._saveItem(this.CONSTANTS.STORAGE.ERROR, '');
         this._saveItem(this.CONSTANTS.STORAGE.ERROR_DESCRIPTION, '');
         var urlNavigate = this._getNavigateUrl('id_token', null) + '&nonce=' + encodeURIComponent(this._idTokenNonce);
+
+        console.log(urlNavigate);
+        alert('240');
 
         if (this.config.displayCall) {
             // User defined way of handling the navigation

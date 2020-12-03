@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -157,6 +158,47 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                         equals new { staffSec.SchoolId, staffSec.ClassPeriodName, staffSec.ClassroomIdentificationCode, staffSec.LocalCourseCode, staffSec.TermDescriptorId, staffSec.SchoolYear, staffSec.UniqueSectionCode, staffSec.SequenceOfCourse }
                     where staffSec.StaffUsi == staffUsi && studSec.StudentUsi == studentUsi
                     select studSec.StudentUsi).Any();
+        }
+
+        public async Task<List<PersonIdentityModel>> GetStaffPrincipalIdentityByEmailAsync(string email, string[] validStaffDescriptors, DateTime today)
+        {
+            var identity = await (from s in _edFiDb.Staffs
+                                  join seoaa in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.StaffUsi equals seoaa.StaffUsi
+                                  join sa in _edFiDb.StaffElectronicMails on s.StaffUsi equals sa.StaffUsi
+                                  where sa.ElectronicMailAddress == email && validStaffDescriptors.Contains(seoaa.PositionTitle)
+                                  && seoaa.BeginDate <= today && (seoaa.EndDate == null || seoaa.EndDate >= today)
+                                  select new PersonIdentityModel
+                                  {
+                                      Usi = s.StaffUsi,
+                                      UniqueId = s.StaffUniqueId,
+                                      PersonTypeId = ChatLogPersonTypeEnum.Staff.Value,
+                                      FirstName = s.FirstName,
+                                      LastSurname = s.LastSurname,
+                                      Email = sa.ElectronicMailAddress,
+                                      SchoolId = s.StaffEducationOrganizationAssignmentAssociations.FirstOrDefault().EducationOrganizationId
+                                  }).ToListAsync();
+
+            return identity;
+        }
+
+        public async Task<List<PersonIdentityModel>> GetStaffPrincipalIdentityByProfileEmailAsync(string email, string[] validStaffDescriptors, DateTime today)
+        {
+            var identity = await (from s in _edFiDb.Staffs
+                                  join seoaa in _edFiDb.StaffEducationOrganizationAssignmentAssociations on s.StaffUsi equals seoaa.StaffUsi
+                                  join sa in _edFiDb.StaffProfileElectronicMails on s.StaffUniqueId equals sa.StaffUniqueId
+                                  where sa.ElectronicMailAddress == email && validStaffDescriptors.Contains(seoaa.PositionTitle)
+                                  && seoaa.BeginDate <= today && (seoaa.EndDate == null || seoaa.EndDate >= today)
+                                  select new PersonIdentityModel
+                                  {
+                                      Usi = s.StaffUsi,
+                                      UniqueId = s.StaffUniqueId,
+                                      PersonTypeId = ChatLogPersonTypeEnum.Staff.Value,
+                                      FirstName = s.FirstName,
+                                      LastSurname = s.LastSurname,
+                                      Email = sa.ElectronicMailAddress
+                                  }).ToListAsync();
+
+            return identity;
         }
     }
 }

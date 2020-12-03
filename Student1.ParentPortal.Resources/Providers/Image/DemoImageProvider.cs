@@ -68,7 +68,11 @@ namespace Student1.ParentPortal.Resources.Providers.Image
             // Seed with Usi to always get the same img if the same Usi is requested.
             var random = new Random(Int32.Parse(studentUniqueId));
 
-            var demoImageConventionName = $"{data.SexType.Description}-{data.StaffRaces.FirstOrDefault().RaceType.Description.Replace(" ", "_")}-{random.Next(1, 3)}.png";
+            string sexTypeDescription = string.Empty;
+            if (data.SexType != null)
+                sexTypeDescription = data.SexType.Description;
+
+            var demoImageConventionName = $"{sexTypeDescription}-{data.StaffRaces.FirstOrDefault().RaceType.Description.Replace(" ", "_")}-{random.Next(1, 3)}.png";
             var imageUrl = Path.Combine(_applicationSettingsProvider.GetSetting("student.image.path"), demoImageConventionName);
 
             return ImageExistsOrDefault(imageUrl);

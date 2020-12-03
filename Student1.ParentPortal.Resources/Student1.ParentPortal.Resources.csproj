@@ -104,11 +104,15 @@
     <Compile Include="Providers\Notifications\PushNotificationProvider.cs" />
     <Compile Include="Providers\Security\Access\Implementations\CampusLeaderAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\CampusLeaderSchoolsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\AdminAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ExchangeTokenAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\OAuthAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ParentImageAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ParentFeedbackAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ParentNotificationsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\StudentCommunicationsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\StudentMeAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\StudentStudentsAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\TeacherImageAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\TeacherCommunicationsAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ParentCommunicationsAccessValidator.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="Providers\Security\CampusLeaderIdentityProvider.cs" />
     <Compile Include="Providers\Security\IIdentityProvider.cs" />
     <Compile Include="Providers\Security\ITokenValidationProvider.cs" />
+    <Compile Include="Providers\Security\StudentIdeintityProvider.cs" />
     <Compile Include="Providers\Security\StaffIdeintityProvider.cs" />
     <Compile Include="Providers\Security\ParentIdeintityProvider.cs" />
     <Compile Include="Providers\Date\DemoDateProvider.cs" />
@@ -158,6 +163,8 @@
     <Compile Include="Services\Parents\ParentsService.cs" />
     <Compile Include="Services\Schools\SchoolsService.cs" />
     <Compile Include="Services\SpotlightIntegrations\SpotlightIntegrationsService.cs" />
+    <Compile Include="Services\Students\StudentAllAboutService.cs" />
+    <Compile Include="Services\Students\StudentGoalService.cs" />
     <Compile Include="Services\Teachers\TeachersService.cs" />
     <Compile Include="Services\Students\StudentAssessmentService.cs" />
     <Compile Include="Services\Students\StudentAssignmentService.cs" />

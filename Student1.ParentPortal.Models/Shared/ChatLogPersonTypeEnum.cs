@@ -10,6 +10,7 @@ namespace Student1.ParentPortal.Models.Shared
     {
         public static readonly ChatLogPersonTypeEnum Parent = new ChatLogPersonTypeEnum(1, "Parent");
         public static readonly ChatLogPersonTypeEnum Staff = new ChatLogPersonTypeEnum(2, "Staff");
+        public static readonly ChatLogPersonTypeEnum Student = new ChatLogPersonTypeEnum(3, "Student");
 
         private ChatLogPersonTypeEnum(int value, string displayName) : base(value, displayName)
         {

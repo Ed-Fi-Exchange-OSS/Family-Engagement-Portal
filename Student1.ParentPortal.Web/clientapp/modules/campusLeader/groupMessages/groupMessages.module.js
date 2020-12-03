@@ -2,7 +2,8 @@
     .component('groupMessages', {
         bindings: {
             grades: '<',
-            programs: '<'
+            programs: '<',
+            school: '<'
         },
         templateUrl: 'clientapp/modules/campusLeader/groupMessages/groupMessages.view.html',
         controllerAs: 'ctrl',
@@ -22,9 +23,6 @@
             ctrl.stateKey = 'groupMessage';
 
             ctrl.$onInit = function() {
-
-                
-
                 ctrl.selectedGrade = ctrl.grades[0];
                 
                 ctrl.selectedProgram = ctrl.programs[0];
@@ -50,7 +48,8 @@
                     if (state.body != null)
                         ctrl.message.body = state.body;
                 } else {
-                    ctrl.getParentStudentCount();
+                    if (ctrl.grades != undefined && ctrl.grades.length > 0)
+                        ctrl.getParentStudentCount();
                 }
             };
 
@@ -61,7 +60,7 @@
                     ctrl.programIds.shift();
 
                 api.communications
-                    .getParentStudentCountInGradesAndPrograms({ grades: ctrl.gradeIds, programs: ctrl.programIds })
+                    .getParentStudentCountInGradesAndPrograms({ grades: ctrl.gradeIds, programs: ctrl.programIds, schoolId: ctrl.school })
                     .then(function(data) {
                         ctrl.showDescription = true;
                         ctrl.familyCountDescription = data;
@@ -72,24 +71,28 @@
 
             
 
-            ctrl.OnGradeChange = function() {
+            ctrl.OnGradeChange = function () {
+                if (ctrl.selectedGrade == undefined)
+                    ctrl.selectedGrade = ctrl.grades[0];
                 if (ctrl.selectedGrade.id != 0) {
                     ctrl.gradeIds = [];
                     ctrl.gradeIds.push(ctrl.selectedGrade.id);
                 } else {
-                    ctrl.gradeIds = ctrl.grades.map(function(g) { return g.id; });
+                    ctrl.gradeIds = ctrl.grades.map(function (g) { return g.id; });
                     ctrl.selectedGrade = ctrl.grades[0];
                 }
                 ctrl.getParentStudentCount();
             };
 
-            ctrl.OnProgramChange = function() {
+            ctrl.OnProgramChange = function () {
+                if (ctrl.selectedProgram == undefined)
+                    ctrl.selectedProgram = ctrl.programs[0];
                 if (ctrl.selectedProgram.id != 0) {
                     ctrl.programIds = [];
                     ctrl.programIds.push(ctrl.selectedProgram.id);
 
                 } else {
-                    ctrl.programIds = ctrl.programs.map(function(p) {
+                    ctrl.programIds = ctrl.programs.map(function (p) {
                         return p.id;
                     });
                 }

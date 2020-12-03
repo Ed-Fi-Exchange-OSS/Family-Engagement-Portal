@@ -51,7 +51,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> RecipientUnreadMessages()
         {
             var person = SecurityPrincipal.Current;
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             return Ok(await _communicationsService.RecipientUnreadMessages(person.PersonUniqueId, person.PersonTypeId));
         }
@@ -61,7 +61,7 @@ namespace Student1.ParentPortal.Web.Controllers
         {
             var person = SecurityPrincipal.Current;
 
-            var role = person.Claims.SingleOrDefault(x => x.Type == "role").Value;
+            var role = person.Role;
 
             if (role.Equals("Parent", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _communicationsService.GetAllParentRecipients(request.StudentUsi, person.PersonUniqueId, person.PersonTypeId, request.RowsToSkip, request.RowsToRetrieve));
@@ -166,7 +166,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> GetParentStudentByTermAndGradeLevel(ParentStudentTermFilterModel parentStudentTermFilter)
         {
             var campusLeader = SecurityPrincipal.Current;
-            var model = await _communicationsService.GetParentStudentByTermAndGradeLevel(campusLeader.PersonUniqueId, parentStudentTermFilter.SearchTerm, parentStudentTermFilter.GradeLevels);
+            var model = await _communicationsService.GetParentStudentByTermAndGradeLevel(campusLeader.PersonUniqueId, parentStudentTermFilter.SearchTerm, parentStudentTermFilter.GradeLevels, parentStudentTermFilter.SchoolId);
 
             if (model == null)
                 return NotFound();
@@ -179,7 +179,7 @@ namespace Student1.ParentPortal.Web.Controllers
         public async Task<IHttpActionResult> GetParentStudentByTermAndGradeLevelCount(ParentStudentTermFilterModel parentStudentTermFilter)
         {
             var campusLeader = SecurityPrincipal.Current;
-            var model = await _communicationsService.GetParentStudentByTermAndGradeLevelCount(campusLeader.PersonUniqueId, parentStudentTermFilter.SearchTerm, parentStudentTermFilter.GradeLevels);
+            var model = await _communicationsService.GetParentStudentByTermAndGradeLevelCount(campusLeader.PersonUniqueId, parentStudentTermFilter.SearchTerm, parentStudentTermFilter.GradeLevels, parentStudentTermFilter.SchoolId);
 
             if (model == null)
                 return NotFound();

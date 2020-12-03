@@ -1,0 +1,159 @@
+﻿
+<div class="row" ng-show="ctrl.showIRLA">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="border-bottom-1 p-b-15">
+                        <div class="pull-left" style="float:left">
+                            <h2>IRLA<span> - English</span></h2>
+                        </div>
+                        <div class="pull-right text-right" style="float:right">
+                            <h4 class="text-muted">Baseline Reporting Date: {{ctrl.arcModelIRLA.baselineDate}}</h4>
+                            <h4 class="text-muted">Current Reporting Date: {{ctrl.arcModelIRLA.reportingDate | date:'M/d/yyyy'}}</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="m-t-25 text-center">
+                        Power Goal: &nbsp; {{ctrl.arcModelIRLA.powerGoal}}
+                    </div>
+
+                    <div class="table-responsive m-t-30 m-b-40">
+                        <table class="table table-bordered text-center">
+                            <tbody>
+                                <tr>
+                                    <td class="table-border-force arc-table-header" colspan="1">PreK</td>
+                                    <td class="table-border-force arc-table-header" colspan="2">Kinder</td>
+                                    <td class="table-border-force arc-table-header" colspan="3">1</td>
+                                    <td class="table-border-force arc-table-header" colspan="2">2</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">3</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">4</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">5</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">6</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">7</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">8</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">9 &amp; 10</td>
+                                    <td class="table-border-force arc-table-header" colspan="1">11 &amp; 12</td>
+                                </tr>
+                                <tr>
+                                    <td id="ItdRTM" class="table-border-force" style="background-color:	#9A4F9A;color:white">
+                                        RTM
+                                    </td>
+                                    <td id="Itd1-3Y" class="table-border-force" style="background-color: #F7D511;color:black">1-3Y</td>
+                                    <td id="Itd1G" class="table-border-force" style="background-color:	#42B550;color:black">1G</td>
+                                    <td id="Itd2G" class="table-border-force" style="background-color:	#42B550;color:black">2G</td>
+                                    <td id="Itd1B" class="table-border-force" style="background-color:	#0471B8;color:white">1B</td>
+                                    <td id="Itd2B" class="table-border-force" style="background-color:	#0471B8;color:white">
+                                        <div style="width:10px;height:5px;background-color:black;float:left;margin-left:-12px;margin-top:10px"></div>
+                                        <div style="width:10px;height:5px;background-color:black;float:right;margin-right:-12px;margin-top:10px"></div>
+                                        2B
+                                    </td>
+                                    <td id="Itd1R" class="table-border-force" style="background-color:	#F61A20;color:black">1R</td>
+                                    <td id="Itd2R" class="table-border-force" style="background-color:	#F61A20;color:black">
+                                        <div style="width:10px;height:5px;background-color:black;float:left;margin-left:-12px;margin-top:10px"></div>
+                                        <div style="width:10px;height:5px;background-color:black;float:right;margin-right:-12px;margin-top:10px"></div>
+                                        2R
+                                    </td>
+                                    <td id="ItdWt" class="table-border-force" style="background-color:	#C4C7C6;color:black">Wt</td>
+                                    <td id="ItdBk" class="table-border-force" style="background-color:	#110C17;color:white">Bk</td>
+                                    <td id="ItdOr" class="table-border-force" style="background-color: #F98D1E;color:black">Or</td>
+                                    <td id="ItdPu" class="table-border-force" style="background-color:	#64318F;color:white">Pu</td>
+                                    <td id="Itd1Br" class="table-border-force" style="background-color:	#C1901F;color:black">1Br</td>
+                                    <td id="Itd2Br" class="table-border-force" style="background-color:	#C1901F;color:black">
+                                        <div style="width:10px;height:5px;background-color:black;float:left;margin-left:-12px;margin-top:10px"></div>
+                                        <div style="width:10px;height:5px;background-color:black;float:right;margin-right:-12px;margin-top:10px"></div>
+                                        2Br
+                                    </td>
+                                    <td id="ItdSi" class="table-border-force" style="background-color:	#B4BAC1;color:black">Si</td>
+                                    <td id="ItdGI" class="table-border-force" style="background-color:	#FCCD29;color:black">GI</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row" ng-show="ctrl.showENIL">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="border-bottom-1 p-b-15">
+                    <div class="pull-left" style="float:left">
+                        <h2>ENIL<span> - Spanish</span></h2>
+                    </div>
+                    <div class="pull-right text-right" style="float:right">
+                        <h4 class="text-muted">Baseline Reporting Date: {{ctrl.arcModelENIL.baselineDate}}</h4>
+                        <h4 class="text-muted">Current Reporting Date: {{ctrl.arcModelENIL.reportingDate | date:'M/d/yyyy'}}</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="m-t-25 text-center">
+                    Power Goal: &nbsp; {{ctrl.arcModelENIL.powerGoal}}
+                </div>
+
+                <div class="table-responsive m-t-30 m-b-40">
+                    <table class="table table-bordered text-center">
+                        <tbody>
+                            <tr>
+                                <td class="table-border-force arc-table-header" colspan="1">PreK</td>
+                                <td class="table-border-force arc-table-header" colspan="2">Kinder</td>
+                                <td class="table-border-force arc-table-header" colspan="3">1</td>
+                                <td class="table-border-force arc-table-header" colspan="2">2</td>
+                                <td class="table-border-force arc-table-header" colspan="1">3</td>
+                                <td class="table-border-force arc-table-header" colspan="1">4</td>
+                                <td class="table-border-force arc-table-header" colspan="1">5</td>
+                                <td class="table-border-force arc-table-header" colspan="1">6</td>
+                                <td class="table-border-force arc-table-header" colspan="1">7</td>
+                                <td class="table-border-force arc-table-header" colspan="1">8</td>
+                                <td class="table-border-force arc-table-header" colspan="1">9 &amp; 10</td>
+                                <td class="table-border-force arc-table-header" colspan="1">11 &amp; 12</td>
+                            </tr>
+                            <tr>
+                                <td id="EtdLAM" class="table-border-force" style="background-color:	#9A4F9A;color:white">LAM</td>
+                                <td id="Etd1-3A" class="table-border-force" style="background-color: #F7D511;color:black">
+                                    1-3A
+                                </td>
+                                <td id="Etd1V" class="table-border-force" style="background-color:	#42B550;color:black">
+                                    1V
+                                </td>
+                                <td id="Etd2V" class="table-border-force" style="background-color:	#42B550;color:black">
+                                    2V
+                                </td>
+                                <td id="Etd1Az" class="table-border-force" style="background-color:	#0471B8;color:white">1Az</td>
+                                <td id="Etd2Az" class="table-border-force" style="background-color:	#0471B8;color:white">
+                                    <div style="width:10px;height:5px;background-color:black;float:left;margin-left:-12px;margin-top:10px"></div>
+                                    <div style="width:10px;height:5px;background-color:black;float:right;margin-right:-12px;margin-top:10px"></div>
+                                    2Az
+                                </td>
+                                <td id="Etd1R" class="table-border-force" style="background-color:	#F61A20;color:black">1R</td>
+                                <td id="Etd2R" class="table-border-force" style="background-color:	#F61A20;color:black">
+                                    <div style="width:10px;height:5px;background-color:black;float:left;margin-left:-12px;margin-top:10px"></div>
+                                    <div style="width:10px;height:5px;background-color:black;float:right;margin-right:-12px;margin-top:10px"></div>
+                                    2R
+                                </td>
+                                <td id="EtdBI" class="table-border-force" style="background-color:	#C4C7C6;color:black">BI</td>
+                                <td id="EtdNe" class="table-border-force" style="background-color:	#110C17;color:white">Ne</td>
+                                <td id="EtdAn" class="table-border-force" style="background-color: #F98D1E;color:black">An</td>
+                                <td id="EtdPu" class="table-border-force" style="background-color:	#64318F;color:white">Pu</td>
+                                <td id="Etd1Br" class="table-border-force" style="background-color:	#C1901F;color:black">1Br</td>
+                                <td id="Etd2Br" class="table-border-force" style="background-color:	#C1901F;color:black">
+                                    <div style="width:10px;height:5px;background-color:black;float:left;margin-left:-12px;margin-top:10px"></div>
+                                    <div style="width:10px;height:5px;background-color:black;float:right;margin-right:-12px;margin-top:10px"></div>
+                                    2Br
+                                </td>
+                                <td id="EtdPI" class="table-border-force" style="background-color:	#B4BAC1;color:black">PI</td>
+                                <td id="EtdOr" class="table-border-force" style="background-color:	#FCCD29;color:black">Or</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -5,7 +5,7 @@
     'ngAnimate',
     'pascalprecht.translate',
     'chart.js',
-    'AdalAngular', // AzureAD Directives
+    //'AdalAngular', // AzureAD Directives
     'angular-jwt', // General jwt helpers from Auth0
     'ngCookies',
     'ngTouch',
@@ -26,7 +26,9 @@
     'app.config',
 
     // Directives
-    'app.directives'
+    'app.directives',
+
+    'ngTagsInput'
 
 ])
     // UI Router Base Configuration
@@ -46,16 +48,37 @@
         // Add interceptor to show $http loading UI component
         $httpProvider.interceptors.push('loadingInterceptor');
 
-
     }])
-    .run(['$rootScope', '$transitions', 'api', '$timeout', 'adalAuthenticationService',  function ($rootScope, $transitions, api, $timeout, adalService) {
+    .run(['$rootScope', '$transitions', 'api', '$timeout', 'authManager', '$window', function ($rootScope, $transitions, api, $timeout, authManager, $window) {
+
+        // This is for the more generic angular-JWT security.
+        // Article: https://github.com/auth0/angular-jwt
+        authManager.checkAuthOnRefresh();
+        authManager.redirectWhenUnauthenticated();
+        $rootScope.$on('tokenHasExpired', function () {
+            // TODO: redirect to login page.
+            alert('Your session has expired! Please login again.');
+            $state.go('app.login');
+        });
 
         $rootScope.showLoader = true;
-
         $rootScope.featureToggles = {};
         // Feature Toggles are beeing loaded on $locationChangeStart
         $rootScope.$on('$locationChangeStart', function ($event, next, current) {
-            if (!adalService.userInfo.isAuthenticated)
+
+            //validate redirected url from sso login
+            if ($window.location.href.indexOf('id_token=') > 0) {
+                var existTokenSplit = $window.location.href.split('id_token=');
+                var token = existTokenSplit[1].split('&');
+                localStorage.setItem('existTokenToValidate', token[0]);
+            }
+            else if ($window.location.href.indexOf('code=') > 0) {
+                var existTokenSplit = $window.location.href.split('code=');
+                var token = existTokenSplit[1].split('&');
+                localStorage.setItem('existTokenToValidate', token[0]);
+            }
+
+            if (!$rootScope.isAuthenticated)
                 return;
 
             api.customParams.getAll().then(function (result) {
@@ -87,8 +110,8 @@
             $rootScope.showLoader = false;
         });
 
-        if (sessionStorage.getItem('adal.impersonate') == null) {
-            sessionStorage.setItem('adal.impersonate', false);
-        }
+        //if (sessionStorage.getItem('adal.impersonate') == null) {
+        //    sessionStorage.setItem('adal.impersonate', false);
+        //}
     }]);
 

@@ -16,12 +16,20 @@
                         {{'view.login.log_into_account' | translate}}
                     </h2>
                     <div ng-if="!ctrl.isApplicationOffline" class="text-center m-t-20">
-                        <!--<h5 class="m-b-30">{{'view.login.or_login_with' | translate}}</h5>-->
-                        <a href="#" ng-click="ctrl.loginSSO()" class="btn btn-primary">Login</a>
-                        <span class="f-s-12">
+
+                        <a ng-if="ctrl.showAzure" href="#" ng-click="ctrl.loginSSO('azure')" class="btn btn-primary m-b-10">Login With Azure Active Directory</a>
+
+                        <a ng-if="ctrl.showGoogle" href="#" ng-click="ctrl.loginSSO('google')" class="btn btn-primary m-b-10">Login With Google</a>
+
+                        <a ng-if="ctrl.showHotmail" href="#" ng-click="ctrl.loginSSO('hotmail')" class="btn btn-primary m-b-10">Login With Hotmail</a>
+
+                        <a ng-if="ctrl.showFacebook" href="#" ng-click="ctrl.loginSSO('facebook')" class="btn btn-primary m-b-10">Login With Facebook</a>
+
+                        <span class="f-s-12 m-t-10">
                             {{'App Browser' | translate}}
                             <i class="icon ion-logo-chrome"></i>
                         </span>
+
                         <p class="m-t-30">
                             <a href="#" ng-click="ctrl.logOutSSO()">{{'view.login.sign_out' | translate}}</a>
                         </p>

@@ -1,7 +1,21 @@
-﻿<main role="main" class="container">
+﻿﻿<main role="main" class="container">
     <h1>{{'Home' | translate}}, <span>{{'Communication' | translate}}</span></h1>
     <div class="card">
         <div class="card-body">
+
+            <div class="row" ng-if="ctrl.schools.length > 1">
+                <div class="col-12 col-lg-4 float-md-right">
+                    <div class="form-group">
+                        <label for="nickname"> {{'Select school.' | translate}} </label>
+                        <select class="form-control" name="schoolSelect" id="schoolSelect"
+                                ng-model="ctrl.seletedSchool"
+                                ng-options="item as item.nameOfInstitution for item in ctrl.schools"
+                                ng-change="ctrl.OnSchoolChange()">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-12 col-lg-12">
                     <nav>
@@ -13,13 +27,13 @@
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <group-messages grades="ctrl.gradeLevels" programs="ctrl.programs"></group-messages>
+                            <group-messages ng-if="ctrl.gradeLevels.length > 0 && ctrl.programs.length > 0" grades="ctrl.gradeLevels" programs="ctrl.programs" school="ctrl.seletedSchool.schoolId"></group-messages>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <individual-messages grades="ctrl.gradeLevels" languages="ctrl.languages"></individual-messages>
+                            <individual-messages ng-if="ctrl.gradeLevels.length > 0" grades="ctrl.gradeLevels" languages="ctrl.languages" school-id="ctrl.seletedSchool.schoolId"></individual-messages>
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <messages-log sender="ctrl.sender" grades="ctrl.gradeLevels" programs="ctrl.programs" queues="ctrl.queues"></messages-log>
+                            <messages-log ng-if="ctrl.gradeLevels.length > 0 && ctrl.programs.length > 0" sender="ctrl.sender" grades="ctrl.gradeLevels" programs="ctrl.programs" queues="ctrl.queues" school="ctrl.seletedSchool.schoolId"></messages-log>
                         </div>
                     </div>
                 </div>
