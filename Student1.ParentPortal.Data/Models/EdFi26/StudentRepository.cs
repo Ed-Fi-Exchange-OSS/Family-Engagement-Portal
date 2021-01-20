@@ -566,7 +566,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi26
                                   IdentificationCode = s.StudentIdentificationCodes.FirstOrDefault(x => x.AssigningOrganizationIdentificationCode == "LASID").IdentificationCode
                               }).SingleOrDefaultAsync();
 
-            data.PersonTypeId = ChatLogPersonTypeEnum.Staff.Value;
+            data.PersonTypeId = ChatLogPersonTypeEnum.Student.Value;
             data.Role = "Student";
 
             return data;

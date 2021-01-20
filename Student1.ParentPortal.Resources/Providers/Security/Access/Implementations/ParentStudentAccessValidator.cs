@@ -21,6 +21,11 @@ namespace Student1.ParentPortal.Resources.Providers.Security.Access
 
         public bool CanAccess(SecurityContext securityContext)
         {
+            if (securityContext.ActionName == "StudentLabels" || securityContext.ActionName == "UpdateStudentGoalStep")
+            {
+                return true;
+            }
+
             var studentUsi = Convert.ToInt32(securityContext.ActionParameters.Single(x => x.Key == "id").Value);
             var parentUsi = securityContext.UserUSIAccessingResource;
 

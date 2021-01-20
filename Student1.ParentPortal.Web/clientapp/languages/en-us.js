@@ -679,6 +679,8 @@ angular.module('app.languages')
             "view.admin.student.detail.features.college.initiative.corner": "College Initiative Corner",
             "view.admin.student.detail.features.arc": "ARC",
             "view.admin.student.detail.features.staar.assessment": "STAAR Assessment",
-            "view.admin.student.detail.features.assessment": "Assessment"
+            "view.admin.student.detail.features.assessment": "Assessment",
+
+            "not.available": "Not Available"
         });
     }]);

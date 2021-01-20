@@ -18,9 +18,9 @@
             
             ctrl.save = function () {
                 if (ctrl.model != undefined) {
-                    return api.admin.impersonate({ impersonateEmail: ctrl.model.emailInterpeson, token: sessionStorage.getItem('adal.idtoken') }).then(function (data) {
-                        sessionStorage.setItem('adal.impersonateRole', data.impersonatingRole);
-                        impersonateService.impersonateUser(data.token, sessionStorage.getItem('adal.idtoken'), true);
+                    return api.admin.impersonate({ impersonateEmail: ctrl.model.emailInterpeson, token: sessionStorage.getItem('access_token') }).then(function (data) {
+                        sessionStorage.setItem('impersonateRole', data.impersonatingRole);
+                        impersonateService.impersonateUser(data.token, sessionStorage.getItem('access_token'), true);
                         $state.go('app.login');
                     });
                 } else {

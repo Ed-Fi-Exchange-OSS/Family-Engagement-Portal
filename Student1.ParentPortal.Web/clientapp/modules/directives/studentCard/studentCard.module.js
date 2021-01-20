@@ -32,29 +32,7 @@
             }
 
             ctrl.styleStudentAbc = function () {
-                let countInactives = 0;
-                if ($rootScope.featureToggles.comms.studentAbc != undefined) {
-                    Object.keys($rootScope.featureToggles.comms.studentAbc).forEach(function (key) {
-                        if (!$rootScope.featureToggles.comms.studentAbc[key])
-                            countInactives++
-                    });
-                }
-                switch (countInactives) {
-                    case 0:
-                        ctrl.indicatorStyle = 'col-3';
-                        break;
-                    case 1:
-                        ctrl.indicatorStyle = 'col-4';
-                        break;
-                    case 2:
-                        ctrl.indicatorStyle = 'col-6';
-                        break;
-                    case 3:
-                        ctrl.indicatorStyle = 'col-12';
-                        break;
-                    case 4:
-                        break;
-                }
+                ctrl.indicatorStyle = 'col-4'
             }
         }]
     });

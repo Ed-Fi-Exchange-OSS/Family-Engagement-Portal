@@ -1,0 +1,33 @@
+﻿<link rel="stylesheet" ng-href="clientapp/modules/directives/studentAttendanceCalendar/studentAttendanceCalendar.style.css">
+
+<div class="card">
+    <div class="card-body">
+        <table id="calendar" class="calendar">
+            <thead>
+                <tr class="calendar-title"><th colspan="5">{{ctrl.calendar.monthName | translate}} {{ctrl.calendar.year}}</th></tr>
+                <tr class="calendar-sub-title">
+                    <th>{{'Mon' | translate}}</th>
+                    <th>{{'Tue' | translate}}</th>
+                    <th>{{'Wed' | translate}}</th>
+                    <th>{{'Thu' | translate}}</th>
+                    <th>{{'Fri' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="week in ctrl.calendar.weeks">
+                    <td ng-repeat="day in week track by $index"
+                        ng-class="{ excused: ctrl.hasEvent(day.events, 4)
+                      , unexcused: ctrl.hasEvent(day.events, 8)
+                      , tardy: ctrl.hasEvent(day.events, 10)
+                      , noninstructional: ctrl.hasEvent(day.events, 'nonDay')
+                      , disabled: day.outOfSchoolYear
+                      , currentDay: day.isToday
+                    }"
+                        title="{{ctrl.getComments(day.events, [4,8,10,'nonDay','di'])}}">
+                        <span>{{day.day}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

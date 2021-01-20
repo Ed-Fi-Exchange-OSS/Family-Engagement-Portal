@@ -47,7 +47,7 @@
                 var langUse = ctrl.model.languages.find(function (language) { return language.lang == localeId; });
                 $translate.use(langUse.id);
                 ctrl.model.currentLang = parseCountry(localeId);
-                for (var i = 0; i < ctrl.model.languages.length; i++) {
+                for (var i = 0; i < ctrl.model.availableLanguages.length; i++) {
                     if (ctrl.model.availableLanguages[i].code == ctrl.model.currentLang)
                         ctrl.model.availableLanguages[i].active = true;
                     else

@@ -59,5 +59,7 @@ namespace Student1.ParentPortal.Data.Models
 
         Task<List<PersonIdentityModel>> GetStudentIdentityByEmailAsync(string email);
         Task<UserProfileModel> GetStudentProfileAsync(int studentUsi);
+
+        Task<List<StudentCalendarDay>> GetStudentCalendarDays(int studentUsi);
     }
 }

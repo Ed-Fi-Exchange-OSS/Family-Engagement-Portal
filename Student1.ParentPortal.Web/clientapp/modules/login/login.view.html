@@ -2,14 +2,14 @@
     <div class="row justify-content-center h-100">
         <div class="col-xl-6">
             <div ng-if="ctrl.isApplicationOffline" class="alert alert-danger align-middle"><i class="ion-md-alert f-s-20"></i> {{'view.login.app_online_status' | translate}}</div>
-            <div class="alert alert-danger"><i class="ion-md-information-circle f-s-20"></i> {{'view.login.app_pilot' | translate}}</div>
+            <!--<div class="alert alert-danger"><i class="ion-md-information-circle f-s-20"></i> {{'view.login.app_pilot' | translate}}</div>-->
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
                         <language-chooser></language-chooser>
                     </div>
                     <div class="text-center">
-                        <img src="clientapp/assets/img/logo.png" alt="District Logo" />
+                        <img src="clientapp/assets/img/cf_logo.jpg" alt="District Logo" />
                     </div>
                     <h1 class=" text-center m-t-25">{{'view.login.app_name' | translate}}</h1>
                     <h2 ng-if="!ctrl.isApplicationOffline" class="text-center m-t-10 f-s-16">
@@ -19,7 +19,7 @@
 
                         <a ng-if="ctrl.showAzure" href="#" ng-click="ctrl.loginSSO('azure')" class="btn btn-primary m-b-10">Login With Azure Active Directory</a>
 
-                        <a ng-if="ctrl.showGoogle" href="#" ng-click="ctrl.loginSSO('google')" class="btn btn-primary m-b-10">Login With Google</a>
+                        <a ng-if="ctrl.showGoogle" href="#" ng-click="ctrl.loginSSO('google')" class="btn btn-primary m-b-10">{{'view.login.log_into_account' | translate}}</a>
 
                         <a ng-if="ctrl.showHotmail" href="#" ng-click="ctrl.loginSSO('hotmail')" class="btn btn-primary m-b-10">Login With Hotmail</a>
 

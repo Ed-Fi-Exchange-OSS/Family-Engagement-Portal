@@ -237,6 +237,7 @@
     <Content Include="clientapp\app.config.jwt.js" />
     <Content Include="clientapp\app.config.js" />
     <Content Include="clientapp\app.js" />
+    <Content Include="clientapp\assets\img\cf_logo.jpg" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-1.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-2.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaska_Native-1.png" />
@@ -285,6 +286,8 @@
     <Content Include="clientapp\assets\img\favicon-district.ico" />
     <Content Include="clientapp\assets\img\favicon.ico" />
     <Content Include="clientapp\assets\img\logo.png" />
+    <Content Include="clientapp\assets\img\parent\778657.png" />
+    <Content Include="clientapp\assets\img\profile-default-transparent.png" />
     <Content Include="clientapp\assets\img\profile-default.png" />
     <Content Include="clientapp\assets\img\student\1.png" />
     <Content Include="clientapp\assets\img\student\female-african-american-hs-3.png" />
@@ -312,6 +315,7 @@
     <Content Include="clientapp\assets\img\teacher\58.png" />
     <Content Include="clientapp\assets\img\teacher\59.png" />
     <Content Include="clientapp\assets\img\teacher\54.png" />
+    <Content Include="clientapp\assets\img\wida-logo-horizontal.png" />
     <Content Include="clientapp\assets\img\yes_prerp_icon_notification.png" />
     <Content Include="clientapp\css\material-colors.css" />
     <Content Include="clientapp\css\preloader.css" />
@@ -965,12 +969,21 @@
     <Content Include="clientapp\modules\campusLeader\landing\landing.view.html" />
     <Content Include="clientapp\modules\directives\feedback\feedback.module.js" />
     <Content Include="clientapp\modules\directives\feedback\feedback.view.html" />
+    <Content Include="clientapp\modules\directives\indicator\indicator4.module.js" />
+    <Content Include="clientapp\modules\directives\indicator\indicator4.view.html" />
+    <Content Include="clientapp\modules\directives\indicator\indicatorLegend.module.js" />
+    <Content Include="clientapp\modules\directives\indicator\indicatorLegend.view.html" />
     <Content Include="clientapp\modules\directives\modals\inactivity\inactivity.module.js" />
     <Content Include="clientapp\modules\directives\modals\inactivity\inactivity.view.html" />
     <Content Include="clientapp\modules\directives\studentAllAboutMe\studentAllAboutMe.module.js" />
     <Content Include="clientapp\modules\directives\studentAllAboutMe\studentAllAboutMe.view.html" />
     <Content Include="clientapp\modules\directives\studentARC\studentARC.module.js" />
     <Content Include="clientapp\modules\directives\studentARC\studentARC.view.html" />
+    <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendar.module.js" />
+    <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendar.style.css" />
+    <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendar.view.html" />
+    <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendarList.module.js" />
+    <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendarList.view.html" />
     <Content Include="clientapp\modules\directives\studentGoals\studentGoals.module.js" />
     <Content Include="clientapp\modules\directives\studentGoals\studentGoals.view.html" />
     <Content Include="clientapp\modules\teacher\groupMessaging\groupMessaging.module.js" />

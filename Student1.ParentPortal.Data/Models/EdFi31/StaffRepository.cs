@@ -34,7 +34,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             return identity;
         }
 
-
         public async Task<List<PersonIdentityModel>> GetStaffIdentityByProfileEmailAsync(string email)
         {
             var identity = await (from s in _edFiDb.Staffs
@@ -95,7 +94,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             return identity;
         }
-
 
         public async Task<List<PersonIdentityModel>> GetStaffIdentityByProfileEmailAsync(string email, string[] validStaffDescriptors)
         {

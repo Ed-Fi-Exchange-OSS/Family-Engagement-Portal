@@ -32,10 +32,10 @@ namespace Student1.ParentPortal.Resources.Services.Students
             var absenceThresholdDays = _customParametersProvider.GetParameters().attendance.ADA.maxAbsencesCountThreshold;
             var descriptors = _customParametersProvider.GetParameters().descriptors;
 
-            var excusedEvents = attendanceEvents.Where(ae => ae.EventCategory == descriptors.excusedAbsenceDescriptorCodeValue).ToList();
-            var unexcusedEvents = attendanceEvents.Where(ae => ae.EventCategory == descriptors.unexcusedAbsenceDescriptorCodeValue).ToList();
-            var tardyEvents = attendanceEvents.Where(ae => ae.EventCategory == descriptors.tardyDescriptorCodeValue).ToList();
-            var abscentEvents = attendanceEvents.Where(ae => ae.EventCategory == descriptors.absentDescriptorCodeValue).ToList();
+            var excusedEvents = attendanceEvents.Where(ae => !string.IsNullOrEmpty(ae.EventCategory) && ae.EventCategory.Contains(descriptors.excusedAbsenceDescriptorCodeValue)).ToList();
+            var unexcusedEvents = attendanceEvents.Where(ae => !string.IsNullOrEmpty(ae.EventCategory) && ae.EventCategory.Contains(descriptors.unexcusedAbsenceDescriptorCodeValue)).ToList();
+            var tardyEvents = attendanceEvents.Where(ae => !string.IsNullOrEmpty(ae.EventCategory) && ae.EventCategory.Contains(descriptors.tardyDescriptorCodeValue)).ToList();
+            var abscentEvents = attendanceEvents.Where(ae => !string.IsNullOrEmpty(ae.EventCategory) && ae.EventCategory.Contains(descriptors.absentDescriptorCodeValue)).ToList();
 
             return new StudentAttendance
             {

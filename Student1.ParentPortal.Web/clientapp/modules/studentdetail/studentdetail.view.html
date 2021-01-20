@@ -1,4 +1,5 @@
 ﻿<main id="top" role="main" class="container">
+
     <div class="row">
         <div class="col-lg-6">
             <h1> <a ng-repeat="p in ctrl.urls" ui-sref="{{p.url}}">{{p.displayName | translate}}</a> > {{'view.studentDetail.title' | translate}} <span>{{'view.studentDetail.subtitle' | translate}}</span></h1>
@@ -13,23 +14,28 @@
             </div>
         </div>
     </div>
-    <!--<div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body d-flex flex-wrap justify-content-around">
-                    <div class="d-flex" ng-repeat="s in ctrl.sections">
-                        <a class="cursor-pointer link-text" ng-click="ctrl.gotoAnchor(s.id)">{{s.name}}</a>
-                    </div>
-                </div>
-            </div>
+
+    <div class="row">
+        <div class="col-md-3 p-20">
+            <button type="button" class="btn btn-block btn-outline-primary-custom btn-rounded f-s-14" ng-click="ctrl.gotoAnchor('mg')">{{'view.studentDetail.myGoals' | translate}}</button>
         </div>
-    </div>-->
+        <div class="col-md-3 p-20">
+            <button type="button" class="btn btn-block btn-outline-primary-custom btn-rounded f-s-14" ng-click="ctrl.gotoAnchor('se')">{{'view.studentDetail.studentEngagement' | translate}}</button>
+        </div>
+        <div class="col-md-3 p-20">
+            <button type="button" class="btn btn-block btn-outline-primary-custom btn-rounded f-s-14" ng-click="ctrl.gotoAnchor('college-corner')">{{'view.studentDetail.performance' | translate}}</button>
+        </div>
+        <div class="col-md-3 p-20">
+            <button type="button" class="btn btn-block btn-outline-primary-custom btn-rounded f-s-14" ng-click="ctrl.gotoAnchor('st')">{{'view.studentSuccessTeam.title' | translate}}</button>
+        </div>
+    </div>
+
     <div class="row m-b-20">
         <div class="col-md-6 col-lg-4 p-20" ng-if="ctrl.studentDetailFeatures.profile">
             <student-profile model="ctrl.model"></student-profile>
         </div>
         <!-- Indicators -->
-        <div id="indicators" class="col-12 col-md-6 col-lg-4">
+        <!--<div id="indicators" class="col-12 col-md-6 col-lg-4">
             <div class="row flex-card-grid">
                 <div class="col-12 col-md-12 col-lg-12" ng-if="ctrl.studentDetailFeatures.attendanceIndicator">
                     <indicator2 show-loader="ctrl.model.attendance.absentAttendanceEvents != null"
@@ -88,6 +94,57 @@
                                 bgclass="widget-bg-success"></indicator2>
                 </div>
             </div>
+        </div>-->
+        <!-- Indicators -->
+        <!--LP-->
+        <div id="indicators" class="col-12 col-md-6 col-lg-4">
+            <div class="row flex-card-grid">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <indicator3 indicator-title="{{'view.studentDetail.indicators.absences.title' | translate}}"
+                                tooltip="{{'view.studentDetail.indicators.absences.tooltip' | translate}}"
+                                indicator-categories="ctrl.attendanceIndicatorCategories"
+                                anchorid="attendance"
+                                large-text="true"
+                                ng-click="ctrl.gotoAnchor('attendance')"
+                                textual-evaluation="'view.studentDetail.indicators.absences.interpretation.' | translate"
+                                bgclass="widget-bg-primary"></indicator3>
+                </div>
+                <div class="col-12 col-md-12 col-lg-12">
+                    <indicator3 indicator-title="{{'view.studentDetail.indicators.star.title' | translate}}"
+                                tooltip="{{'view.studentDetail.indicators.star.tooltip' | translate}}"
+                                large-text="true"
+                                indicator-categories="ctrl.starIndicatorCategories"
+                                interpretation="ctrl.starGeneralIndicator"
+                                anchorid="star"
+                                ng-click="ctrl.gotoAnchor('star')"
+                                textual-evaluation="'view.studentDetail.indicators.star.interpretation.' | translate"
+                                bgclass="widget-bg-secondary"></indicator3>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="indicators" class="col-12 col-md-12 col-lg-4">
+            <div class="row flex-card-grid">
+                <div class="col-12 col-md-6 col-lg-12">
+                    <indicator3 indicator-title="{{'view.studentDetail.indicators.behavior.title' | translate}}"
+                                tooltip="{{'view.studentDetail.indicators.behavior.tooltip' | translate}}"
+                                indicator-categories="ctrl.behaviorIndicatorCategories"
+                                textual-evaluation="'view.studentDetail.indicators.behavior.interpretation.' + ctrl.model.behavior.interpretation | translate:{ 'incidentCount': ctrl.model.behavior.yearToDateDisciplineIncidentCount}"
+                                ng-click="ctrl.gotoAnchor('behaviour-log')"
+                                bgclass="widget-bg-warning"></indicator3>
+                </div>
+                <div class="col-12 col-md-6 col-lg-12">
+                    <indicator2 show-loader="ctrl.model.missingAssignments.interpretation != null"
+                                indicator-title="{{'view.studentDetail.indicators.access.title' | translate}}"
+                                tooltip="{{'view.studentDetail.indicators.access.tooltip' | translate}}"
+                                value="ctrl.model.assessment.assessmentIndicators[0].interpretation || ctrl.model.assessment.assessmentIndicators[0].result > 0 ? ctrl.model.assessment.assessmentIndicators[0].result : ('No Score' | translate)"
+                                interpretation="ctrl.model.assessment.assessmentIndicators[0].interpretation"
+                                ng-click="ctrl.gotoAnchor('access')"
+                                textual-evaluation="''"
+                                bgclass="widget-bg-success"></indicator2>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -115,13 +172,25 @@
         </div>
     </div>
 
-    <!-- Attendance Log -->
-    <div id="attendance" class="row" ng-if="ctrl.model.attendance.absentAttendanceEvents.length > 0 && ctrl.studentDetailFeatures.attendanceLog">
+    <!--student engagement-->
+    <div class="row m-b-10" id="se">
         <div class="col-lg-12">
-            <student-attendance model="ctrl.model.attendance" show-all="ctrl.showAbsences"></student-attendance>
+            <h2 class="inline p-b-10">{{'view.studentDetail.studentEngagement' | translate}}</h2>
+        </div>
+    </div>
+    <!-- Attendance Log -->
+    <div id="attendance" class="row mb-2">
+        <div class="col-lg-12">
+            <student-attendance-calendar-list model="ctrl.model.attendanceEventsByMonth"></student-attendance-calendar-list>
         </div>
     </div>
 
+    <!-- Attendance Log -->
+    <!--<div id="attendance" class="row" ng-if="ctrl.model.attendance.absentAttendanceEvents.length > 0 && ctrl.studentDetailFeatures.attendanceLog">
+        <div class="col-lg-12">
+            <student-attendance model="ctrl.model.attendance" show-all="ctrl.showAbsences"></student-attendance>
+        </div>
+    </div>-->
     <!-- Behavior Log -->
     <div id="behaviour-log" class="row" ng-if="$root.featureToggles.comms.studentAbc.behavior && ctrl.studentDetailFeatures.behaviorLog">
         <div class="col-lg-12" ng-if="ctrl.model.behavior.disciplineIncidents.length > 0">
@@ -135,7 +204,7 @@
             <current-grades model="ctrl.model.courseGrades" student-usi="ctrl.model.studentUsi"></current-grades>
         </div>
     </div>
-    <div class="row" ng-if="ctrl.studentDetailFeatures.courseGrades">
+    <div class="row" ng-if="ctrl.studentDetailFeatures.courseGrades && $root.featureToggles.gpaTableDetail.enabled">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -207,11 +276,7 @@
             </div>
         </div>
     </div>
-    <!--<div class="row">
-        <div class="col-lg-12">
-            <transcript model="ctrl.model.courseGrades"></transcript>
-        </div>
-    </div>-->
+
     <div id="missing-assignments" class="row" ng-if="ctrl.model.missingAssignments.missingAssignmentCount > 0 && ctrl.studentDetailFeatures.missingAssignments">
         <div class="col-lg-12">
             <missing-assignments model="ctrl.model.missingAssignments" student-usi="ctrl.model.studentUsi" custom-params="ctrl.customParams.assignments"></missing-assignments>
@@ -223,15 +288,9 @@
         </div>
     </div>
 
-    <div id="success-team" class="row" ng-if="ctrl.studentDetailFeatures.successTeam">
-        <div class="col-lg-12">
-            <student-success-team data="ctrl.model"></student-success-team>
-        </div>
-    </div>
-
     <div id="college-corner" class="row" ng-if="ctrl.model.courseGrades.gpa.gpa && ctrl.model.assessment.assessments[0].maxRawScore > 0 && ctrl.model.assessment.assessments[1].maxRawScore > 0 && ctrl.model.assessment.assessments[2].maxRawScore > 0 && ctrl.studentDetailFeatures.collegeInitiativeCorner">
         <div class="col-lg-12">
-            <h2>College Initiative Corner</h2>
+            <h2>{{'view.studentDetail.collegeInitiativeCornerTitle' | translate}}</h2>
         </div>
     </div>
     <div class="row m-b-30" ng-if="ctrl.model.courseGrades.gpa.gpa && ctrl.studentDetailFeatures.collegeInitiativeCorner">
@@ -251,6 +310,10 @@
         </div>
     </div>
 
+    <div class="alert alert-info" ng-if="ctrl.model.courseGrades.gpa.gpa && ctrl.model.assessment.assessments[0].maxRawScore > 0 && ctrl.model.assessment.assessments[1].maxRawScore > 0 && ctrl.model.assessment.assessments[2].maxRawScore > 0">
+        <i class="ion-md-information-circle f-s-20"></i> {{'Assesment Disclaimer' | translate}}
+    </div>
+
     <!--ARC-->
     <div class="row" ng-if="ctrl.showARC && ctrl.studentDetailFeatures.arc">
         <div class="col-lg-12">
@@ -263,13 +326,12 @@
         </div>
     </div>
 
-    <div class="alert alert-info" ng-if="ctrl.model.courseGrades.gpa.gpa && ctrl.model.assessment.assessments[0].maxRawScore > 0 && ctrl.model.assessment.assessments[1].maxRawScore > 0 && ctrl.model.assessment.assessments[2].maxRawScore > 0"><i class="ion-md-information-circle f-s-20"></i> {{'Assesment Disclaimer' | translate}}</div>
     <div id="assesments" class="row" ng-if="ctrl.model.staarAssessmentHistory && ctrl.model.staarAssessmentHistory.length > 0 && ctrl.studentDetailFeatures.staarAssessment">
         <div class="col-lg-12">
             <student-staar-assessment model="ctrl.model.staarAssessmentHistory" link="{{ctrl.model.assessment.assessments[0].externalLink}}"></student-staar-assessment>
         </div>
     </div>
-    <div id="assesments" class="row" ng-if="ctrl.model.assessment.assessments[0].maxRawScore > 0 && ctrl.studentDetailFeatures.assessment">
+    <div id="star" class="row" ng-if="ctrl.model.assessment.assessments[0].maxRawScore > 0 && ctrl.studentDetailFeatures.assessment">
         <div class="col-lg-12">
             <student-assessment model="ctrl.model.assessment.assessments[0]" assessment="0" color="info"></student-assessment>
         </div>
@@ -282,6 +344,92 @@
             <student-assessment model="ctrl.model.assessment.assessments[2]" assessment="2" color="success"></student-assessment>
         </div>
     </div>
+
+    <div class="row card-no-margin-top">
+        <div class="col-12">
+            <star-detail model="ctrl.model.studentDomainMastery" color="dark"
+                         widget-title="Domain Mastery"
+                         widget-Sub-Title="and Skills"></star-detail>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="inline p-b-10">
+                <img src="clientapp/assets/img/wida-logo-horizontal.png" style="width: 100px" /> ACCESS {{'for' | translate}} ELLs
+            </h2> <a href="https://wida.wisc.edu/teach/can-do/descriptors" target="_blank">{{'Can-Do Descriptors' | translate}}</a>
+        </div>
+    </div>
+    <div id="access" class="row p-t-20">
+        <div class="col-lg-12">
+            <indicator4 color="success"
+                        indicator-title="{{'Overall Score' | translate}}"
+                        indicator-sub-title="{{('Meeting Proficiency' | translate) + ' = 4.8'}}"
+                        indicator-text=""
+                        tooltip="{{'view.studentDetail.indicators.missingAssignments.tooltip' | translate}}"
+                        data="ctrl.accessOverall"
+                        subject="'No Subject'"
+                        can-do-descriptors="ctrl.customParams.canDoDescriptors"
+                        bgclass="widget-bg-success"></indicator4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <indicator4 color="salmon"
+                        indicator-title="{{'Listening' | translate}}"
+                        icon="ion-md-headset"
+                        tooltip="STAR Benchmark Performance Level"
+                        data="ctrl.accessListening"
+                        subject="'Listening'"
+                        can-do-descriptors="ctrl.customParams.canDoDescriptors"
+                        bgclass="widget-bg-warning"></indicator4>
+        </div>
+        <div class="col-lg-6">
+            <indicator4 color="info"
+                        indicator-title="{{'Speaking' | translate}}"
+                        icon="ion-md-chatbubbles"
+                        tooltip="{{'view.studentDetail.indicators.missingAssignments.tooltip' | translate}}"
+                        data="ctrl.accessSpeaking"
+                        subject="'Speaking'"
+                        can-do-descriptors="ctrl.customParams.canDoDescriptors"
+                        bgclass="widget-bg-success"></indicator4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <indicator4 color="amber"
+                        indicator-title="{{'Reading' | translate}}"
+                        icon="ion-md-book"
+                        tooltip="{{'view.studentDetail.indicators.missingAssignments.tooltip' | translate}}"
+                        data="ctrl.accessReading"
+                        subject="'Reading'"
+                        can-do-descriptors="ctrl.customParams.canDoDescriptors"
+                        bgclass="widget-bg-success"></indicator4>
+        </div>
+        <div class="col-lg-6">
+            <indicator4 color="green"
+                        indicator-title="{{'Writing' | translate}}"
+                        icon="ion-md-document"
+                        tooltip="{{'view.studentDetail.indicators.missingAssignments.tooltip' | translate}}"
+                        data="ctrl.accessWriting"
+                        subject="'Writing'"
+                        can-do-descriptors="ctrl.customParams.canDoDescriptors"
+                        bgclass="widget-bg-success"></indicator4>
+        </div>
+    </div>
+
+    <div class="row m-b-10" id="st" ng-if="ctrl.studentDetailFeatures.successTeam">
+        <div class="col-lg-12">
+            <h2 class="inline p-b-10">{{'view.studentSuccessTeam.title' | translate}}</h2>
+        </div>
+    </div>
+    <div id="success-team" class="row" ng-if="ctrl.studentDetailFeatures.successTeam">
+        <div class="col-lg-12">
+            <student-success-team data="ctrl.model"></student-success-team>
+        </div>
+    </div>
+
     <div class="top-button cursor-pointer" ng-click="ctrl.gotoAnchor('top')">
         <i class="icon ion-md-arrow-round-up"></i>
     </div>

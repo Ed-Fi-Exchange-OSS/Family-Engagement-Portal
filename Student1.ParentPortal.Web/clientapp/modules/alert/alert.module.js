@@ -35,8 +35,10 @@
 
                 var alert = ctrl.model.alerts.find(function (alert) { return alert.alertTypeId == 1 });
 
-                alert.thresholds = alert.thresholds.filter(function (threshold) { return threshold.thresholdTypeId == 1 });
-                alert.thresholds.find(function (threshold) { return threshold.thresholdTypeId == 1 }).description = "ADA Absence Threshold";
+                if (alert && alert.thresholds) {
+                    alert.thresholds = alert.thresholds.filter(function (threshold) { return threshold.thresholdTypeId == 1 });
+                    alert.thresholds.find(function (threshold) { return threshold.thresholdTypeId == 1 }).description = "ADA Absence Threshold";
+                }
             }
         }]
     });

@@ -4,7 +4,7 @@
         <i class="ion-md-information-circle f-s-20"></i>
         Enhance your portal experience by setting your <a ui-sref="app.userProfile">preferred language</a> and <a ui-sref="app.alert">notifications</a>.
     </div>
-    <div class="alert alert-info ng-binding" ng-if="ctrl.isElementaty">
+    <div class="alert alert-info ng-binding" ng-if="ctrl.isElementaty && ctrl.showCommunicationMessage">
         <i class="ion-md-information-circle f-s-20"></i>  {{ 'Please use' | translate}} <a href="https://home.classdojo.com/#/login?redirectTo=%2Fstory" target="_blank"> ClassDojo </a> {{ 'for all communications about elementary students.' | translate}}
     </div>
 

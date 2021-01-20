@@ -23,6 +23,8 @@
             var ctrl = this;
             ctrl.isElementaty = false;
             ctrl.showDeliveryMethodOfContactDescription = false;
+            ctrl.showCommunicationMessage = false;
+
             ctrl.$onInit = function () {
                 $rootScope.$on('showProfileDescription', function (event, args) {
                     if (args.methodOfContact == null) {
@@ -36,6 +38,10 @@
                 api.students.setStudentIds(ctrl.model.map(function (x) { return x.studentUsi }));
                 if (ctrl.model != undefined)
                     ctrl.isElementayGrade();
+
+                if ($rootScope.featureToggles.comms && $rootScope.featureToggles.comms.enabled) {
+                    ctrl.showCommunicationMessage = true;
+                }
             }
 
             ctrl.isElementayGrade = function () {

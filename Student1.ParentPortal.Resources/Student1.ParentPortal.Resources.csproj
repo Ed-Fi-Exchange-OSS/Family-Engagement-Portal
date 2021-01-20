@@ -110,6 +110,7 @@
     <Compile Include="Providers\Security\Access\Implementations\ParentImageAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ParentFeedbackAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\ParentNotificationsAccessValidator.cs" />
+    <Compile Include="Providers\Security\Access\Implementations\StudentTypesAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\StudentCommunicationsAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\StudentMeAccessValidator.cs" />
     <Compile Include="Providers\Security\Access\Implementations\StudentStudentsAccessValidator.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Services\Schools\SchoolsService.cs" />
     <Compile Include="Services\SpotlightIntegrations\SpotlightIntegrationsService.cs" />
     <Compile Include="Services\Students\StudentAllAboutService.cs" />
+    <Compile Include="Services\Students\StudentCalendarService.cs" />
     <Compile Include="Services\Students\StudentGoalService.cs" />
     <Compile Include="Services\Teachers\TeachersService.cs" />
     <Compile Include="Services\Students\StudentAssessmentService.cs" />

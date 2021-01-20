@@ -1301,6 +1301,29 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
             return ToUserProfileModel(edfiProfile);
         }
 
+        public async Task<List<StudentCalendarDay>> GetStudentCalendarDays(int studentUsi)
+        {
+            var studentSchoolAssociation = await _edFiDb.StudentSchoolAssociations.FirstOrDefaultAsync(x => x.StudentUsi == studentUsi && x.ExitWithdrawDate == null);
+            var days = await (from cd in _edFiDb.CalendarDates
+                              join cdc in _edFiDb.CalendarDateCalendarEvents
+                                 on new { cd.SchoolId, cd.Date } equals new { cdc.SchoolId, cdc.Date }
+                              join d in _edFiDb.Descriptors on cdc.CalendarEventDescriptorId equals d.DescriptorId into dc
+                              from ced in dc.DefaultIfEmpty()
+                              where cd.SchoolId == studentSchoolAssociation.SchoolId
+                              select new
+                              {
+                                  Date = cd.Date,
+                                  EventName = ced.CodeValue,
+                                  EventDescription = ced.CodeValue
+                              }).ToListAsync();
+
+            return days.Select(x => new StudentCalendarDay
+            {
+                Date = x.Date,
+                Event = new StudentCalendarEvent { Name = x.EventName, Description = x.EventDescription }
+            }).ToList();
+        }
+
         private UserProfileModel ToUserProfileModel(Student student)
         {
             var model = new UserProfileModel

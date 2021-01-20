@@ -122,6 +122,7 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public string shortDescription { get; set; }
         public string externalLink { get; set; }
         public bool getPerformanceLevel { get; set; }
+        public string assessmentReportingMethodTypeDescriptorProficiency { get; set; }
     }
 
     public class GraduationReadiness
@@ -154,6 +155,20 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public string disciplineIncidentDescriptor { get; set; }
         public string missingAssignmentLetterGrade { get; set; }
         public string[] validEmailTypeDescriptors { get; set; }
+        public string[] suspensionDescriptors { get; set; }
+        public string assessmentLengthOfTime { get; set; }
+        public Descriptor ellDescriptor { get; set; }
+        public Descriptor accommodationDescriptor { get; set; }
+        public Descriptor specialEducationDescriptor { get; set; }
+        public string instructionalDayDescriptorCodeValue { get; set; }
+        public string nonInstrunctionalDayDescriptorCodeValue { get; set; }
+    }
+
+    public class Descriptor
+    {
+        public string CodeValue { get; set; }
+        public string DisplayName { get; set; }
+        public string Url { get; set; }
     }
 
     public class Page

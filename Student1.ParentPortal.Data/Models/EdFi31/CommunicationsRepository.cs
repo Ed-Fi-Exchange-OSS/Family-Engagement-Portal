@@ -963,8 +963,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                 lastName = searchName.Count > 1 ? searchName[1] : string.Empty;
             }
 
-
-
             var queryBase = (from p in _edFiDb.Parents
                              join spa in _edFiDb.StudentParentAssociations on p.ParentUsi equals spa.ParentUsi
                              join dspa in _edFiDb.Descriptors on spa.RelationDescriptorId equals dspa.DescriptorId

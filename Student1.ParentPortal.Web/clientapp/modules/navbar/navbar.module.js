@@ -10,8 +10,8 @@
     .component('navbar', {
         templateUrl: 'clientapp/modules/navbar/navbar.view.html',
         controllerAs: 'ctrl',
-        controller: ['landingRouteService', 'api', '$window', '$translate', '$location', '$rootScope', 'impersonateService', '$state', 'communicationService',
-            function (landingRouteService, api, $window, $translate, $location, $rootScope, impersonateService, $state, communicationService) {
+        controller: ['landingRouteService', 'api', '$window', '$translate', '$location', '$rootScope', 'impersonateService', '$state', 'communicationService', '$rootScope',
+            function (landingRouteService, api, $window, $translate, $location, $rootScope, impersonateService, $state, communicationService,$rootScope) {
 
                 var ctrl = this;
                 ctrl.role = "";
@@ -20,7 +20,7 @@
                 ctrl.isAdminUser = false;
                 ctrl.impersonateMode = impersonateService.isimpersonatingUser();
                 ctrl.recipientUnreadMessages = null;
-                ctrl.impersonateRole = sessionStorage.getItem('adal.impersonateRole');
+                ctrl.impersonateRole = sessionStorage.getItem('impersonateRole');
                 ctrl.showGroupMessaging = false;
                 ctrl.showCommButton = true;
 
@@ -56,6 +56,11 @@
                         ctrl.showCommButton = false;
                     if (role == 'Admin')
                         ctrl.isAdminUser = true;
+
+                    if ($rootScope.featureToggles.comms && !$rootScope.featureToggles.comms.enabled) {
+                        ctrl.showGroupMessaging = false;
+                        ctrl.showCommButton = false;
+                    }
                 });
 
                 ctrl.inLoginScreen = function () {
@@ -63,7 +68,10 @@
                 };
 
                 ctrl.logOutSSO = function () {
-                    localStorage.removeItem('access_token');
+                    sessionStorage.removeItem('access_token');
+                    sessionStorage.removeItem('old_access_token');
+                    sessionStorage.removeItem('impersonateRole');
+                    sessionStorage.removeItem('impersonate');
                     $rootScope.isAuthenticated = false;
                 };
 
@@ -76,12 +84,10 @@
                 };
 
                 ctrl.disabledImpersonate = function () {
-                    sessionStorage.removeItem('adal.impersonateRole');
-                    impersonateService.impersonateUser(
-                        sessionStorage.getItem('adal.oldidtoken'),
-                        sessionStorage.getItem('adal.idtoken'),
-                        false
-                    )
+                    impersonateService.impersonateUser(sessionStorage.getItem('old_access_token'),sessionStorage.getItem('access_token'),false);
+                    sessionStorage.removeItem('impersonateRole');
+                    sessionStorage.removeItem('old_access_token');
+                    sessionStorage.removeItem('impersonate');
                     $state.go('app.login');
                 }
 
@@ -96,6 +102,7 @@
                     });
                 });
 
-                communicationService.start();
+                //TODO:Disable communications service
+                //communicationService.start();
             }]
     });

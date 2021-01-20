@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
 
-            <div class="row" ng-if="ctrl.schools.length > 1">
+            <div class="row" ng-if="ctrl.featureCommsAvailable && ctrl.schools.length > 1">
                 <div class="col-12 col-lg-4 float-md-right">
                     <div class="form-group">
                         <label for="nickname"> {{'Select school.' | translate}} </label>
@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-if="ctrl.featureCommsAvailable">
                 <div class="col-12 col-lg-12">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -36,6 +36,14 @@
                             <messages-log ng-if="ctrl.gradeLevels.length > 0 && ctrl.programs.length > 0" sender="ctrl.sender" grades="ctrl.gradeLevels" programs="ctrl.programs" queues="ctrl.queues" school="ctrl.seletedSchool.schoolId"></messages-log>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row" ng-if="!ctrl.featureCommsAvailable">
+                <div class="col-12 col-lg-12">
+                    <p>
+                        {{'Communication' | translate}} - {{'not.available' | translate}}
+                    </p>
                 </div>
             </div>
         </div>

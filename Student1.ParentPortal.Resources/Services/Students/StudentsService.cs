@@ -46,6 +46,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
         private readonly ICustomParametersProvider _customParametersProvider;
         private readonly IStudentGoalService _studentGoalService;
         private readonly IStudentAllAboutService _studentAllAboutService;
+        private readonly IStudentCalendarService _studentCalendarService;
 
         public StudentsService(IStudentRepository studentRepository, 
                                IImageProvider imageUrlProvider, 
@@ -63,7 +64,8 @@ namespace Student1.ParentPortal.Resources.Services.Students
                                ISpotlightIntegrationsService spotlightIntegrationsService, 
                                ICustomParametersProvider customParametersProvider,
                                IStudentGoalService studentGoalService, 
-                               IStudentAllAboutService studentAllAboutService)
+                               IStudentAllAboutService studentAllAboutService,
+                               IStudentCalendarService studentCalendarService)
         {
             _studentRepository = studentRepository;
             _imageUrlProvider = imageUrlProvider;
@@ -82,6 +84,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
             _customParametersProvider = customParametersProvider;
             _studentGoalService = studentGoalService;
             _studentAllAboutService = studentAllAboutService;
+            _studentCalendarService = studentCalendarService;
         }
 
         public async Task<StudentDetailModel> GetStudentDetailAsync(int studentUsi, string recipientUniqueId, int recipientTypeId)
@@ -118,7 +121,8 @@ namespace Student1.ParentPortal.Resources.Services.Students
 
             if (student == null)
                 return null;
-            
+
+            student.StudentCalendar = await _studentCalendarService.GetStudentCalendar(student.StudentUsi);
             student.ImageUrl = await _imageUrlProvider.GetStudentImageUrlAsync(student.StudentUniqueId);
             student.Programs = await _studentProgramService.GetStudentProgramsAsync(student.StudentUsi);
             student.Indicators = await _studentIndicatorService.GetStudentIndicatorsAsync(student.StudentUsi);

@@ -70,35 +70,34 @@
             if ($window.location.href.indexOf('id_token=') > 0) {
                 var existTokenSplit = $window.location.href.split('id_token=');
                 var token = existTokenSplit[1].split('&');
-                localStorage.setItem('existTokenToValidate', token[0]);
+                sessionStorage.setItem('existTokenToValidate', token[0]);
             }
             else if ($window.location.href.indexOf('code=') > 0) {
                 var existTokenSplit = $window.location.href.split('code=');
                 var token = existTokenSplit[1].split('&');
-                localStorage.setItem('existTokenToValidate', token[0]);
+                sessionStorage.setItem('existTokenToValidate', token[0]);
             }
-
-            if (!$rootScope.isAuthenticated)
-                return;
 
             api.customParams.getAll().then(function (result) {
                 $timeout(function () {
                     $rootScope.$apply(function () {
                         var selectedPage = result.featureToggle.filter(function (page) { return next.indexOf(page.route) != -1 })[0];
-                        if (!selectedPage)
-                            return;
+
+                        if (!selectedPage) return;
 
                         selectedPage.features.forEach(function (feature) {
                             $rootScope.featureToggles[feature.name] = { enabled: feature.enabled };
                             if (feature.enabled && feature.studentAbc != null) {
                                 $rootScope.featureToggles[feature.name].studentAbc = feature.studentAbc
                             }
-                            
                         });
                     });
                 });
 
             });
+
+            if (!$rootScope.isAuthenticated)
+                return;            
         });
 
 
@@ -110,8 +109,5 @@
             $rootScope.showLoader = false;
         });
 
-        //if (sessionStorage.getItem('adal.impersonate') == null) {
-        //    sessionStorage.setItem('adal.impersonate', false);
-        //}
     }]);
 

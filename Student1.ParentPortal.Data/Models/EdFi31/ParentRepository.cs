@@ -156,8 +156,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             var identity = await (from p in _edFiDb.Parents
                                                     .Include(x => x.StudentParentAssociations.Select(spa => spa.RelationDescriptor.Descriptor))
                 join pa in _edFiDb.ParentElectronicMails on p.ParentUsi equals pa.ParentUsi
-                where pa.ElectronicMailAddress == email &&
-                      p.StudentParentAssociations.Any(x => validParentDescriptors.Contains(x.RelationDescriptor.Descriptor.CodeValue))
+                where pa.ElectronicMailAddress == email 
+                && p.StudentParentAssociations.Any(x => validParentDescriptors.Contains(x.RelationDescriptor.Descriptor.CodeValue))
                 select new PersonIdentityModel
                 {
                     Usi = p.ParentUsi,
@@ -166,7 +166,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                     FirstName = p.FirstName,
                     LastSurname = p.LastSurname,
                     Email = pa.ElectronicMailAddress
-                }).ToListAsync();
+                }).ToListAsync();            
 
             return identity;
         }

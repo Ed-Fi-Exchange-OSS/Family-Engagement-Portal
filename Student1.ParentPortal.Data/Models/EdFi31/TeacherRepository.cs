@@ -24,7 +24,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public async Task<List<StaffSectionModel>> GetStaffSectionsAsync(int staffUsi, DateTime today)
         {
             // Get the current sections for this teacher.
-
             var data = await (from sec in _edFiDb.StaffSectionAssociations
                               join sy in _edFiDb.SchoolYearTypes on sec.SchoolYear equals sy.SchoolYear
                               join scp in _edFiDb.SectionClassPeriods

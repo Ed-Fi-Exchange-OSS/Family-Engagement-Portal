@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
+﻿using Student1.ParentPortal.Models.Shared;
+using Student1.ParentPortal.Resources.Providers.Translation;
+using Student1.ParentPortal.Resources.Services.Translate;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using Newtonsoft.Json;
-using Student1.ParentPortal.Models.Shared;
-using Student1.ParentPortal.Resources.Providers.Translation;
-using Student1.ParentPortal.Resources.Services.Translate;
 
 namespace Student1.ParentPortal.Web.Controllers
 {
@@ -38,6 +29,8 @@ namespace Student1.ParentPortal.Web.Controllers
 
             if (model == null)
                 return NotFound();
+
+            model = model.Where(rec => rec.Code == "en" || rec.Code == "es").ToList();
 
             return Ok(model);
         }

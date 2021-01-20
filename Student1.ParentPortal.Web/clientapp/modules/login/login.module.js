@@ -47,19 +47,19 @@
                     ctrl.showFacebook = response.oAuthFacebook;
                 });
 
-                var existTokenToValidate = localStorage.getItem('existTokenToValidate');
-                var serviceSelected = localStorage.getItem('ssoServiceSelected');
+                var existTokenToValidate = sessionStorage.getItem('existTokenToValidate');
+                var serviceSelected = sessionStorage.getItem('ssoServiceSelected');
                 if (existTokenToValidate != undefined && existTokenToValidate != null && existTokenToValidate != '') {
 
-                    localStorage.removeItem('existTokenToValidate');
-                    localStorage.removeItem('ssoServiceSelected');
+                    sessionStorage.removeItem('existTokenToValidate');
+                    sessionStorage.removeItem('ssoServiceSelected');
 
                     var model = { id_token: existTokenToValidate, grant_type: 'client_credentials', service: serviceSelected, code: existTokenToValidate };
                     if (serviceSelected == 'facebook')
                         model.id_token = null;
 
                     api.oauth.exchangeToken(model).then(function (response) {
-                        localStorage.setItem('access_token', response.access_token);
+                        sessionStorage.setItem('access_token', response.access_token);
                         var tokenPayload = jwtHelper.decodeToken(response.access_token);
                         ctrl.model.userInfo = {
                             userName: tokenPayload.name,
@@ -77,14 +77,14 @@
                         toastr.error('No service for ' + service, 'Error Login');
                         return;
                     }
-                    localStorage.setItem('ssoServiceSelected', service);
+                    sessionStorage.setItem('ssoServiceSelected', service);
                     $window.open(url_sso, '_self');
                 });
             };
 
             ctrl.logOutSSO = function () {
-                localStorage.removeItem('id_token');
-                localStorage.removeItem('access_token');
+                sessionStorage.removeItem('id_token');
+                sessionStorage.removeItem('access_token');
                 $rootScope.isAuthenticated = false;
             };
 
@@ -98,7 +98,7 @@
 
             function AuthAndRedirect() {
 
-                var access_token = localStorage.getItem('access_token');
+                var access_token = sessionStorage.getItem('access_token');
 
                 if (!access_token) {
                     $rootScope.isAuthenticated = false;
@@ -107,7 +107,7 @@
                 }
 
                 if (jwtHelper.isTokenExpired(access_token)) {
-                    localStorage.removeItem('access_token');
+                    sessionStorage.removeItem('access_token');
                     $rootScope.isAuthenticated = false;
                     console.log("Token expired");
                     return;

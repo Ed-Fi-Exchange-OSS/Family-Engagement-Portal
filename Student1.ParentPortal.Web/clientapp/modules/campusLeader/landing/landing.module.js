@@ -28,14 +28,17 @@
             ctrl.gradeLevels = [];
             ctrl.programs = [];
             ctrl.queues = [];
+            ctrl.featureCommsAvailable = true;
 
             ctrl.getQueues = function () {
                 $rootScope.$broadcast('getQueues', true);
             }
 
             ctrl.$onInit = function () {
+                if ($rootScope.featureToggles && $rootScope.featureToggles.comms && !$rootScope.featureToggles.comms.enabled) {
+                    ctrl.featureCommsAvailable = false;
+                }
                 ctrl.seletedSchool = ctrl.schools[0];
-
                 ctrl.getGradesProgramsAndQueuesData();
             }
 

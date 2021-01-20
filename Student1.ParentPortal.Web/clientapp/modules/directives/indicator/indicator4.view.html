@@ -1,0 +1,44 @@
+﻿<div class="card w-100">
+    <div class="card-body">
+        <div class="border-bottom-1 p-b-15">
+            <h3 class="text-uppercase" ng-class="'text-' + ctrl.color"><i class="ion" ng-class="ctrl.icon"></i> {{ctrl.indicatorTitle}} <span>{{ctrl.indicatorSubTitle}}</span></h3>
+            
+        </div>
+        <div class="row p-t-10" ng-if="ctrl.indicatorText">
+            <div class="col-lg-12">{{ctrl.indicatorText}}</div>
+        </div>
+        <div class="row m-t-15">
+            <div class="col-lg-3">
+                <span class="text-muted f-s-12 block p-t-15 p-b-15">{{'Year' | translate}}</span>
+            </div>
+            <div class="col-lg-3">
+                <span class="text-muted f-s-12">{{'Proficiency Level' | translate}}<br />({{'Possible' | translate}} 1.0 - 6.0)</span>
+            </div>
+            <div class="col-lg-6">
+                <span class="text-muted f-s-12 block p-t-15 p-b-15">{{'Scale Score' | translate}}</span>
+            </div>
+        </div>
+
+        <div class="row m-t-15" ng-repeat="assessment in ctrl.data">
+            <div class="col-lg-3">
+                <h2 class="f-s-40 m-t-5" ng-class="'text-' + ctrl.color">{{assessment.version}}</h2>
+            </div>
+            <div class="col-lg-3">
+                <h2 class="f-s-40 m-t-5" ng-class="'text-' + ctrl.color">{{assessment.proficiencyLevel}}</h2>
+            </div>
+            <div class="col-lg-6">
+                <div class="progress m-t-15 h-18px">
+                    <div class="progress-bar progress-bar-animated" ng-class="'bg-' + ctrl.color" role="progressbar" style="width: 58%" aria-valuenow="{{assessment.result}}" aria-valuemin="1" aria-valuemax="{{assesment.result}}">{{assesment.result}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-1 p-b-15" ng-if="ctrl.subject != 'No Subject'">
+            <h3 class="text-uppercase inline-block">{{'view.studentDetail.indicators.access.improve' | translate}}</h3> <div class="inline-block btn-round-small text-center" ng-click="expandCollapse=!expandCollapse"><i class="ion f-s-22" ng-class="{'ion-md-arrow-dropdown': !expandCollapse, 'ion-md-arrow-dropup': expandCollapse}"></i></div>
+            <div ng-if="expandCollapse">
+                <h4>{{view.studentDetail.indicators.access.nextLevel | translate}} ({{ctrl.proficiencyLevel}})</h4>
+                <p class="can-do-descriptor-text">{{ctrl.description}}</p>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

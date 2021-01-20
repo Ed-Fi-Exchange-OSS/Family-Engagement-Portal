@@ -74,7 +74,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                     Description = alertType.Description,
                     ShortDescription = alertType.ShortDescription,
                     Enabled = false,
-                    Thresholds = alertType.ThresholdTypes.Select(tt => new ThresholdTypeModel()
+                    Thresholds = alertType?.ThresholdTypes.Select(tt => new ThresholdTypeModel()
                     {
                         ThresholdTypeId = tt.ThresholdTypeId,
                         Description = tt.Description,
@@ -153,8 +153,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                                             .Include(x => x.AttendanceEventCategoryDescriptor.Descriptor)
                                                on s.StudentUsi equals ssae.StudentUsi
                                                join sy in _edFiDb.SchoolYearTypes on ssae.SchoolYear equals sy.SchoolYear
-                                               where pa.AlertsEnabled
-                                                   && sy.CurrentSchoolYear // Only for current School Year
+                                               where pa.AlertsEnabled && sy.CurrentSchoolYear // Only for current School Year
                                                group new { s, ssae, pa, profile, spa } by  new { s.StudentUsi, pa.ParentUniqueId } into g
                                                where g.Where(x => x.ssae.AttendanceEventCategoryDescriptor.Descriptor.CodeValue == excusedDescriptor).Count() >= excusedThreshold
                                                     || g.Where(x => x.ssae.AttendanceEventCategoryDescriptor.Descriptor.CodeValue == unexcusedDescriptor).Count() >= unexcusedThreshold

@@ -1,19 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-using Student1.ParentPortal.Models.Shared;
-using Student1.ParentPortal.Models.Staff;
+﻿using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.User;
 using Student1.ParentPortal.Resources.Services;
 using Student1.ParentPortal.Resources.Services.Admin;
 using Student1.ParentPortal.Resources.Services.Parents;
 using Student1.ParentPortal.Resources.Services.Students;
 using Student1.ParentPortal.Web.Security;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
 
 namespace Student1.ParentPortal.Web.Controllers
 {
@@ -71,7 +68,10 @@ namespace Student1.ParentPortal.Web.Controllers
             if (role.Equals("Student", System.StringComparison.InvariantCultureIgnoreCase))
                 return Ok(await _studentsService.GetPersonBriefModelAsync(person.PersonUSI));
 
-            return Ok(await _teachersService.GetBriefStaffProfileAsync(person.PersonUSI));
+            var result = await _teachersService.GetBriefStaffProfileAsync(person.PersonUSI);
+            result.Role = person.Role;
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -104,8 +104,10 @@ namespace Student1.ParentPortal.Web.Controllers
         public IHttpActionResult GetSchool()
         {
             var person = SecurityPrincipal.Current;
-            var school = person.Claims.FirstOrDefault(x => x.Type == "schoolId").Value;
-            return Ok(school);
+            var school = person.Claims.FirstOrDefault(x => x.Type == "schoolId");
+            if (school != null) return Ok(school.Value);
+
+            return Ok(0);
         }
 
         [Route("image")]

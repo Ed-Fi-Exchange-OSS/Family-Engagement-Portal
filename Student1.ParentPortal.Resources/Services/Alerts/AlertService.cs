@@ -93,24 +93,28 @@ namespace Student1.ParentPortal.Resources.Services.Alerts
             foreach (var alert in modelAlerts)
             {
                 if (alert.AlertTypeId == 1 &&
+                   customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null).ToList()).FirstOrDefault().Count > 0 &&
                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.absence)
                 {
                     model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 1));
                 }
 
                 if (alert.AlertTypeId == 2 &&
+                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null).ToList()).FirstOrDefault().Count > 0 &&
                     customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.behavior)
                 {
                     model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 2));
                 }
 
                 if (alert.AlertTypeId == 3 &&
+                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null).ToList()).FirstOrDefault().Count > 0 &&
                     customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.missingAssignments)
                 {
                     model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 3));
                 }
 
                 if (alert.AlertTypeId == 4 &&
+                    customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null).ToList()).FirstOrDefault().Count > 0 &&
                     customParameters.featureToggle.Select(x => x.features.Where(i => i.enabled && i.studentAbc != null)).FirstOrDefault().FirstOrDefault().studentAbc.courseAverage) 
                 {
                     model.Alerts.Add(modelAlerts.FirstOrDefault(x => x.AlertTypeId == 4));

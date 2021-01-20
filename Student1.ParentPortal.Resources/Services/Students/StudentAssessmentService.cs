@@ -129,18 +129,17 @@ namespace Student1.ParentPortal.Resources.Services.Students
                 model.StarAssessments.Add(newAssessment);
             }
 
-            //foreach (var assessment in customparams.accessAssessments)
-            //{
-            //    var assessments = await _studentRepository.GetACCESSStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
+            foreach (var assessment in customparams.accessAssessments)
+            {
+                var assessments = await _studentRepository.GetACCESSStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
+                var proficiencyAssessments = await _studentRepository.GetACCESSStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptorProficiency, assessment.title);
 
-            //    var proficiencyAssessments = await _studentRepository.GetACCESSStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptorProficiency, assessment.title);
+                if (assessments.Count == proficiencyAssessments.Count)
+                    foreach (var a in assessments)
+                        a.ProficiencyLevel = proficiencyAssessments[assessments.FindIndex(x => x.Title == a.Title && x.ReportingMethodCodeValue == a.ReportingMethodCodeValue && x.Version == a.Version)].Result;
 
-            //    if (assessments.Count == proficiencyAssessments.Count)
-            //        foreach (var a in assessments)
-            //            a.ProficiencyLevel = proficiencyAssessments[assessments.FindIndex(x => x.Title == a.Title && x.ReportingMethodCodeValue == a.ReportingMethodCodeValue && x.Version == a.Version)].Result;
-
-            //    model.AccessAssessments.AddRange(assessments);
-            //}
+                model.AccessAssessments.AddRange(assessments);
+            }
 
             return model;
         }
