@@ -27,8 +27,7 @@ namespace Student1.ParentPortal.Resources.ExtensionMethods
                 var gradesNumberY = grades.FirstOrDefault(g => g.Value.Equals(integerY));
 
                 return gradesNumberX.Value.CompareTo(gradesNumberY.Value);
-            }
-            
+            }            
            
             var gradesStringX = grades.FirstOrDefault(g => g.DisplayName.ToUpper().Equals(x.Name.ToUpper()));
             var gradesStringy = grades.FirstOrDefault(g => g.DisplayName.ToUpper().Equals(y.Name.ToUpper()));

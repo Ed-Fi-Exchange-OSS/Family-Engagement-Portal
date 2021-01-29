@@ -1,5 +1,4 @@
-﻿
-using Student1.ParentPortal.Models.Shared;
+﻿using Student1.ParentPortal.Models.Shared;
 using Student1.ParentPortal.Models.Staff;
 using Student1.ParentPortal.Models.Student;
 using Student1.ParentPortal.Models.User;
@@ -20,7 +19,7 @@ namespace Student1.ParentPortal.Data.Models
         Task<UserProfileModel> AddNewProfileAsync(string staffUniqueId, UserProfileModel model);
         bool HasAccessToStudent(int staffUsi, int studentUsi);
         bool HasAccessToStudent(int staffUsi, string studentUniqueId);
-
         Task SaveStaffLanguage(string staffUniqueId, string languageCode);
+        Task<List<StudentCampusLeaderModel>> GetTeacherStudentsByCampusLeader(CampusLeaderStudentSearchModel model);
     }
 }

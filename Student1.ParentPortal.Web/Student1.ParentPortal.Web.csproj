@@ -960,6 +960,8 @@
     <Content Include="clientapp\modules\admin\studentdetailfeatures\studentdetailfeatures.view.html" />
     <Content Include="clientapp\modules\alert\alert.module.js" />
     <Content Include="clientapp\modules\alert\alert.view.html" />
+    <Content Include="clientapp\modules\campusLeader\generalInformation\generalInformation.module.js" />
+    <Content Include="clientapp\modules\campusLeader\generalInformation\generalInformation.view.html" />
     <Content Include="clientapp\modules\campusLeader\groupMessages\groupMessages.module.js" />
     <Content Include="clientapp\modules\campusLeader\individualMessages\individualMessages.module.js" />
     <Content Include="clientapp\modules\campusLeader\individualMessages\individualMessages.view.html" />

@@ -17,6 +17,10 @@ namespace Student1.ParentPortal.Resources.Services.Schools
         Task<List<ProgramsModel>> GetProgramssBySchoolId(int schoolId);
         [NoCache]
         Task<List<SchoolBriefDetailModel>> GetSchoolsByPrincipal(int staffUsi);
+        [NoCache]
+        Task<List<SchoolBriefDetailModel>> GetDistinctSchoolsByPrincipal(int staffUsi);
+        [NoCache]
+        Task<List<GradeModel>> GetOnlyGradeLevelsBySchoolId(int schoolId);
     }
     public class SchoolsService : ISchoolsService
     {
@@ -46,6 +50,23 @@ namespace Student1.ParentPortal.Resources.Services.Schools
         public async Task<List<SchoolBriefDetailModel>> GetSchoolsByPrincipal(int staffUsi)
         {
             return await _schoolsRepository.GetSchoolsByPrincipal(staffUsi);
+        }
+
+        public async Task<List<SchoolBriefDetailModel>> GetDistinctSchoolsByPrincipal(int staffUsi)
+        {
+            List<SchoolBriefDetailModel> result = new List<SchoolBriefDetailModel>();
+            List<SchoolBriefDetailModel> listSchools = await _schoolsRepository.GetSchoolsByPrincipal(staffUsi);
+            List<int> idsSchools = listSchools.Select(rec => rec.SchoolId).Distinct().ToList();
+            idsSchools.ForEach(rec => result.Add(listSchools.FirstOrDefault(sch => sch.SchoolId == rec)));
+            return result;
+        }
+
+        public async Task<List<GradeModel>> GetOnlyGradeLevelsBySchoolId(int schoolId)
+        {
+            var gradeSort = new GradeSortExtensionMethods();
+            var gradesLevels = (await _schoolsRepository.GetGradeLevelsBySchoolId(schoolId)).OrderBy(rec => rec.Name).ToList();
+            //gradesLevels.Sort(gradeSort); //TODO:REMOVE After information is correct
+            return gradesLevels;
         }
     }
 }

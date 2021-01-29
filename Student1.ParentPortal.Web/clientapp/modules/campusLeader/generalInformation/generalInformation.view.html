@@ -1,0 +1,71 @@
+﻿<h1>{{'Home' | translate}}, <span>{{'view.campusleader.general.landing' | translate}}</span></h1>
+<div class="card">
+    <div class="card-body">
+        <h4>{{'Filters'  | translate}}</h4>
+        <form>
+            <div class="row m-b-10">
+                <div class="col-12 col-lg-12">
+                    <div class="form-group">
+                        <label for="sectionsSelect"> {{'campusleader.landing.school'  | translate}}: </label>
+                        <select class="form-control" name="repeatSelect" id="schoolSelect"
+                                ng-model="ctrl.search.school"
+                                ng-change="ctrl.updateSchool()"
+                                ng-options="item as item.nameOfInstitution for item in ctrl.schools"></select>
+                    </div>
+                </div>
+                <div class="form-group col-12 col-lg-12">
+                    <label for="sectionsSelect"> {{'campusleader.landing.grade.level'  | translate}}: </label>
+                    <select class="form-control"
+                            ng-model="ctrl.search.grade"
+                            ng-options="item as item.name for item in ctrl.grades"></select>
+                </div>
+                <div class="col-12 col-lg-12">
+                    <div class="form-group">
+                        <label for="studentNameInputs">{{'campusleader.landing.grade.student.teacher'  | translate}}: </label>
+                        <input ng-model="ctrl.search.text" type="text" class="form-control" id="studentTeacherNameInputs" ng-enter="ctrl.searchInformation()">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group-append p-10 f-s-18 d-flex justify-content-center align-items-center btn btn-fill-search" ng-click="ctrl.searchInformation()">
+                        <span>{{'Search' | translate }}</span><i class="ion ion-md-search"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row m-t-20" ng-if="ctrl.searchClick">
+            <div class="col-md-12" ng-if="ctrl.information.length > 0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Teacher</th>
+                            <th scope="col">Grade Level</th>
+                            <th scope="col">Student</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in ctrl.information">
+                            <td>
+                                <a ui-sref="app.teacherLandingById({staffId: item.staffUsi})">{{item.teacherCompleteName}}</a>
+                            </td>
+                            <td>{{item.gradeLevel}}</td>
+                            <td>
+                                <a ui-sref="app.studentdetail({studentId: item.studentUsi})">{{item.studentCompleteName}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
+
+            <div class="col-md-12 text-center" ng-if="ctrl.information.length == 0">
+                <div class="alert alert-warning">* {{'view.studentCardGrid.noResultsWithFilters' | translate }}</div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<br />

@@ -523,6 +523,49 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
             await _edFiDb.SaveChangesAsync();
         }
 
+        public async Task<List<StudentCampusLeaderModel>> GetTeacherStudentsByCampusLeader(CampusLeaderStudentSearchModel model)
+        {
+            string text = string.Empty;
+            if (!string.IsNullOrEmpty(model.Text)) text = model.Text.ToLower();
+
+            var studentsAssociatedWithStaff = await (from s in _edFiDb.Students
+                                                     join ssa in _edFiDb.StudentSchoolAssociations on s.StudentUsi equals ssa.StudentUsi
+                                                     join d in _edFiDb.Descriptors on ssa.EntryGradeLevelDescriptorId equals d.DescriptorId
+                                                     join eo in _edFiDb.EducationOrganizations on ssa.SchoolId equals eo.EducationOrganizationId
+                                                     join studSec in _edFiDb.StudentSectionAssociations
+                                                       on new { ssa.StudentUsi, ssa.SchoolId } equals new { studSec.StudentUsi, studSec.SchoolId }
+                                                     join staffSec in _edFiDb.StaffSectionAssociations
+                                                                   on new { studSec.SchoolId, studSec.ClassPeriodName, studSec.ClassroomIdentificationCode, studSec.LocalCourseCode, studSec.TermDescriptorId, studSec.SchoolYear, studSec.UniqueSectionCode, studSec.SequenceOfCourse }
+                                                                equals new { staffSec.SchoolId, staffSec.ClassPeriodName, staffSec.ClassroomIdentificationCode, staffSec.LocalCourseCode, staffSec.TermDescriptorId, staffSec.SchoolYear, staffSec.UniqueSectionCode, staffSec.SequenceOfCourse }
+                                                     join staff in _edFiDb.Staffs on staffSec.StaffUsi equals staff.StaffUsi
+                                                     where (model.SchoolId == 0 || ssa.SchoolId == model.SchoolId) &&
+                                                           (model.GradeId == 0 || ssa.EntryGradeLevelDescriptorId == model.GradeId) &&
+                                                           (s.FirstName.ToUpper().Contains(text) || s.MiddleName.ToUpper().Contains(text) || s.LastSurname.ToUpper().Contains(text) || staff.FirstName.ToUpper().Contains(text) ||
+                                                           staff.MiddleName.ToUpper().Contains(text) || staff.LastSurname.ToUpper().Contains(text))
+                                                     orderby s.LastSurname
+                                                     group new { s, eo, ssa, staff, d } by new { s.StudentUniqueId } into g
+                                                     select new StudentCampusLeaderModel
+                                                     {
+                                                         StudentUsi = g.FirstOrDefault().s.StudentUsi,
+                                                         StudentUniqueId = g.FirstOrDefault().s.StudentUniqueId,
+                                                         FirstName = g.FirstOrDefault().s.FirstName,
+                                                         LastSurname = g.FirstOrDefault().s.LastSurname,
+                                                         MiddleName = g.FirstOrDefault().s.MiddleName,
+                                                         TeacherFirstName = g.FirstOrDefault().staff.FirstName,
+                                                         TeacherLastSurname = g.FirstOrDefault().staff.LastSurname,
+                                                         TeacherMiddleName = g.FirstOrDefault().staff.MiddleName,
+                                                         StaffUsi = g.FirstOrDefault().staff.StaffUsi,
+                                                         StaffUniqueId = g.FirstOrDefault().staff.StaffUniqueId,
+                                                         GradeLevel = g.FirstOrDefault().d.CodeValue,
+                                                         CurrentSchool = g.FirstOrDefault().eo.NameOfInstitution
+                                                     }).ToListAsync();
+
+            if (studentsAssociatedWithStaff.Any())
+                studentsAssociatedWithStaff = studentsAssociatedWithStaff.OrderBy(rec => rec.TeacherCompleteName).ThenBy(rec => rec.GradeLevel).ThenBy(rec => rec.StudentCompleteName).ToList();
+
+            return studentsAssociatedWithStaff;
+        }
+
         private class StaffBiographyModel
         {
             public Staff Staff { get; set; }

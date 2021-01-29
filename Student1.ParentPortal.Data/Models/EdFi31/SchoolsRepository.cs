@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Student1.ParentPortal.Models.Schools;
+using Student1.ParentPortal.Models.Shared;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using Student1.ParentPortal.Models.Schools;
-using Student1.ParentPortal.Models.Shared;
 
 namespace Student1.ParentPortal.Data.Models.EdFi31
 {

@@ -30,6 +30,7 @@ namespace Student1.ParentPortal.Resources.Services
         Task<UserProfileModel> SaveStaffProfileAsync(int staffUsi, UserProfileModel model);
         Task UploadStaffImageAsync(string staffUniqueId, byte[] image, string contentType);
         Task UpdateStaffLanguage(string staffUniqueId, string languageCode);
+        Task<List<StudentCampusLeaderModel>> GetTeacherStudentsByCampusLeader(CampusLeaderStudentSearchModel model);
     }
     public class TeachersService : ITeachersService
     {
@@ -156,6 +157,11 @@ namespace Student1.ParentPortal.Resources.Services
         public async Task UpdateStaffLanguage(string staffUniqueId, string languageCode)
         {
             await _teacherRepository.SaveStaffLanguage(staffUniqueId, languageCode);
+        }
+
+        public async Task<List<StudentCampusLeaderModel>> GetTeacherStudentsByCampusLeader(CampusLeaderStudentSearchModel model)
+        {
+            return await _teacherRepository.GetTeacherStudentsByCampusLeader(model);
         }
     }
 }

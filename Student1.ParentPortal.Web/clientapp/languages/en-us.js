@@ -681,6 +681,11 @@ angular.module('app.languages')
             "view.admin.student.detail.features.staar.assessment": "STAAR Assessment",
             "view.admin.student.detail.features.assessment": "Assessment",
 
-            "not.available": "Not Available"
+            "not.available": "Not Available",
+            "view.campusleader.general.landing": "Teachers and Students Information",
+            "campusleader.landing.school": "School",
+            "campusleader.landing.grade.level": "Grade Level",
+            "campusleader.landing.grade.student.teacher": "Student or Teacher Name",
+            "count.zero": "No information found"
         });
     }]);

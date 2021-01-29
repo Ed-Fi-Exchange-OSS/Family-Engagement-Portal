@@ -121,7 +121,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
 
             if (student == null)
                 return null;
-
+            
             student.StudentCalendar = await _studentCalendarService.GetStudentCalendar(student.StudentUsi);
             student.ImageUrl = await _imageUrlProvider.GetStudentImageUrlAsync(student.StudentUniqueId);
             student.Programs = await _studentProgramService.GetStudentProgramsAsync(student.StudentUsi);

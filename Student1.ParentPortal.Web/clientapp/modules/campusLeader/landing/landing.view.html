@@ -1,6 +1,7 @@
 ﻿﻿<main role="main" class="container">
-    <h1>{{'Home' | translate}}, <span>{{'Communication' | translate}}</span></h1>
-    <div class="card">
+
+    <h1 ng-if="ctrl.featureCommsAvailable">{{'Home' | translate}}, <span>{{'Communication' | translate}}</span></h1>
+    <div ng-if="ctrl.featureCommsAvailable" class="card">
         <div class="card-body">
 
             <div class="row" ng-if="ctrl.featureCommsAvailable && ctrl.schools.length > 1">
@@ -39,13 +40,9 @@
                 </div>
             </div>
 
-            <div class="row" ng-if="!ctrl.featureCommsAvailable">
-                <div class="col-12 col-lg-12">
-                    <p>
-                        {{'Communication' | translate}} - {{'not.available' | translate}}
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
+
+    <general-information></general-information>
+
 </main>

@@ -81,8 +81,8 @@
             api.customParams.getAll().then(function (result) {
                 $timeout(function () {
                     $rootScope.$apply(function () {
-                        var selectedPage = result.featureToggle.filter(function (page) { return next.indexOf(page.route) != -1 })[0];
 
+                        var selectedPage = result.featureToggle.filter(function (page) { return next.indexOf(page.route) != -1 })[0];
                         if (!selectedPage) return;
 
                         selectedPage.features.forEach(function (feature) {

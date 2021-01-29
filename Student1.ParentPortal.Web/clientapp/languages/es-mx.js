@@ -637,6 +637,11 @@
             "view.admin.student.detail.features.staar.assessment": "STAAR Assessment",
             "view.admin.student.detail.features.assessment": "Assessment",
 
-            "not.available": "No Disponible"
+            "not.available": "No Disponible",
+            "view.campusleader.general.landing": "Información de Maestros y Estudiantes",
+            "campusleader.landing.school": "Escuela",
+            "campusleader.landing.grade.level": "Grado",
+            "campusleader.landing.grade.student.teacher": "Nombre de Estudiante o Maestro",
+            "count.zero": "No se encontró información"
         });
     }]);

@@ -1,6 +1,7 @@
 ﻿angular.module('app')
     .config(['$stateProvider', function($stateProvider) {
-        $stateProvider.state('app.teacherLanding', {
+        $stateProvider
+            .state('app.teacherLanding', {
                 url: '/teacherLanding',
                 views: {
                     'content@': { component:'teacherLanding' }
@@ -8,7 +9,16 @@
                 resolve: {
                     sections: ['api', function (api) { return api.teachers.getAllSections(); }],
                 }
-            });
+            })
+            .state('app.teacherLandingById', {
+                url: '/teacherLanding/:staffId',
+                views: {
+                    'content@': { component: 'teacherLanding' }
+                },
+                resolve: {
+                    sections: ['$stateParams', 'api', function ($stateParams, api) { return api.teachers.getAllSectionsByTeacherId($stateParams.staffId); }],
+                }
+        });
     }])
     .component('teacherLanding', {
         bindings: {
@@ -17,7 +27,7 @@
         }, // One way data binding.
         templateUrl: 'clientapp/modules/teacher/landing/landing.view.html',
         controllerAs:'ctrl',
-        controller: ['api', '$translate', function (api, $translate) {
+        controller: ['api', '$translate', '$stateParams', function (api, $translate,$stateParams) {
 
             var ctrl = this;
             ctrl.selectedOrder = {};
@@ -52,6 +62,8 @@
 
             ctrl.getTeacherStudents = function () {
                 var request = { section: ctrl.selectedSection, studentName: ctrl.search.name };
+                if ($stateParams && $stateParams.staffId)
+                    request.staffUsi = $stateParams.staffId;
 
                 api.teachers.getStudentsInSection(request).then(function (data) {
                     ctrl.model = data;
@@ -65,8 +77,6 @@
                 } else {
                     ctrl.sectionSelected = (ctrl.selectedSection.localCourseCode ? ctrl.selectedSection.localCourseCode + ' - ' : '') + ctrl.selectedSection.courseTitle + (ctrl.selectedSection.classPeriodName ? ' (' + ctrl.selectedSection.classPeriodName + ') ' : ' ') + 'section.';
                 }
-            }
-
-            
+            }            
         }]
     });
