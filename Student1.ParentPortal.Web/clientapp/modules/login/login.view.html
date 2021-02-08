@@ -12,9 +12,9 @@
                         <img src="clientapp/assets/img/cf_logo.jpg" alt="District Logo" />
                     </div>
                     <h1 class=" text-center m-t-25">{{'view.login.app_name' | translate}}</h1>
-                    <h2 ng-if="!ctrl.isApplicationOffline" class="text-center m-t-10 f-s-16">
+                    <!--<h2 ng-if="!ctrl.isApplicationOffline" class="text-center m-t-10 f-s-16">
                         {{'view.login.log_into_account' | translate}}
-                    </h2>
+                    </h2>-->
                     <div ng-if="!ctrl.isApplicationOffline" class="text-center m-t-20">
 
                         <a ng-if="ctrl.showAzure" href="#" ng-click="ctrl.loginSSO('azure')" class="btn btn-primary m-b-10">Login With Azure Active Directory</a>
