@@ -170,8 +170,10 @@
     <Content Include="Scripts\Edfi26\StudentGoalIntervention.sql" />
     <Content Include="Scripts\Edfi26\StudentGoalsSchema.sql" />
     <Content Include="Scripts\edFi31\1CreateParentPortalSupportingDatabaseSchema.sql" />
+    <Content Include="Scripts\edFi31\3StudentDetails.sql" />
     <Content Include="Scripts\edFi31\2ODSExtensions.sql" />
     <Content Include="Scripts\edFi31\98Parent Portal QA Scripts.sql" />
+    <Content Include="Scripts\edFi31\4SampleDataDemo.sql" />
     <Content Include="Scripts\edFi31\99SampleDataNeededForDemo.sql" />
     <Content Include="Scripts\edFi31\AdminStudentDetailFeatures.sql" />
     <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentCreationDemoData.sql" />

@@ -386,7 +386,7 @@
     "gradeTypeSemesterDescriptor": "Semester", // 926
     "gradeTypeExamDescriptor": "Exam",
     "gradeTypeFinalDescriptor": "Final", // 925
-    "validParentDescriptors": [ "FAT", "MOT", "STP", "GUA", "FOS", "GRP" ], //[ "F", "FP", "G", "M", "SP", "GP" ]
+    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster", "GrandParent", "Father, step", "Mother, step", "Parent, step"],   
     "validCampusLeaderDescriptors": [ "Assistant Principal", "Counselor", "Principal", "School Administrator", "School Leader" ],
     "schoolGradingPeriodDescriptors": [
       "First Six Weeks",
@@ -530,11 +530,11 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "false",
+          "enabled": "true",
           "studentAbc": {
             "missingAssignments": "true",
             "courseAverage": "true",
-            "behavior": "false",
+            "behavior": "true",
             "absence": "true"
           }
         }
@@ -546,11 +546,11 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "false",
+          "enabled": "true",
           "studentAbc": {
             "missingAssignments": "true",
             "courseAverage": "true",
-            "behavior": "false",
+            "behavior": "true",
             "absence": "true"
           }
         }

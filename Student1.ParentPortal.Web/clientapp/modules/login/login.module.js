@@ -83,6 +83,7 @@
             };
 
             ctrl.logOutSSO = function () {
+                https://login.microsoftonline.com/{0}/oauth2/logout?post_logout_redirect_uri={1}
                 sessionStorage.removeItem('id_token');
                 sessionStorage.removeItem('access_token');
                 $rootScope.isAuthenticated = false;

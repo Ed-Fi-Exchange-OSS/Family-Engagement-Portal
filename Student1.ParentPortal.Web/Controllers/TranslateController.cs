@@ -30,7 +30,7 @@ namespace Student1.ParentPortal.Web.Controllers
             if (model == null)
                 return NotFound();
 
-            model = model.Where(rec => rec.Code == "en" || rec.Code == "es").ToList();
+            //model = model.Where(rec => rec.Code == "en" || rec.Code == "es").ToList();
 
             return Ok(model);
         }

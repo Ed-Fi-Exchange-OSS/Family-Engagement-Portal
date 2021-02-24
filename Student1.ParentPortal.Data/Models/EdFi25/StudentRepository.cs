@@ -298,7 +298,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
                              {
                                 Title = a.AssessmentTitle,
                                 Identifier = a.AssessmentIdentifier,
-                                MaxRawScore = a.MaxRawScore,
+                                MaxRawScore = (decimal)a.MaxRawScore,
                                 AdministrationDate  = sa.AdministrationDate,
                                 Result = sasr.Result,
                                 PerformanceLevelMet = plt.ShortDescription,

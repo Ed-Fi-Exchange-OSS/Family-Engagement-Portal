@@ -365,7 +365,7 @@ namespace Student1.ParentPortal.Models.Student
         public string Title { get; set; }
         public DateTime AdministrationDate { get; set; }
         public string ShortDescription { get; set; }
-        public int? MaxRawScore { get; set; }
+        public decimal MaxRawScore { get; set; }
         public string Result { get; set; }
         public string PerformanceLevelMet { get; set; }
         public string GradeLevel { get; set; }
@@ -382,7 +382,7 @@ namespace Student1.ParentPortal.Models.Student
         public string Title { get; set; }
         public DateTime AdministrationDate { get; set; }
         public string ShortDescription { get; set; }
-        public int? MaxRawScore { get; set; }
+        public decimal MaxRawScore { get; set; }
         public int TotalScore { get { return SubSections.Sum(x=>x.Score); } }
         public int SubsectionCount { get { return SubSections.Count(); } }
         public List<AssessmentSubSection> SubSections { get; set; }

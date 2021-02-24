@@ -237,7 +237,8 @@
     <Content Include="clientapp\app.config.jwt.js" />
     <Content Include="clientapp\app.config.js" />
     <Content Include="clientapp\app.js" />
-    <Content Include="clientapp\assets\img\cf_logo.jpg" />
+    <Content Include="clientapp\assets\img\cf_logo_district.png" />
+    <Content Include="clientapp\assets\img\cf_logo_old.jpg" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-1.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-2.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaska_Native-1.png" />
@@ -1108,6 +1109,7 @@
     <Content Include="customizableParametersEdFi26.json" />
     <Content Include="clientapp\modules\admin\studentdetailfeatures\studentdetailfeatures.module.js" />
     <None Include="Properties\PublishProfiles\HeroProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Properties\PublishProfiles\NelticProfile.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

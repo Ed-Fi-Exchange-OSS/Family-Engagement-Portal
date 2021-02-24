@@ -10,7 +10,7 @@ The Parent Engagement Portal provides an easy-to-use view of student information
 Live Demo
 ------------
 
-URL: http://parentportal.toolwise.net/
+URL: https://familyportal.nearshoredevs.com/
 
 **Credentials:**
 
@@ -32,6 +32,18 @@ Teacher:
    Password: Teacher123
 ~~~
 
+~~~
+Principal:
+   Email: fred.lloyd@toolwise.onmicrosoft.com
+   Password: Teacher123
+~~~
+
+~~~
+Teacher Admin
+Email: trent.newton@toolwise.onmicrosoft.com
+Password: 5tgb.^YHN
+~~~
+
 Setup
 ------------
 
@@ -42,11 +54,11 @@ We tried to make the setup and deploy of this web application as easy as possibl
 * Install Visual Studio Community Edition (https://visualstudio.microsoft.com/downloads/)
 * Install MsSQL Developer Edition (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 * Install SQL Server Management Studio (https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
-* Download and restore Ed-Fi ODS v3.1
+* Download and restore Ed-Fi ODS v5.1
   * Download 3.1 from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Samples.Ods/3.1.1
 * Download the code (https://github.com/Ed-Fi-Alliance/Ed-Fi-X-ParentPortal)
 * Open code with Visual Studio Community Edition
-* Compile
+* Compile project but NOT Run it.
 
 ### Running the application for the first time ###
 
@@ -59,7 +71,8 @@ Open SQL Server Management Studio and run the following scripts in the order tha
 Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
   * 1CreateParentPortalSupportingDatabaseSchema.sql
   * 2ODSExtensions.sql
-  * 99SampleDataNeededForDemo.sql (For Demo Only)
+  * 3StudentDetails.sql
+  * 4SampleDataDemo.sql (For Demo Only)
 
 You are now ready to run the application. 
 Go back to Visual Studio Community Edition and press F5.

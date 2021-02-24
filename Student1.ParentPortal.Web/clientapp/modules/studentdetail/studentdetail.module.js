@@ -254,26 +254,7 @@
                     ctrl.model.attendanceEventsByMonth = ctrl.calculateCalendar(ctrl.model.studentCalendar);
 
                     $rootScope.loadingOverride = false;
-                    ctrl.attendanceIndicatorCategories = [
-                        {
-                            tooltip: "Unexcused Absences",
-                            textDisplay: "Abv Unexcused Absences",
-                            value: ctrl.model.attendance.unexcusedAttendanceEvents.length,
-                            interpretation: ctrl.model.attendance.unexcusedInterpretation,
-                        },
-                        {
-                            tooltip: "Excused Absences",
-                            textDisplay: "Abv Excused Absences",
-                            value: ctrl.model.attendance.excusedAttendanceEvents.length,
-                            interpretation: ctrl.model.attendance.excusedInterpretation,
-                        },
-                        {
-                            tooltip: "Tardy Absences",
-                            textDisplay: "Abv Tardy Absences",
-                            value: ctrl.model.attendance.tardyAttendanceEvents.length,
-                            interpretation: ctrl.model.attendance.tardyInterpretation,
-                        },
-                    ];
+                    
                     ctrl.behaviorIndicatorCategories = [
                         {
                             tooltip: $translate.instant('Referrals'),
@@ -292,7 +273,31 @@
 
                     ctrl.gotoAnchor(ctrl.anchor);
                     api.students.getStudentAttendance(ctrl.currentStudent).then(function (data) {
+                        
                         ctrl.model.attendance = data;
+                        ctrl.attendanceIndicatorCategories = [
+                            {
+                                tooltip: "Unexcused Absences",
+                                textDisplay: "Abv Unexcused Absences",
+                                value: ctrl.model.attendance.unexcusedAttendanceEvents.length,
+                                interpretation: ctrl.model.attendance.unexcusedInterpretation,
+                                //},
+                                //{
+                                //    tooltip: "Excused Absences",
+                                //    textDisplay: "Abv Excused Absences",
+                                //    value: ctrl.model.attendance.excusedAttendanceEvents.length,
+                                //    interpretation: ctrl.model.attendance.excusedInterpretation,
+                                //},
+                                //{
+                                //    tooltip: "Tardy Absences",
+                                //    textDisplay: "Abv Tardy Absences",
+                                //    value: ctrl.model.attendance.tardyAttendanceEvents.length,
+                                //    interpretation: ctrl.model.attendance.tardyInterpretation,
+                                //}
+                            }
+                        ];
+                        console.log(ctrl.attendanceIndicatorCategories);
+                        console.log(ctrl.model.attendance.unexcusedAttendanceEvents);
                     });
                     api.students.getStudentBehavior(ctrl.currentStudent).then(function (data) {
                         ctrl.model.behavior = data;

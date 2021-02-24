@@ -326,7 +326,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi26
                               {
                                   Title = a.AssessmentTitle,
                                   Identifier = a.AssessmentIdentifier,
-                                  MaxRawScore = a.MaxRawScore,
+                                  MaxRawScore = (decimal)a.MaxRawScore,
                                   AdministrationDate = sa.AdministrationDate,
                                   Result = sasr.Result,
                                   PerformanceLevelMet = plt.ShortDescription,
@@ -356,7 +356,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi26
                                   Version = a.Version,
                                   Title = a.AssessmentTitle,
                                   Identifier = a.AssessmentIdentifier,
-                                  MaxRawScore = a.MaxRawScore,
+                                  MaxRawScore = (decimal)a.MaxRawScore,
                                   AdministrationDate = sa.AdministrationDate,
                                   PerformanceLevelMet = d.CodeValue,
                                   ReportingMethodCodeValue = sapl.AssessmentReportingMethodType.CodeValue
@@ -383,7 +383,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi26
                                   Version = a.Version,
                                   Title = a.AssessmentTitle,
                                   Identifier = a.AssessmentIdentifier,
-                                  MaxRawScore = a.MaxRawScore,
+                                  MaxRawScore = (decimal)a.MaxRawScore,
                                   AdministrationDate = sa.AdministrationDate,
                                   Result = sasr.Result,
                                   ReportingMethodCodeValue = sasr.AssessmentReportingMethodType.CodeValue
@@ -411,7 +411,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi26
                                   Version = a.Version,
                                   Title = a.AssessmentTitle,
                                   Identifier = a.AssessmentIdentifier,
-                                  MaxRawScore = a.MaxRawScore,
+                                  MaxRawScore = (decimal)a.MaxRawScore,
                                   AdministrationDate = sa.AdministrationDate,
                                   Result = sasr.Result,
                                   ReportingMethodCodeValue = sasr.AssessmentReportingMethodType.CodeValue,

@@ -69,9 +69,11 @@
 
                 ctrl.logOutSSO = function () {
                     sessionStorage.removeItem('access_token');
+                    sessionStorage.removeItem('id_token');
                     sessionStorage.removeItem('old_access_token');
                     sessionStorage.removeItem('impersonateRole');
                     sessionStorage.removeItem('impersonate');
+                    window.location.href = "https://login.microsoftonline.com/c34f1634-092c-476e-baa9-29e429717879/oauth2/logout?post_logout_redirect_uri=" + "http://localhost/Student1.ParentPortal.Web/#/login"
                     $rootScope.isAuthenticated = false;
                 };
 
