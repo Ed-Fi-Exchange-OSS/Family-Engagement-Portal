@@ -273,7 +273,7 @@ angular.module('app.languages')
             // Login
             'view.login.app_online_status': 'We are updating student data. Please come back in a few.',
             'view.login.app_pilot': "Thank you for helping us during this Pilot. Our team is working very hard every day to bring relevant data to improve your student's education. Please let us know if you have any feedback.",
-            'view.login.app_name': 'Family Portal',
+            'view.login.app_name': 'Learner Profile',
             'view.login.log_into_account': 'Log into Your Account',
             'view.login.email': 'Email',
             'view.login.password': 'Password',

@@ -265,7 +265,7 @@
             // Login
             'view.login.app_online_status': 'La applicación esta siendo actualizada. Porfavor revise nuevamente mas tarde.',
             'view.login.app_pilot': 'Gracias por ayudarnos durante este Piloto. Nuestro equipo esta trabajando muy duro diariamente para brindar información relevante mejorando la educación de los estudiantes. Por favor haganos saber cualquier sugerencia.',
-            'view.login.app_name': 'Portal Familiar',
+            'view.login.app_name': 'Portal Estudiante',
             'view.login.log_into_account': 'Iniciar Sesión',
             'view.login.email': 'Correo Electrónico',
             'view.login.password': 'Contraseña',
