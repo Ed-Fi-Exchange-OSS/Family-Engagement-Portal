@@ -27,9 +27,9 @@ Teacher:
 ~~~
 
 ~~~
-Teacher:
-   Email: fred.lloyd@toolwise.onmicrosoft.com
-   Password: Teacher123
+Student:
+   Email: chadwick.garner@toolwise.onmicrosoft.com
+   Password: 4rfv.%TGB
 ~~~
 
 ~~~
@@ -40,8 +40,8 @@ Principal:
 
 ~~~
 Teacher Admin
-Email: trent.newton@toolwise.onmicrosoft.com
-Password: 5tgb.^YHN
+    Email: trent.newton@toolwise.onmicrosoft.com
+    Password: 5tgb.^YHN
 ~~~
 
 Setup
@@ -54,11 +54,18 @@ We tried to make the setup and deploy of this web application as easy as possibl
 * Install Visual Studio Community Edition (https://visualstudio.microsoft.com/downloads/)
 * Install MsSQL Developer Edition (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 * Install SQL Server Management Studio (https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
-* Download and restore Ed-Fi ODS v5.1
-  * Download 3.1 from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Samples.Ods/3.1.1
-* Download the code (https://github.com/Ed-Fi-Alliance/Ed-Fi-X-ParentPortal)
+* Download and restore Ed-Fi ODS s3v5.1.0 database
+  * Download  from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0
+* Download the code (https://github.com/Ed-Fi-Exchange-OSS/ParentPortal)
 * Open code with Visual Studio Community Edition
-* Compile project but NOT Run it.
+    Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
+    Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
+      * 1CreateParentPortalSupportingDatabaseSchema.sql
+      * 2ODSExtensions.sql
+      * 3StudentDetails.sql
+      * 4SampleDataDemo.sql (For Demo Only)
+
+* Compile project and Run it.
 
 ### Running the application for the first time ###
 
@@ -67,12 +74,7 @@ Before you begin make sure you have gone through all the Prerequisites listed ab
 To run the Parent Portal we still need to execute some application specific scripts.
 
 
-Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
-Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
-  * 1CreateParentPortalSupportingDatabaseSchema.sql
-  * 2ODSExtensions.sql
-  * 3StudentDetails.sql
-  * 4SampleDataDemo.sql (For Demo Only)
+
 
 You are now ready to run the application. 
 Go back to Visual Studio Community Edition and press F5.
@@ -98,9 +100,21 @@ Teacher:
 ~~~
 
 ~~~
-Teacher:
+Student:
+   Email: chadwick.garner@toolwise.onmicrosoft.com
+   Password: 4rfv.%TGB
+~~~
+
+~~~
+Principal:
    Email: fred.lloyd@toolwise.onmicrosoft.com
    Password: Teacher123
+~~~
+
+~~~
+Teacher Admin
+    Email: trent.newton@toolwise.onmicrosoft.com
+    Password: 5tgb.^YHN
 ~~~
 
 

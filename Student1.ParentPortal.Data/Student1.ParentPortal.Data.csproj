@@ -175,13 +175,12 @@
     <Content Include="Scripts\edFi31\98Parent Portal QA Scripts.sql" />
     <Content Include="Scripts\edFi31\4SampleDataDemo.sql" />
     <Content Include="Scripts\edFi31\99SampleDataNeededForDemo.sql" />
-    <Content Include="Scripts\edFi31\3AdminStudentDetailFeatures.sql" />
     <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentCreationDemoData.sql" />
     <Content Include="Scripts\edFi31\AppleStoreValidationParentAndStudentDeleteDemoData.sql" />
     <Content Include="Scripts\edFi31\CreateFakeSchoolInformationScript.sql" />
-    <Content Include="Scripts\edFi31\4StudentAllAbout.sql" />
-    <Content Include="Scripts\edFi31\5StudentGoalIntervention.sql" />
-    <Content Include="Scripts\edFi31\6StudentGoalsSchema.sql" />
+    <Content Include="Scripts\edFi31\StudentAllAbout.sql" />
+    <Content Include="Scripts\edFi31\StudentGoalIntervention.sql" />
+    <Content Include="Scripts\edFi31\StudentGoalsSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

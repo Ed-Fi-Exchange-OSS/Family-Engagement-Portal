@@ -112,14 +112,6 @@ insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorI
 values (@absenceDescriptor, '2011-05-10',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'The student left the school.');
 
 
---Insert Student all about
-SET IDENTITY_INSERT [ParentPortal].[StudentAllAbout] ON
-SET IDENTITY_INSERT [ParentPortal].[Admin] ON 
-INSERT [ParentPortal].[StudentAllAbout] ([StudentAllAboutId], [StudentUSI], [PrefferedName], [FunFact], [TypesOfBook], [FavoriteAnimal], [FavoriteThingToDo], [FavoriteSubjectSchool], [OneThingWant], [LearnToDo], [LearningThings], [DateCreated], [DateUpdated]) VALUES (1, 435, N'Hannah', N'I am funny', N'Sci-Fi', N'Dogs are cute', N'Reading', N'Math', N'Travel', N'Math', N'Yes', CAST(N'2021-02-24T17:49:04.427' AS DateTime), CAST(N'2021-02-24T17:49:04.427' AS DateTime))
-
--- Insert teacher admin
-INSERT [ParentPortal].[Admin] ([AdminUSI], [ElectronicMailAddress], [CreateDate], [LastModifiedDate], [Id]) VALUES (3, N'trent.newton@toolwise.onmicrosoft.com', CAST(N'2020-06-03T00:00:00.0000000' AS DateTime2), CAST(N'2020-06-03T00:00:00.0000000' AS DateTime2), N'a3b7e2df-de0c-43ce-8e6d-2da37e3b0ab3')
-
 
 --Adding student discipline incidents
 
@@ -174,8 +166,8 @@ INSERT INTO [ParentPortal].[Admin]([ElectronicMailAddress],[CreateDate],[LastMod
 --values(26, '2011-04-22', @disciplineDescriptor, @studentMaleUSI);
 --insert into edfi.DisciplineActionDiscipline(DisciplineActionIdentifier, DisciplineDate, DisciplineDescriptorId,StudentUSI)
 --values(27, '2011-04-22', @disciplineDescriptor, @studentFemaleUSI);
-
-
+INSERT [ParentPortal].[StudentAllAbout] ([StudentAllAboutId], [StudentUSI], [PrefferedName], [FunFact], [TypesOfBook], [FavoriteAnimal], [FavoriteThingToDo], [FavoriteSubjectSchool], [OneThingWant], [LearnToDo], [LearningThings], [DateCreated], [DateUpdated]) VALUES (1, 435, N'Hannah', N'I am funny', N'Sci-Fi', N'Dogs are cute', N'Reading', N'Math', N'Travel', N'Math', N'Yes', CAST(N'2021-02-24T17:49:04.427' AS DateTime), CAST(N'2021-02-24T17:49:04.427' AS DateTime))
+INSERT [ParentPortal].[Admin] ([AdminUSI], [ElectronicMailAddress], [CreateDate], [LastModifiedDate], [Id]) VALUES (3, N'trent.newton@toolwise.onmicrosoft.com', CAST(N'2020-06-03T00:00:00.0000000' AS DateTime2), CAST(N'2020-06-03T00:00:00.0000000' AS DateTime2), N'a3b7e2df-de0c-43ce-8e6d-2da37e3b0ab3')
 --  Homework
 declare @homeWorkDescriptor int;
 select @homeWorkDescriptor = DescriptorId from edfi.Descriptor where Namespace =  'uri://ed-fi.org/GradebookEntryTypeDescriptor' and Description = 'Homework'
