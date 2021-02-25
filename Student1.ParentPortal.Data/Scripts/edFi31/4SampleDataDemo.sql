@@ -114,12 +114,12 @@ values (@absenceDescriptor, '2011-05-10',@middleSchoolId, 2011, '2010-2011 Sprin
 
 --Insert Student all about
 SET IDENTITY_INSERT [ParentPortal].[StudentAllAbout] ON
-SET IDENTITY_INSERT [ParentPortal].[Admin] ON 
 INSERT [ParentPortal].[StudentAllAbout] ([StudentAllAboutId], [StudentUSI], [PrefferedName], [FunFact], [TypesOfBook], [FavoriteAnimal], [FavoriteThingToDo], [FavoriteSubjectSchool], [OneThingWant], [LearnToDo], [LearningThings], [DateCreated], [DateUpdated]) VALUES (1, 435, N'Hannah', N'I am funny', N'Sci-Fi', N'Dogs are cute', N'Reading', N'Math', N'Travel', N'Math', N'Yes', CAST(N'2021-02-24T17:49:04.427' AS DateTime), CAST(N'2021-02-24T17:49:04.427' AS DateTime))
-
+SET IDENTITY_INSERT [ParentPortal].[StudentAllAbout] OFF
 -- Insert teacher admin
+SET IDENTITY_INSERT [ParentPortal].[Admin] ON 
 INSERT [ParentPortal].[Admin] ([AdminUSI], [ElectronicMailAddress], [CreateDate], [LastModifiedDate], [Id]) VALUES (3, N'trent.newton@toolwise.onmicrosoft.com', CAST(N'2020-06-03T00:00:00.0000000' AS DateTime2), CAST(N'2020-06-03T00:00:00.0000000' AS DateTime2), N'a3b7e2df-de0c-43ce-8e6d-2da37e3b0ab3')
-
+SET IDENTITY_INSERT [ParentPortal].[Admin] OFF
 
 --Adding student discipline incidents
 
