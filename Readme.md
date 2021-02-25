@@ -58,8 +58,8 @@ We tried to make the setup and deploy of this web application as easy as possibl
   * Download  from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0
 * Download the code (https://github.com/Ed-Fi-Exchange-OSS/ParentPortal)
 * Open code with Visual Studio Community Edition
-    Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
-    Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
+* Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
+    * Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
       * 1CreateParentPortalSupportingDatabaseSchema.sql
       * 2ODSExtensions.sql
       * 3StudentDetails.sql
