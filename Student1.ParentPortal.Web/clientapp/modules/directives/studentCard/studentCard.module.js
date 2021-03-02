@@ -32,7 +32,7 @@
             }
 
             ctrl.styleStudentAbc = function () {
-                ctrl.indicatorStyle = 'col-4'
+                ctrl.indicatorStyle = 'col-6'
             }
         }]
     });

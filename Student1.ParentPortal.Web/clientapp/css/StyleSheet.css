@@ -613,7 +613,7 @@ div.event-teal {
 .masonry-student-card {
     max-width: 380px;
     width: 380px;
-    height: 637px;
+    height: 800px;
 }
 @media (min-width: 576px)  { .masonry-student-card { width: 240px; } }
 @media (min-width: 768px)  { .masonry-student-card { width: 330px; } }

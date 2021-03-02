@@ -48,7 +48,10 @@
                     <b>{{ctrl.model.ytdDisciplineIncidentCount}}</b>
                 </a>
             </div>
-            <div class="border-right-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.courseAverage">
+           
+        </div>
+        <div class="row">
+             <div class="border-right-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.courseAverage">
                 <interpretation-icon model="(ctrl.showStudentGPA(ctrl.model.gradeLevel)? ctrl.model.gpaInterpretation : ctrl.model.courseAverage.evaluation)"></interpretation-icon>
                 <h3 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{(ctrl.showStudentGPA(ctrl.model.gradeLevel)? 'GPA' : 'Course Average') | translate}}">{{(ctrl.showStudentGPA(ctrl.model.gradeLevel)? 'GPA' : 'Abv Course Average') | translate}}</h3>
                 <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'grades' })">
