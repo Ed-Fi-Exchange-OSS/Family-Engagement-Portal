@@ -49,9 +49,9 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
     border: 2px solid;
     display: table-cell;
     text-align: center;
-    vert-align: middle;
-    width: 28px;
-    height: 28px;
+    vertical-align: middle;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;    
 }
 .icon-round-border-large {

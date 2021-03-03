@@ -23,9 +23,9 @@
                         <i class="ion ion-md-call" ng-if="$first"></i> <a href="tel:{{t}}" ng-class="{'m-l-15':!$first}">{{t}}</a>
                     </div>
 
-                    <div ng-class="{'m-t-8':$first}" ng-repeat="a in profile.p.addresses" class="text-truncate" tooltip-placement="bottom" uib-tooltip="{{a.streetNumberName}}, {{a.city}}, {{a.state}} {{a.postalCode}}">
+                    <div ng-class="{'m-t-8':$first}" ng-repeat="a in profile.p.addresses"  tooltip-placement="bottom" uib-tooltip="{{a.streetNumberName}}, {{a.city}}, {{a.state}} {{a.postalCode}}">
                         <i class="ion ion-md-pin"></i> {{a.streetNumberName}}<br />
-                        <span class="m-l-12">{{a.city}}, {{a.state}} {{a.postalCode}}</span>
+                        <span class="text-truncate m-l-12">{{a.city}}, {{a.state}} {{a.postalCode}}</span>
                     </div>
 
                     <div ng-class="{'m-t-8':$first}" ng-repeat="e in profile.p.emails">

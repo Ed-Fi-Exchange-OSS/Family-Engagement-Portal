@@ -572,31 +572,31 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "false"
+          "enabled": "true"
         },
         {
           "name": "gradesDetail",
-          "enabled": "false"
+          "enabled": "true"
         },
         {
           "name": "gpaTableDetail",
-          "enabled": "false"
+          "enabled": "true"
         },
         {
           "name": "missingAssignmentsDetail",
-          "enabled": "false"
+          "enabled": "true"
         },
         {
           "name": "scheduleDetail",
-          "enabled": "false"
+          "enabled": "true"
         },
         {
           "name": "gpaIndicator",
-          "enabled": "false"
+          "enabled": "true"
         },
         {
           "name": "onTrackIndicator",
-          "enabled": "false"
+          "enabled": "true"
         }
       ]
     },
@@ -606,7 +606,7 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "false"
+          "enabled": "true"
         }
       ]
     },
@@ -616,7 +616,7 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "false"
+          "enabled": "true"
         }
       ]
     },
@@ -626,7 +626,7 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "false"
+          "enabled": "true"
         }
       ]
     }

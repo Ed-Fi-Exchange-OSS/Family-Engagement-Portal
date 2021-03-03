@@ -21,7 +21,10 @@ namespace Student1.ParentPortal.Resources.Providers.Security.Access
 
         public bool CanAccess(SecurityContext securityContext)
         {
-            if (securityContext.ActionName == "StudentLabels" || securityContext.ActionName == "UpdateStudentGoalStep")
+            if (securityContext.ActionName.Equals("StudentLabels", StringComparison.InvariantCultureIgnoreCase)
+                || securityContext.ActionName.Equals("UpdateStudentGoalStep", StringComparison.InvariantCultureIgnoreCase) 
+                || securityContext.ActionName.Equals("AddStudentGoal", StringComparison.InvariantCultureIgnoreCase)
+                )
             {
                 return true;
             }

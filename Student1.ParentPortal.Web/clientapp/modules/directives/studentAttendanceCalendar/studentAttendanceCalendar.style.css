@@ -1,5 +1,7 @@
 ﻿.calendar-engagement {
     width: 100%;
+    padding:0.8rem;
+    min-width:100px;
 }
 
 .calendar-engagement-title th {
