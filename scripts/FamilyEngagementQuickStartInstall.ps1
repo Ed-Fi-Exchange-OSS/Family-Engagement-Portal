@@ -28,6 +28,7 @@ $global:pathToWorkingDir = "C:\Ed-Fi\QuickStarts\FamilyEngagement"
 
 #
 Function Install-FamilyPortalPrerequisites() {
+    Install-Chocolatey
     Find-MsSQLServerDependency "."
     Install-MsSQLServerExpress
     Install-MsSSMS
