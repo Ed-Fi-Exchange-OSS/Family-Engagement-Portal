@@ -4,9 +4,9 @@
 # See the LICENSE and NOTICES files in the project root for more information.
 
 ############################################################
- 
+
 # Author: Douglas Loyo, Sr. Solutions Architect @ MSDF
- 
+
 # Description: Module contains a collection of MsSQL Server utility functions.
 
 # Note: This powershell has to be ran with Elevated Permissions (As Administrator) and in a x64 environment.
@@ -65,7 +65,7 @@ function Install-MsSQLServerExpress {
         #Refres env and reload path in the Shell
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
         refreshenv
-        
+
         # Test to see if we need to close PowerShell and reopen.
         # If .Net is already installed then we need to check to see if the MsSQL commands for SMO are avaialble.
         # We do this check because if .net is not installed we will reboot later.
@@ -139,32 +139,37 @@ Function Restore-Database($db, $dbDestinationName, $backupLocation, $dataFileDes
 	$logFileOrigin  = $originDbName+"_log"
 	$dataFileLocation = "$dataFileDestination\$newDbName.mdf"
 	$logFileLocation  = "$logFileDestination\$newDbName"+"_log.ldf"
-	  
+
 	Write-Host "     Restoring database $newDbName"
-	  
+
 	#Some special cases...
+
 	if($newDbName -like '*Populated_Template*' )
 	{
 	    $dataFileOrigin = "EdFi_Ods_Populated_Template"
 	    $logFileOrigin = "EdFi_Ods_Populated_Template_log"
 	}
-	  
+    if($newDbName -eq 'EdFi_Ods_Populated_Template_Test' )
+	{
+	    $dataFileOrigin = "EdFi_Ods_Populated_Template_Test"
+	    $logFileOrigin = "EdFi_Ods_Populated_Template_Test_log"
+	}
 	#Some special cases...
 	if($newDbName -like '*minimal*')
 	{
 	    $dataFileOrigin = "EdFi_Ods_Minimal_Template"
 	    $logFileOrigin = "EdFi_Ods_Minimal_Template_log"
 	}
-	  
+
 	$RelocateData = New-Object Microsoft.SqlServer.Management.Smo.RelocateFile($dataFileOrigin, $dataFileLocation)
     $RelocateLog = New-Object Microsoft.SqlServer.Management.Smo.RelocateFile($logFileOrigin, $logFileLocation)
     # Write-Host "***Debugging***"
-    # Write-Host "Data Relocation:" 
+    # Write-Host "Data Relocation:"
     # Write-Host "        origin: $dataFileOrigin"
-    # Write-Host "        destin: $dataFileLocation" 
-    # Write-Host "Log Relocation:" 
+    # Write-Host "        destin: $dataFileLocation"
+    # Write-Host "Log Relocation:"
     # Write-Host "        origin: $logFileOrigin"
-    # Write-Host "        destin: $logFileLocation" 
+    # Write-Host "        destin: $logFileLocation"
     # Write-Host "    Running Command:> Restore-SqlDatabase -ServerInstance '.' -Database $newDbName -BackupFile $backupLocation$originDbName.bak -RelocateFile @($RelocateData,$RelocateLog) -ReplaceDatabase"
     $ver = Get-MsSQLServerVersion "."
     Write-Host "MsSQL Server Version $ver"
@@ -176,7 +181,7 @@ Function Restore-Database($db, $dbDestinationName, $backupLocation, $dataFileDes
     }
 }
 
-function Remove-SqlDatabase($databaseName) {    
+function Remove-SqlDatabase($databaseName) {
     $server = New-Object Microsoft.SqlServer.Management.Smo.Server(".")
     $db = $server.databases[$databaseName]
     if ($db) {
@@ -186,21 +191,21 @@ function Remove-SqlDatabase($databaseName) {
   }
 
 Function Get-DestDbName($dbmetadata, $prefix, $sufix) {
-    
+
     $dbname = if($dbmetadata.dest){ $dbmetadata.dest }else{ $dbmetadata.src }
 
     if($prefix -And $sufix){"$prefix$dbname$sufix"; return}
     if($prefix){"$prefix$dbname"; return}
     if($sufix){"$dbname$sufix"; return}
 
-    $dbname         
+    $dbname
 }
 
 Function Enable-SQLServerTCPIP() {
     $wmi = new-object ('Microsoft.SqlServer.Management.Smo.Wmi.ManagedComputer')
     $computerName = (get-item env:\computername).Value
-    $uri = "ManagedComputer[@Name='$computerName']/ ServerInstance[@Name='MSSQLSERVER']/ServerProtocol[@Name='Tcp']"  
-    $Tcp = $wmi.GetSmoObject($uri)  
-    $Tcp.IsEnabled = $true  
-    $Tcp.Alter() 
+    $uri = "ManagedComputer[@Name='$computerName']/ ServerInstance[@Name='MSSQLSERVER']/ServerProtocol[@Name='Tcp']"
+    $Tcp = $wmi.GetSmoObject($uri)
+    $Tcp.IsEnabled = $true
+    $Tcp.Alter()
 }
