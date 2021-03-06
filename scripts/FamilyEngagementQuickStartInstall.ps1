@@ -29,6 +29,7 @@ $global:pathToWorkingDir = "C:\Ed-Fi\QuickStarts\FamilyEngagement"
 #
 Function Install-FamilyPortalPrerequisites() {
     Install-Chocolatey
+    Install-Chrome
     Find-MsSQLServerDependency "."
     Install-MsSQLServerExpress
     Install-MsSSMS
@@ -97,7 +98,7 @@ Restore-OdsDatabase
 # # 2.1) Run the SQL update scripts.
 Write-HostStep "Executing Sql scripts to populate Parent portal demo."
 
-Run-DemoDataScripts
+Add-DemoData
 
 # # 3) Create shortcuts on user's desktop
 Write-HostInfo "Creating desktop links"

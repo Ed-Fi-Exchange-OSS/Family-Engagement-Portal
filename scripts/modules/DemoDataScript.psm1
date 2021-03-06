@@ -12,8 +12,8 @@
 # Note: This powershell has to be ran with Elevated Permissions (As Administrator) and in a x64 environment.
 
 ############################################################
-Import-Module SQLServer
-function Run-DemoDataScripts{
+
+function Add-DemoData{
     $EdFiParamTable = @{
                 Ods="Server=.; Database=EdFi_Ods_Populated_Template_Test; Trusted_Connection=True;";
                 SolutionPath="C:\ed-fi\QuickStarts\FamilyEngagement\ParentPortal-main"

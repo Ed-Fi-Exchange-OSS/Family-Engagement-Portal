@@ -4,9 +4,9 @@
 # See the LICENSE and NOTICES files in the project root for more information.
 
 ############################################################
- 
+
 # Author: Douglas Loyo, Sr. Solutions Architect @ MSDF
- 
+
 # Description: Module contains a collection of utility functions that help check if software is installed and if powershell commands are available.
 
 ############################################################
@@ -25,4 +25,18 @@ Function Find-PowershellCommand($command) {
     try {if(Get-Command $command){return $true}}
     Catch {return $false}
     Finally {$ErrorActionPreference=$currentErrorActionPreference}
+}
+function Install-Chrome(){
+    if(!(Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'))
+    {
+        Write-Host "Installing: Google Chrome..."
+        choco install googlechrome -F --ignore-checksum
+        #Refres env and reload path in the Shell
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+        refreshenv
+
+        ##Set as default brower
+    } else {
+        Write-Host "Skipping: google chrome there is already a google chrome version installed."
+    }
 }
