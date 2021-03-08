@@ -66,6 +66,12 @@ function Install-MsSQLServerExpress {
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
         refreshenv
 
+        ## Install Sql server module  which contains Restore-SqlDatabase modules
+        If(-Not (Find-PowershellCommand Restore-SqlDatabase)) {
+            Install-Module -Name SqlServer
+            Import-Module -Force -Scope Global SqlServer
+        }
+
         # Test to see if we need to close PowerShell and reopen.
         # If .Net is already installed then we need to check to see if the MsSQL commands for SMO are avaialble.
         # We do this check because if .net is not installed we will reboot later.
