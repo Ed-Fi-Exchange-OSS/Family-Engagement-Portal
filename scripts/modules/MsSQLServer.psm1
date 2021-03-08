@@ -13,10 +13,19 @@
 
 ############################################################
 
-#load assemblies
-[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SMO") | Out-Null
-#Need SmoExtended for backups
-[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SmoExtended") | Out-Null
+function Install-SQLServerModule
+{
+    Write-Host "Ensuring the Powershell SQLModule is available."
+    # Check to see if the module has been installed first.
+    If(-Not (Get-InstalledModule | Where-Object -Property Name -eq SqlServer)) {
+        Install-Module -Name SqlServer -Force
+    }
+
+    # Lets make sure we have the module imported.
+    If(-Not (Get-Module SqlServer)) {
+        Import-Module SqlServer -Force
+    }
+}
 
 function Get-MsSQLServerDependency {
     # MsSQL Server
@@ -64,13 +73,7 @@ function Install-MsSQLServerExpress {
         choco install sql-server-express -o -ia "'/IACCEPTSQLSERVERLICENSETERMS /Q /ACTION=install /INSTANCEID=MSSQLSERVER /INSTANCENAME=MSSQLSERVER /SECURITYMODE=SQL /SAPWD=EdfiUs3r /TCPENABLED=1 /UPDATEENABLED=FALSE'" -f -y
         #Refres env and reload path in the Shell
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-        refreshenv
-
-        ## Install Sql server module  which contains Restore-SqlDatabase modules
-        If(-Not (Find-PowershellCommand Restore-SqlDatabase)) {
-            Install-Module -Name SqlServer -MinimumVersion "21.1.18068" -Scope CurrentUser -Force -AllowClobber | Out-Null
-            Import-Module -Force -Scope Global SqlServer
-        }
+        refreshenv        
 
         # Test to see if we need to close PowerShell and reopen.
         # If .Net is already installed then we need to check to see if the MsSQL commands for SMO are avaialble.

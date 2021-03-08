@@ -5,7 +5,9 @@
 
 ############################################################
 
-# Author: Douglas Loyo, Sr. Solutions Architect @ MSDF
+# Authors: 
+# Douglas Loyo, Sr. Solutions Architect @ MSDF
+# Luis Perez, Sr. Developer @ NearShoreDevs.com
 
 # Description: Install script that downloads the repo zip en loads necesarry modules.
 
@@ -27,34 +29,39 @@ $global:pathToBinaries = "C:\Ed-Fi\Bin\FamilyEngagement"
 $global:pathToWorkingDir = "C:\Ed-Fi\QuickStarts\FamilyEngagement"
 
 #
-Function Install-FamilyPortalPrerequisites() {
+function Install-FamilyPortalPrerequisites() {
     Install-Chocolatey
     Install-Nuget
-    Install-Chrome
-    Find-MsSQLServerDependency "."
     Install-MsSQLServerExpress
-    Install-MsSSMS
+    Install-SQLServerModule
+}
 
+function Install-RecomendedTools{
+    Install-Chrome
+    Install-MsSSMS
 }
-function Install-FamilyPortalPostRequisities(){
-    Write-HostInfo "Install visual studio 2019 Community"
+
+function Install-FamilyPortalPostrequisities(){
+    Write-Host "Install visual studio 2019 Community"
     Install-VisualStudioCommunity
-    Write-HostInfo "Installing 4.7.1 Net Framework."
-    choco install dotnet4.7.1 -y
+    Write-Host "Installing .Net Framework SDK 4.7.1."
+    choco install netfx-4.7.1-devpack -y
 }
+
 function Install-OdsDatabase{
 
     $urlODSDatabase = "https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0"
 
-    Write-HostInfo "Downloading ODS database"
-    $wc = New-Object net.webclient
+    Write-Host "Downloading ODS database"
     $outputpath = "$global:pathToBinaries\EdFi.Suite3.Ods.Populated.Template.5.1.0.zip"
-    $wc.Downloadfile($urlODSDatabase, $outputpath)
+    Invoke-DownloadFile $urlODSDatabase $outputpath
 
-    Write-HostInfo "Unziping database"
+    Write-Host "Unziping database"
     Expand-Archive -LiteralPath $outputpath -DestinationPath "$global:pathToWorkingDir\Db" -Force
 }
+
 function Restore-OdsDatabase(){
+    Write-Host "Restoring database"
     $backupLocation = "$global:pathToWorkingDir\Db\"
     $db = @{
         src = "EdFi.Ods.Populated.Template"
@@ -64,11 +71,11 @@ function Restore-OdsDatabase(){
     $logFileDestination = Get-MsSQLLogFileDestination
 
     Restore-Database  $db $db.dest $backupLocation $dataFileDestination $logFileDestination
-
 }
+
 function Add-DesktopAppLinks {
     # Get Public Desktop to install links to Apps
-    Write-Verbose "Adding Solution Links to Ed-Fi Solutions Folder on common Desktop"
+    Write-Host "Adding Solution Links to Ed-Fi Solutions Folder on common Desktop"
     $publicDesktop=[Environment]::GetFolderPath("CommonDesktopDirectory")
     $EdFiSolFolder="$publicDesktop\Ed-Fi Solutions\FamilyPortalQuickStart"
 
@@ -85,46 +92,31 @@ function Add-DesktopAppLinks {
     $Shortcut.TargetPath = $AppLinks.URI
     $Shortcut.Save()
 }
-#Starting Install
+
+# Starting Install
 # 1) Install prerequisites
 Write-HostInfo "Installing Family Engagement Quick Start."
 Write-HostStep "Step: Ensuring all Prerequisites are installed."
-
 Install-FamilyPortalPrerequisites
 
 # 2) Download the 5.1.0 ODS .
-Write-HostInfo "Installing Ods Database."
-
+Write-HostStep "Step: Installing Populted Ods Database"
 Install-OdsDatabase
-
-#Restore  ODS database
-Write-HostStep "Step: MsSQL Restoring databases"
-
 Restore-OdsDatabase
-
-# # 2.1) Run the SQL update scripts.
-Write-HostStep "Executing Sql scripts to populate Parent portal demo."
-
 Add-DemoData
 
-# # 3) Create shortcuts on user's desktop
-Write-HostInfo "Creating desktop links"
-
+# 3) Create shortcuts on user's desktop
+Write-HostStep "Step: Creating desktop links"
 Add-DesktopAppLinks
 
-#Install Netframework 4.7.1 at the end to avoid re-run script
-Install-FamilyPortalPostRequisities
-
+# 4) Install Postrequisities
+Write-HostStep "Step: Installing Family Engagement Postrequisities"
+Install-FamilyPortalPostrequisities
 
 $announcement = @"
 ***************************************************************
 *                                                             *
-* Please reboot your system now to apply updates any updates  *
-*                                                             *
-* The Ed-Fi Solution Installation is complete                 *
-*                                                             *
-* See Solution installation packages here:                    *
-*                                                             *
+*         The Ed-Fi Solution Installation is complete         *
 *                                                             *
 ***************************************************************
 "@
