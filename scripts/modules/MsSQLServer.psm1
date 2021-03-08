@@ -68,7 +68,7 @@ function Install-MsSQLServerExpress {
 
         ## Install Sql server module  which contains Restore-SqlDatabase modules
         If(-Not (Find-PowershellCommand Restore-SqlDatabase)) {
-            Install-Module -Name SqlServer
+            Install-Module -Name SqlServer -MinimumVersion "21.1.18068" -Scope CurrentUser -Force -AllowClobber | Out-Null
             Import-Module -Force -Scope Global SqlServer
         }
 
