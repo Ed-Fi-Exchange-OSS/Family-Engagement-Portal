@@ -33,6 +33,9 @@ Function Install-FamilyPortalPrerequisites() {
     Find-MsSQLServerDependency "."
     Install-MsSQLServerExpress
     Install-MsSSMS
+
+}
+function Install-FamilyPortalPostRequisities(){
     Install-NetFramework48
 }
 function Install-OdsDatabase{
@@ -105,7 +108,8 @@ Write-HostInfo "Creating desktop links"
 
 Add-DesktopAppLinks
 
-
+#Install Netframework 4.8 at the end to avoid re-run script
+Install-FamilyPortalPostRequisities
 
 
 $announcement = @"
