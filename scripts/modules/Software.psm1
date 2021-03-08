@@ -30,7 +30,7 @@ function Install-Chrome(){
     if(!(Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'))
     {
         Write-Host "Installing: Google Chrome..."
-        choco install googlechrome -F --ignore-checksum
+        choco install googlechrome -F -y --ignore-checksum
         #Refres env and reload path in the Shell
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
         refreshenv
