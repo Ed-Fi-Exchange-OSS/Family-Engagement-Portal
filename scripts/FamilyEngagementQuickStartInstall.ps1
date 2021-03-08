@@ -37,7 +37,10 @@ Function Install-FamilyPortalPrerequisites() {
 
 }
 function Install-FamilyPortalPostRequisities(){
-    Install-NetFramework48
+    Write-HostInfo "Install visual studio 2019 Community"
+    Install-VisualStudioCommunity
+    Write-HostInfo "Installing 4.7.1 Net Framework."
+    choco install dotnet4.7.1 -y
 }
 function Install-OdsDatabase{
 
@@ -109,7 +112,7 @@ Write-HostInfo "Creating desktop links"
 
 Add-DesktopAppLinks
 
-#Install Netframework 4.8 at the end to avoid re-run script
+#Install Netframework 4.7.1 at the end to avoid re-run script
 Install-FamilyPortalPostRequisities
 
 

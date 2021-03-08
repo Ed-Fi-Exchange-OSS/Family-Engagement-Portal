@@ -40,7 +40,17 @@ function Install-Chrome(){
         Write-Host "Skipping: google chrome there is already a google chrome version installed."
     }
 }
+function Install-VisualStudioCommunity(){
+    if(!(Test-Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\16.0'))
+    {
+        Write-Host "Installing: Visual Studio Community..."
+        choco install visualstudio2019community  -y
+    } else {
+        Write-Host "Skipping: Visual Studio Community  is already  installed."
+    }
 
+
+}
 function Install-Nuget(){
     Install-PackageProvider -Force -Name 'NuGet'
 }
