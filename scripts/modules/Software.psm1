@@ -40,3 +40,7 @@ function Install-Chrome(){
         Write-Host "Skipping: google chrome there is already a google chrome version installed."
     }
 }
+
+function Install-Nuget(){
+    Install-PackageProvider -Force -Name 'NuGet'
+}

@@ -29,6 +29,7 @@ $global:pathToWorkingDir = "C:\Ed-Fi\QuickStarts\FamilyEngagement"
 #
 Function Install-FamilyPortalPrerequisites() {
     Install-Chocolatey
+    Install-Nuget
     Install-Chrome
     Find-MsSQLServerDependency "."
     Install-MsSQLServerExpress
