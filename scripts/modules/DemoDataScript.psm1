@@ -15,7 +15,7 @@
 
 function Add-DemoData{
     $EdFiParamTable = @{
-                Ods="Server=.; Database=EdFi_Ods_Populated_Template_Test; Trusted_Connection=True;";
+                Ods="Server=.; Database=Ed-Fi_v5.1.0_ODS_FamilyEngagementQuickStart; Trusted_Connection=True;";
                 SolutionPath="C:\ed-fi\QuickStarts\FamilyEngagement\ParentPortal-main"
             }
     $OdsConnectStr=$EdFiParamTable.Ods

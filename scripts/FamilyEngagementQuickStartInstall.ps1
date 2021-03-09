@@ -5,7 +5,7 @@
 
 ############################################################
 
-# Authors: 
+# Authors:
 # Douglas Loyo, Sr. Solutions Architect @ MSDF
 # Luis Perez, Sr. Developer @ NearShoreDevs.com
 
@@ -36,16 +36,15 @@ function Install-FamilyPortalPrerequisites() {
     Install-SQLServerModule
 }
 
-function Install-RecomendedTools{
+function Install-RecommendedTools{
     Install-Chrome
     Install-MsSSMS
 }
 
 function Install-FamilyPortalPostrequisities(){
-    Write-Host "Install visual studio 2019 Community"
     Install-VisualStudioCommunity
-    Write-Host "Installing .Net Framework SDK 4.7.1."
-    choco install netfx-4.7.1-devpack -y
+    Install-NetFramework471
+    Install-RecommendedTools
 }
 
 function Install-OdsDatabase{
@@ -65,7 +64,7 @@ function Restore-OdsDatabase(){
     $backupLocation = "$global:pathToWorkingDir\Db\"
     $db = @{
         src = "EdFi.Ods.Populated.Template"
-        dest = "EdFi_Ods_Populated_Template_Test"
+        dest = "Ed-Fi_v5.1.0_ODS_FamilyEngagementQuickStart"
     }
     $dataFileDestination = Get-MsSQLDataFileDestination
     $logFileDestination = Get-MsSQLLogFileDestination
@@ -100,7 +99,7 @@ Write-HostStep "Step: Ensuring all Prerequisites are installed."
 Install-FamilyPortalPrerequisites
 
 # 2) Download the 5.1.0 ODS .
-Write-HostStep "Step: Installing Populted Ods Database"
+Write-HostStep "Step: Installing Populated Ods Database"
 Install-OdsDatabase
 Restore-OdsDatabase
 Add-DemoData
@@ -116,7 +115,7 @@ Install-FamilyPortalPostrequisities
 $announcement = @"
 ***************************************************************
 *                                                             *
-*         The Ed-Fi Solution Installation is complete         *
+*         The Ed-fi Family Portal   installation is complete  *
 *                                                             *
 ***************************************************************
 "@

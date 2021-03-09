@@ -4,9 +4,9 @@
 # See the LICENSE and NOTICES files in the project root for more information.
 
 ############################################################
- 
+
 # Author: Douglas Loyo, Sr. Solutions Architect @ MSDF
- 
+
 # Description: Module contains a collection of Chocolatey utility functions.
 
 # Note: This powershell has to be ran with Elevated Permissions (As Administrator) and in a x64 environment.
@@ -18,6 +18,6 @@ Function Install-Chocolatey(){
         #Ensure we use the windows compression as we have had issues with 7zip
         $env:chocolateyUseWindowsCompression = 'true'
         Write-Host "Installing: Cocholatey..."
-        Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     }else{Write-Host "Skipping: Cocholatey is already installed."}
 }

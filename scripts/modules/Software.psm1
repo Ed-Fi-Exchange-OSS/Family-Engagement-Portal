@@ -52,5 +52,11 @@ function Install-VisualStudioCommunity(){
 
 }
 function Install-Nuget(){
-    Install-PackageProvider -Force -Name 'NuGet'
+    if(!(Get-Command nuget.exe))
+    {
+        Write-Host "Installing: Nuget Command line..."
+        choco install nuget.commandline -F -y
+    } else {
+        Write-Host "Skipping: Nuget Command line  is already  installed."
+    }
 }

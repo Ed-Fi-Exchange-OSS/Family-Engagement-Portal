@@ -73,7 +73,7 @@ function Install-MsSQLServerExpress {
         choco install sql-server-express -o -ia "'/IACCEPTSQLSERVERLICENSETERMS /Q /ACTION=install /INSTANCEID=MSSQLSERVER /INSTANCENAME=MSSQLSERVER /SECURITYMODE=SQL /SAPWD=EdfiUs3r /TCPENABLED=1 /UPDATEENABLED=FALSE'" -f -y
         #Refres env and reload path in the Shell
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-        refreshenv        
+        refreshenv
 
         # Test to see if we need to close PowerShell and reopen.
         # If .Net is already installed then we need to check to see if the MsSQL commands for SMO are avaialble.
@@ -92,9 +92,9 @@ function Install-MsSQLServerExpress {
 function Install-MsSSMS {
     if(!(Find-SoftwareInstalled 'SQL Server Management Studio'))
     {
-        Write-Host "Installing: SSMS - Sql Server Management Studio..."
+        Write-Host "Installing: SSMS  Sql Server Management Studio..."
         choco install sql-server-management-studio -y
-    }else{Write-Host "Skipping: SSMS - Sql Server Management Studio as it is already installed."}
+    }else{Write-Host "Skipping: SSMS  Sql Server Management Studio as it is already installed."}
 }
 
 Function Add-SQLUser($serverInstance, $User, $Role) {
@@ -158,7 +158,8 @@ Function Restore-Database($db, $dbDestinationName, $backupLocation, $dataFileDes
 	    $dataFileOrigin = "EdFi_Ods_Populated_Template"
 	    $logFileOrigin = "EdFi_Ods_Populated_Template_log"
 	}
-    if($newDbName -eq 'EdFi_Ods_Populated_Template_Test' )
+    #TODO: Change DB in nuget $urlODSDatabase = "https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0"
+    if($newDbName -eq 'Ed-Fi_v5.1.0_ODS_FamilyEngagementQuickStart' )
 	{
 	    $dataFileOrigin = "EdFi_Ods_Populated_Template_Test"
 	    $logFileOrigin = "EdFi_Ods_Populated_Template_Test_log"
@@ -172,6 +173,10 @@ Function Restore-Database($db, $dbDestinationName, $backupLocation, $dataFileDes
 
 	$RelocateData = New-Object Microsoft.SqlServer.Management.Smo.RelocateFile($dataFileOrigin, $dataFileLocation)
     $RelocateLog = New-Object Microsoft.SqlServer.Management.Smo.RelocateFile($logFileOrigin, $logFileLocation)
+
+    $DBServer = New-Object Microsoft.SqlServer.Management.Smo.Server '.'
+    $DBServer.KillAllProcesses($newDbName)
+    $DBServer.Databases[$newDbName].UserAccess = [Microsoft.SqlServer.Management.Smo.DatabaseUserAccess]::Single #set to single user
     # Write-Host "***Debugging***"
     # Write-Host "Data Relocation:"
     # Write-Host "        origin: $dataFileOrigin"
@@ -186,7 +191,7 @@ Function Restore-Database($db, $dbDestinationName, $backupLocation, $dataFileDes
         Restore-SqlDatabase -ServerInstance "." -Database "$newDbName" -BackupFile "$backupLocation$originDbName.bak" -ReplaceDatabase
     }
     else {
-        Restore-SqlDatabase -ServerInstance "." -Database "$newDbName" -BackupFile "$backupLocation$originDbName.bak" -ReplaceDatabase -RelocateFile @($RelocateData,$RelocateLog)
+        Restore-SqlDatabase -InputObject $DBServer -Database "$newDbName" -BackupFile "$backupLocation$originDbName.bak" -ReplaceDatabase -RelocateFile @($RelocateData,$RelocateLog)
     }
 }
 
