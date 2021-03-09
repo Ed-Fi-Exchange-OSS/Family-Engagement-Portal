@@ -74,17 +74,6 @@ function Install-MsSQLServerExpress {
         #Refres env and reload path in the Shell
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
         refreshenv
-
-        # Test to see if we need to close PowerShell and reopen.
-        # If .Net is already installed then we need to check to see if the MsSQL commands for SMO are avaialble.
-        # We do this check because if .net is not installed we will reboot later.
-        if((IsNetVersionInstalled 4 8)){
-            If(-Not (Find-PowershellCommand Restore-SqlDatabase)) {
-                # Will need to restart so lets give the user a message and exit here.
-                Write-BigMessage "SQl Server Express Requires a PowerShell Session Restart" "Please close this PowerShell window and open a new one as an Administrator and run install again."
-                Write-Error "Please restart this Powershell session/window and try again." -ErrorAction Stop
-            }
-        }
     } else {
         Write-Host "Skipping: MsSQL Express there is already a SQL Server installed."
     }
@@ -176,7 +165,10 @@ Function Restore-Database($db, $dbDestinationName, $backupLocation, $dataFileDes
 
     $DBServer = New-Object Microsoft.SqlServer.Management.Smo.Server '.'
     $DBServer.KillAllProcesses($newDbName)
-    $DBServer.Databases[$newDbName].UserAccess = [Microsoft.SqlServer.Management.Smo.DatabaseUserAccess]::Single #set to single user
+    if (!($null -eq $DBServer.Databases[$newDbName].UserAccess)){
+        $DBServer.Databases[$newDbName].UserAccess = [Microsoft.SqlServer.Management.Smo.DatabaseUserAccess]::Single #set to single user
+    }
+
     # Write-Host "***Debugging***"
     # Write-Host "Data Relocation:"
     # Write-Host "        origin: $dataFileOrigin"
