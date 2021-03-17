@@ -1,11 +1,11 @@
-﻿Parent Portal provided by YesPrep and Student1 
+﻿Family Engagement Portal provided by YesPrep and Student1 
 ============
 
-This parent portal was made possible thanks to Yes Prep Public Schools and Student1.
+This Family Engagement portal was made possible thanks to Yes Prep Public Schools and Student1.
 
 Description
 ------------
-The Parent Engagement Portal provides an easy-to-use view of student information, attendance, discipline, grades, and assessment scores with links to parent views in other applications. The Portal enables communication between members of the student’s “success team” by supporting text communications with automatic language translation.
+The Family Engagement Engagement Portal provides an easy-to-use view of student information, attendance, discipline, grades, and assessment scores with links to parent views in other applications. The Portal enables communication between members of the student’s “success team” by supporting text communications with automatic language translation.
 
 Live Demo
 ------------
@@ -56,7 +56,7 @@ We tried to make the setup and deploy of this web application as easy as possibl
 * Install SQL Server Management Studio (https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 * Download and restore Ed-Fi ODS s3v5.1.0 database
   * Download  from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0
-* Download the code (https://github.com/Ed-Fi-Exchange-OSS/ParentPortal)
+* Download the code (https://github.com/Ed-Fi-Exchange-OSS/Family-Engagement-Portal)
 * Open code with Visual Studio Community Edition
 * Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
     * Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
@@ -71,7 +71,7 @@ We tried to make the setup and deploy of this web application as easy as possibl
 
 Before you begin make sure you have gone through all the Prerequisites listed above.
 
-To run the Parent Portal we still need to execute some application specific scripts.
+To run the Family Engagement Portal we still need to execute some application specific scripts.
 
 
 
