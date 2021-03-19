@@ -235,6 +235,8 @@
     <Content Include="clientapp\app.js" />
     <Content Include="clientapp\assets\img\cf_logo_district.png" />
     <Content Include="clientapp\assets\img\cf_logo_old.jpg" />
+    <Content Include="clientapp\assets\img\demo\student\605255.png" />
+    <Content Include="clientapp\assets\img\demo\student\605541.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-1.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaskan_Native-2.png" />
     <Content Include="clientapp\assets\img\demo\student\Female-American_Indian_-_Alaska_Native-1.png" />
