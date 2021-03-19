@@ -83,7 +83,7 @@ function Add-DesktopAppLinks {
 
     $AppLinks = @{
             name= "Open ParentPortal Project in Visual Studio Community";
-            URI = "$global:pathToWorkingDir\ParentPortal-main\Student1.ParentPortal.sln"
+            URI = "$global:pathToAssets\Student1.ParentPortal.sln"
         }
 
 

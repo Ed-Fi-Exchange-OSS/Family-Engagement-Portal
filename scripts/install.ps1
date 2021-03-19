@@ -22,7 +22,7 @@ New-Item -ItemType Directory -Force -Path $global:pathToBinaries
 
 
 # 2) Download and unzip the github powershell scripts (in zip format)
-$packageUrl = "https://github.com/Ed-Fi-Exchange-OSS/ParentPortal/archive/main.zip"
+$packageUrl = "https://github.com/Ed-Fi-Exchange-OSS/Family-Engagement-Portal/archive/main.zip"
 $outputpath = "$global:pathToBinaries\main.zip"
 #Invoke-WebRequest -Uri $packageUrl -OutFile $outputpath
 $wc = New-Object net.webclient
@@ -30,6 +30,6 @@ $wc.Downloadfile($packageUrl, $outputpath)
 Expand-Archive -LiteralPath $outputpath -DestinationPath $global:pathToWorkingDir -Force
 
 # 3) Execute script
-$global:pathToAssets = "$global:pathToWorkingDir\ParentPortal-main"
+$global:pathToAssets = "$global:pathToWorkingDir\Family-Engagement-Portal-main"
 $pathToMainScript = "$global:pathToAssets\scripts\FamilyEngagementQuickStartInstall.ps1"
 Invoke-Expression -Command $pathToMainScript
