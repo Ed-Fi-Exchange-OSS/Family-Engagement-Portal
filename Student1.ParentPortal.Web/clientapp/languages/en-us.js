@@ -487,8 +487,8 @@ angular.module('app.languages')
             'view.studentDetail.indicators.courseAverage.interpretation.': "No Data",
 
             // Access Indicator
-            'view.studentDetail.indicators.access.title': 'ACCESS Overall Score',
-            'view.studentDetail.indicators.access.tooltip': 'ACCESS Overall Score',
+            'view.studentDetail.indicators.access.title': 'WIDA ACCESS Overall Score',
+            'view.studentDetail.indicators.access.tooltip': 'Access is the collective name for WIDA\'s suite of annual summative English language proficiency assessment',
             'view.studentDetail.indicators.access.interpretation.great': "Your student's current ACCESS average is very good.",
             'view.studentDetail.indicators.access.interpretation.good': "Your student's current ACCESS average is good.",
             'view.studentDetail.indicators.access.interpretation.warning': "Your student's current ACCESS average is fair.",

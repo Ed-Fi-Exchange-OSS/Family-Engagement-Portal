@@ -15,20 +15,16 @@
     <RootNamespace>Student1.ParentPortal.Web</RootNamespace>
     <AssemblyName>Student1.ParentPortal.Web</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>443</IISExpressSSLPort>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -292,8 +288,8 @@
     <Content Include="clientapp\assets\img\profile-default.png" />
     <Content Include="clientapp\assets\img\student\1.png" />
     <Content Include="clientapp\assets\img\student\female-african-american-hs-3.png" />
-    <Content Include="clientapp\assets\img\student\553.png" />
-    <Content Include="clientapp\assets\img\student\29.png" />
+    <Content Include="clientapp\assets\img\student\605255.png" />
+    <Content Include="clientapp\assets\img\student\605541.png" />
     <Content Include="clientapp\assets\img\student\male-african-american-hs.png" />
     <Content Include="clientapp\assets\img\teacher\1.png" />
     <Content Include="clientapp\assets\img\teacher\16.png" />
@@ -317,6 +313,7 @@
     <Content Include="clientapp\assets\img\teacher\59.png" />
     <Content Include="clientapp\assets\img\teacher\54.png" />
     <Content Include="clientapp\assets\img\wida-logo-horizontal.png" />
+    <Content Include="clientapp\assets\img\wida-logo.png" />
     <Content Include="clientapp\assets\img\yes_prerp_icon_notification.png" />
     <Content Include="clientapp\css\material-colors.css" />
     <Content Include="clientapp\css\preloader.css" />

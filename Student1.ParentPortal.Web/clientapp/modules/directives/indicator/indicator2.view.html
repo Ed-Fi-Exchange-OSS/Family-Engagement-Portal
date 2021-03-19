@@ -8,16 +8,18 @@
 
 <div class="card h-100 cursor-pointer w-100">
     <div class="card-body">
-        <div class="text-center m-t-10" ng-if="ctrl.showLoader">
-            <interpretation-icon fontclass="f-s-50 icon-round-border-large" model="ctrl.interpretation"></interpretation-icon>
+        <div class="text-center">
+            <img src="clientapp/assets/img/wida-logo.png" width="82" height="82" />
             <h3 class="m-t-6" tooltip-placement="bottom" uib-tooltip="{{ctrl.tooltip}}">{{ctrl.indicatorTitle}}</h3>
+            <p class="f-s-12">{{ctrl.tooltip}}</p>
+            <h3 class="m-t-6">Proficency Level</h3>
             <span class="m-t-10 f-s-30 font-weight-bold text-dark">{{ctrl.value}}</span>
-            <p class="f-s-12" ng-bind-html="ctrl.textualEvaluation"></p>
-        </div>
-        <div ng-if="!ctrl.showLoader">
-            <div class="d-flex justify-content-center m-t-105">
-                <i style="color: #03a9f4" class="ion-ios-refresh f-s-50 animation-rotate"></i>
+            <div ng-if="!ctrl.showLoader">
+                <div class="d-flex justify-content-center m-t-105">
+                    <i style="color: #03a9f4" class="ion-ios-refresh f-s-50 animation-rotate"></i>
+                </div>
             </div>
         </div>
+        
     </div>
 </div>
