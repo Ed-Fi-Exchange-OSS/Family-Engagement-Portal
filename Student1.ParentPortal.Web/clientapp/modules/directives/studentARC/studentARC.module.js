@@ -636,13 +636,13 @@
 
                 //show/hide if information does not exist
 
-                if (ctrl.arcModelIRLA.rlCurrent == null || ctrl.arcModelIRLA.rlCurrent == '' || ctrl.arcModelIRLA.rlCurrent == '-') {
-                    ctrl.showIRLA = false;
-                }
+                //if (ctrl.arcModelIRLA.rlCurrent == null || ctrl.arcModelIRLA.rlCurrent == '' || ctrl.arcModelIRLA.rlCurrent == '-') {
+                //    ctrl.showIRLA = false;
+                //}
 
-                if (ctrl.arcModelENIL.rlCurrent == null || ctrl.arcModelENIL.rlCurrent == '' || ctrl.arcModelENIL.rlCurrent == '-') {
-                    ctrl.showENIL = false;
-                }
+                //if (ctrl.arcModelENIL.rlCurrent == null || ctrl.arcModelENIL.rlCurrent == '' || ctrl.arcModelENIL.rlCurrent == '-') {
+                //    ctrl.showENIL = false;
+                //}
 
                 if (!ctrl.showIRLA && !ctrl.showENIL) {
                     $scope.$emit('studentARC', false);

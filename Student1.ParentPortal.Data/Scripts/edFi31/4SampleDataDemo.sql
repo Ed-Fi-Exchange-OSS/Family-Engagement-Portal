@@ -669,4 +669,595 @@ update edfi.CourseOffering set LocalCourseTitle = 'Spanish 2' where Course
 update edfi.CourseOffering set LocalCourseTitle = 'Spanish 3' where CourseCode = 'SPAN-3'
 
 
+GO
+----------------------------------------------------------------------------------------------------------------------
+--Goals students
+declare @studentMaleUSI AS int
+declare @studentFemaleUSI AS int
+
+
+
+
+select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
+select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
+
+
+
+
+
+
+INSERT INTO ParentPortal.StudentGoal 
+([StudentUSI],[GoalType],[Goal],[GradeLevel],
+ [DateGoalCreated],[DateScheduled],[DateCompleted],
+ [Additional],[Completed],[DateCreated],[DateUpdated],[Labels])
+
+values
+(@studentFemaleUSI,'A', 'Decode most 2 syllable words','Tenth grade', GETDATE(), DATEADD(dd,31,GETDATE()),null,'','NA',GETDATE(),  GETDATE(),null),
+(@studentFemaleUSI,'C', 'SELF-MANAGEMENT: manage my emotions, thoughts, and behaviors effectively in different situations and to achieve goals.','Tengh grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA', GETDATE(), GETDATE(),null),
+(@studentFemaleUSI,'P', 'Demonstrate awareness of career options in the community','Tenth grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA',GETDATE(),GETDATE(),null)
+
+INSERT INTO ParentPortal.StudentGoal 
+([StudentUSI],[GoalType],[Goal],[GradeLevel],
+ [DateGoalCreated],[DateScheduled],[DateCompleted],
+ [Additional],[Completed],[DateCreated],[DateUpdated],[Labels])
+
+values
+(@studentMaleUSI,'A', 'Decode most 2 syllable words','Tenth grade', GETDATE(), DATEADD(dd,31,GETDATE()),null,'','NA',GETDATE(),  GETDATE(),null),
+(@studentMaleUSI,'C', 'SELF-MANAGEMENT: manage my emotions, thoughts, and behaviors effectively in different situations and to achieve goals.','Tengh grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA', GETDATE(), GETDATE(),null),
+(@studentMaleUSI,'P', 'Demonstrate awareness of career options in the community','Tenth grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA',GETDATE(),GETDATE(),null)
+
+-----------------------------------------------------------------------------------------------------
+go
+
+declare @studentFemaleGoalAcademic AS int
+declare @studentFemaleGoalCareer AS int
+declare @studentFemaleGoalPersonal AS int
+
+declare @studentMaleGoalAcademic AS int
+declare @studentMaleGoalCareer AS int
+declare @studentMaleGoalPersonal AS int
+
+declare @studentMaleUSI AS int
+declare @studentFemaleUSI AS int
+select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
+select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
+
+
+select @studentFemaleGoalAcademic = StudentGoalId  from ParentPortal.StudentGoal where [StudentUSI] = @studentFemaleUSI and GoalType = 'A'
+select @studentFemaleGoalCareer = StudentGoalId  from ParentPortal.StudentGoal where [StudentUSI] = @studentFemaleUSI and GoalType = 'C'
+select @studentFemaleGoalPersonal = StudentGoalId  from ParentPortal.StudentGoal where [StudentUSI] = @studentFemaleUSI and GoalType = 'P'
+
+select @studentMaleGoalAcademic = StudentGoalId  from ParentPortal.StudentGoal where [StudentUSI] = @studentMaleUSI and GoalType = 'A'
+select @studentMaleGoalCareer = StudentGoalId  from ParentPortal.StudentGoal where [StudentUSI] = @studentMaleUSI and GoalType = 'C'
+select @studentMaleGoalPersonal = StudentGoalId  from ParentPortal.StudentGoal where [StudentUSI] = @studentMaleUSI and GoalType = 'P'
+
+INSERT INTO [ParentPortal].[StudentGoalStep]
+           ([StudentGoalId],[StepName],[Completed],[DateCreated]
+           ,[DateUpdated],[IsActive],[StudentGoalInterventionId])
+     VALUES
+           (@studentFemaleGoalAcademic,'identify all consonant and vowel sounds',1,GETDATE(),GETDATE(),1,NULL),
+		   (@studentFemaleGoalAcademic,'identify beginning, middle and ending sounds',1,GETDATE(),GETDATE(),1,NULL),
+		   (@studentFemaleGoalAcademic,'be able to cumulativley blend 2 and 3 phoneme words',1,GETDATE(),GETDATE(),1,NULL),
+
+		   (@studentFemaleGoalCareer,'Use planning and organizational tools such as checklists and picture schedules to stay on track',0,GETDATE(),GETDATE(),1,NULL),
+		   (@studentFemaleGoalCareer,'Goal for completion of work; use of paper tracker or google form to track completed assignemnts',0,GETDATE(),GETDATE(),1,NULL),
+		   (@studentFemaleGoalCareer,'use of stress management strategies such as short breaks and use of cool down station in classroom',0,GETDATE(),GETDATE(),1,NULL),
+		   
+		   (@studentFemaleGoalPersonal,'Identify career clusters in occupations within the community that I would be interested in',0,GETDATE(),GETDATE(),1,NULL)
+
+
+INSERT INTO [ParentPortal].[StudentGoalStep]
+           ([StudentGoalId],[StepName],[Completed],[DateCreated]
+           ,[DateUpdated],[IsActive],[StudentGoalInterventionId])
+     VALUES
+           (@studentMaleGoalAcademic,'identify all consonant and vowel sounds',1,GETDATE(),GETDATE(),1,NULL),
+		   (@studentMaleGoalAcademic,'identify beginning, middle and ending sounds',1,GETDATE(),GETDATE(),1,NULL),
+		   (@studentMaleGoalAcademic,'be able to cumulativley blend 2 and 3 phoneme words',1,GETDATE(),GETDATE(),1,NULL),
+
+		   (@studentMaleGoalCareer,'Use planning and organizational tools such as checklists and picture schedules to stay on track',0,GETDATE(),GETDATE(),1,NULL),
+		   (@studentMaleGoalCareer,'Goal for completion of work; use of paper tracker or google form to track completed assignemnts',0,GETDATE(),GETDATE(),1,NULL),
+		   (@studentMaleGoalCareer,'use of stress management strategies such as short breaks and use of cool down station in classroom',0,GETDATE(),GETDATE(),1,NULL),
+		   
+		   (@studentMaleGoalPersonal,'Identify career clusters in occupations within the community that I would be interested in',0,GETDATE(),GETDATE(),1,NULL)
+
+	GO
+
+--255901001  - Grand Bend High School
+--@AssessmentCategoryDescriptorId    State English proficiency test
+
+--AssesmentIdentifier : AccessScores_2019
+--Namespace : uri://ed-fi.org/Assessment/Assessment.xml
+
+
+declare @highSchoolId as int = 255901001
+
+
+declare @studentMaleUSI AS int
+declare @studentFemaleUSI AS int
+
+--Assessments descriptors
+declare @AssessmentCategoryDescriptorId int         -- 119 uri://ed-fi.org/AssessmentCategoryDescriptor State English proficiency test
+declare @AcademicSubjectDescriptorId int		    -- 31	uri://ed-fi.org/AcademicSubjectDescriptor	English	
+declare @ResultDatatypeTypeDescriptorInteger int	-- 2013 @ResultDatatypeTypeDescriptorInteger	uri://ed-fi.org/ResultDatatypeTypeDescriptor	Integer	
+declare @ResultDatatypeTypeDescriptorDecimal int     --@ResultDatatypeTypeDescriptorDecimal	uri://ed-fi.org/ResultDatatypeTypeDescriptor	Decimal
+declare @AssessmentReportingMethodDescriptorProfencyLevel int --@ResultDatatypeTypeDescriptorDecimal	uri://ed-fi.org/AssessmentReportingMethodDescriptor	Proficiency level
+declare @AssessmentReportingMethodDescriptorRawScore int      --@AssessmentReportingMethodDescriptorRawScore	uri://ed-fi.org/AssessmentReportingMethodDescriptor	Raw score	Raw score
+declare @AssessmentReportingMethodDescriptorScaleScore int    --@AssessmentReportingMethodDescriptorScaleScore	uri://ed-fi.org/AssessmentReportingMethodDescriptor	Scale score
+declare @GradeLevelDescriptor int							  --@GradeLevelDescriptor	uri://ed-fi.org/GradeLevelDescriptor	First grade
+declare @PerformaceLevelDescriptor int						  --@GradeLevelDescriptor	uri://ed-fi.org/PerformanceLevelDescriptor	Above Benchmark
+
+select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
+select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
+
+--select  @studentMaleUSI = 69
+--select  @studentFemaleUSI = 70
+
+
+select  @AssessmentCategoryDescriptorId = descriptorid from edfi.Descriptor where Namespace = 'AssessmentCategoryDescriptor' and CodeValue = 'English proficiency test'
+select  @AcademicSubjectDescriptorId = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AcademicSubjectDescriptor' and CodeValue = 'English'
+select  @ResultDatatypeTypeDescriptorInteger = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Integer'
+select  @ResultDatatypeTypeDescriptorDecimal = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Decimal'
+select  @AssessmentReportingMethodDescriptorProfencyLevel = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Proficiency level'
+select  @AssessmentReportingMethodDescriptorRawScore = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Raw score'
+select  @AssessmentReportingMethodDescriptorScaleScore = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Scale score'
+select  @GradeLevelDescriptor = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/GradeLevelDescriptor' and CodeValue = 'First grade'
+select  @PerformaceLevelDescriptor = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/PerformanceLevelDescriptor' and CodeValue = 'Above Benchmark'
+
+
+DECLARE @AssesmentIdentifierMale2018 UNIQUEIDENTIFIER
+DECLARE @AssesmentIdentifierMale2019 UNIQUEIDENTIFIER
+
+
+DECLARE @AssesmentIdentifierFemale2018 UNIQUEIDENTIFIER
+DECLARE @AssesmentIdentifierFemale2019 UNIQUEIDENTIFIER
+
+select @AssesmentIdentifierFemale2018 = NEWID()
+select @AssesmentIdentifierFemale2019 = NEWID()
+
+select @AssesmentIdentifierMale2018 = NEWID()
+select @AssesmentIdentifierMale2019 = NEWID()
+
+INSERT [edfi].[Assessment] ([AssessmentIdentifier], [Namespace], [AssessmentTitle], [AssessmentCategoryDescriptorId], [AssessmentForm], [AssessmentVersion], [RevisionDate], [MaxRawScore], [Nomenclature], [AssessmentFamily], [EducationOrganizationId], [AdaptiveAssessment], [CreateDate], [LastModifiedDate], [Id]) 
+VALUES 
+(N'AccessScores_2019', N'uri://ed-fi.org/Assessment/Assessment.xml', N'Access Scores', @AssessmentCategoryDescriptorId, NULL, 2019, NULL, 6.0, NULL, NULL, 255901001, NULL, CAST(N'2019-10-31T13:36:16.000' AS DateTime), CAST(N'2019-10-31T13:36:16.250' AS DateTime), N'e6b0a3b2-4866-4050-a69e-6e9ea0df9682')
+--(N'AccessScores_2018', N'uri://ed-fi.org/Assessment/Assessment.xml', N'Access Scores', @AssessmentCategoryDescriptorId, NULL, 2018, NULL, 6.0, NULL, NULL, 255901001, NULL, CAST(N'2019-12-11T15:05:39.000' AS DateTime), CAST(N'2019-12-11T15:05:39.300' AS DateTime), N'785e03b2-a06d-480b-8f9a-92803f8e8787'),
+
+INSERT [edfi].[Assessment] ([AssessmentIdentifier], [Namespace], [AssessmentTitle], [AssessmentCategoryDescriptorId], [AssessmentForm], [AssessmentVersion], [RevisionDate], [MaxRawScore], [Nomenclature], [AssessmentFamily], [EducationOrganizationId], [AdaptiveAssessment], [CreateDate], [LastModifiedDate], [Id]) 
+VALUES 
+(N'AccessScores_2018', N'uri://ed-fi.org/Assessment/Assessment.xml', N'Access Scores', @AssessmentCategoryDescriptorId, NULL, 2018, NULL, 6.0, NULL, NULL, 255901001, NULL, CAST(N'2019-12-11T15:05:39.000' AS DateTime), CAST(N'2019-12-11T15:05:39.300' AS DateTime), N'785e03b2-a06d-480b-8f9a-92803f8e8787')
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2019','STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15000)
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2018','STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15001)
+
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2019','STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15000)
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2018','STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15001)
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2019','STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15000)
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2018','STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15001)
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2019','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15000)
+
+
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2018','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml'
+           ,6.0,0.25,null,null,null,@AcademicSubjectDescriptorId,null,GETDATE(),GETDATE(),NEWID(),15001)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [edfi].[AssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace]
+           ,[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+INSERT INTO [edfi].[AssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace]
+           ,[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Objective Assessment Score 
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml','0','6.0',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+------------------------------------------------------
+--Student assesment
+INSERT INTO [edfi].[StudentAssessment]
+           ([AssessmentIdentifier],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[AdministrationDate],[AdministrationEndDate]
+		   ,[SerialNumber],[AdministrationLanguageDescriptorId],[AdministrationEnvironmentDescriptorId],[RetestIndicatorDescriptorId]
+           ,[ReasonNotTestedDescriptorId],[WhenAssessedGradeLevelDescriptorId],[EventCircumstanceDescriptorId],[EventDescription]
+           ,[SchoolYear],[PlatformTypeDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2019','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,'20170502',null
+           ,null,null,null,null,null,@GradeLevelDescriptor
+           ,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),103939)
+
+INSERT INTO [edfi].[StudentAssessment]
+           ([AssessmentIdentifier],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[AdministrationDate],[AdministrationEndDate]
+		   ,[SerialNumber],[AdministrationLanguageDescriptorId],[AdministrationEnvironmentDescriptorId],[RetestIndicatorDescriptorId]
+           ,[ReasonNotTestedDescriptorId],[WhenAssessedGradeLevelDescriptorId],[EventCircumstanceDescriptorId],[EventDescription]
+           ,[SchoolYear],[PlatformTypeDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2018','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,'20170502',null
+           ,null,null,null,null,null,@GradeLevelDescriptor
+           ,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),103938)
+
+
+--student assesment score
+
+INSERT INTO [edfi].[StudentAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace],[StudentAssessmentIdentifier]
+           ,[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,3.9,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace],[StudentAssessmentIdentifier]
+           ,[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,4.9,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+
+--student assesment objetice assesment
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,GETDATE())
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,GETDATE())
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,GETDATE())
+
+-- student assesment student objective score result
+
+
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,'5.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,'5.8',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,'2.1',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2019,@studentMaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+--
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,'3.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- STUDENT FEMALE 
+
+------------------------------------------------------
+--Student assesment
+INSERT INTO [edfi].[StudentAssessment]
+           ([AssessmentIdentifier],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[AdministrationDate],[AdministrationEndDate]
+		   ,[SerialNumber],[AdministrationLanguageDescriptorId],[AdministrationEnvironmentDescriptorId],[RetestIndicatorDescriptorId]
+           ,[ReasonNotTestedDescriptorId],[WhenAssessedGradeLevelDescriptorId],[EventCircumstanceDescriptorId],[EventDescription]
+           ,[SchoolYear],[PlatformTypeDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2019','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'20170502',null
+           ,null,null,null,null,null,@GradeLevelDescriptor
+           ,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),103939)
+
+INSERT INTO [edfi].[StudentAssessment]
+           ([AssessmentIdentifier],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[AdministrationDate],[AdministrationEndDate]
+		   ,[SerialNumber],[AdministrationLanguageDescriptorId],[AdministrationEnvironmentDescriptorId],[RetestIndicatorDescriptorId]
+           ,[ReasonNotTestedDescriptorId],[WhenAssessedGradeLevelDescriptorId],[EventCircumstanceDescriptorId],[EventDescription]
+           ,[SchoolYear],[PlatformTypeDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('AccessScores_2018','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,'20170502',null
+           ,null,null,null,null,null,@GradeLevelDescriptor
+           ,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),103938)
+
+
+--student assesment score
+
+INSERT INTO [edfi].[StudentAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace],[StudentAssessmentIdentifier]
+           ,[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,3.9,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace],[StudentAssessmentIdentifier]
+           ,[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,4.9,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+
+--student assesment objetice assesment
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,GETDATE())
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,GETDATE())
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2019','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('AccessScores_2018','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,GETDATE())
+
+-- student assesment student objective score result
+
+
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Reading','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,'5.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Speaking','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,'5.8',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Listening','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,'2.1',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2019',@AssessmentReportingMethodDescriptorRawScore,'STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'2.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+--
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('AccessScores_2018',@AssessmentReportingMethodDescriptorRawScore,'STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2018,@studentFemaleUSI,'3.5',@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+GO
+
+
+
+
+
+
+
+
+
 

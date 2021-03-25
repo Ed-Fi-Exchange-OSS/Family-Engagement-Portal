@@ -18,7 +18,7 @@
             ctrl.$onInit = function () {
                 if (!ctrl.interpretation)
                     ctrl.interpretation = ctrl.getGeneralInterpretation();
-
+                console.log("Modelo",ctrl.model);
                 var indCatLength = 1;
                 if (ctrl.indicatorCategories != null && ctrl.indicatorCategories != undefined)
                     indCatLength = ctrl.indicatorCategories.length;

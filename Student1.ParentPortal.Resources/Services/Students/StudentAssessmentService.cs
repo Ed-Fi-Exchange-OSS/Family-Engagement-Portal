@@ -132,11 +132,16 @@ namespace Student1.ParentPortal.Resources.Services.Students
             foreach (var assessment in customparams.accessAssessments)
             {
                 var assessments = await _studentRepository.GetACCESSStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
+                var objectivesAssessments = await _studentRepository.GetStudentObjectiveAssessments(studentUsi);
                 var proficiencyAssessments = await _studentRepository.GetACCESSStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptorProficiency, assessment.title);
 
-                if (assessments.Count == proficiencyAssessments.Count)
-                    foreach (var a in assessments)
-                        a.ProficiencyLevel = proficiencyAssessments[assessments.FindIndex(x => x.Title == a.Title && x.ReportingMethodCodeValue == a.ReportingMethodCodeValue && x.Version == a.Version)].Result;
+                //if (assessments.Count == proficiencyAssessments.Count)
+                //    foreach (var a in assessments)
+                //        a.ProficiencyLevel = proficiencyAssessments[assessments.FindIndex(x => x.Title == a.Title && x.ReportingMethodCodeValue == a.ReportingMethodCodeValue && x.Version == a.Version)].Result;
+
+                foreach (var item in assessments) {
+                    item.ObjectiveAssessments = objectivesAssessments.Where(x => x.AssessmentIdentifier == item.Identifier).ToList();
+                }
 
                 model.AccessAssessments.AddRange(assessments);
             }

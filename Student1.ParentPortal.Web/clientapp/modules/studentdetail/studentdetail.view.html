@@ -100,13 +100,15 @@
         <div id="indicators" class="col-12 col-md-6 col-lg-4">
             <div class="row flex-card-grid">
                 <div class="col-12 col-md-12 col-lg-12">
+
                     <indicator3 indicator-title="{{'view.studentDetail.indicators.absences.title' | translate}}"
                                 tooltip="{{'view.studentDetail.indicators.absences.tooltip' | translate}}"
                                 indicator-categories="ctrl.attendanceIndicatorCategories"
                                 anchorid="attendance"
                                 large-text="true"
+                                interpretation="ctrl.absentInterpretation"
                                 ng-click="ctrl.gotoAnchor('attendance')"
-                                textual-evaluation="'view.studentDetail.indicators.absences.interpretation.' | translate"
+                                textual-evaluation="'view.studentDetail.indicators.absences.interpretation.' + ctrl.absentInterpretation | translate"
                                 bgclass="widget-bg-primary"></indicator3>
                 </div>
                 <div class="col-12 col-md-12 col-lg-12">
@@ -117,7 +119,7 @@
                                 interpretation="ctrl.starGeneralIndicator"
                                 anchorid="star"
                                 ng-click="ctrl.gotoAnchor('star')"
-                                textual-evaluation="'view.studentDetail.indicators.star.interpretation.' | translate"
+                                textual-evaluation="'view.studentDetail.indicators.star.interpretation.' + ctrl.starGeneralIndicator | translate"
                                 bgclass="widget-bg-secondary"></indicator3>
                 </div>
             </div>
@@ -130,6 +132,8 @@
                     <indicator3 indicator-title="{{'view.studentDetail.indicators.behavior.title' | translate}}"
                                 tooltip="{{'view.studentDetail.indicators.behavior.tooltip' | translate}}"
                                 indicator-categories="ctrl.behaviorIndicatorCategories"
+                                interpretation="ctrl.behaviorInterpretation"
+                                large-text="true"
                                 textual-evaluation="'view.studentDetail.indicators.behavior.interpretation.' + ctrl.model.behavior.interpretation | translate:{ 'incidentCount': ctrl.model.behavior.yearToDateDisciplineIncidentCount}"
                                 ng-click="ctrl.gotoAnchor('behaviour-log')"
                                 bgclass="widget-bg-warning"></indicator3>

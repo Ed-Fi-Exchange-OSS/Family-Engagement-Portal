@@ -821,7 +821,7 @@ address {
 }
 
 .flex-card-grid > * > * {
-    height: 360px;
+    height: 400px;
 }
 .position-relative {
     position: relative;

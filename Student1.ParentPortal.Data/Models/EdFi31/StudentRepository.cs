@@ -1324,7 +1324,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                 && a.AssessmentTitle == assessmentTitle
                               select new ParentPortal.Models.Student.Assessment
                               {
-                                  //Version = a.Version,
+                                  Version = a.AssessmentVersion,
                                   Title = a.AssessmentTitle,
                                   Identifier = a.AssessmentIdentifier,
                                   MaxRawScore = (decimal)a.MaxRawScore,
@@ -1359,9 +1359,9 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                   oe.IdentificationCode
                               }).ToListAsync();
 
-            var result = list.GroupBy(x => x.Title).Select(x => new StudentObjectiveAssessment
+            var result = list.GroupBy(x => new { x.IdentificationCode, x.AssessmentIdentifier }).Select(x => new StudentObjectiveAssessment
             {
-                Title = x.Key,
+                Title = x.Key.IdentificationCode,
                 EnglishResult = x.FirstOrDefault(r => !r.AssessmentIdentifier.Contains("Spanish") && r.AdministrationDate == x.Where(d => !d.AssessmentIdentifier.Contains("Spanish")).Max(d => d.AdministrationDate))?.Result,
                 SpanishResult = x.FirstOrDefault(r => r.AssessmentIdentifier.Contains("Spanish") && r.AdministrationDate == x.Where(d => d.AssessmentIdentifier.Contains("Spanish")).Max(d => d.AdministrationDate))?.Result,
                 ParentIdentificationCode = x.FirstOrDefault().ParentIdentificationCode,

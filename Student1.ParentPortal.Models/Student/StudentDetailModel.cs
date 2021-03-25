@@ -386,6 +386,7 @@ namespace Student1.ParentPortal.Models.Student
         public int TotalScore { get { return SubSections.Sum(x=>x.Score); } }
         public int SubsectionCount { get { return SubSections.Count(); } }
         public List<AssessmentSubSection> SubSections { get; set; }
+        public List<StudentObjectiveAssessment> ObjectiveAssessments { get; set; }
         public string ExternalLink { get; set; }
         public string Interpretation { get; set; }
         public string Result { get; set; }

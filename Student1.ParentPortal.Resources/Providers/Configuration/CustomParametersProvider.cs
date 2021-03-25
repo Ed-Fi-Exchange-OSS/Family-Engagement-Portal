@@ -44,6 +44,8 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public List<Assessment> starAssessments { get; set; }
         public List<Assessment> accessAssessments { get; set; }
         public AssessmentPerformanceLevel assessmentPerformanceLevel { get; set; }
+
+        public List<CanDoDescriptor> canDoDescriptors { get; set; }
     }
 
     public class AssessmentPerformanceLevel
@@ -191,5 +193,12 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public bool courseAverage { get; set; }
         public bool behavior { get; set; }
         public bool absence { get; set; }
+    }
+    public class CanDoDescriptor
+    {
+        public List<int> gradeLevels { get; set; }
+        public string subject { get; set; }
+        public int proficiency { get; set; }
+        public string description { get; set; }
     }
 }

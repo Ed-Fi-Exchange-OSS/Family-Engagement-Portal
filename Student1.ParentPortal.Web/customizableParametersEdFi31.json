@@ -482,29 +482,29 @@
   "accessAssessments": [
     {
       "title": "Access Scores",
-      "assessmentReportingMethodTypeDescriptor": "Composite (Overall) Scale Score",
-      "assessmentReportingMethodTypeDescriptorProficiency": "Composite (Overall) Proficiency Level"
+      "assessmentReportingMethodTypeDescriptor": "Composition Score",
+      "assessmentReportingMethodTypeDescriptorProficiency": "Proficiency Level"
     },
-    {
-      "title": "Access Scores",
-      "assessmentReportingMethodTypeDescriptor": "Listening Scale Score",
-      "assessmentReportingMethodTypeDescriptorProficiency": "Literacy Proficiency Level"
-    },
-    {
-      "title": "Access Scores",
-      "assessmentReportingMethodTypeDescriptor": "Reading Scale Score",
-      "assessmentReportingMethodTypeDescriptorProficiency": "Reading Proficiency Level"
-    },
-    {
-      "title": "Access Scores",
-      "assessmentReportingMethodTypeDescriptor": "Speaking Scale Score",
-      "assessmentReportingMethodTypeDescriptorProficiency": "Speaking Proficiency Level"
-    },
-    {
-      "title": "Access Scores",
-      "assessmentReportingMethodTypeDescriptor": "Writing Scale Score",
-      "assessmentReportingMethodTypeDescriptorProficiency": "Writing Proficiency Level"
-    }
+    //{
+    //  "title": "Access Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "Composition Score",
+    //  "assessmentReportingMethodTypeDescriptorProficiency": "Proficiency Level"
+    //},
+    //{
+    //  "title": "Access Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "Reading Scale Score",
+    //  "assessmentReportingMethodTypeDescriptorProficiency": "Reading Proficiency Level"
+    //},
+    //{
+    //  "title": "Access Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "Speaking Scale Score",
+    //  "assessmentReportingMethodTypeDescriptorProficiency": "Speaking Proficiency Level"
+    //},
+    //{
+    //  "title": "Access Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "Writing Scale Score",
+    //  "assessmentReportingMethodTypeDescriptorProficiency": "Writing Proficiency Level"
+    //}
   ],
   "objectiveAssessmentsIdentifiers": {
     "mathAssessmentIdentifier": "",
