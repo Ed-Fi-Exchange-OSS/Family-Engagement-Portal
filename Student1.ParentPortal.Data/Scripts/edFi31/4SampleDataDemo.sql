@@ -498,6 +498,48 @@ insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, Assessm
 values('STAAR SOCIAL STUDIES', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', @performanceLevelDescriptorMaster, 'iwenfwf319r9r9v8noAWWDQN9dq1', @studentMaleUSI, 1 );
 
 
+
+------------StudentAssessment-
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR READING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, '2011-10-29', @gradeLevelDescriptor);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR MATHEMATICS', 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, '2011-10-29', @gradeLevelDescriptor);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR WRITING', 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, '2011-10-29', @gradeLevelDescriptor);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR SCIENCE', 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, '2011-10-29', @gradeLevelDescriptor);
+insert into edfi.StudentAssessment(AssessmentIdentifier, Namespace, StudentAssessmentIdentifier, StudentUSI, AdministrationDate, WhenAssessedGradeLevelDescriptorId)
+values('STAAR SOCIAL STUDIES', 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, '2011-10-29', @gradeLevelDescriptor);
+
+
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR READING', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 500, @resultDatatypeTypeDescriptor);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR MATHEMATICS', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 450, @resultDatatypeTypeDescriptor);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR WRITING', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 500, @resultDatatypeTypeDescriptor);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR SCIENCE', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 450, @resultDatatypeTypeDescriptor);
+insert into edfi.StudentAssessmentScoreResult(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, StudentAssessmentIdentifier, StudentUSI, Result, ResultDatatypeTypeDescriptorId)
+values('STAAR SOCIAL STUDIES', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 500, @resultDatatypeTypeDescriptor);
+
+
+
+
+
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR READING', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', @performanceLevelDescriptorDidNotMeet, 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR MATHEMATICS', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', @performanceLevelDescriptorApproaches, 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR WRITING', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', @performanceLevelDescriptorDidNotMeet, 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR SCIENCE', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', @performanceLevelDescriptorDidNotMeet, 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 1 );
+insert into edfi.StudentAssessmentPerformanceLevel(AssessmentIdentifier, AssessmentReportingMethodDescriptorId, Namespace, PerformanceLevelDescriptorId, StudentAssessmentIdentifier, StudentUSI, PerformanceLevelMet)
+values('STAAR SOCIAL STUDIES', @assessmentReportingMethodDescriptor, 'uri://ed-fi.org/Assessment/Assessment.xml', @performanceLevelDescriptorMaster, 'iwenfwf319r9r9v8noAWWDQN9dq2', @studentFemaleUSI, 1 );
+
+update edfi.Assessment  set AssessmentTitle = 'STAAR Math' where AssessmentIdentifier = 'STAAR MATHEMATICS' 
+update edfi.Assessment  set AssessmentTitle = 'STAAR Reading' where AssessmentIdentifier = 'STAAR READING' 
 -- Adding Messages
 insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, EnglishMessage, DateSent, RecipientHasRead)
 values(605541, 2, 207260, 1, 777779, 'Message for Demo', '2011-04-2', 0);

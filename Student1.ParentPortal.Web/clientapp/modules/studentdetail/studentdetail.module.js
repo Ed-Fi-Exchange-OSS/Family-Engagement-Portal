@@ -102,13 +102,15 @@
                 };
 
                 ctrl.findWorstStarPerformanceLevelInterpretation = function () {
-                    var interpretations = ['bad', 'warning', 'good']; // The Client didn't need the last indicator for this section.
-
+                    var interpretations = ['bad', 'warning']; // The Client didn't need the last indicator for this section.
+                    var worstInterpretation = "";
                     interpretations.forEach(interpretation => {
-                        if (ctrl.model.assessment.assessmentIndicators.some(x => x.interpretation == interpretation))
-                            return interpretation;
+                        if (ctrl.model.assessment.starAssessments.some(x => x.interpretation == interpretation)) {
+                            worstInterpretation =  interpretation;
+                        }
+                            
                     });
-
+                    return worstInterpretation;
                 };
 
                 landingRouteService.getRoute().then(function (route) {
@@ -248,7 +250,7 @@
 
                     $scope.$on('studentARC', function (evt, data) {
                         ctrl.showARC = data;
-                        console.log("ARC",ctrl.showARC);
+                        console.log("ARC", ctrl.showARC);
                     });
 
                     ctrl.convertToDatesCalendar(ctrl.model);
@@ -257,18 +259,18 @@
                     $rootScope.loadingOverride = false;
 
                     ctrl.behaviorIndicatorCategories = [
-                        {
-                            tooltip: $translate.instant('Referrals'),
-                            textDisplay: $translate.instant('Referrals'),
-                            value: ctrl.model.behavior.yearToDateDisciplineReferralIncidentCount,
-                            interpretation: ctrl.model.behavior.referralInterpretation,
-                        },
-                        {
-                            tooltip: $translate.instant('Suspensions'),
-                            textDisplay: $translate.instant('Suspensions'),
-                            value: ctrl.model.behavior.yearToDateDisciplineSuspensionIncidentCount,
-                            interpretation: ctrl.model.behavior.suspensionInterpretation,
-                        }
+                        //{
+                        //    tooltip: $translate.instant('Referrals'),
+                        //    textDisplay: $translate.instant('Referrals'),
+                        //    value: ctrl.model.behavior.yearToDateDisciplineReferralIncidentCount,
+                        //    interpretation: ctrl.model.behavior.referralInterpretation,
+                        //},
+                        //{
+                        //    tooltip: $translate.instant('Suspensions'),
+                        //    textDisplay: $translate.instant('Suspensions'),
+                        //    value: ctrl.model.behavior.yearToDateDisciplineSuspensionIncidentCount,
+                        //    interpretation: ctrl.model.behavior.suspensionInterpretation,
+                        //}
                     ];
                     ctrl.attendanceIndicatorCategories = [
                         {
@@ -291,285 +293,13 @@
                         }
 
                     ];
+                    ctrl.starIndicatorCategories = [];
+
+
+
                     ctrl.currentPos = ctrl.studentIds.indexOf(parseInt(ctrl.currentStudent));
 
                     ctrl.gotoAnchor(ctrl.anchor);
-
-                    ctrl.accessAssessmentsold = [
-                        {
-                            "identifier": "AccessScores_2019",
-                            "title": "Access Scores",
-                            "administrationDate": "2019-02-12T05:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2019,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "359",
-                            "proficiencyLevel": "4.6",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Composite (Overall) Scale Score",
-                            "gradelevel": "Third grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2018",
-                            "title": "Access Scores",
-                            "administrationDate": "2018-04-19T04:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2018,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "314",
-                            "proficiencyLevel": "3.6",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Composite (Overall) Scale Score",
-                            "gradelevel": "Second grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2017",
-                            "title": "Access Scores",
-                            "administrationDate": "2017-05-02T20:31:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2017,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "301",
-                            "proficiencyLevel": "3.6",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Composite (Overall) Scale Score",
-                            "gradelevel": "First grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2019",
-                            "title": "Access Scores",
-                            "administrationDate": "2019-02-12T05:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2019,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "376",
-                            "proficiencyLevel": "4.5",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Listening Scale Score",
-                            "gradelevel": "Third grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2018",
-                            "title": "Access Scores",
-                            "administrationDate": "2018-04-19T04:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2018,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "389",
-                            "proficiencyLevel": "3.2",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Listening Scale Score",
-                            "gradelevel": "Second grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2017",
-                            "title": "Access Scores",
-                            "administrationDate": "2017-05-02T20:31:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2017,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "340",
-                            "proficiencyLevel": "3",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Listening Scale Score",
-                            "gradelevel": "First grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2019",
-                            "title": "Access Scores",
-                            "administrationDate": "2019-02-12T05:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2019,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "369",
-                            "proficiencyLevel": "5.9",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Reading Scale Score",
-                            "gradelevel": "Third grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2018",
-                            "title": "Access Scores",
-                            "administrationDate": "2018-04-19T04:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2018,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "322",
-                            "proficiencyLevel": "3.7",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Reading Scale Score",
-                            "gradelevel": "Second grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2017",
-                            "title": "Access Scores",
-                            "administrationDate": "2017-05-02T20:31:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2017,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "311",
-                            "proficiencyLevel": "4.6",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Reading Scale Score",
-                            "gradelevel": "First grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2019",
-                            "title": "Access Scores",
-                            "administrationDate": "2019-02-12T05:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2019,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "337",
-                            "proficiencyLevel": "4",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Speaking Scale Score",
-                            "gradelevel": "Third grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2018",
-                            "title": "Access Scores",
-                            "administrationDate": "2018-04-19T04:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2018,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "290",
-                            "proficiencyLevel": "3.3",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Speaking Scale Score",
-                            "gradelevel": "Second grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2017",
-                            "title": "Access Scores",
-                            "administrationDate": "2017-05-02T20:31:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2017,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "344",
-                            "proficiencyLevel": "4.6",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Speaking Scale Score",
-                            "gradelevel": "First grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2019",
-                            "title": "Access Scores",
-                            "administrationDate": "2019-02-12T05:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2019,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "350",
-                            "proficiencyLevel": "4",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Writing Scale Score",
-                            "gradelevel": "Third grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2018",
-                            "title": "Access Scores",
-                            "administrationDate": "2018-04-19T04:00:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2018,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "284",
-                            "proficiencyLevel": "3",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Writing Scale Score",
-                            "gradelevel": "Second grade"
-                        },
-                        {
-                            "identifier": "AccessScores_2017",
-                            "title": "Access Scores",
-                            "administrationDate": "2017-05-02T20:31:00",
-                            "shortDescription": null,
-                            "maxRawScore": null,
-                            "version": 2017,
-                            "totalScore": 0,
-                            "subsectionCount": 0,
-                            "subSections": [],
-                            "externalLink": null,
-                            "interpretation": null,
-                            "result": "257",
-                            "proficiencyLevel": "2.5",
-                            "performanceLevelMet": null,
-                            "reportingMethodCodeValue": "Writing Scale Score",
-                            "gradelevel": "First grade"
-                        }
-                    ]
-
-                    
-
 
                     api.students.getStudentAttendance(ctrl.currentStudent).then(function (data) {
 
@@ -600,20 +330,22 @@
                     api.students.getStudentBehavior(ctrl.currentStudent).then(function (data) {
                         ctrl.model.behavior = data;
                         ctrl.behaviorInterpretation = ctrl.model.behavior.interpretation;
-                        ctrl.behaviorIndicatorCategories = [
-                            {
-                                tooltip: $translate.instant('Referrals'),
-                                textDisplay: $translate.instant('Referrals'),
-                                value: ctrl.model.behavior.yearToDateDisciplineIncidentCount,
-                                interpretation: ctrl.model.behavior.referralInterpretation,
-                            },
-                            {
-                                tooltip: $translate.instant('Suspensions'),
-                                textDisplay: $translate.instant('Suspensions'),
-                                value: ctrl.model.behavior.yearToDateDisciplineIncidentCount,
-                                interpretation: ctrl.model.behavior.suspensionInterpretation,
-                            }
-                        ];
+
+                        var indicatorReferrals = {
+                            tooltip: $translate.instant('Referrals'),
+                            textDisplay: $translate.instant('Referrals'),
+                            value: ctrl.model.behavior.yearToDateDisciplineIncidentCount,
+                            interpretation: 'good',
+                        }
+                        var indicatorSuspensions = {
+                            tooltip: $translate.instant('Suspensions'),
+                            textDisplay: $translate.instant('Suspensions'),
+                            value: ctrl.model.behavior.yearToDateDisciplineIncidentCount,
+                            interpretation: 'good',
+                        }
+                        ctrl.behaviorIndicatorCategories.push(indicatorSuspensions);
+                        ctrl.behaviorIndicatorCategories.push(indicatorReferrals);
+                       
                     });
                     api.students.getStudentCourseGrades(ctrl.currentStudent).then(function (data) {
                         ctrl.model.courseGrades = data;
@@ -632,18 +364,18 @@
 
 
                         ctrl.model.assessment.accessAssessments.forEach(accessAssessment => {
-                                ctrl.accessOverall.push({ proficiencyLevel: accessAssessment.result, version: accessAssessment.version });
+                            ctrl.accessOverall.push({ proficiencyLevel: accessAssessment.result, version: accessAssessment.version });
                         })
 
-                       
+
 
                         ctrl.model.assessment.accessAssessments.forEach(accessAssessment => {
                             if (accessAssessment.objectiveAssessments.length > 0) {
                                 var listening = accessAssessment.objectiveAssessments.filter(x => x.identificationCode.includes('Listening'));
                                 if (listening !== null && listening !== undefined && listening.length > 0) {
-                                    ctrl.accessListening.push({ proficiencyLevel: listening[0].englishResult, version:accessAssessment.version });
+                                    ctrl.accessListening.push({ proficiencyLevel: listening[0].englishResult, version: accessAssessment.version });
                                 }
-                                
+
                             }
 
                         })
@@ -655,7 +387,7 @@
                                 }
 
                             }
-                            console.log(ctrl.accessReading);
+
                         })
                         ctrl.model.assessment.accessAssessments.forEach(accessAssessment => {
                             if (accessAssessment.objectiveAssessments.length > 0) {
@@ -683,47 +415,30 @@
                         //ctrl.accessSpeaking = ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Speaking'));
                         //ctrl.accessWriting = ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Writing'));
 
-                        ctrl.starGeneralIndicator = ctrl.findWorstStarPerformanceLevelInterpretation();
+                        
 
-                        ctrl.model.assessment.starAssessments[0].interpretation = ctrl.model.assessment.assessmentIndicators[1].interpretation;
-                        ctrl.model.assessment.starAssessments[1].interpretation = ctrl.model.assessment.assessmentIndicators[2].interpretation;
-                        ctrl.model.assessment.starAssessments[2].interpretation = ctrl.model.assessment.assessmentIndicators[3].interpretation;
+                        //ctrl.model.assessment.starAssessments[0].interpretation = ctrl.model.assessment.assessmentIndicators[1].interpretation;
+                        //ctrl.model.assessment.starAssessments[1].interpretation = ctrl.model.assessment.assessmentIndicators[2].interpretation;
+                        //ctrl.model.assessment.starAssessments[2].interpretation = ctrl.model.assessment.assessmentIndicators[3].interpretation;
 
-                        ctrl.model.assessment.starAssessments[0].performanceLevelMet = ctrl.model.assessment.assessmentIndicators[1].performanceLevelMet;
-                        ctrl.model.assessment.starAssessments[1].performanceLevelMet = ctrl.model.assessment.assessmentIndicators[2].performanceLevelMet;
-                        ctrl.model.assessment.starAssessments[2].performanceLevelMet = ctrl.model.assessment.assessmentIndicators[3].performanceLevelMet;
+                        //ctrl.model.assessment.starAssessments[0].performanceLevelMet = ctrl.model.assessment.assessmentIndicators[1].performanceLevelMet;
+                        //ctrl.model.assessment.starAssessments[1].performanceLevelMet = ctrl.model.assessment.assessmentIndicators[2].performanceLevelMet;
+                        //ctrl.model.assessment.starAssessments[2].performanceLevelMet = ctrl.model.assessment.assessmentIndicators[3].performanceLevelMet;
 
-                        ctrl.starIndicatorCategories = [];
+
 
                         ctrl.model.assessment.starAssessments.forEach(assessment => {
-                            if (assessment.identifier != null && assessment.identifier != '') {
-                                if (assessment.identifier.indexOf('EarlyLiteracy') >= 0) {
-                                    ctrl.starIndicatorCategories.push({
-                                        tooltip: "STAR Early Literacy",
-                                        textDisplay: "STAR EL",
-                                        value: ctrl.model.assessment.assessmentIndicators[1].performanceLevelMet,
-                                        interpretation: ctrl.model.assessment.assessmentIndicators[1].interpretation,
-                                    });
-                                }
-                                else if (assessment.identifier.indexOf('Math') >= 0) {
-                                    ctrl.starIndicatorCategories.push({
-                                        tooltip: "STAR Math",
-                                        textDisplay: "STAR Math",
-                                        value: ctrl.model.assessment.assessmentIndicators[2].performanceLevelMet,
-                                        interpretation: ctrl.model.assessment.assessmentIndicators[2].interpretation,
-                                    });
-                                }
-                                else {
-                                    ctrl.starIndicatorCategories.push({
-                                        tooltip: "STAR Reading",
-                                        textDisplay: "STAR Reading",
-                                        value: ctrl.model.assessment.assessmentIndicators[3].performanceLevelMet,
-                                        interpretation: ctrl.model.assessment.assessmentIndicators[3].interpretation,
-                                    });
-                                }
-                            }
-                        });
 
+                            var indicator = {
+                                tooltip: "STAAR",
+                                textDisplay: assessment.identifier,
+                                value: assessment.performanceLevelMet,
+                                interpretation: assessment.interpretation,
+                            }
+                            ctrl.starIndicatorCategories.push(indicator);
+
+                        });
+                        ctrl.starGeneralIndicator = ctrl.findWorstStarPerformanceLevelInterpretation();
                         if (ctrl.model.gradeLevel != 'First grade' && ctrl.model.gradeLevel != 'Second grade' && ctrl.model.gradeLevel != 'Kindergarten') {
 
                             for (let i = 0; i < ctrl.model.assessment.starAssessments.length; i++) {

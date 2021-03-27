@@ -118,6 +118,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
             foreach (var assessment in customparams.starAssessments)
             {
                 var newAssessment = await _studentRepository.GetStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
+                                       var performanceLevel = await _studentRepository.GetStudentAssesmentPerformanceLevel(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
                 if (newAssessment == null)
                 {
                     newAssessment = new Assessment();
@@ -125,7 +126,15 @@ namespace Student1.ParentPortal.Resources.Services.Students
                     newAssessment.Result = "0";
                     newAssessment.PerformanceLevelMet = "Not Yet Taken";
                     newAssessment.ReportingMethodCodeValue = assessment.assessmentReportingMethodTypeDescriptor;
+                    newAssessment.Interpretation = "";
                 }
+                if (performanceLevel != null) {
+                    newAssessment.Interpretation = InterpretAssessmentPerformanceLevel(performanceLevel.PerformanceLevelMet);
+                    newAssessment.PerformanceLevelMet = performanceLevel.PerformanceLevelMet;
+                }
+                
+                    
+
                 model.StarAssessments.Add(newAssessment);
             }
 

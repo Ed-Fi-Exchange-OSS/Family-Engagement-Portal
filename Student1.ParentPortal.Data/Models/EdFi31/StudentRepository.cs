@@ -1275,7 +1275,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                   Identifier = a.AssessmentIdentifier,
                                   MaxRawScore = (decimal)a.MaxRawScore,
                                   AdministrationDate = sa.AdministrationDate,
-                                  Result = sasr.Result,
+                                  Result = sasr.Result
                                   //ReportingMethodCodeValue = sasr.AssessmentReportingMethodType.CodeValue
                               }).FirstOrDefaultAsync();
             return data;

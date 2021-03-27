@@ -218,9 +218,19 @@
         "value": "At/Above Benchmark"
       },
       {
+        "interpretation": "bad",
+        "operator": "==",
+        "value": "Below Basic"
+      },
+      {
         "interpretation": "good",
         "operator": "==",
         "value": "Above Benchmark"
+      },
+      {
+        "interpretation": "good",
+        "operator": "==",
+        "value": "Advanced"
       },
       {
         "interpretation": "good",
@@ -450,32 +460,32 @@
       "getPerformanceLevel": false
     },
     {
-      "title": "STAR Early Literacy",
+      "title": "STAAR Early Literacy",
       "assessmentReportingMethodTypeDescriptor": "RICAS",
       "getPerformanceLevel": true
     },
     {
-      "title": "STAR Math",
+      "title": "STAAR Math",
       "assessmentReportingMethodTypeDescriptor": "RICAS",
       "getPerformanceLevel": true
     },
     {
-      "title": "STAR Reading",
+      "title": "STAAR Reading",
       "assessmentReportingMethodTypeDescriptor": "RICAS",
       "getPerformanceLevel": true
     }
   ],
   "starAssessments": [
+    //{
+    //  "title": "STAAR Early Literacy",
+    //  "assessmentReportingMethodTypeDescriptor": "Percentile rank"
+    //},
     {
-      "title": "STAR Early Literacy",
+      "title": "STAAR Math",
       "assessmentReportingMethodTypeDescriptor": "Percentile rank"
     },
     {
-      "title": "STAR Math",
-      "assessmentReportingMethodTypeDescriptor": "Percentile rank"
-    },
-    {
-      "title": "STAR Reading",
+      "title": "STAAR Reading",
       "assessmentReportingMethodTypeDescriptor": "Percentile rank"
     }
   ],
