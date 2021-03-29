@@ -96,10 +96,31 @@ declare @disciplineDescriptor int
 declare @assessmentReportingMethodDescriptor int
 select @assessmentReportingMethodDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Scale score'
 
- declare @absenceDescriptor int;
- select @absenceDescriptor = DescriptorId from edfi.Descriptor where Namespace like 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and Description = 'Unexcused Absence'
+declare @absenceDescriptor int;
+declare @absenceExcused int;
+declare @absenceUnExcused int;
+declare @absenceTardy int;
 
+select @absenceExcused = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and CodeValue = 'Excused Absence'
+select @absenceTardy = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and CodeValue = 'Tardy'
+select @absenceUnExcused = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and CodeValue = 'Unexcused Absence'
+select @absenceDescriptor = DescriptorId from edfi.Descriptor where Namespace like 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and Description = 'Unexcused Absence'
 
+ ----INSERTING Tardies and excused absences
+
+ insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
+values 
+(@absenceExcused, '2011-01-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
+(@absenceExcused, '2011-01-11',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
+(@absenceTardy, '2011-01-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
+(@absenceTardy, '2011-02-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
+(@absenceTardy, '2011-02-23',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'')
+
+ 
+ insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
+values 
+(@absenceExcused, '2011-06-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-04-06',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'')
 --Adding Student Absences
  insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
 values 
