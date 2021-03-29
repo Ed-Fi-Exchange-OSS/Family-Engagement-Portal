@@ -110,6 +110,7 @@
                         }
                             
                     });
+                    worstInterpretation = worstInterpretation == "" ? "good" : worstInterpretation;
                     return worstInterpretation;
                 };
 
@@ -299,13 +300,13 @@
                             tooltip: $translate.instant('Referrals'),
                             textDisplay: $translate.instant('Referrals'),
                             value: ctrl.model.behavior.yearToDateDisciplineIncidentCount,
-                            interpretation: 'good',
+                            interpretation: ctrl.model.behavior.interpretation
                         }
                         var indicatorSuspensions = {
                             tooltip: $translate.instant('Suspensions'),
                             textDisplay: $translate.instant('Suspensions'),
                             value: ctrl.model.behavior.yearToDateDisciplineIncidentCount,
-                            interpretation: 'good',
+                            interpretation: ctrl.model.behavior.interpretation,
                         }
                         ctrl.behaviorIndicatorCategories.push(indicatorSuspensions);
                         ctrl.behaviorIndicatorCategories.push(indicatorReferrals);

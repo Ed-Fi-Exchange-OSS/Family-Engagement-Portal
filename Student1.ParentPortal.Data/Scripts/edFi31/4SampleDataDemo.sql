@@ -241,29 +241,24 @@ INSERT INTO [ParentPortal].[Admin]([ElectronicMailAddress],[CreateDate],[LastMod
 
 
  --Update relationshisp incidents 
---insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
---values (22, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
---insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
---values (23, @highSchoolId, @studentFemaleUSI, @perpetratorDisciplineStudentDescriptor);
+insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+values (22, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
+insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+values (23, @highSchoolId, @studentFemaleUSI, @perpetratorDisciplineStudentDescriptor);
+insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+values (24, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
+insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+values (25, @highSchoolId, @studentFemaleUSI, @perpetratorDisciplineStudentDescriptor);
 
 
-
---insert into edfi.DisciplineAction(DisciplineActionIdentifier, DisciplineDate, StudentUSI, ResponsibilitySchoolId)
---values(26, '2011-04-22', @studentMaleUSI, @middleSchoolId);
---insert into edfi.DisciplineAction(DisciplineActionIdentifier, DisciplineDate, StudentUSI, ResponsibilitySchoolId)
---values(27, '2011-04-22', @studentFemaleUSI, @highSchoolId);
-
-
---select @disciplineDescriptor = DescriptorId from edfi.Descriptor where Namespace =  'uri://ed-fi.org/DisciplineDescriptor' and CodeValue = 'Removal from Classroom'
+insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
+values(22, '2011-04-22', 22, @highSchoolId, @studentMaleUSI);
+insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
+values(23, '2011-04-22', 22, @highSchoolId, @studentMaleUSI);
 --insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
---values(26, '2011-04-22', 22, @middleSchoolId, @studentMaleUSI);
---insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
---values(27, '2011-04-22', 23, @highSchoolId, @studentFemaleUSI);
+--values(24, '2011-04-22', 23, @highSchoolId, @studentFemaleUSI);
 
---insert into edfi.DisciplineActionDiscipline(DisciplineActionIdentifier, DisciplineDate, DisciplineDescriptorId,StudentUSI)
---values(26, '2011-04-22', @disciplineDescriptor, @studentMaleUSI);
---insert into edfi.DisciplineActionDiscipline(DisciplineActionIdentifier, DisciplineDate, DisciplineDescriptorId,StudentUSI)
---values(27, '2011-04-22', @disciplineDescriptor, @studentFemaleUSI);
+
 
 
 --  Homework
@@ -307,6 +302,17 @@ insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
 values('Normal Schedule', '2011-05-05', @highSchoolId)
 insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
 values('Normal Schedule', '2011-05-06', @highSchoolId)
+
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-02', @middleSchoolId)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-03', @middleSchoolId)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-04', @middleSchoolId)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-05', @middleSchoolId)
+insert into edfi.BellScheduleDate(BellScheduleName, Date, SchoolId)
+values('Normal Schedule', '2011-05-06', @middleSchoolId)
 
 -- ADDING ASSESSMENTS
 
