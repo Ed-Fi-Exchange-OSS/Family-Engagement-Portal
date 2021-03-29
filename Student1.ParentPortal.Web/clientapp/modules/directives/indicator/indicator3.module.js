@@ -15,15 +15,13 @@
         controller: ['$location', function ($location) {
             var ctrl = this;
 
+            ctrl.$onChanges = function (changes) {
+                ctrl.calculateWith();    
+            }
             ctrl.$onInit = function () {
                 if (!ctrl.interpretation)
                     ctrl.interpretation = ctrl.getGeneralInterpretation();
-                var indCatLength = 1;
-                if (ctrl.indicatorCategories != null && ctrl.indicatorCategories != undefined)
-                    indCatLength = ctrl.indicatorCategories.length;
-
-                ctrl.categoryWidth = 100 / indCatLength;
-                ctrl.textualEvaluation += ctrl.interpretation;
+                ctrl.calculateWith();
             }
 
             ctrl.getGeneralInterpretation = function () {
@@ -34,6 +32,16 @@
                             return interpretationTypes[x];
                     }
                 }
+            }
+            ctrl.calculateWith = function () {
+                var indCatLength = 1;
+                if (ctrl.indicatorCategories != null && ctrl.indicatorCategories != undefined) {
+                    indCatLength = ctrl.indicatorCategories.length;
+                }
+
+
+                ctrl.categoryWidth = 100 / indCatLength;
+                ctrl.textualEvaluation += ctrl.interpretation;
             }
             ctrl.isNotLast = function (i) {
                 return ctrl.indicatorCategories.indexOf(i) < ctrl.indicatorCategories.length - 1;

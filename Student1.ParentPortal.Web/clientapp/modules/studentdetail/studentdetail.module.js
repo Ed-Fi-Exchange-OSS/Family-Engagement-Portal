@@ -257,44 +257,8 @@
                     ctrl.model.attendanceEventsByMonth = ctrl.calculateCalendar(ctrl.model.studentCalendar);
 
                     $rootScope.loadingOverride = false;
-
-                    ctrl.behaviorIndicatorCategories = [
-                        //{
-                        //    tooltip: $translate.instant('Referrals'),
-                        //    textDisplay: $translate.instant('Referrals'),
-                        //    value: ctrl.model.behavior.yearToDateDisciplineReferralIncidentCount,
-                        //    interpretation: ctrl.model.behavior.referralInterpretation,
-                        //},
-                        //{
-                        //    tooltip: $translate.instant('Suspensions'),
-                        //    textDisplay: $translate.instant('Suspensions'),
-                        //    value: ctrl.model.behavior.yearToDateDisciplineSuspensionIncidentCount,
-                        //    interpretation: ctrl.model.behavior.suspensionInterpretation,
-                        //}
-                    ];
-                    ctrl.attendanceIndicatorCategories = [
-                        {
-                            tooltip: "Unexcused Absences",
-                            textDisplay: "Abv Unexcused Absences",
-                            value: ctrl.model.attendance.unexcusedAttendanceEvents.length,
-                            interpretation: ctrl.model.attendance.unexcusedInterpretation,
-                        },
-                        {
-                            tooltip: "Excused Absences",
-                            textDisplay: "Abv Excused Absences",
-                            value: ctrl.model.attendance.excusedAttendanceEvents.length,
-                            interpretation: ctrl.model.attendance.excusedInterpretation,
-                        },
-                        {
-                            tooltip: "Tardy Absences",
-                            textDisplay: "Abv Tardy Absences",
-                            value: ctrl.model.attendance.tardyAttendanceEvents.length,
-                            interpretation: ctrl.model.attendance.tardyInterpretation,
-                        }
-
-                    ];
+                    ctrl.behaviorIndicatorCategories = [];
                     ctrl.starIndicatorCategories = [];
-
 
 
                     ctrl.currentPos = ctrl.studentIds.indexOf(parseInt(ctrl.currentStudent));
