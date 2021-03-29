@@ -101,18 +101,32 @@
                     return ctrl.studentIds[ctrl.currentPos + 1];
                 };
 
+               
+                ctrl.findWorstAbsencePerformanceLevelInterpretation = function () {
+                    var interpretations = ['bad', 'warning']; // The Client didn't need the last indicator for this section.
+                    var worstInterpretation = "";
+                    interpretations.forEach(interpretation => {
+                        if (ctrl.attendanceIndicatorCategories.some(x => x.interpretation == interpretation)) {
+                            worstInterpretation = interpretation;
+                        }
+
+                    });
+                    worstInterpretation = worstInterpretation == "" ? "good" : worstInterpretation;
+                    return worstInterpretation;
+                };
                 ctrl.findWorstStarPerformanceLevelInterpretation = function () {
                     var interpretations = ['bad', 'warning']; // The Client didn't need the last indicator for this section.
                     var worstInterpretation = "";
                     interpretations.forEach(interpretation => {
                         if (ctrl.model.assessment.starAssessments.some(x => x.interpretation == interpretation)) {
-                            worstInterpretation =  interpretation;
+                            worstInterpretation = interpretation;
                         }
-                            
+
                     });
                     worstInterpretation = worstInterpretation == "" ? "good" : worstInterpretation;
                     return worstInterpretation;
                 };
+
 
                 landingRouteService.getRoute().then(function (route) {
                     ctrl.urls.push({ displayName: $translate.instant('Home'), url: route });
@@ -269,7 +283,7 @@
                     api.students.getStudentAttendance(ctrl.currentStudent).then(function (data) {
 
                         ctrl.model.attendance = data;
-                        ctrl.absentInterpretation = ctrl.model.attendance.absentInterpretation;
+                        
                         ctrl.attendanceIndicatorCategories = [
                             {
                                 tooltip: "Unexcused Absences",
@@ -291,6 +305,8 @@
                             }
 
                         ];
+                       
+                        ctrl.absentInterpretation = ctrl.findWorstAbsencePerformanceLevelInterpretation();
                     });
                     api.students.getStudentBehavior(ctrl.currentStudent).then(function (data) {
                         ctrl.model.behavior = data;
