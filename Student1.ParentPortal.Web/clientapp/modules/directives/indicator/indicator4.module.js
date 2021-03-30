@@ -18,7 +18,7 @@
             var ctrl = this;
 
             ctrl.$onChanges = function (changes) {
-               
+                ctrl.setProfencyLevels();
             }
 
             ctrl.$onInit = function () {
@@ -29,20 +29,22 @@
                 if (ctrl.subject == 'No Subject' || !ctrl.data[0])
                     return;
 
+                ctrl.setProfencyLevels();
+            };
+            ctrl.setProfencyLevels = function myfunction() {
                 ctrl.gradeLevel = ctrl.getGradeLevel();
                 ctrl.proficiencyLevel = Math.floor(ctrl.data[0].proficiencyLevel) + 1;
                 if (ctrl.proficiencyLevel == 7)
                     ctrl.proficiencyLevel--;
-
+                
                 let existDescription = ctrl.canDoDescriptors
                     .find(cdd => cdd.subject == ctrl.subject
-                        && cdd.gradeLevels.some(x => x == (ctrl.gradeLevel+1))
+                        && cdd.gradeLevels.some(x => x == (ctrl.gradeLevel + 1))
                         && cdd.proficiency == ctrl.proficiencyLevel);
-
+                
                 if (existDescription != null && existDescription != undefined)
                     ctrl.description = existDescription.description;
-            };
-
+            }
             ctrl.getGradeLevel = function () {
                 switch (ctrl.data[0].gradelevel) {
                     case 'First grade':
