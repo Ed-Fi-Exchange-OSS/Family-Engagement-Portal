@@ -16,6 +16,8 @@
             var ctrl = this;
 
             ctrl.$onChanges = function (changes) {
+                if (!ctrl.interpretation)
+                    ctrl.interpretation = ctrl.getGeneralInterpretation();
                 ctrl.calculateWith();    
             }
             ctrl.$onInit = function () {
@@ -41,7 +43,10 @@
 
 
                 ctrl.categoryWidth = 100 / indCatLength;
-                ctrl.textualEvaluation += ctrl.interpretation;
+                if (ctrl.interpretation !== undefined) {
+                    ctrl.textualEvaluation += ctrl.interpretation;
+                }
+                
             }
             ctrl.isNotLast = function (i) {
                 return ctrl.indicatorCategories.indexOf(i) < ctrl.indicatorCategories.length - 1;

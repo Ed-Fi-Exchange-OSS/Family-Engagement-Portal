@@ -13,16 +13,17 @@ angular
 
                 var ctrl = this;
 
-                const calendarsPerRow = 4;
+                const calendarsperrow = 4;
                 ctrl.model =
-                    // Group by rows of 4 months each
-                    scope.model.reduce(function (accumulator, currentValue, currentIndex) {
-                        let idx = ~~(currentIndex / calendarsPerRow); // Integer result of division
+                    // group by rows of 4 months each
+                    scope.model.reduce(function (accumulator, currentvalue, currentindex) {
+                        let idx = ~~(currentindex / calendarsperrow); // integer result of division
                         if (accumulator[idx] == null) { accumulator[idx] = []; }
                         let row = accumulator[idx];
-                        row.push(currentValue);
+                        row.push(currentvalue);
                         return accumulator;
                     }, []);
+                console.log(ctrl.model);
             }]
         };
     }]);

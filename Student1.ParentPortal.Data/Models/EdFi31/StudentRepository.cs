@@ -57,22 +57,27 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
         public async Task<List<ParentPortal.Models.Student.DisciplineIncident>> GetStudentDisciplineIncidentsAsync(int studentUsi, string disciplineIncidentDescriptor, DateTime date)
         {
             var data = await(from sdia in _edFiDb.StudentDisciplineIncidentAssociations
-                              join di in _edFiDb.DisciplineIncidents on new { sdia.IncidentIdentifier, sdia.SchoolId } equals new { di.IncidentIdentifier, di.SchoolId }
-                              join spcd in _edFiDb.Descriptors on sdia.StudentParticipationCodeDescriptorId equals spcd.DescriptorId
-                              join dadi in _edFiDb.DisciplineActionStudentDisciplineIncidentAssociations
+                              
+                             join di in _edFiDb.DisciplineIncidents on new { sdia.IncidentIdentifier, sdia.SchoolId } equals new { di.IncidentIdentifier, di.SchoolId }
+                              
+                             join spcd in _edFiDb.Descriptors on sdia.StudentParticipationCodeDescriptorId equals spcd.DescriptorId
+                              
+                             join dadi in _edFiDb.DisciplineActionStudentDisciplineIncidentAssociations
                                       on new { di.IncidentIdentifier, di.SchoolId }
                                   equals new { dadi.IncidentIdentifier, dadi.SchoolId }
-                              join da in _edFiDb.DisciplineActions
+                              
+                             join da in _edFiDb.DisciplineActions
                                       on new { dadi.DisciplineActionIdentifier, dadi.StudentUsi, dadi.DisciplineDate }
                                   equals new { da.DisciplineActionIdentifier, da.StudentUsi, da.DisciplineDate }
-                              join dad in _edFiDb.DisciplineActionDisciplines
+                              
+                             join dad in _edFiDb.DisciplineActionDisciplines
                                       on new { da.DisciplineActionIdentifier, da.StudentUsi, da.DisciplineDate }
                                   equals new { dad.DisciplineActionIdentifier, dad.StudentUsi, dad.DisciplineDate }
                               join dt in _edFiDb.Descriptors on dad.DisciplineDescriptorId equals dt.DescriptorId
-                              join s in _edFiDb.Students
-                                                  .Include(x => x.StudentSectionAssociations)
-                                              on sdia.StudentUsi equals s.StudentUsi
-                              where sdia.StudentUsi == studentUsi && _edFiDb.Sessions.Where(x => x.SchoolId == sdia.SchoolId && x.BeginDate <= date && x.EndDate >= date).Max(x => x.BeginDate) <= di.IncidentDate
+                             join s in _edFiDb.Students
+                                                 .Include(x => x.StudentSectionAssociations)
+                                             on sdia.StudentUsi equals s.StudentUsi
+                             where sdia.StudentUsi == studentUsi && _edFiDb.Sessions.Where(x => x.SchoolId == sdia.SchoolId && x.BeginDate <= date && x.EndDate >= date).Max(x => x.BeginDate) <= di.IncidentDate
                               && spcd.CodeValue == disciplineIncidentDescriptor
                               orderby di.IncidentDate descending
                               select new
@@ -334,18 +339,25 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
             var missingAssignments = await (from gbe in _edFiDb.GradebookEntries
                                             join ssa in _edFiDb.StudentSectionAssociations
                                                     on new { gbe.LocalCourseCode, gbe.SchoolId, gbe.SchoolYear, gbe.SectionIdentifier, gbe.SessionName}
-                                                equals new { ssa.LocalCourseCode, ssa.SchoolId, ssa.SchoolYear, ssa.SectionIdentifier, ssa.SessionName}
+                                                    equals new { ssa.LocalCourseCode, ssa.SchoolId, ssa.SchoolYear, ssa.SectionIdentifier, ssa.SessionName}
+                                            
                                             join staffsa in _edFiDb.StaffSectionAssociations
                                                     on new {gbe.LocalCourseCode, gbe.SchoolId, gbe.SchoolYear, gbe.SectionIdentifier, gbe.SessionName }
                                                     equals new {staffsa.LocalCourseCode, staffsa.SchoolId, staffsa.SchoolYear, staffsa.SectionIdentifier, staffsa.SessionName }
+                                            
                                             join staff in _edFiDb.Staffs on staffsa.StaffUsi equals staff.StaffUsi
+                                            
                                             join co in _edFiDb.CourseOfferings
                                                     on new { gbe.LocalCourseCode, gbe.SchoolId, gbe.SchoolYear, gbe.SessionName }
-                                                equals new { co.LocalCourseCode, co.SchoolId, co.SchoolYear, co.SessionName }
+                                                    equals new { co.LocalCourseCode, co.SchoolId, co.SchoolYear, co.SessionName }
+                                            
                                             join c in _edFiDb.Courses
                                                     on new { co.EducationOrganizationId, co.CourseCode }
                                                     equals new { c.EducationOrganizationId, c.CourseCode }
+
+
                                             from gbed in _edFiDb.Descriptors.Where(x => x.DescriptorId == gbe.GradebookEntryTypeDescriptorId)
+
                                             from sge in _edFiDb.StudentGradebookEntries.Where(x => x.StudentUsi == studentUsi
                                                                                                  && x.DateAssigned == gbe.DateAssigned
                                                                                                  && x.GradebookEntryTitle == gbe.GradebookEntryTitle
@@ -1273,7 +1285,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                   //Version = a.Version,
                                   Title = a.AssessmentTitle,
                                   Identifier = a.AssessmentIdentifier,
-                                  MaxRawScore = (decimal)a.MaxRawScore,
+                                  MaxRawScore = (decimal)(a.MaxRawScore ?? 0) ,
                                   AdministrationDate = sa.AdministrationDate,
                                   Result = sasr.Result
                                   //ReportingMethodCodeValue = sasr.AssessmentReportingMethodType.CodeValue

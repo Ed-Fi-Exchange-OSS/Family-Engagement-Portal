@@ -17,7 +17,7 @@
 
 .calendar-engagement th, .calendar-engagement td {
     text-align: center;
-    /*min-width: 40px;*/
+    min-width: 40px;
     background: white;
     color: #454545;
     height: unset;

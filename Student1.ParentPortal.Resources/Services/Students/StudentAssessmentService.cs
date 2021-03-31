@@ -78,6 +78,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
                 else
                 {
                     var newAssessment = await _studentRepository.GetStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
+                    var objectivesAssessments = await _studentRepository.GetStudentObjectiveAssessments(studentUsi);
                     if (newAssessment == null)
                     {
                         newAssessment = new Assessment();
@@ -85,6 +86,10 @@ namespace Student1.ParentPortal.Resources.Services.Students
                         newAssessment.Result = "-";
                         newAssessment.PerformanceLevelMet = "Not Yet Taken";
                         newAssessment.ReportingMethodCodeValue = assessment.assessmentReportingMethodTypeDescriptor;
+                    }
+                    else {
+                        newAssessment.ObjectiveAssessments = objectivesAssessments.Where(x => x.AssessmentIdentifier == newAssessment.Identifier).ToList();
+                        
                     }
                     model.ArcAssessments.Add(newAssessment);
                 }
@@ -118,7 +123,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
             foreach (var assessment in customparams.starAssessments)
             {
                 var newAssessment = await _studentRepository.GetStudentAssesmentScore(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
-                                       var performanceLevel = await _studentRepository.GetStudentAssesmentPerformanceLevel(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
+                var performanceLevel = await _studentRepository.GetStudentAssesmentPerformanceLevel(studentUsi, assessment.assessmentReportingMethodTypeDescriptor, assessment.title);
                 if (newAssessment == null)
                 {
                     newAssessment = new Assessment();

@@ -1398,48 +1398,53 @@
       "assessmentReportingMethodTypeDescriptor": "ARC Reading Level (Baseline)"
     },
     {
-      "title": "ARC ENIL Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Days on Current Power Goal"
-    },
-    {
-      "title": "ARC ENIL Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Power Goal Abbreviation"
-    },
-    {
-      "title": "ARC ENIL Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Reading Level"
-    },
-    {
-      "title": "ARC ENIL Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Score"
-    },
-    {
-      "title": "ARC ENIL Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Baseline Reporting Date"
-    },
-    {
       "title": "ARC IRLA Scores",
       "assessmentReportingMethodTypeDescriptor": "ARC Reading Level (Baseline)"
-    },
-    {
-      "title": "ARC IRLA Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Days on Current Power Goal"
-    },
-    {
-      "title": "ARC IRLA Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Power Goal Abbreviation"
-    },
-    {
-      "title": "ARC IRLA Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Reading Level"
-    },
-    {
-      "title": "ARC IRLA Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Score"
-    },
-    {
-      "title": "ARC IRLA Scores",
-      "assessmentReportingMethodTypeDescriptor": "ARC Baseline Reporting Date"
     }
+    //,
+    //{
+    //  "title": "ARC ENIL Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Days on Current Power Goal"
+    //},
+    //{
+    //  "title": "ARC ENIL Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Power Goal Abbreviation"
+    //},
+    //{
+    //  "title": "ARC ENIL Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Reading Level"
+    //},
+    //{
+    //  "title": "ARC ENIL Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Score"
+    //},
+    //{
+    //  "title": "ARC ENIL Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Baseline Reporting Date"
+    //},
+    //{
+    //  "title": "ARC IRLA Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Reading Level (Baseline)"
+    //},
+    //{
+    //  "title": "ARC IRLA Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Days on Current Power Goal"
+    //},
+    //{
+    //  "title": "ARC IRLA Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Power Goal Abbreviation"
+    //},
+    //{
+    //  "title": "ARC IRLA Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Reading Level"
+    //},
+    //{
+    //  "title": "ARC IRLA Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Score"
+    //},
+    //{
+    //  "title": "ARC IRLA Scores",
+    //  "assessmentReportingMethodTypeDescriptor": "ARC Baseline Reporting Date"
+    //}
   ]
 }

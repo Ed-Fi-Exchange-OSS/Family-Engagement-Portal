@@ -165,9 +165,32 @@ select @perpetratorDisciplineDescriptor = DescriptorId from  edfi.Descriptor whe
 select @reporterDisciplineDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/DisciplineIncidentParticipationCodeDescriptor' and CodeValue = 'Reporter'
 
 insert into edfi.DisciplineIncident(IncidentIdentifier, SchoolId, IncidentDate, IncidentDescription)
-values (22, @highSchoolId, '2011-04-21', 'Student playing with a toy in class.');
-insert into edfi.DisciplineIncident(IncidentIdentifier, SchoolId, IncidentDate, IncidentDescription)
-values (23, @middleSchoolId, '2011-04-20', 'Student missbehaving in class.');
+values (30, @middleSchoolId, '2011-06-04', 'Student playing with a toy in class.');
+
+INSERT INTO [edfi].[DisciplineAction]
+           ([DisciplineActionIdentifier],[DisciplineDate],[StudentUSI],[DisciplineActionLength],[ActualDisciplineActionLength]
+           ,[DisciplineActionLengthDifferenceReasonDescriptorId],[RelatedToZeroTolerancePolicy],[ResponsibilitySchoolId]
+           ,[AssignmentSchoolId],[ReceivedEducationServicesDuringExpulsion],[IEPPlacementMeetingIndicator],[Discriminator]
+           ,[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           (30,'2011-06-04',@studentMaleUSI,1,1,787,NULL,@middleSchoolId,NULL,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),47760)
+
+INSERT INTO [edfi].[DisciplineActionDiscipline]
+           ([DisciplineActionIdentifier],[DisciplineDate],[DisciplineDescriptorId],[StudentUSI],[CreateDate])
+     VALUES
+           (30,'2011-06-04',797,@studentMaleUSI,GETDATE())
+
+
+INSERT INTO [edfi].[StudentDisciplineIncidentAssociation]
+           ([IncidentIdentifier],[SchoolId],[StudentUSI],[StudentParticipationCodeDescriptorId],[Discriminator]
+           ,[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           (30,@middleSchoolId,@studentMaleUSI,2258,null,GETDATE(),GETDATE(),NEWID(),17743)
+
+INSERT INTO [edfi].[DisciplineActionStudentDisciplineIncidentAssociation]
+           ([DisciplineActionIdentifier],[DisciplineDate],[IncidentIdentifier],[SchoolId],[StudentUSI],[CreateDate])
+     VALUES
+           (30,'2011-06-04',30,@middleSchoolId,@studentMaleUSI,GETDATE())
 
 declare @perpetratorDisciplineStudentDescriptor int;
 declare @reporterDisciplineStudentDescriptor int;
@@ -184,23 +207,10 @@ select @2gradeLevelDescriptor = DescriptorId from  edfi.Descriptor where Namespa
 select @resultDatatypeTypeDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Integer'
 
 
---select * from edfi.StudentDisciplineIncidentAssociation
- --Update relationshisp incidents 
---insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
---values (22, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
---insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
---values (23, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
-
-
-
 --  Homework
 declare @homeWorkDescriptor int;
 select @homeWorkDescriptor = DescriptorId from edfi.Descriptor where Namespace =  'uri://ed-fi.org/GradebookEntryTypeDescriptor' and Description = 'Homework'
 update edfi.Descriptor set CodeValue = 'HMWK' where DescriptorId = @homeWorkDescriptor;
-
-
-
-
 
 -- Adding students missing asignments
 insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
@@ -687,7 +697,7 @@ values
 (@studentMaleUSI,'P', 'Demonstrate awareness of career options in the community','Tenth grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA',GETDATE(),GETDATE(),null)
 
 -----------------------------------------------------------------------------------------------------
-go
+
 
 declare @studentFemaleGoalAcademic AS int
 declare @studentFemaleGoalCareer AS int
@@ -740,7 +750,7 @@ INSERT INTO [ParentPortal].[StudentGoalStep]
 		   
 		   (@studentMaleGoalPersonal,'Identify career clusters in occupations within the community that I would be interested in',0,GETDATE(),GETDATE(),1,NULL)
 
-	GO
+
 
 --255901001  - Grand Bend High School
 --@AssessmentCategoryDescriptorId    State English proficiency test
@@ -748,7 +758,7 @@ INSERT INTO [ParentPortal].[StudentGoalStep]
 --AssesmentIdentifier : AccessScores_2019
 --Namespace : uri://ed-fi.org/Assessment/Assessment.xml
 
-
+go
 declare @highSchoolId as int = 255901001
 
 
@@ -1321,6 +1331,421 @@ INSERT INTO [edfi].[StudentGradebookEntry]
      VALUES
            ('2011-01-04','2011-04-20','Essay Delivery','SCI-06','255901044','2011','25590104405Trad212SCI0622011'
            ,'2010-2011 Spring Semester',721,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+go
+
+--Descriptors variables
+
+--Gender Descriptors
+declare @femaleSexDescriptorId int;
+declare @maleSexDescriptorId int;
+
+declare @staffUSIPrincipalGrandBenHighSchool int;
+declare @electronictWorkMailDescriptor int
+
+declare @fatherRelationDescriptor int;
+declare @motherRelationDescriptor int;
+
+--Roles's users ans USIs
+
+declare @studentMaleUSI AS int
+declare @studentFemaleUSI AS int
+
+--descriptors Assignment 
+select @femaleSexDescriptorId = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/SexDescriptor' and CodeValue = 'Female' -- 2091
+select @maleSexDescriptorId = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/SexDescriptor' and CodeValue = 'Male' -- 2090
+select @electronictWorkMailDescriptor = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ElectronicMailTypeDescriptor' and CodeValue = 'Work'
+select @fatherRelationDescriptor = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/RelationDescriptor' and Description = 'Father'
+select @motherRelationDescriptor = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/RelationDescriptor' and Description = 'Mother'
+declare @AssessmentCategoryDescriptorId int         -- 119 uri://ed-fi.org/AssessmentCategoryDescriptor State English proficiency test
+declare @AcademicSubjectDescriptorId int		    -- 31	uri://ed-fi.org/AcademicSubjectDescriptor	English	
+declare @ResultDatatypeTypeDescriptorInteger int	-- 2013 @ResultDatatypeTypeDescriptorInteger	uri://ed-fi.org/ResultDatatypeTypeDescriptor	Integer	
+declare @ResultDatatypeTypeDescriptorDecimal int     --@ResultDatatypeTypeDescriptorDecimal	uri://ed-fi.org/ResultDatatypeTypeDescriptor	Decimal
+declare @AssessmentReportingMethodDescriptorProfencyLevel int --@ResultDatatypeTypeDescriptorDecimal	uri://ed-fi.org/AssessmentReportingMethodDescriptor	Proficiency level
+declare @AssessmentReportingMethodDescriptorRawScore int      --@AssessmentReportingMethodDescriptorRawScore	uri://ed-fi.org/AssessmentReportingMethodDescriptor	Raw score	Raw score
+declare @AssessmentReportingMethodDescriptorScaleScore int    --@AssessmentReportingMethodDescriptorScaleScore	uri://ed-fi.org/AssessmentReportingMethodDescriptor	Scale score
+declare @GradeLevelDescriptor int							  --@GradeLevelDescriptor	uri://ed-fi.org/GradeLevelDescriptor	First grade
+declare @PerformaceLevelDescriptor int						  --@GradeLevelDescriptor	uri://ed-fi.org/PerformanceLevelDescriptor	Above Benchmark
+declare @ResultDatatypeTypeDescriptorLevel int
+
+
+select  @ResultDatatypeTypeDescriptorLevel = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Level'
+select  @AssessmentCategoryDescriptorId = descriptorid from edfi.Descriptor where Namespace = 'AssessmentCategoryDescriptor' and CodeValue = 'English proficiency test'
+select  @AcademicSubjectDescriptorId = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AcademicSubjectDescriptor' and CodeValue = 'English'
+select  @ResultDatatypeTypeDescriptorInteger = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Integer'
+select  @ResultDatatypeTypeDescriptorDecimal = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Decimal'
+select  @AssessmentReportingMethodDescriptorProfencyLevel = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Proficiency level'
+select  @AssessmentReportingMethodDescriptorRawScore = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Raw score'
+select  @AssessmentReportingMethodDescriptorScaleScore = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Scale score'
+select  @GradeLevelDescriptor = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/GradeLevelDescriptor' and CodeValue = 'First grade'
+select  @PerformaceLevelDescriptor = descriptorid from edfi.Descriptor where Namespace = 'uri://ed-fi.org/PerformanceLevelDescriptor' and CodeValue = 'Above Benchmark'
+
+select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
+select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
+
+declare @AssesmentIdentifierFemale2019 uniqueidentifier
+declare @AssesmentIdentifierFemale20192 uniqueidentifier
+
+select  @AssesmentIdentifierFemale2019 = newid()
+select  @AssesmentIdentifierFemale20192 = newid()
+
+-----------------------------------------------------
+--Assesment
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle,EducationOrganizationId, AssessmentVersion)
+values('ARC_ENIL', 'uri://ed-fi.org/Assessment/Assessment.xml', 'ARC ENIL Scores', 255901001, 2019);
+
+insert into edfi.Assessment(AssessmentIdentifier, Namespace, AssessmentTitle,EducationOrganizationId, AssessmentVersion)
+values('ARC_IRLA', 'uri://ed-fi.org/Assessment/Assessment.xml', 'ARC IRLA Scores', 255901001, 2019);
+
+-------------Assesment Score
+INSERT INTO [edfi].[AssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace]
+           ,[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',null,null,
+		   @ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[AssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace]
+           ,[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',null,null,
+		   @ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+
+-----------------------Objetive Assesment
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_ENIL','ARC Reading Level','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_ENIL','ARC Days on Current Power Goal','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_ENIL','ARC Reading Level (Baseline)','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_ENIL','ARC Score','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_ENIL','ARC Baseline Reporting Date','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+
+			--*************************************
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_IRLA','ARC Reading Level','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_IRLA','ARC Days on Current Power Goal','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_IRLA','ARC Reading Level (Baseline)','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_IRLA','ARC Score','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+INSERT INTO [edfi].[ObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[MaxRawScore]
+           ,[PercentOfAssessment],[Nomenclature],[Description],[ParentIdentificationCode]
+           ,[AcademicSubjectDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate]
+           ,[Id],[ChangeVersion])
+     VALUES
+           ('ARC_IRLA','ARC Baseline Reporting Date','uri://ed-fi.org/Assessment/Assessment.xml',null,
+		    null,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),15000)
+
+-----------------------Objetive AssesmentScore
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Days on Current Power Goal',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorInteger,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level (Baseline)',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Score',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Baseline Reporting Date',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+--*************************************************************
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Days on Current Power Goal',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorInteger,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level (Baseline)',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Score',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[ObjectiveAssessmentScore]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode]
+           ,[Namespace],[MinimumScore],[MaximumScore],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Baseline Reporting Date',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',null,null,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+----------------------------------------------------------------------------------------------------------------
+
+--Student assesment
+INSERT INTO [edfi].[StudentAssessment]
+           ([AssessmentIdentifier],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[AdministrationDate],[AdministrationEndDate]
+		   ,[SerialNumber],[AdministrationLanguageDescriptorId],[AdministrationEnvironmentDescriptorId],[RetestIndicatorDescriptorId]
+           ,[ReasonNotTestedDescriptorId],[WhenAssessedGradeLevelDescriptorId],[EventCircumstanceDescriptorId],[EventDescription]
+           ,[SchoolYear],[PlatformTypeDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('ARC_ENIL','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'20170502',null
+           ,null,null,null,null,null,null
+           ,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),103939)
+
+INSERT INTO [edfi].[StudentAssessment]
+           ([AssessmentIdentifier],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[AdministrationDate],[AdministrationEndDate]
+		   ,[SerialNumber],[AdministrationLanguageDescriptorId],[AdministrationEnvironmentDescriptorId],[RetestIndicatorDescriptorId]
+           ,[ReasonNotTestedDescriptorId],[WhenAssessedGradeLevelDescriptorId],[EventCircumstanceDescriptorId],[EventDescription]
+           ,[SchoolYear],[PlatformTypeDescriptorId],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('ARC_IRLA','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,'20170502',null
+           ,null,null,null,null,null,null
+           ,null,null,null,null,null,GETDATE(),GETDATE(),NEWID(),103939)
+
+----------------------
+INSERT INTO [edfi].[StudentAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace],[StudentAssessmentIdentifier]
+           ,[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',
+		   @AssesmentIdentifierFemale2019,@studentFemaleUSI,3.9,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[Namespace],[StudentAssessmentIdentifier]
+           ,[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'uri://ed-fi.org/Assessment/Assessment.xml',
+		   @AssesmentIdentifierFemale20192,@studentFemaleUSI,4.9,@ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+
+--student assesmnet objteinces
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_ENIL','ARC Reading Level','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_ENIL','ARC Days on Current Power Goal','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_ENIL','ARC Reading Level (Baseline)','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_ENIL','ARC Score','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_ENIL','ARC Baseline Reporting Date','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,GETDATE())
+
+--*****************************************************************************************
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_IRLA','ARC Reading Level','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_IRLA','ARC Days on Current Power Goal','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_IRLA','ARC Reading Level (Baseline)','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_IRLA','ARC Score','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
+           ([AssessmentIdentifier],[IdentificationCode],[Namespace],[StudentAssessmentIdentifier],[StudentUSI],[CreateDate])
+     VALUES
+           ('ARC_IRLA','ARC Baseline Reporting Date','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,GETDATE())
+
+
+
+--student objetives scores
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'1Az',
+		   @ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Days on Current Power Goal',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,15,
+		   @ResultDatatypeTypeDescriptorInteger,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level (Baseline)',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'2R',
+		   @ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Score',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,10,
+		   @ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_ENIL',@AssessmentReportingMethodDescriptorRawScore,'ARC Baseline Reporting Date',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale2019,@studentFemaleUSI,'9/17/2019',
+		   @ResultDatatypeTypeDescriptorLevel,GETDATE())
+--*************************************************************************
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,'1R',
+		   @ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Days on Current Power Goal',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,22,
+		   @ResultDatatypeTypeDescriptorInteger,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Reading Level (Baseline)',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,'2R',
+		   @ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Score',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,5.42,
+		   @ResultDatatypeTypeDescriptorDecimal,GETDATE())
+
+INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
+           ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
+           ,[StudentAssessmentIdentifier],[StudentUSI],[Result],[ResultDatatypeTypeDescriptorId],[CreateDate])
+     VALUES
+           ('ARC_IRLA',@AssessmentReportingMethodDescriptorRawScore,'ARC Baseline Reporting Date',
+		   'uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierFemale20192,@studentFemaleUSI,'9/17/2019',
+		   @ResultDatatypeTypeDescriptorLevel,GETDATE())
+
+
 
 
 

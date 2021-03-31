@@ -337,6 +337,11 @@
                     api.students.getStudentAssessments(ctrl.currentStudent).then(function (data) {
                         ctrl.model.assessment = data;
 
+                        //Assing ARC assesments
+                        ctrl.model.arcAssessments = ctrl.model.assessment.arcAssessments;
+                        ctrl.model.arcAssessments.gradeLevel = ctrl.model.gradeLevel;
+
+
                         ctrl.accessOverall = []; //ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Overall'));
                         ctrl.accessListening = []; //ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Listening'));
                         ctrl.accessReading = []; //ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Reading'));
@@ -347,9 +352,6 @@
                         ctrl.model.assessment.accessAssessments.forEach(accessAssessment => {
                             ctrl.accessOverall.push({ proficiencyLevel: accessAssessment.result, version: accessAssessment.version });
                         })
-
-
-
                         ctrl.model.assessment.accessAssessments.forEach(accessAssessment => {
                             if (accessAssessment.objectiveAssessments.length > 0) {
                                 var listening = accessAssessment.objectiveAssessments.filter(x => x.identificationCode.includes('Listening'));
@@ -417,9 +419,9 @@
                                 interpretation: assessment.interpretation,
                             }
                             ctrl.starIndicatorCategories.push(indicator);
-
+                            ctrl.starGeneralIndicator = ctrl.findWorstStarPerformanceLevelInterpretation();
                         });
-                        ctrl.starGeneralIndicator = ctrl.findWorstStarPerformanceLevelInterpretation();
+                        
                         if (ctrl.model.gradeLevel != 'First grade' && ctrl.model.gradeLevel != 'Second grade' && ctrl.model.gradeLevel != 'Kindergarten') {
 
                             for (let i = 0; i < ctrl.model.assessment.starAssessments.length; i++) {

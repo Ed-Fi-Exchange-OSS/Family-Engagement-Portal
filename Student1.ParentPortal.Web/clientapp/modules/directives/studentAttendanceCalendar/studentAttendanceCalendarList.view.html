@@ -1,6 +1,6 @@
 ﻿<h3>{{'view.studentAttendance.title'  | translate}} <span>{{'view.studentAttendance.subtitle' | translate}}</span></h3>
 <div class="row" ng-repeat="row in ctrl.model">
-    <div class="col-md-3" ng-repeat="m in row" style="padding:10px;">
+    <div class="col-xs-3" ng-repeat="m in row" style="padding:10px;">
         <student-attendance-calendar model="m"></student-attendance-calendar>
     </div>
 </div>

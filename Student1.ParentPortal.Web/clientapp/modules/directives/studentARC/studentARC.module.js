@@ -6,25 +6,25 @@
         },
         templateUrl: 'clientapp/modules/directives/studentARC/studentARC.view.html',
         controllerAs: 'ctrl',
-        controller: ['$scope','$compile', function ($scope,$compile) {
+        controller: ['$scope', '$compile', function ($scope, $compile) {
             var ctrl = this;
 
             ctrl.showIRLA = true;
             ctrl.showENIL = true;
 
             ctrl.arcModelIRLA = {
-                reportingDate:null,
+                reportingDate: null,
                 rlBaseLine: '',
                 rlCurrent: '',
                 powerGoal: '',
                 currentDaysOnGoal: '',
                 baselineDate: '',
-                scoreValue:null,
+                scoreValue: null,
                 graphicLayout: {
                     master: '',
                     levels: 0,
                     levelsName: [],
-                    currentPosition:0
+                    currentPosition: 0
                 }
             };
 
@@ -53,7 +53,7 @@
                     text: 'Read-Aloud Immersion',
                     begin: 0,
                     end: 0,
-                    index:0
+                    index: 0
                 },
                 {
                     levelName: '1-3Y',
@@ -63,7 +63,7 @@
                     text: 'Active Reading Strategies and Initial Consonants',
                     begin: 0.01,
                     end: 0.59,
-                    index:1
+                    index: 1
                 },
                 {
                     levelName: '1G',
@@ -374,55 +374,70 @@
 
             ctrl.$onInit = function () {
 
-                if (ctrl.model.assessment != null && ctrl.model.assessment != undefined) {
-                    for (let i = 0; i < ctrl.model.assessment.arcAssessments.length; i++) {
+                ctrl.setData();
+            };
+            ctrl.$onChanges = function (changes) {
+                ctrl.setData();
+            }
+            ctrl.setData = function () {
+                //console.log("ARC::", ctrl.model.assessment);
+                console.log("ARC::", ctrl.model);
+                for (let i = 0; i < ctrl.model.length; i++) {
 
-                        let record = ctrl.model.assessment.arcAssessments[i];
+                    let record = ctrl.model[i];
 
-                        if (record.title.indexOf('ENIL') >= 0) {
-                            if (record.reportingMethodCodeValue == 'ARC Reading Level (Baseline)') {
-                                this.arcModelENIL.rlBaseLine = record.result;
+                    if (record.title.indexOf('ENIL') >= 0) {
+
+                        record.objectiveAssessments.forEach(element => {
+                            if (element.identificationCode == 'ARC Reading Level (Baseline)') {
+                                this.arcModelENIL.rlBaseLine = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Reading Level') {
-                                this.arcModelENIL.reportingDate = record.administrationDate;
-                                this.arcModelENIL.rlCurrent = record.result;
+                            else if (element.identificationCode == 'ARC Reading Level') {
+                                this.arcModelENIL.reportingDate = element.englishResult;
+                                this.arcModelENIL.rlCurrent = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Power Goal Abbreviation') {
-                                this.arcModelENIL.powerGoal = record.result;
+                            else if (element.identificationCode == 'ARC Power Goal Abbreviation') {
+                                this.arcModelENIL.powerGoal = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Days on Current Power Goal') {
-                                this.arcModelENIL.currentDaysOnGoal = record.result;
+                            else if (element.identificationCode == 'ARC Days on Current Power Goal') {
+                                this.arcModelENIL.currentDaysOnGoal = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Baseline Reporting Date') {
-                                this.arcModelENIL.baselineDate = record.result;
+                            else if (element.identificationCode == 'ARC Baseline Reporting Date') {
+                                this.arcModelENIL.baselineDate = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Score') {
-                                this.arcModelENIL.scoreValue = record.result;
+                            else if (element.identificationCode == 'ARC Score') {
+                                this.arcModelENIL.scoreValue = element.englishResult;
                             }
-                        }
-                        else if (record.title.indexOf('IRLA') >= 0) {
-                            if (record.reportingMethodCodeValue == 'ARC Reading Level (Baseline)') {
-                                this.arcModelIRLA.rlBaseLine = record.result;
+                        });
+                    }
+                    else if (record.title.indexOf('IRLA') >= 0) {
+                        record.objectiveAssessments.forEach(element => {
+
+                            if (element.identificationCode == 'ARC Reading Level (Baseline)') {
+                                this.arcModelIRLA.rlBaseLine = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Reading Level') {
-                                this.arcModelIRLA.reportingDate = record.administrationDate;
-                                this.arcModelIRLA.rlCurrent = record.result;
+                            else if (element.identificationCode == 'ARC Reading Level') {
+                                this.arcModelIRLA.reportingDate = element.administrationDate;
+                                this.arcModelIRLA.rlCurrent = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Power Goal Abbreviation') {
-                                this.arcModelIRLA.powerGoal = record.result;
+                            else if (element.identificationCode == 'ARC Power Goal Abbreviation') {
+                                this.arcModelIRLA.powerGoal = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Days on Current Power Goal') {
-                                this.arcModelIRLA.currentDaysOnGoal = record.result;
+                            else if (element.identificationCode == 'ARC Days on Current Power Goal') {
+                                this.arcModelIRLA.currentDaysOnGoal = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Baseline Reporting Date') {
-                                this.arcModelIRLA.baselineDate = record.result;
+                            else if (element.identificationCode == 'ARC Baseline Reporting Date') {
+                                this.arcModelIRLA.baselineDate = element.englishResult;
                             }
-                            else if (record.reportingMethodCodeValue == 'ARC Score') {
-                                this.arcModelIRLA.scoreValue = record.result;
+                            else if (element.identificationCode == 'ARC Score') {
+                                this.arcModelIRLA.scoreValue = element.englishResult;
                             }
-                        }
+
+                        });
+
                     }
                 }
+
 
                 if (ctrl.arcModelIRLA.rlCurrent != '-') {
                     for (let i = 0; i < ctrl.masterLayoutInformationIRLA.length; i++) {
@@ -484,7 +499,7 @@
                             var elementId = 'Itd' + irlaItem.levelName;
                             var htmlelement = document.getElementById(elementId);
                             var htmlelementSize = htmlelement.clientWidth;
-                            var position = (htmlelementSize/2) - 24;
+                            var position = (htmlelementSize / 2) - 24;
                             var positionText = -65 + position;
                             var $marker1 = $("<div tooltip-placement='top' uib-tooltip='Current Year Baseline' style='background-color:deepskyblue;margin-left:" + position + "px' class='pin1'></div>");
                             var $marker2 = $("<div class='pinText1' style='margin-top:20px;margin-left:" + positionText + "px'>Current <br/> Year Baseline</div>");
@@ -647,9 +662,8 @@
                 if (!ctrl.showIRLA && !ctrl.showENIL) {
                     $scope.$emit('studentARC', false);
                 }
-            }; 
-
-            ctrl.addElementInView = function (idTarget,elementMarker,elementText) {
+            }
+            ctrl.addElementInView = function (idTarget, elementMarker, elementText) {
                 var htmlelement = document.getElementById(idTarget);
                 var elementBaseLine = angular.element(elementMarker);
                 var elementBaseLineText = angular.element(elementText);
