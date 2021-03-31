@@ -44,6 +44,10 @@ BEGIN
 	insert into edfi.StaffElectronicMail(ElectronicMailTypeDescriptorId, StaffUSI, ElectronicMailAddress)
 								  values(853, 9, 'fred.lloyd@toolwise.onmicrosoft.com');
 END
+INSERT INTO [ParentPortal].[Admin]([ElectronicMailAddress],[CreateDate],[LastModifiedDate],[Id]) VALUES ('trent.newton@toolwise.onmicrosoft.com' ,GETDATE() ,GETDATE(),newid())
+
+update edfi.StaffElectronicMail set ElectronicMailAddress= 'trent.newton@toolwise.onmicrosoft.com' where StaffUSI = 58 
+update edfi.StaffElectronicMail set StaffUSI = 51  where ElectronicMailAddress= 'trent.newton@toolwise.onmicrosoft.com'
 update edfi.Student set FirstName = 'Hannah', MiddleName= 'Valeria', LastSurname ='Terrell', BirthSexDescriptorId = @femaleSexDescriptorId where StudentUSI = 435;
 select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
 select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
@@ -110,114 +114,39 @@ select @absenceDescriptor = DescriptorId from edfi.Descriptor where Namespace li
 
  insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
 values 
-(@absenceExcused, '2011-01-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceExcused, '2011-01-11',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
+(@absenceExcused, '2011-01-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'Dental appointment'),
+(@absenceExcused, '2011-01-11',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'Dental appointment'),
 (@absenceTardy, '2011-01-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
 (@absenceTardy, '2011-02-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceTardy, '2011-02-23',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'')
+(@absenceTardy, '2011-02-23',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'');
+
+--Student MARSHALL Tardies
+--select * from edfi.StudentSchoolAttendanceEvent where StudentUSI = 721
+ insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
+values 
+(@absenceTardy, '2011-01-10',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-02-14',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-04-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-05-23',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-06-20',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+
+(@absenceTardy, '2011-07-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-08-15',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-09-12',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-10-24',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceTardy, '2011-11-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+
+(@absenceExcused, '2011-01-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'Dental appointment'),
+(@absenceExcused, '2011-02-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'Dental appointment'),
+(@absenceExcused, '2011-03-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceExcused, '2011-04-12',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceExcused, '2011-05-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceExcused, '2011-06-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+
+(@absenceUnExcused, '2011-06-14',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
+(@absenceUnExcused, '2011-03-15',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'');
 
  
- insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
-values 
-(@absenceExcused, '2011-06-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-04-06',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'')
---Adding Student Absences
- insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
-values 
-(@absenceDescriptor, '2011-01-04',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-01-05',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-01-26',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-02-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-02-15',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-02-25',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-03-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-03-17',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-04-20',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-04-21',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-04-22',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-04-27',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-04-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-02',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-05',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-17',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-18',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-26',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-27',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-30',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-31',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-16',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-10',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-11',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-12',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-05-13',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-06-06',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-06-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-07-20',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-08-22',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-08-23',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-08-30',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-08-31',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-09-20',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-09-21',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-10-03',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-10-04',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-10-05',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-11-14',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-11-15',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-11-16',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-11-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-11-29',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceDescriptor, '2011-12-08',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'');
-
-
-insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
-values
-(@absenceDescriptor, '2011-01-04',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-01-05',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-01-26',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-02-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-02-15',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-02-25',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-03-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-03-17',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-04-20',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-04-21',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-04-22',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-04-27',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-04-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-02',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-05',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-17',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-18',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-26',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-27',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-30',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-31',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-16',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-10',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-11',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-12',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-05-13',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-06-06',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-06-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-07-20',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-08-22',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-08-23',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-08-30',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-08-31',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-09-20',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-09-21',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-10-03',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-10-04',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-10-05',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-11-14',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-11-15',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-11-16',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-11-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-11-29',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceDescriptor, '2011-12-08',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'');
 
 --Insert Student all about
 SET IDENTITY_INSERT [ParentPortal].[StudentAllAbout] ON
@@ -234,6 +163,7 @@ declare @perpetratorDisciplineDescriptor int;
 declare @reporterDisciplineDescriptor int;
 select @perpetratorDisciplineDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/DisciplineIncidentParticipationCodeDescriptor' and CodeValue = 'Perpetrator'
 select @reporterDisciplineDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/DisciplineIncidentParticipationCodeDescriptor' and CodeValue = 'Reporter'
+
 insert into edfi.DisciplineIncident(IncidentIdentifier, SchoolId, IncidentDate, IncidentDescription)
 values (22, @highSchoolId, '2011-04-21', 'Student playing with a toy in class.');
 insert into edfi.DisciplineIncident(IncidentIdentifier, SchoolId, IncidentDate, IncidentDescription)
@@ -254,31 +184,12 @@ select @2gradeLevelDescriptor = DescriptorId from  edfi.Descriptor where Namespa
 select @resultDatatypeTypeDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Integer'
 
 
-
-INSERT INTO [ParentPortal].[Admin]([ElectronicMailAddress],[CreateDate],[LastModifiedDate],[Id]) VALUES ('trent.newton@toolwise.onmicrosoft.com' ,GETDATE() ,GETDATE(),newid())
-
- update edfi.StaffElectronicMail set ElectronicMailAddress= 'trent.newton@toolwise.onmicrosoft.com' where StaffUSI = 58 
- update edfi.StaffElectronicMail set StaffUSI = 51  where ElectronicMailAddress= 'trent.newton@toolwise.onmicrosoft.com'
-
-
+--select * from edfi.StudentDisciplineIncidentAssociation
  --Update relationshisp incidents 
-insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
-values (22, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
-insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
-values (23, @highSchoolId, @studentFemaleUSI, @perpetratorDisciplineStudentDescriptor);
-insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
-values (24, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
-insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
-values (25, @highSchoolId, @studentFemaleUSI, @perpetratorDisciplineStudentDescriptor);
-
-
-insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
-values(22, '2011-04-22', 22, @highSchoolId, @studentMaleUSI);
-insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
-values(23, '2011-04-22', 22, @highSchoolId, @studentMaleUSI);
---insert into edfi.DisciplineActionStudentDisciplineIncidentAssociation(DisciplineActionIdentifier, DisciplineDate, IncidentIdentifier, SchoolId, StudentUSI)
---values(24, '2011-04-22', 23, @highSchoolId, @studentFemaleUSI);
-
+--insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+--values (22, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
+--insert into edfi.StudentDisciplineIncidentAssociation(IncidentIdentifier, SchoolId, StudentUSI, StudentParticipationCodeDescriptorId)
+--values (23, @middleSchoolId, @studentMaleUSI, @perpetratorDisciplineStudentDescriptor);
 
 
 
@@ -1320,6 +1231,96 @@ INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
 
 
 GO
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Insert Assigments
+
+-- Fall Semester Asigment
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2010-08-23', '20 Exercises', 'ART2-EM', 255901001, 2011, '25590100104Trad322ART2EM12011', '2010-2011 Fall Semester', 933);
+
+-- Spring Semester Asigment
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-12', 'Essay 3 Rough Draft', 'CREAT-WR', 255901001, 2011, '25590100102Trad321CREATWR22011', '2010-2011 Spring Semester', 933);
+
+
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-12', 'Essay Delivery', 'ENVIRSYS', 255901001, 2011, '25590100107Trad222ENVIRSYS2201', '2010-2011 Spring Semester', 933);
+
+
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-12', 'Ch. 10 Exercises', 'SPAN-1', 255901001, 2011, '25590100103Trad324SPAN122011', '2010-2011 Spring Semester', 933);
+
+
+-- Spring Semester Asigment
+
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-20', 'Worksheet 22 Simple Physics', 'SS-06', 255901044, 2011,'25590104406Trad112SS0622011', '2010-2011 Spring Semester', 933);
+insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
+values('2011-04-20', 'Essay Delivery', 'SCI-06', 255901044, 2011,'25590104405Trad212SCI0622011', '2010-2011 Spring Semester', 933);
+
+
+--Insert missing assesment for students
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2011-01-04','2011-04-12','Assigment 1','ALG-2','255901001','2011','25590100106Trad220ALG222011'
+           ,'2010-2011 Spring Semester',435,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2010-08-23','2010-08-23','20 Exercises','ART2-EM','255901001','2011','25590100104Trad322ART2EM12011'
+           ,'2010-2011 Fall Semester',435,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2011-01-04','2011-04-12','Essay 3 Rough Draft','CREAT-WR','255901001','2011','25590100102Trad321CREATWR22011'
+           ,'2010-2011 Spring Semester',435,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2011-01-04','2011-04-12','Essay Delivery','ENVIRSYS','255901001','2011','25590100107Trad222ENVIRSYS2201'
+           ,'2010-2011 Spring Semester',435,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2011-01-04','2011-04-12','Ch. 10 Exercises','SPAN-1','255901001','2011','25590100103Trad324SPAN122011'
+           ,'2010-2011 Spring Semester',435,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2011-01-04','2011-04-20','Worksheet 22 Simple Physics','SS-06','255901044','2011','25590104406Trad112SS0622011'
+           ,'2010-2011 Spring Semester',721,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
+
+INSERT INTO [edfi].[StudentGradebookEntry]
+           ([BeginDate],[DateAssigned],[GradebookEntryTitle],[LocalCourseCode],[SchoolId],[SchoolYear]
+           ,[SectionIdentifier],[SessionName],[StudentUSI],[DateFulfilled],[LetterGradeEarned],[NumericGradeEarned]
+           ,[CompetencyLevelDescriptorId],[DiagnosticStatement],[Discriminator],[CreateDate],[LastModifiedDate],[Id],[ChangeVersion])
+     VALUES
+           ('2011-01-04','2011-04-20','Essay Delivery','SCI-06','255901044','2011','25590104405Trad212SCI0622011'
+           ,'2010-2011 Spring Semester',721,NULL,'M',92.00,NULL,NULL,NULL,GETDATE(),GETDATE(),NEWID(),88348)
 
 
 
