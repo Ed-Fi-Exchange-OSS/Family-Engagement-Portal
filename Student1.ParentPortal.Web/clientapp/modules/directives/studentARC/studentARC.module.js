@@ -319,7 +319,7 @@
                     index: 6
                 },
                 {
-                    levelName: 'Pú',
+                    levelName: 'Pu',
                     master: '6',
                     numberOfLevels: 1,
                     position: 0,
@@ -381,7 +381,8 @@
             }
             ctrl.setData = function () {
                 //console.log("ARC::", ctrl.model.assessment);
-                console.log("ARC::", ctrl.model);
+                if (ctrl.model === undefined)
+                    return;
                 for (let i = 0; i < ctrl.model.length; i++) {
 
                     let record = ctrl.model[i];

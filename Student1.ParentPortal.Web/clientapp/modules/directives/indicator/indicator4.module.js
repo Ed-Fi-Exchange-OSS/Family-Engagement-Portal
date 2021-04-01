@@ -33,6 +33,9 @@
             };
             ctrl.setProfencyLevels = function myfunction() {
                 ctrl.gradeLevel = ctrl.getGradeLevel();
+                if (ctrl.data === undefined) {
+                    return;
+                }
                 ctrl.proficiencyLevel = Math.floor(ctrl.data[0].proficiencyLevel) + 1;
                 if (ctrl.proficiencyLevel == 7)
                     ctrl.proficiencyLevel--;
@@ -46,6 +49,9 @@
                     ctrl.description = existDescription.description;
             }
             ctrl.getGradeLevel = function () {
+                if (ctrl.data === undefined) {
+                    return 0;
+                }
                 switch (ctrl.data[0].gradelevel) {
                     case 'First grade':
                         return 1;
