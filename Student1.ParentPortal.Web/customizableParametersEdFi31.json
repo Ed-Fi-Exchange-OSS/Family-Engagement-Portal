@@ -582,7 +582,13 @@
       "features": [
         {
           "name": "comms",
-          "enabled": "true"
+          "enabled": "true",
+          "studentAbc": {
+            "missingAssignments": "true",
+            "courseAverage": "true",
+            "behavior": "true",
+            "absence": "true"
+          }
         },
         {
           "name": "gradesDetail",
