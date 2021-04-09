@@ -425,10 +425,10 @@
       "DisplayName": "Specialized Instruction",
       "Url": "http://www.powerschool.com"
     },
-    "instructionalDayDescriptorCodeValue": "101_Count as More Than Half Day - No Event",
-    "nonInstrunctionalDayDescriptorCodeValue": "101_Count as 0 - No Event"
-    //"instructionalDayDescriptorCodeValue": "Instructional day",
-    //"nonInstrunctionalDayDescriptorCodeValue": "Other"
+    //"instructionalDayDescriptorCodeValue": "101_Count as More Than Half Day - No Event",
+    //"nonInstrunctionalDayDescriptorCodeValue": "101_Count as 0 - No Event"
+    "instructionalDayDescriptorCodeValue": "Instructional day",
+    "nonInstrunctionalDayDescriptorCodeValue": "Other"
   },
   "assessments": [
     {

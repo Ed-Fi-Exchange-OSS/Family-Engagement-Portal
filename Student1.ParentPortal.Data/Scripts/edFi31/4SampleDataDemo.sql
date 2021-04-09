@@ -1936,7 +1936,70 @@ INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
 
 
 
+go
 
+declare @femaleSexDescriptorId int;
+declare @maleSexDescriptorId int;
+
+declare @staffUSIPrincipalGrandBenHighSchool int;
+declare @electronictWorkMailDescriptor int
+
+declare @fatherRelationDescriptor int;
+declare @motherRelationDescriptor int;
+
+--Roles's users ans USIs
+declare @studentMaleUSI AS int
+declare @studentFemaleUSI AS int
+
+select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
+select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
+
+
+declare @highSchoolId as int = 255901001
+declare @middleSchoolId as int =255901044
+
+declare @calendarType int;
+declare @nonintructionalday int;
+
+--select * FROM EDFI.Descriptor WHERE Namespace = 'uri://ed-fi.org/CalendarTypeDescriptor' and CodeValue = 'School' 
+select @calendarType = DescriptorId FROM EDFI.Descriptor WHERE Namespace = 'uri://ed-fi.org/CalendarTypeDescriptor' and CodeValue = 'School' 
+select @nonintructionalday =  DescriptorId FROM EDFI.Descriptor WHERE Namespace = 'uri://ed-fi.org/CalendarEventDescriptor' and CodeValue = 'Other' 
+
+--Calendar for each school
+INSERT INTO EDFI.Calendar VALUES(@highSchoolId,@highSchoolId,2011,@calendarType,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.Calendar VALUES(@middleSchoolId,@middleSchoolId,2011,@calendarType,null,GETDATE(),GETDATE(),NEWID(),11815)
+--Dates for each school
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20111124',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20111125',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110425',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110426',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110427',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110428',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110429',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20111124',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20111125',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110425',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110426',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110427',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110428',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110429',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
+--NonInstructionalDays for each school
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20111124',@highSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20111125',@highSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110425',@highSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110426',@highSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110427',@highSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110428',@highSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110429',@highSchoolId,2011,GETDATE())
+
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20111124',@middleSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20111125',@middleSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110425',@middleSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110426',@middleSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110427',@middleSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110428',@middleSchoolId,2011,GETDATE())
+INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110429',@middleSchoolId,2011,GETDATE())
 
 
 
