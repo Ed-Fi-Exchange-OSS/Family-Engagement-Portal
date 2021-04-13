@@ -1,0 +1,67 @@
+﻿<div class="card w-100">
+    <div class="card-body">
+        <div class="border-bottom-1 p-b-15">
+            <h3 class="text-uppercase" ng-class="'text-' + ctrl.color">{{ctrl.widgetTitle}} <span>{{ctrl.widgetSubTitle}}</span></h3>
+        </div>
+        <div class="d-flex justify-content-end mt-2 mb-2">
+            <div class="d-flex align-items-center mr-5"><div class="d-flex align-items-center justify-content-center star-meter-score position-relative mr-2 w-25px h-25px f-s-10">%</div> {{'English' | translate}}</div>
+            <div class="d-flex align-items-center mr-5"><div class="d-flex align-items-center justify-content-center star-meter-score-alt position-relative mr-2 w-25px h-25px f-s-10">%</div> {{'Spanish' | translate}}</div>
+            <div class="d-flex align-items-center mr-5"><div class="star-meter-bad w-25px h-15px mr-2"></div> {{'Beginning' | translate}}</div>
+            <div class="d-flex align-items-center mr-5"><div class="star-meter-warning w-25px h-15px mr-2"></div> {{'Developing' | translate}}</div>
+            <div class="d-flex align-items-center mr-5"><div class="star-meter-good w-25px h-15px mr-2"></div> {{'Secure' | translate}}</div>
+        </div>
+        <div class="table-responsive">
+            <table class="table star-table domain-table">
+                <tbody class="" style="border: 1px solid grey">
+                    <tr ng-repeat-start="group in ctrl.groupInfo">
+                        <th scope="col" class="main-header-master" colspan="3">
+                            <h3 class="domain-header">{{group.title}} - {{group.administrationDate | date: 'shortDate'}}</h3>
+                        </th>
+                    </tr>
+                    <tr ng-repeat-start="r in group.items" class="domain-section">
+                        <th scope="col" class="pl-3"><h4 class="domain-header">{{r.familyName == 'Early Literacy English' ? '' : r.familyName}}</h4></th>
+                        <th>
+                            <div class="w-100 position-relative">
+                                <span class="star-percent-title" style="left:0%;">&nbsp;0%</span>
+                                <span class="star-percent-title" style="left:20%;">20%</span>
+                                <span class="star-percent-title" style="left:40%;">40%</span>
+                                <span class="star-percent-title" style="left:60%;">60%</span>
+                                <span class="star-percent-title" style="left:80%;">80%</span>
+                                <span class="star-percent-title" style="left:100%;">100%</span>
+                            </div>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat-start="sd in r.domains" ng-click="sd.showDetails = !sd.showDetails" class="cursor-pointer domain-section">
+                        <td class="align-middle pl-4">{{sd.title}}</td>
+                        <td class="align-middle">
+                            <div class="star-meter-container">
+                                <div class="star-meter star-meter-bad" title="0% - 10%"></div><div class="star-meter star-meter-bad" title="11% - 20%"></div><div class="star-meter star-meter-bad" title="21% - 30%"></div><div class="star-meter star-meter-bad" title="31% - 40%"></div><div class="star-meter star-meter-bad" title="41% - 50%"></div><div class="star-meter star-meter-bad" title="51% - 59%"></div><div class="star-meter star-meter-warning" title="60% - 70%"></div><div class="star-meter star-meter-warning" title="71% - 79%"></div><div class="star-meter star-meter-good" title="80% - 90%"></div><div class="star-meter star-meter-good" title="91% - 100%"></div>
+                                <div id="star_eng_{{ctrl.getHashKeyClean(sd.$$hashKey)}}" ng-mouseenter="ctrl.starEnter(sd,'eng')" ng-mouseleave="ctrl.starLeave(sd)" ng-if="sd.englishResult" title=" {{sd.englishResult == sd.spanishResult ? ('English' | translate) + ': ' + (sd.englishResult | number:0) + '%' + ' ' + ('Spanish' | translate) + ': ' + (sd.spanishResult | number:0) : ('English' | translate) + ': ' + (sd.englishResult | number:0) + '%'}}" class="star-meter-score" ng-style="{left: (sd.englishResult == sd.spanishResult ? sd.spanishResult -1 : sd.englishResult) + '%'}">{{sd.englishResult | number:0}}%</div>
+                                <div id="star_esp_{{ctrl.getHashKeyClean(sd.$$hashKey)}}" ng-mouseenter="ctrl.starEnter(sd,'esp')" ng-mouseleave="ctrl.starLeave(sd)" ng-if="sd.spanishResult" title=" {{sd.englishResult == sd.spanishResult ? ('English' | translate) + ': ' + (sd.englishResult | number:0) + '%' + ' ' + ('Spanish' | translate) + ': ' + (sd.spanishResult | number:0) : ('Spanish' | translate) + ': ' + (sd.spanishResult | number:0) + '%'}}" class="star-meter-score-alt" ng-style="{left: (sd.spanishResult) + '%'}">{{sd.spanishResult | number:0}}%</div>
+                            </div>
+                        </td>
+                        <td>
+                            <i ng-if="sd.showDetails" class="ion-md-arrow-dropup f-s-20"></i>
+                            <i ng-if="!sd.showDetails" class="ion-md-arrow-dropdown f-s-20"></i>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="sk in sd.skillAreas" ng-if="sd.showDetails">
+                        <td class="align-middle pl-5">{{sk.title}}</td>
+                        <td class="align-middle">
+                            <div class="star-meter-container">
+                                <div class="star-meter star-meter-bad" title="0% - 10%"></div><div class="star-meter star-meter-bad" title="11% - 20%"></div><div class="star-meter star-meter-bad" title="21% - 30%"></div><div class="star-meter star-meter-bad" title="31% - 40%"></div><div class="star-meter star-meter-bad" title="41% - 50%"></div><div class="star-meter star-meter-bad" title="51% - 59%"></div><div class="star-meter star-meter-warning" title="60% - 70%"></div><div class="star-meter star-meter-warning" title="71% - 79%"></div><div class="star-meter star-meter-good" title="80% - 90%"></div><div class="star-meter star-meter-good" title="91% - 100%"></div>
+                                <div id="star_eng_{{ctrl.getHashKeyClean(sd.$$hashKey)}}" ng-mouseenter="ctrl.starEnter(sd,'eng')" ng-mouseleave="ctrl.starLeave(sd)" ng-if="sk.englishResult" title=" {{sk.englishResult == sk.spanishResult ? ('English' | translate) + ': ' + (sk.englishResult | number:0) + '%' + ' ' + ('Spanish' | translate) + ': ' + (sk.spanishResult | number:0) + '%' : ('English' | translate) + ': ' + (sk.englishResult | number:0) + '%'}}" class="star-meter-score" ng-style="{left: (sk.englishResult == sk.spanishResult ? sk.spanishResult -1 : sk.englishResult) + '%'}">{{sk.englishResult | number:0}}%</div>
+                                <div id="star_esp_{{ctrl.getHashKeyClean(sd.$$hashKey)}}" ng-mouseenter="ctrl.starEnter(sd,'esp')" ng-mouseleave="ctrl.starLeave(sd)" ng-if="sk.spanishResult" title=" {{sk.englishResult == sk.spanishResult ? ('English' | translate) + ': ' + (sk.englishResult | number:0) + '%' + ' ' + ('Spanish' | translate) + ': ' + (sk.spanishResult | number:0) + '%' : ('Spanish' | translate) + ': ' + (sk.spanishResult | number:0) + '%'}}" class="star-meter-score-alt" ng-style="{left: (sk.spanishResult) + '%'}">{{sk.spanishResult | number:0}}%</div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr ng-repeat-end ng-if="false"></tr>
+                    <tr ng-repeat-end ng-if="false"></tr>
+                    <tr ng-repeat-end ng-if="false"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

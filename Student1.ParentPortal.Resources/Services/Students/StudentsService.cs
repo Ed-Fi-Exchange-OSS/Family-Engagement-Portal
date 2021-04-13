@@ -108,7 +108,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
             student.UnreadMessageCount = await _communicationsService.UnreadMessageCount(student.StudentUsi, recipientUniqueId, recipientTypeId, null, null);
             student.ExternalLinks = await _spotlightIntegrationsService.GetStudentExternalLinks(student.StudentUniqueId);
             student.StaarAssessmentHistory = await _studentAssessmentService.GetStudentStaarAssessmentHistoryAsync(student.StudentUsi);
-
+            student.StudentDomainMastery = await _studentAssessmentService.GetStudentDomainMasteryAsync(student.StudentUsi);
             student.StudentGoals = await _studentGoalService.GetStudentGoals(student.StudentUsi);
             student.StudentAllAboutMe = await _studentAllAboutService.GetStudentAllAbout(student.StudentUsi);
 

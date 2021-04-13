@@ -1086,6 +1086,8 @@
     <Content Include="clientapp\modules\directives\studentAllAboutMe\studentAllAboutMe.view.html" />
     <Content Include="clientapp\modules\directives\studentARC\studentARC.module.js" />
     <Content Include="clientapp\modules\directives\studentARC\studentARC.view.html" />
+    <Content Include="clientapp\modules\directives\studentAssessment\starDetail.module.js" />
+    <Content Include="clientapp\modules\directives\studentAssessment\starDetail.view.html" />
     <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendar.module.js" />
     <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendar.style.css" />
     <Content Include="clientapp\modules\directives\studentAttendanceCalendar\studentAttendanceCalendar.view.html" />

@@ -15,6 +15,8 @@ namespace Student1.ParentPortal.Resources.Services.Students
     {
         Task<StudentAssessment> GetStudentAssessmentsAsync(int studentUsi);
         Task<List<AssessmentSubSection>> GetStudentStaarAssessmentHistoryAsync(int studentUsi);
+
+        Task<List<StudentDomainMastery>> GetStudentDomainMasteryAsync(int studentUsi);
     }
 
     public class StudentAssessmentService : IStudentAssessmentService
@@ -27,6 +29,7 @@ namespace Student1.ParentPortal.Resources.Services.Students
             _studentRepository = studentRepository;
             _customParametersProvider = customParametersProvider;
         }
+
 
         public async Task<StudentAssessment> GetStudentAssessmentsAsync(int studentUsi)
         {
@@ -172,7 +175,64 @@ namespace Student1.ParentPortal.Resources.Services.Students
 
             return assessments;
         }
+        public async Task<List<StudentDomainMastery>> GetStudentDomainMasteryAsync(int studentUsi)
+        {
+            string identifierELEnglish = string.Empty;
+            string identifierELSpanish = string.Empty;
+            var objectiveAssessmentsIdentifiers = _customParametersProvider.GetParameters().objectiveAssessmentsIdentifiers;
 
+            if (objectiveAssessmentsIdentifiers != null)
+            {
+                identifierELEnglish = objectiveAssessmentsIdentifiers.earlyLiteracyEnglishAssessmentIdentifier;
+                identifierELSpanish = objectiveAssessmentsIdentifiers.earlyLiteracySpanishAssessmentIdentifier;
+            }
+
+            var result = new List<StudentDomainMastery>();
+            var data = await _studentRepository.GetStudentObjectiveAssessments(studentUsi);
+
+            var familyNames = data.Where(x => x.ParentIdentificationCode != null).GroupBy(x => x.ParentIdentificationCode).Where(x => !x.Key.Contains("_")).Select(x => x.Key);
+
+            foreach (var fName in familyNames)
+            {
+                var domains = data.Where(x => x.ParentIdentificationCode == fName);
+
+                foreach (var domain in domains)
+                    domain.SkillAreas = data.Where(x => x.ParentIdentificationCode == domain.IdentificationCode).ToList();
+
+                result.Add(new StudentDomainMastery { FamilyName = fName, Domains = domains.ToList() });
+            }
+
+            var earlyLiteracySpanishObjectiveAssessments = data.Where(x => x.AssessmentIdentifier.Contains(identifierELSpanish));
+            var eLDomainsSpanish = earlyLiteracySpanishObjectiveAssessments.Where(x => x.ParentIdentificationCode == null);
+            if (eLDomainsSpanish.Count() > 0)
+                result.Add(new StudentDomainMastery { FamilyName = "Early Literacy Spanish", Domains = eLDomainsSpanish.ToList() });
+
+            var earlyLiteracyObjectiveAssessments = data.Where(x => x.AssessmentIdentifier.Contains(identifierELEnglish));
+            var eLDomains = earlyLiteracyObjectiveAssessments.Where(x => x.ParentIdentificationCode == null);
+            foreach (var domain in eLDomains)
+                domain.SkillAreas = earlyLiteracyObjectiveAssessments.Where(x => x.ParentIdentificationCode == domain.IdentificationCode).ToList();
+            if (eLDomains.Count() > 0)
+                result.Add(new StudentDomainMastery { FamilyName = "Early Literacy English", Domains = eLDomains.ToList() });
+
+            result.ForEach(p => {
+                string firstAssessmentIdentifier = string.Empty;
+                DateTime administrationDate = DateTime.Now;
+                if (p.Domains != null && p.Domains.Any())
+                {
+                    firstAssessmentIdentifier = p.Domains.First().AssessmentIdentifier;
+                    administrationDate = p.Domains.First().AdministrationDate;
+                }
+                if (firstAssessmentIdentifier.ToLower().Contains("reading")) firstAssessmentIdentifier = "Reading";
+                if (firstAssessmentIdentifier.ToLower().Contains("math")) firstAssessmentIdentifier = "Math";
+                if (firstAssessmentIdentifier.ToLower().Contains(identifierELSpanish.ToLower())) firstAssessmentIdentifier = "Early Literacy Spanish";
+                if (firstAssessmentIdentifier.ToLower().Contains(identifierELEnglish.ToLower())) firstAssessmentIdentifier = "Early Literacy English";
+                p.MainName = firstAssessmentIdentifier;
+                p.AdministrationDate = administrationDate;
+            });
+
+            result = result.OrderBy(p => p.MainName).ToList();
+            return result;
+        }
         private async Task<List<AssessmentSubSection>> GetStudentStaarAssessmentAsync(int studentUsi, string title, string assessmentReportingMethodTypeDescriptor,  string title1, List<string> assessmentIdentifiers, string shortDescription)
         {
             var data = await _studentRepository.GetStudentAssessmentAsync(studentUsi, assessmentReportingMethodTypeDescriptor, title);

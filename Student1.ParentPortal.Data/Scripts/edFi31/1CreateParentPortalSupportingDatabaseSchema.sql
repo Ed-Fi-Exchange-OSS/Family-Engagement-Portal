@@ -837,8 +837,7 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 		inner join edfi.Descriptor as d
 			on sdia.StudentParticipationCodeDescriptorId = d.DescriptorId
 		WHERE d.CodeValue = 'Perpetrator'
-			AND sdia.StudentUSI = s.StudentUSI
-			AND di.IncidentDate >= (SELECT MAX(BeginDate) FROM edfi.Session WHERE SchoolId = sdia.SchoolId AND BeginDate <= GETDATE() AND EndDate >= GETDATE())) 
+			AND sdia.StudentUSI = s.StudentUSI) 
 			as [DisciplineIncidents],
 -- Grading Period Average --
 (SELECT AVG(g.NumericGradeEarned) from edfi.Grade as g

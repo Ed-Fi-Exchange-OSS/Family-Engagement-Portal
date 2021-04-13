@@ -438,17 +438,23 @@
                                 }
                             }
 
-                            if (ctrl.model.studentDomainMastery != null && ctrl.model.studentDomainMastery.length > 0) {
-                                let newList = [];
-                                for (let i = 0; i < ctrl.model.studentDomainMastery.length; i++) {
-                                    if (ctrl.model.studentDomainMastery[i].mainName != 'Early Literacy') {
-                                        newList.push(ctrl.model.studentDomainMastery[i]);
-                                    }
-                                }
-                                ctrl.model.studentDomainMastery = newList;
-                            }
+                            
                         }
 
+                    });
+                    api.students.getStudentDomainMastery(ctrl.currentStudent).then(function (data) {
+
+                        ctrl.model.studentDomainMastery = data;
+                        if (ctrl.model.studentDomainMastery != null && ctrl.model.studentDomainMastery.length > 0) {
+                            let newList = [];
+                            for (let i = 0; i < ctrl.model.studentDomainMastery.length; i++) {
+                                if (ctrl.model.studentDomainMastery[i].mainName != 'Early Literacy') {
+                                    newList.push(ctrl.model.studentDomainMastery[i]);
+                                }
+                            }
+                            ctrl.model.studentDomainMastery = newList;
+                        }
+                        console.log(data);
                     });
                     ctrl.heroTextDesc = $translate.instant('view.disciplineIncidents.moreDetail');
                     $rootScope.$on('$translateChangeSuccess', function (event, current, previous) {

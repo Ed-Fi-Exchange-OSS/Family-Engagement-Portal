@@ -160,6 +160,16 @@ namespace Student1.ParentPortal.Web.Controllers
 
             return Ok(model);
         }
+        [HttpGet, Route("{id:int}/detail/domainMastery")]
+        public async Task<IHttpActionResult> GetStudentDomainMastery(int id)
+        {
+            var model = await _studentAssessmentService.GetStudentDomainMasteryAsync(id);
+
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
 
         [HttpGet, Route("{id:int}/detail/staarAssessmentHistory")]
         public async Task<IHttpActionResult> GetStudentStaarAssessmentHistory(int id)

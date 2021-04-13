@@ -18,6 +18,7 @@
             getStudentSuccessTeamMembers: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/successTeamMembers').then(function (response) { return response.data; }); },
             getStudentSchedule: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/schedule').then(function (response) { return response.data; }); },
             getStudentAssessments: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/assessments').then(function (response) { return response.data; }); },
+            getStudentDomainMastery: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/domainMastery').then(function (response) { return response.data; }); },
             getStudentStaarAssessmentHistory: function (id) { return $http.get(apiResourceUri + '/' + id + '/detail/staarAssessmentHistory').then(function (response) { return response.data; }); },
             addStudentGoal: function (item) { return $http.post(apiResourceUri + '/AddStudentGoal', item).then(function (response) { return response.data; }); },
             updateStudentGoal: function (item) { return $http.post(apiResourceUri + '/UpdateStudentGoal', item).then(function (response) { return response.data; }); },

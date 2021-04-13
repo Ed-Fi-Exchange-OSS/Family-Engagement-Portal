@@ -43,6 +43,7 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public List<Assessment> assessmentIndicators { get; set; }
         public List<Assessment> starAssessments { get; set; }
         public List<Assessment> accessAssessments { get; set; }
+        public ObjectiveAssessmentsIdentifier objectiveAssessmentsIdentifiers { get; set; }
         public AssessmentPerformanceLevel assessmentPerformanceLevel { get; set; }
 
         public List<CanDoDescriptor> canDoDescriptors { get; set; }
@@ -51,6 +52,13 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
     public class AssessmentPerformanceLevel
     {
         public List<ThresholdRule<string>> thresholdRules { get; set; }
+    }
+    public class ObjectiveAssessmentsIdentifier
+    {
+        public string mathAssessmentIdentifier { get; set; }
+        public string readingAssessmentIdentifier { get; set; }
+        public string earlyLiteracyEnglishAssessmentIdentifier { get; set; }
+        public string earlyLiteracySpanishAssessmentIdentifier { get; set; }
     }
 
     public class ThresholdRule<T>
