@@ -39,7 +39,7 @@ Principal:
 ~~~
 
 ~~~
-Teacher Admin
+Admin
     Email: trent.newton@toolwise.onmicrosoft.com
     Password: 5tgb.^YHN
 ~~~

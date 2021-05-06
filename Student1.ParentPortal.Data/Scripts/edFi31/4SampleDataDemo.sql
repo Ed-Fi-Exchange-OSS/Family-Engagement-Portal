@@ -21,6 +21,7 @@ declare @parentEmail as varchar = 'perry.savage@toolwise.onmicrosoft.com'
 declare @parentUSI AS int
 declare @studentFemaleEmail as varchar = 'chadwick1.garner@toolwise.onmicrosoft.com'
 declare @studentFemaleUSI AS int
+declare @descriptorPrincial AS int
 
 --descriptors Assignment 
 select @femaleSexDescriptorId = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/SexDescriptor' and CodeValue = 'Female' -- 2091
@@ -28,6 +29,7 @@ select @maleSexDescriptorId = DescriptorId from edfi.Descriptor where Namespace 
 select @electronictWorkMailDescriptor = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/ElectronicMailTypeDescriptor' and CodeValue = 'Work'
 select @fatherRelationDescriptor = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/RelationDescriptor' and Description = 'Father'
 select @motherRelationDescriptor = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/RelationDescriptor' and Description = 'Mother'
+select @descriptorPrincial = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/StaffClassificationDescriptor' and Description = 'Principal'
 
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -44,6 +46,9 @@ BEGIN
 	insert into edfi.StaffElectronicMail(ElectronicMailTypeDescriptorId, StaffUSI, ElectronicMailAddress)
 								  values(853, 9, 'fred.lloyd@toolwise.onmicrosoft.com');
 END
+
+update edfi.StaffEducationOrganizationAssignmentAssociation set StaffClassificationDescriptorId = @descriptorPrincial where StaffUSI = @principalStaffUSI
+
 INSERT INTO [ParentPortal].[Admin]([ElectronicMailAddress],[CreateDate],[LastModifiedDate],[Id]) VALUES ('trent.newton@toolwise.onmicrosoft.com' ,GETDATE() ,GETDATE(),newid())
 
 update edfi.StaffElectronicMail set ElectronicMailAddress= 'trent.newton@toolwise.onmicrosoft.com' where StaffUSI = 58 
