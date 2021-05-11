@@ -65,7 +65,7 @@ namespace Student1.ParentPortal.Resources.Services.Schools
         {
             var gradeSort = new GradeSortExtensionMethods();
             var gradesLevels = (await _schoolsRepository.GetGradeLevelsBySchoolId(schoolId)).OrderBy(rec => rec.Name).ToList();
-            //gradesLevels.Sort(gradeSort); //TODO:REMOVE After information is correct
+            gradesLevels.Sort(gradeSort); 
             return gradesLevels;
         }
     }
