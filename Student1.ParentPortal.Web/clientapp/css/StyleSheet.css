@@ -35,6 +35,10 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
     font-size: 0.7em;
 }
 
+.app-prevent-overflow {
+    word-wrap: normal;
+}
+
 /* Colors */
 .primary { background-color: #9068be !important; color: white; }
 .secondary { background-color: #978DED !important; color: white; }
@@ -301,6 +305,7 @@ li.person:hover { background-color: #eeeeee; }
     width: 150px;
 }
 
+/*
 .img-avatar-student-success {
     display: block !important;
     margin: 0 auto;
@@ -308,6 +313,7 @@ li.person:hover { background-color: #eeeeee; }
     border-radius: 50%;
     box-shadow: 0 0 0 10px #8bc34a;
 }
+*/
 
 .alert-info {
     color: #004085;
@@ -322,6 +328,7 @@ li.person:hover { background-color: #eeeeee; }
 
 .success-team-member { width: 100px; }
 
+/* removed for UI updates
 .img-avatar-red { box-shadow: 0 0 0 10px #ef9a9a; background-color: #ffebee; }
 .img-avatar-pink, .img-avatar-female, .img-avatar-Female { box-shadow: 0 0 0 10px #f48fb1; background-color: #fce4ec; }
 .img-avatar-deep-purple { box-shadow: 0 0 0 10px #b39ddb; background-color: #ede7f6; }
@@ -331,6 +338,7 @@ li.person:hover { background-color: #eeeeee; }
 .img-avatar-orange { box-shadow: 0 0 0 10px #ffcc80; background-color: #fff3e0; }
 .img-avatar-brown  { box-shadow: 0 0 0 10px #bcaaa4; background-color: #efebe9; }
 .img-avatar-light-blue { box-shadow: 0 0 0 10px #81d4fa; background-color: #e1f5fe; }
+*/
 
 .widget-bg-primary { background-color: #9575cd!important; }
 .widget-bg-secondary { background-color: #4fc3f7!important; }

@@ -20,9 +20,11 @@
     </div>
     <div class="card-body">
         <div class="text-center">
-            <div class="image-container img-avatar img-size w-75px" ng-class="'img-avatar-' + ctrl.model.sexType"><img ng-src="{{ctrl.model.imageUrl}}" alt="{{ctrl.model.name}} Profile Picture"></div>
+            <div class="image-container img-avatar img-size w-75px"><img ng-src="{{ctrl.model.imageUrl}}" alt="{{ctrl.model.name}} Profile Picture"></div>
             <h2 class="m-t-15 m-b-2 d-flex justify-content-center align-items-center h-">{{ctrl.model.name}}</h2>
-            <p class="text-muted m-b-2 card-grade-level">{{ctrl.model.gradeLevel  | translate}}</p>
+
+            <p class="text-muted m-b-2 card-grade-level">{{ ctrl.model.gradeLevel | ifEmpty: 'N/A' | translate }}</p>
+
             <p class="text-muted">{{ctrl.model.currentSchool}}</p>
             <div class="row" ng-if="ctrl.model.externalLinks.length > 0">
                 <div class="col-12 p-t-10 p-b-10 d-flex flex-column align-items-center">
@@ -34,14 +36,14 @@
     </div>
     <div class="card-footer p-t-0 p-b-0 m-t-10">
         <div class="row" style="margin-right:0px; margin-left:0px">
-            <div class="border-right-1 border-bottom-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.absence">
+            <div class="p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.absence">
                 <interpretation-icon model="ctrl.model.adaAbsentInterpretation"></interpretation-icon>
                 <h3 class="text-ellipsis text-center" tooltip-placement="top" uib-tooltip="{{'Absence ADA' | translate}}">{{'Absences' | translate}}</h3>
                 <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'attendance' })" tooltip-placement="bottom" uib-tooltip="{{'Absence ADA' | translate}}">
                     <b>{{ctrl.model.adaAbsences}}</b>
                 </a>
             </div>
-            <div class="border-right-1 border-bottom-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.behavior">
+            <div class="p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.behavior">
                 <interpretation-icon model="ctrl.model.ytdDisciplineInterpretation"></interpretation-icon>
                 <h3 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{'Behavior Tooltip' | translate}}">{{'Behavior' | translate}}</h3>
                 <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'behaviour-log' })">
@@ -51,7 +53,7 @@
            
         </div>
         <div class="row" style="margin-right:0px; margin-left:0px">
-             <div class="border-right-1 p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.courseAverage">
+             <div class="p-t-15 d-flex justify-content-center align-items-center flex-column p-b-10" ng-class="ctrl.indicatorStyle" ng-if="$root.featureToggles.comms.studentAbc.courseAverage">
                 <interpretation-icon model="(ctrl.showStudentGPA(ctrl.model.gradeLevel)? ctrl.model.gpaInterpretation : ctrl.model.courseAverage.evaluation)"></interpretation-icon>
                 <h3 class="text-ellipsis text-center m-t-5" tooltip-placement="bottom" uib-tooltip="{{(ctrl.showStudentGPA(ctrl.model.gradeLevel)? 'GPA' : 'Course Average') | translate}}">{{(ctrl.showStudentGPA(ctrl.model.gradeLevel)? 'GPA' : 'Abv Course Average') | translate}}</h3>
                 <a class="text-center d-block text-muted" ui-sref="app.studentdetail({ studentId: ctrl.model.studentUsi, anchor: 'grades' })">

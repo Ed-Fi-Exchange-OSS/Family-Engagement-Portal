@@ -12,7 +12,7 @@
     </div>
     <div class="card-body p-t-0">
         <div class="text-center">
-            <div class="image-container img-avatar img-size w-75px" ng-class="'img-avatar-' + ctrl.model.sexType">
+            <div class="image-container img-avatar img-size w-75px">
                 <img ng-src="{{ctrl.model.imageUrl}}"  alt="Student profile picture">
             </div>
             <h2 class="m-t-15 m-b-2">{{ctrl.model.name}}</h2>
@@ -24,12 +24,16 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-12 p-t-10 p-b-10">
-                <span class="float-left f-w-600"><i class="icon ion-md-mail" /> {{'Email' | translate}}:</span>
+            <div class="col-12 p-t-10 p-b-10 app-prevent-overflow">
+                <span class="float-left f-w-600">
+                    <i class="icon ion-md-mail"> {{'Email' | translate}}: </i>
+                </span>
                 <a href="mailto:{{ctrl.model.email}}">{{ctrl.model.email}}</a>
             </div>
-            <div class="col-12 p-t-10 p-b-10">
-                <span class="float-left f-w-600"><i class="icon ion-md-call" /> {{'Phone' | translate}}:</span>
+            <div class="col-12 p-t-10 p-b-10 app-prevent-overflow">
+                <span class="float-left f-w-600">
+                    <i class="icon ion-md-call"> {{'Phone' | translate}}: </i>
+                </span>
                 <a href="tel:+{{ctrl.model.telephone}}" class="float-right">{{ctrl.model.telephone}}</a>
             </div>
         </div>
