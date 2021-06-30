@@ -288,7 +288,7 @@ namespace Student1.ParentPortal.Web.Controllers.OAuth
 
             person = await _databaseIdentityProvider.GetPersonInformationAsync(email);
 
-            if (person == null || person.Email != email)
+            if (person == null || person.Email.ToUpper() != email.ToUpper())
                 return null;
 
             return person;

@@ -31,6 +31,7 @@
 
 namespace Student1.ParentPortal.Data.Models.EdFi31
 {
+    using System;
     using System.Linq;
 
     #region Unit of work

@@ -14,7 +14,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
         public async Task<bool> IsApplicationOffline()
         {
-            var data = await _edFiDb.AppOfflines.SingleOrDefaultAsync();
+            var data = await _edFiDb.AppOfflines.FirstAsync();
             return data != null && data.IsAppOffline;
         }
     }

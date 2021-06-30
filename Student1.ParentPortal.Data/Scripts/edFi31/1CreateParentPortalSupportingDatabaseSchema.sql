@@ -627,7 +627,7 @@ CREATE TABLE [ParentPortal].[ChatLog] (
     [RecipientUniqueId]      NVARCHAR (32)    NOT NULL,
     [EnglishMessage]         NVARCHAR (MAX)   NOT NULL,
     [TranslatedMessage]      NVARCHAR (MAX)   NULL,
-    [DateSent]               DATETIME         CONSTRAINT [DF_ChatLog_CreateDate] DEFAULT (getdate()) NOT NULL,
+    [DateSent]               DATETIME2(7)         CONSTRAINT [DF_ChatLog_CreateDate] DEFAULT (getdate()) NOT NULL,
     [RecipientHasRead]       BIT              CONSTRAINT [DF_ChatLog_RecipientHasRead] DEFAULT ((0)) NOT NULL,
     [Id]                     UNIQUEIDENTIFIER CONSTRAINT [ChatLog_DF_Id] DEFAULT (newid()) NOT NULL,
     [TranslatedLanguageCode] NVARCHAR (5)     NULL,

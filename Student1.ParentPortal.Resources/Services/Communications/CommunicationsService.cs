@@ -158,8 +158,9 @@ namespace Student1.ParentPortal.Resources.Services.Communications
                 Recipient = await GetPersonBriefModelByUsiAndPersonTypeAsync(recipientUniqueId, recipientTypeId),
             };
 
-            model.Conversation = await _communicationsRepository.GetThreadByParticipantsAsync(model.Student.UniqueId, senderUniqueId, senderTypeId, recipientUniqueId, recipientTypeId,rowsToSkip, unreadMessageCount);
+            model.Conversation = await _communicationsRepository.GetThreadByParticipantsAsync(model.Student.UniqueId, senderUniqueId, senderTypeId, recipientUniqueId, recipientTypeId, rowsToSkip, unreadMessageCount);
             await _communicationsRepository.SetRecipientsRead(model.Student.UniqueId, senderUniqueId, senderTypeId, recipientUniqueId, recipientTypeId);
+
             return model;
         }
 
