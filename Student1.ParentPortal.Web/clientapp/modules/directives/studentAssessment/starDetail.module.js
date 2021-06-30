@@ -16,26 +16,32 @@
         controller: ['$location',function ($location) {
             var ctrl = this;
             ctrl.$onChanges = function (changes) {
-                result = ctrl.model.reduce(function (r, a) {
-                    r[a.mainName] = r[a.mainName] || [];
-                    r[a.mainName].title = a.mainName;
-                    r[a.mainName].administrationDate = a.administrationDate;
-                    if (r[a.mainName].items == undefined) r[a.mainName].items = [];
-                    r[a.mainName].items.push(a);
-                    return r;
-                }, Object.create(null));
-                ctrl.groupInfo = result;
+                // prevent using reduce on empty array before time
+                if (ctrl.model != null) {
+                    result = ctrl.model.reduce(function (r, a) {
+                        r[a.mainName] = r[a.mainName] || [];
+                        r[a.mainName].title = a.mainName;
+                        r[a.mainName].administrationDate = a.administrationDate;
+                        if (r[a.mainName].items == undefined) r[a.mainName].items = [];
+                        r[a.mainName].items.push(a);
+                        return r;
+                    }, Object.create(null));
+                    ctrl.groupInfo = result;
+                }
             }
             this.$onInit = function () {
-                result = ctrl.model.reduce(function (r, a) {
-                    r[a.mainName] = r[a.mainName] || [];
-                    r[a.mainName].title = a.mainName;
-                    r[a.mainName].administrationDate = a.administrationDate;
-                    if (r[a.mainName].items == undefined) r[a.mainName].items = [];
-                    r[a.mainName].items.push(a);
-                    return r;
-                }, Object.create(null));
-                ctrl.groupInfo = result;
+                // prevent using reduce on empty array before time
+                if (ctrl.model != null) {
+                    result = ctrl.model.reduce(function (r, a) {
+                        r[a.mainName] = r[a.mainName] || [];
+                        r[a.mainName].title = a.mainName;
+                        r[a.mainName].administrationDate = a.administrationDate;
+                        if (r[a.mainName].items == undefined) r[a.mainName].items = [];
+                        r[a.mainName].items.push(a);
+                        return r;
+                    }, Object.create(null));
+                    ctrl.groupInfo = result;
+                }
             };
 
             ctrl.getHashKeyClean = function (hashKey) {

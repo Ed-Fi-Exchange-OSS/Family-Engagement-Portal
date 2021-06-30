@@ -165,22 +165,26 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
         public async Task<List<StudentSummary>> GetStudentsSummary(List<int> StudentUsis)
         {
-            var studentsSummary = await _edFiDb.StudentAbcSummaries.Where(x => StudentUsis.Any(usi => usi == x.StudentUsi))
-                                    .Select(x => new StudentSummary
-                                    {
-                                        StudentUsi = x.StudentUsi,
-                                        StudentUniqueId = x.StudentUniqueId,
-                                        FirstName = x.FirstName,
-                                        MiddleName = x.MiddleName,
-                                        LastSurname = x.LastSurname,
-                                        GradeLevel = x.GradeLevel,
-                                        SexType = x.SexType,
-                                        Gpa = x.Gpa,
-                                        MissingassignmentCount = x.MissingAssignments ?? 0,
-                                        DisciplineIncidentCount = x.DisciplineIncidents ?? 0,
-                                        AbsenceCount = x.Absences ?? 0,
-                                        CourseAverage = x.FinalAvg ?? x.SemesterAvg ?? (x.ExamAvg.HasValue ? (x.ExamAvg.Value + x.GradingPeriodAvg.Value) / 2 : x.GradingPeriodAvg ?? 0),
-                                    }).ToListAsync();
+            var students = await _edFiDb.StudentAbcSummaries
+                .Where(student => StudentUsis
+                .Any(usi => usi == student.StudentUsi))
+                .ToListAsync();
+
+            var studentsSummary = students.Select(x => new StudentSummary
+            {
+                StudentUsi = x.StudentUsi,
+                StudentUniqueId = x.StudentUniqueId,
+                FirstName = x.FirstName,
+                MiddleName = x.MiddleName,
+                LastSurname = x.LastSurname,
+                GradeLevel = x.GradeLevel,
+                SexType = x.SexType,
+                Gpa = x.Gpa,
+                MissingassignmentCount = x.MissingAssignments ?? 0,
+                DisciplineIncidentCount = x.DisciplineIncidents ?? 0,
+                AbsenceCount = x.Absences ?? 0,
+                CourseAverage = x.FinalAvg ?? x.SemesterAvg ?? (x.ExamAvg.HasValue ? (x.ExamAvg.Value + x.GradingPeriodAvg.Value) / 2 : x.GradingPeriodAvg ?? 0),
+            }).ToList();
 
             return studentsSummary;
         }

@@ -23,6 +23,12 @@
                     });
                     
                 });
+
+                // make another request to get complete student
+                // model information
+                api.students.getStudentBriefDetail(ctrl.model.studentUsi).then(function (data) {
+                    ctrl.model.gradeLevel = data.gradeLevel;
+                });
             };
 
             ctrl.readAlerts = function (studentUniqueId) {
