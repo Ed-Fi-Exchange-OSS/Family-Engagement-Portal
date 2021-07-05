@@ -105,6 +105,7 @@
                 });
 
                 //TODO:Disable communications service
-                //communicationService.start();
+                // TODO: Figure out why communications service was disabled
+                communicationService.start();
             }]
     });

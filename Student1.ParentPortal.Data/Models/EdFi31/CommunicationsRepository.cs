@@ -75,16 +75,18 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
         public async Task<ChatLogItemModel> PersistMessage(ChatLogItemModel model)
         {
-            var persistModel = new ChatLog();
-            persistModel.RecipientUniqueId = model.RecipientUniqueId;
-            persistModel.SenderUniqueId = model.SenderUniqueId;
-            persistModel.StudentUniqueId = model.StudentUniqueId;
-            persistModel.EnglishMessage = model.EnglishMessage;
-            persistModel.TranslatedMessage = model.TranslatedMessage;
-            persistModel.SenderTypeId = model.SenderTypeId;
-            persistModel.RecipientTypeId = model.RecipientTypeId;
-            persistModel.RecipientHasRead = model.RecipientHasRead;
-            persistModel.TranslatedLanguageCode = model.TranslatedLanguageCode;
+            var persistModel = new ChatLog
+            {
+                RecipientUniqueId = model.RecipientUniqueId,
+                SenderUniqueId = model.SenderUniqueId,
+                StudentUniqueId = model.StudentUniqueId,
+                EnglishMessage = model.EnglishMessage,
+                TranslatedMessage = model.TranslatedMessage,
+                SenderTypeId = model.SenderTypeId,
+                RecipientTypeId = model.RecipientTypeId,
+                RecipientHasRead = model.RecipientHasRead,
+                TranslatedLanguageCode = model.TranslatedLanguageCode
+            };
 
             var dbModel = _edFiDb.ChatLogs.Add(persistModel);
 
@@ -102,7 +104,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                 join s in _edFiDb.Students on c.StudentUniqueId equals s.StudentUniqueId
                                 where s.StudentUsi == studentUsi && !c.RecipientHasRead
                                 && c.RecipientUniqueId == recipientUniqueId && c.RecipientTypeId == recipientTypeId
-                                && (senderUniqueid != null ? (c.SenderUniqueId == senderUniqueid && c.SenderTypeId == senderTypeId) : true)
+                                && (senderUniqueid == null || (c.SenderUniqueId == senderUniqueid && c.SenderTypeId == senderTypeId))
                                 select c).CountAsync();
 
             return result;
