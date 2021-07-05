@@ -432,13 +432,15 @@
                             }
 
                             for (let i = 0; i < ctrl.starIndicatorCategories.length; i++) {
-                                if (ctrl.starIndicatorCategories[i].textDisplay.indexOf('STAR EL') >= 0) {
-                                    ctrl.starIndicatorCategories.splice(i, 1);
-                                    break;
+                                const starIndicatorIsNotNull = ctrl.starIndicatorCategories[i].textDisplay != null;
+                                if (starIndicatorIsNotNull) {
+                                    const isTextFound = ctrl.starIndicatorCategories[i].textDisplay.indexOf('STAR EL') >= 0;
+                                    if (isTextFound) {
+                                        ctrl.starIndicatorCategories.splice(i, 1);
+                                        break;
+                                    }
                                 }
                             }
-
-                            
                         }
 
                     });

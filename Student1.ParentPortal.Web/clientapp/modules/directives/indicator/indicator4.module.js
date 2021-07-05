@@ -32,53 +32,58 @@
                 ctrl.setProfencyLevels();
             };
             ctrl.setProfencyLevels = function myfunction() {
-                ctrl.gradeLevel = ctrl.getGradeLevel();
-                if (ctrl.data === undefined) {
-                    return;
+                if (ctrl.data != undefined && ctrl.data.length != 0) {
+                    ctrl.gradeLevel = ctrl.getGradeLevel();
+                    if (ctrl.data === undefined) {
+                        return;
+                    }
+                    ctrl.proficiencyLevel = Math.floor(ctrl.data[0].proficiencyLevel) + 1;
+                    if (ctrl.proficiencyLevel == 7)
+                        ctrl.proficiencyLevel--;
+
+                    let existDescription = ctrl.canDoDescriptors
+                        .find(cdd => cdd.subject == ctrl.subject
+                            && cdd.gradeLevels.some(x => x == (ctrl.gradeLevel + 1))
+                            && cdd.proficiency == ctrl.proficiencyLevel);
+
+                    if (existDescription != null && existDescription != undefined)
+                        ctrl.description = existDescription.description;
                 }
-                ctrl.proficiencyLevel = Math.floor(ctrl.data[0].proficiencyLevel) + 1;
-                if (ctrl.proficiencyLevel == 7)
-                    ctrl.proficiencyLevel--;
-                
-                let existDescription = ctrl.canDoDescriptors
-                    .find(cdd => cdd.subject == ctrl.subject
-                        && cdd.gradeLevels.some(x => x == (ctrl.gradeLevel + 1))
-                        && cdd.proficiency == ctrl.proficiencyLevel);
-                
-                if (existDescription != null && existDescription != undefined)
-                    ctrl.description = existDescription.description;
             }
             ctrl.getGradeLevel = function () {
                 if (ctrl.data === undefined) {
                     return 0;
                 }
-                switch (ctrl.data[0].gradelevel) {
-                    case 'First grade':
-                        return 1;
-                    case 'Second grade':
-                        return 2;
-                    case 'Third grade':
-                        return 3;
-                    case 'Fourth grade':
-                        return 4;
-                    case 'Fifth grade':
-                        return 5;
-                    case 'Sixth grade':
-                        return 6;
-                    case 'Seventh grade':
-                        return 7;
-                    case 'Eighth grade':
-                        return 8;
-                    case 'Ninth grade':
-                        return 9;
-                    case 'Tenth grade':
-                        return 10;
-                    case 'Eleventh grade':
-                        return 11;
-                    case 'Twelfth grade':
-                        return 12;
-                    default:
-                        return 0;
+
+                if (ctrl.data != undefined && ctrl.data.length != 0) {
+                    switch (ctrl.data[0].gradelevel) {
+                        case 'First grade':
+                            return 1;
+                        case 'Second grade':
+                            return 2;
+                        case 'Third grade':
+                            return 3;
+                        case 'Fourth grade':
+                            return 4;
+                        case 'Fifth grade':
+                            return 5;
+                        case 'Sixth grade':
+                            return 6;
+                        case 'Seventh grade':
+                            return 7;
+                        case 'Eighth grade':
+                            return 8;
+                        case 'Ninth grade':
+                            return 9;
+                        case 'Tenth grade':
+                            return 10;
+                        case 'Eleventh grade':
+                            return 11;
+                        case 'Twelfth grade':
+                            return 12;
+                        default:
+                            return 0;
+                    }
                 }
             }
         }]

@@ -100,14 +100,23 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
         public async Task<int> UnreadMessageCount(int studentUsi, string recipientUniqueId, int recipientTypeId, string senderUniqueid, int? senderTypeId)
         {
-            var result = await (from c in _edFiDb.ChatLogs
-                                join s in _edFiDb.Students on c.StudentUniqueId equals s.StudentUniqueId
-                                where s.StudentUsi == studentUsi && !c.RecipientHasRead
-                                && c.RecipientUniqueId == recipientUniqueId && c.RecipientTypeId == recipientTypeId
-                                && (senderUniqueid == null || (c.SenderUniqueId == senderUniqueid && c.SenderTypeId == senderTypeId))
-                                select c).CountAsync();
-
-            return result;
+            if (senderUniqueid != null)
+            {
+                return await (from c in _edFiDb.ChatLogs
+                              join s in _edFiDb.Students on c.StudentUniqueId equals s.StudentUniqueId
+                              where s.StudentUsi == studentUsi && !c.RecipientHasRead
+                              && c.RecipientUniqueId == recipientUniqueId && c.RecipientTypeId == recipientTypeId
+                              && c.SenderUniqueId == senderUniqueid && c.SenderTypeId == senderTypeId
+                              select c).CountAsync();
+            }
+            else
+            {
+                return await (from c in _edFiDb.ChatLogs
+                              join s in _edFiDb.Students on c.StudentUniqueId equals s.StudentUniqueId
+                              where s.StudentUsi == studentUsi && !c.RecipientHasRead
+                              && c.RecipientUniqueId == recipientUniqueId && c.RecipientTypeId == recipientTypeId
+                              select c).CountAsync();
+            }
         }
 
         public async Task<List<UnreadMessageModel>> RecipientUnreadMessages(string recipientUniqueId, int recipientTypeId)

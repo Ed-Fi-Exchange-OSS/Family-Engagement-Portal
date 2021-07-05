@@ -19,6 +19,8 @@ using Student1.ParentPortal.Web.Hubs;
 using System.Text;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.Jwt;
+using Microsoft.Extensions.DependencyInjection;
+using Student1.ParentPortal.Data.Models.EdFi31;
 
 namespace Student1.ParentPortal.Web
 {

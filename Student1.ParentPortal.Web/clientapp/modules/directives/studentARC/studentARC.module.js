@@ -389,53 +389,62 @@
 
                     if (record.title.indexOf('ENIL') >= 0) {
 
-                        record.objectiveAssessments.forEach(element => {
-                            if (element.identificationCode == 'ARC Reading Level (Baseline)') {
-                                this.arcModelENIL.rlBaseLine = element.englishResult;
+                        if (record.title.indexOf('ENIL') >= 0) {
+
+                            var isRecordObjectiveAssessmentsNull = record.objectiveAssessments != undefined;
+                            if (isRecordObjectiveAssessmentsNull) {
+                                record.objectiveAssessments.forEach(element => {
+                                    if (element.identificationCode == 'ARC Reading Level (Baseline)') {
+                                        this.arcModelENIL.rlBaseLine = element.englishResult;
+                                    }
+                                    else if (element.identificationCode == 'ARC Reading Level') {
+                                        this.arcModelENIL.reportingDate = element.englishResult;
+                                        this.arcModelENIL.rlCurrent = element.englishResult;
+                                    }
+                                    else if (element.identificationCode == 'ARC Power Goal Abbreviation') {
+                                        this.arcModelENIL.powerGoal = element.englishResult;
+                                    }
+                                    else if (element.identificationCode == 'ARC Days on Current Power Goal') {
+                                        this.arcModelENIL.currentDaysOnGoal = element.englishResult;
+                                    }
+                                    else if (element.identificationCode == 'ARC Baseline Reporting Date') {
+                                        this.arcModelENIL.baselineDate = element.englishResult;
+                                    }
+                                    else if (element.identificationCode == 'ARC Score') {
+                                        this.arcModelENIL.scoreValue = element.englishResult;
+                                    }
+                                });
                             }
-                            else if (element.identificationCode == 'ARC Reading Level') {
-                                this.arcModelENIL.reportingDate = element.englishResult;
-                                this.arcModelENIL.rlCurrent = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Power Goal Abbreviation') {
-                                this.arcModelENIL.powerGoal = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Days on Current Power Goal') {
-                                this.arcModelENIL.currentDaysOnGoal = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Baseline Reporting Date') {
-                                this.arcModelENIL.baselineDate = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Score') {
-                                this.arcModelENIL.scoreValue = element.englishResult;
-                            }
-                        });
+
+                        }
                     }
                     else if (record.title.indexOf('IRLA') >= 0) {
-                        record.objectiveAssessments.forEach(element => {
+                        var isRecordObjectiveAssessmentsNull = record.objectiveAssessments != undefined;
+                        if (isRecordObjectiveAssessmentsNull) {
+                            record.objectiveAssessments.forEach(element => {
 
-                            if (element.identificationCode == 'ARC Reading Level (Baseline)') {
-                                this.arcModelIRLA.rlBaseLine = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Reading Level') {
-                                this.arcModelIRLA.reportingDate = element.administrationDate;
-                                this.arcModelIRLA.rlCurrent = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Power Goal Abbreviation') {
-                                this.arcModelIRLA.powerGoal = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Days on Current Power Goal') {
-                                this.arcModelIRLA.currentDaysOnGoal = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Baseline Reporting Date') {
-                                this.arcModelIRLA.baselineDate = element.englishResult;
-                            }
-                            else if (element.identificationCode == 'ARC Score') {
-                                this.arcModelIRLA.scoreValue = element.englishResult;
-                            }
+                                if (element.identificationCode == 'ARC Reading Level (Baseline)') {
+                                    this.arcModelIRLA.rlBaseLine = element.englishResult;
+                                }
+                                else if (element.identificationCode == 'ARC Reading Level') {
+                                    this.arcModelIRLA.reportingDate = element.administrationDate;
+                                    this.arcModelIRLA.rlCurrent = element.englishResult;
+                                }
+                                else if (element.identificationCode == 'ARC Power Goal Abbreviation') {
+                                    this.arcModelIRLA.powerGoal = element.englishResult;
+                                }
+                                else if (element.identificationCode == 'ARC Days on Current Power Goal') {
+                                    this.arcModelIRLA.currentDaysOnGoal = element.englishResult;
+                                }
+                                else if (element.identificationCode == 'ARC Baseline Reporting Date') {
+                                    this.arcModelIRLA.baselineDate = element.englishResult;
+                                }
+                                else if (element.identificationCode == 'ARC Score') {
+                                    this.arcModelIRLA.scoreValue = element.englishResult;
+                                }
 
-                        });
-
+                            });
+                        }
                     }
                 }
 
