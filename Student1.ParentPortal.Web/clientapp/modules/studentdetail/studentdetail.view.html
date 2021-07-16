@@ -331,9 +331,9 @@
         </div>
     </div>
 
-    <div id="assesments" class="row" ng-if="ctrl.model.staarAssessmentHistory && ctrl.model.staarAssessmentHistory.length > 0 && ctrl.studentDetailFeatures.staarAssessment">
+    <div id="assesments" class="row" ng-if="ctrl.staarHistory && ctrl.staarHistory.length > 0 && ctrl.studentDetailFeatures.staarAssessment">
         <div class="col-lg-12">
-            <student-staar-assessment model="ctrl.model.staarAssessmentHistory" link="{{ctrl.model.assessment.assessments[0].externalLink}}"></student-staar-assessment>
+            <student-staar-assessment model="ctrl.staarHistory" link="{{ctrl.model.assessment.assessments[0].externalLink}}"></student-staar-assessment>
         </div>
     </div>
     <div id="star" class="row" ng-if="ctrl.model.assessment.assessments[0].maxRawScore > 0 && ctrl.studentDetailFeatures.assessment">

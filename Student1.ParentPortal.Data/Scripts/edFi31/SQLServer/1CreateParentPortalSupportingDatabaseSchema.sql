@@ -783,13 +783,13 @@ SELECT s.StudentUsi, s.StudentUniqueId, s.FirstName, s.MiddleName, s.LastSurname
 -- Grade Level --
 	(SELECT TOP (1) d.ShortDescription 
 			FROM edfi.Descriptor AS d 
-			INNER JOIN edfi.StudentSchoolAssociation AS ssa ON ssa.StudentUSI = 730 
+			INNER JOIN edfi.StudentSchoolAssociation AS ssa ON ssa.StudentUSI = s.StudentUsi 
 				AND d.DescriptorId = ssa.EntryGradeLevelDescriptorId
 			INNER JOIN edfi.Session AS sess ON ssa.EntryDate >= sess.BeginDate 
 				AND ssa.EntryDate <= sess.EndDate 
 				AND ssa.ExitWithdrawDate IS NULL 
 				AND GETDATE() >= sess.BeginDate 
-				AND GETDATE() <= sess.EndDate
+				-- AND GETDATE() <= sess.EndDate remove when EndDate is more than current year
 			INNER JOIN edfi.SchoolYearType AS sy ON sy.SchoolYear = sess.SchoolYear 
 			WHERE sy.CurrentSchoolYear = 1
 			ORDER BY ssa.EntryDate DESC) as [GradeLevel],

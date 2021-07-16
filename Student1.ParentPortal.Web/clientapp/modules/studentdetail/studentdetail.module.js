@@ -24,6 +24,9 @@
                 }],
                 studentDetailFeatures: ['api', function (api) {
                     return api.admin.getStudentDetailFeatures();
+                }],
+                staarHistory: ['$stateParams', 'api', function ($stateParams, api) {
+                    return api.students.getStudentStaarAssessmentHistory($stateParams.studentId);
                 }]
             }
         });
@@ -35,7 +38,8 @@
             anchor: "<",
             studentIds: "<",
             currentStudent: "<",
-            studentDetailFeatures: "<"
+            studentDetailFeatures: "<",
+            staarHistory: "<"
         }, // One way data binding.
         templateUrl: 'clientapp/modules/studentdetail/studentdetail.view.html',
         controllerAs: 'ctrl',
