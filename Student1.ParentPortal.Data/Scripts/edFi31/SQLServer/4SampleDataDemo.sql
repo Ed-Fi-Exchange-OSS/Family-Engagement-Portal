@@ -2223,15 +2223,15 @@ select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hann
 
 declare @highSchoolId as int = 255901001
 declare @middleSchoolId as int =255901044
+-- Insert Calendar event: School Year 2010-2011
+EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @highSchoolId, @SchoolYear = 2010, @IsCurrent = 1
+EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @middleSchoolId, @SchoolYear = 2010, @IsCurrent = 1
 
-EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @highSchoolId, @SchoolYear = 2011, @IsCurrent = 1
-EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @middleSchoolId, @SchoolYear = 2011, @IsCurrent = 1
-
- ----INSERTING Tardies, Unexcused absences and excused absences
- EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @highSchoolId, @SchoolYear = 2011, @StudentUSI = @studentFemaleUSI
+ ----Insert Tardies, Unexcused absences and excused absences
+ EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @highSchoolId, @SchoolYear = 2010, @StudentUSI = @studentFemaleUSI
 
 --Student MARSHALL Tardies, Unexcused absences and excused absences
- EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @middleSchoolId, @SchoolYear = 2011, @StudentUSI = @studentFemaleUSI 
+ EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @middleSchoolId, @SchoolYear = 2010, @StudentUSI = @studentFemaleUSI 
 
 GO
 
