@@ -1,4 +1,344 @@
-﻿--Descriptors variables
+﻿IF (NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ParentPortal')) 
+BEGIN
+  EXEC ('CREATE SCHEMA ParentPortal AUTHORIZATION [dbo]')
+END
+GO
+
+--Gets the nth occurrence of a given weekday in the month containing the specified date.
+-- For @dayOfWeek, 1 OR 'Sunday' = Sunday, 2 OR 'Monday' = Monday, 3 OR 'Tuesday' = Tuesday, 4 OR 'Wednesday' = Wednesday,
+--	5 OR 'Thursday' = Thursday, 6 OR 'Friday' = Friday, 7 OR 'Saturday' = Saturday
+CREATE OR ALTER FUNCTION ParentPortal.GetDateByNthWeekday(@Date DATETIME,@NthWeekdayInMonth INT,@DayOfWeek VARCHAR(3))
+RETURNS datetime
+AS
+BEGIN
+	DECLARE @Day INT,@OffSet INT
+	DECLARE @BeginMonth DATETIME,@FirstWeekdayOfMonth DATETIME, @Result DATETIME
+
+	IF(ISNUMERIC(@DayOfWeek)=1)
+		SET @Day=@DayOfWeek
+		ELSE
+		BEGIN
+		SET @Day = 
+			   (case when @DayOfWeek = 'Sun' then 1
+					 when @DayOfWeek = 'Mon' then 2
+					 when @DayOfWeek = 'Tue' then 3
+					 when @DayOfWeek = 'Wed' then 4
+					 when @DayOfWeek = 'Thu' then 5
+					 when @DayOfWeek = 'Fri' then 6
+					 when @DayOfWeek = 'Sat' then 7
+				END)
+		 END
+
+	SET @BeginMonth = DATEADD(DAY, -DATEPART(DAY, @Date) + 1, @Date)
+	SET @OffSet = @Day - DATEPART(dw, @BeginMonth)
+
+	IF (@OffSet < 0)
+	BEGIN
+		SET @FirstWeekdayOfMonth = DATEADD(d, 7 + @OffSet, @BeginMonth)
+	END
+	ELSE
+	BEGIN
+		SET @FirstWeekdayOfMonth = DATEADD(d, @OffSet, @BeginMonth)
+	END
+
+	SET @Result = DATEADD(WEEK, @NthWeekdayInMonth - 1, @FirstWeekdayOfMonth)
+	IF (NOT(MONTH(@BeginMonth) = MONTH(@Result)))
+	BEGIN
+		SET @Result = DATEADD(WEEK, - 1, @Result)
+	END
+  RETURN @Result
+END
+GO
+
+--validate if the given date is weekend or not
+CREATE OR ALTER FUNCTION ParentPortal.IsWeekend(@Date date)
+RETURNS BIGINT
+AS
+BEGIN
+	DECLARE @Weekend BIGINT=0	 
+	DECLARE @DayName VARCHAR(9) = DATEName(DW, @Date)
+	IF (@DayName = 'Saturday' OR @DayName = 'Sunday') 
+	BEGIN
+		RETURN 1
+	END
+	RETURN 0
+END
+GO
+
+--Return a Holiday List
+CREATE OR ALTER PROCEDURE ParentPortal.publicHolidays
+  @SchoolYear INT
+AS
+BEGIN
+	DECLARE @PublicHoliday TABLE (Holiday VARCHAR(50), Date_Observed DATETIME, DescriptorId INT)
+	DECLARE @HolidayDescriptorId INT, @NonInstructionalDayDescriptorId INT, @Year CHAR(4), @LastYear CHAR(4)
+	DECLARE @Date DATETIME, @Holiday DATETIME, @FirstDayOfSchool DATETIME,@LastDayOfSchool DATETIME
+
+	SELECT @HolidayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue = 'Holiday' and Namespace='uri://ed-fi.org/CalendarEventDescriptor'
+	SELECT @NonInstructionalDayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue = 'Non-instructional day' and Namespace='uri://ed-fi.org/CalendarEventDescriptor'
+	SET @Year = @schoolYear
+	SET @LastYear = @schoolYear + 1
+
+	--- First day of school should be a weekday in mid August of the schoolYear passed in to the @SchoolYear.
+	DECLARE @PotencialStartDay VARCHAR(10) = CONCAT(@SchoolYear,'/', '08/15') 
+	SELECT @FirstDayOfSchool= DATEADD(DAY, CASE DATENAME(WEEKDAY, @PotencialStartDay) 
+										   WHEN 'Saturday' THEN + 2 
+										   WHEN 'Sunday' THEN + 1 
+										   ELSE 0 END, @PotencialStartDay)
+
+	--- Last day of school should be a weekday in the last week of May of the schoolYear + 1
+	DECLARE @PotencialLastDayOfSchool VARCHAR(10) = CONCAT(@SchoolYear + 1,'/', '05/31')
+	SELECT @LastDayOfSchool = DATEADD(DAY, CASE DATENAME(WEEKDAY, @PotencialLastDayOfSchool) 
+										   WHEN 'Saturday' THEN - 1 
+										   WHEN 'Sunday' THEN - 2 
+										   ELSE 0 END, @PotencialLastDayOfSchool)	
+
+	WHILE (@Year <= @LastYear) 
+	BEGIN	
+		-- New Years Day
+		SET @Date = CONVERT(datetime, @Year + '-01-01')
+		IF DATENAME( dw, @Date ) = 'Saturday'
+			SET @Date = @Date + 2 -- It is observed the week after Christmas break.
+		ELSE IF DATENAME( dw, @Date ) = 'Sunday'
+			SET @Date = @Date + 1
+		INSERT INTO @PublicHoliday SELECT 'New Years Day', @Date, @HolidayDescriptorId
+
+		-- Martin L King's Birthday ( 3rd Monday in January )
+		SET @Date = CONVERT(datetime, @Year + '-01-01') 
+		INSERT INTO @PublicHoliday SELECT 'Martin L King’s Birthday', ParentPortal.GetDateByNthWeekday(@Date, 3,'Monday'), @HolidayDescriptorId
+
+		-- President’s Day ( 3rd Monday in February )
+		SET @Date = CONVERT(datetime, @Year + '-02-01' )
+		INSERT INTO @PublicHoliday SELECT 'President’s Day', ParentPortal.GetDateByNthWeekday(@Date, 3,'Monday'), @HolidayDescriptorId
+
+		-- Spring break: 1 week towards the end of March
+		DECLARE @EndOfSpringBreak DATETIME = CONVERT(datetime, @Year + '-03-31')
+		DECLARE @StartOfSpringBreak DATETIME = dateadd(wk, -1, @EndOfSpringBreak)
+
+		WHILE (@StartOfSpringBreak <= @EndOfSpringBreak)
+		BEGIN
+			INSERT INTO @PublicHoliday SELECT 'Spring break', @StartOfSpringBreak, @NonInstructionalDayDescriptorId
+			SET @StartOfSpringBreak = DATEADD(DAY, 1, @StartOfSpringBreak) /*increment current date*/
+		END
+
+		-- Memorial Day ( Last Monday in May )
+		SET @Date = CONVERT(datetime, @Year + '-05-01')
+		INSERT INTO @PublicHoliday SELECT 'Memorial Day', ParentPortal.GetDateByNthWeekday(@Date,5,'Monday'), @HolidayDescriptorId
+
+		-- Independence Day ( July 4 )
+		SET @Date=CONVERT( datetime, @Year + '-07-04')
+		IF DATENAME( dw, @Date ) = 'Saturday'
+			SET @Date = @Date - 1
+		ELSE IF DATENAME( dw, @Date ) = 'Sunday'
+			SET @Date = @Date + 1
+		INSERT INTO @PublicHoliday SELECT 'Independence Day', @Date, @HolidayDescriptorId
+
+		-- Labor Day ( 1st Monday in September )
+		SET @Date = CONVERT(datetime, @Year + '-09-01')
+		INSERT INTO @PublicHoliday SELECT 'Labor Day', ParentPortal.GetDateByNthWeekday(@Date,1,'Monday'), @HolidayDescriptorId
+
+		-- Columbus Day ( 2nd Monday in October )
+		SET @Date = CONVERT( datetime, @Year + '-10-01')
+		INSERT INTO @PublicHoliday SELECT 'Columbus Day', ParentPortal.GetDateByNthWeekday(@Date,2,'Monday'), @HolidayDescriptorId
+
+		-- Veteran’s Day ( November 11 )
+		SET @Date=CONVERT( datetime,  @Year + '-11-11' ) 
+		IF DATENAME( dw, @Date ) = 'Saturday'
+			SET @Date = @Date - 1
+		ELSE IF DATENAME( dw, @Date ) = 'Sunday'
+			SET @Date = @Date + 1
+		INSERT INTO @PublicHoliday SELECT 'Veteran’s Day', @Date, @HolidayDescriptorId
+
+		-- Thanks Giving week: The whole week of the 4th Thursday in November
+		SET @Date = CONVERT(datetime, @Year + '-11-01')
+		SET @Holiday = ParentPortal.GetDateByNthWeekday(@Date, 4, 'Thursday')
+		-- Start on monday(2)
+		DECLARE @WeekStartDate DATE = @Holiday - 3
+		DECLARE @WeekEndDate DATE = @Holiday + 1
+	
+		WHILE (@WeekStartDate <= @WeekEndDate)
+		BEGIN
+			INSERT INTO @PublicHoliday SELECT 'Thanksgiving Day', @WeekStartDate ,@NonInstructionalDayDescriptorId
+			SET @WeekStartDate = DATEADD(DAY, 1, @WeekStartDate) /*increment current date*/
+		END
+
+		-- Christmas Day ( December 25 ) whole 2 weeks before 25 and after
+		SET @Date = CONVERT(datetime, @Year + '-12-25')
+		DECLARE @EndDate DATETIME = @Year + '-12-31'
+		DECLARE @StartChristmasBreak DATETIME = DATEADD(DAY, - DATEPART(dw, @Date) + 2, @Date)
+		DECLARE @EndChristmasBreak DATE = DATEADD(DAY, - DATEPART(dw, @EndDate) + 6, @EndDate)
+
+		WHILE (@StartChristmasBreak <= @EndChristmasBreak)
+		BEGIN
+			INSERT INTO @PublicHoliday SELECT 'Christmas Vacations', @StartChristmasBreak ,@NonInstructionalDayDescriptorId
+			SET @StartChristmasBreak = DATEADD(DAY, 1, @StartChristmasBreak) /*increment current date*/
+		END
+		--full week from Christmas Day to new years day
+		SET @Year = @Year + 1 /*increment current year*/		
+	END
+	
+	SELECT * FROM @PublicHoliday WHERE Date_Observed between @FirstDayOfSchool and @LastDayOfSchool
+END 
+GO
+
+CREATE OR ALTER PROCEDURE ParentPortal.CreateSchoolCalendarMetadata
+	@SchoolId INT, --255901044
+	@SchoolYear INT,--Start year
+	@IsCurrent BIT
+AS
+BEGIN
+	--Start year: @SchoolYear (2020)
+	--End year> @SchoolYear + 1 (2021)
+	DECLARE @SchoolEndYear INT = @SchoolYear + 1
+	
+	--Set the schoolyear as the current one.
+	IF(@IsCurrent = 1)
+		EXEC edfi.SetCurrentSchoolYear @schoolYear = @SchoolEndYear
+
+	--School session
+	DECLARE @LastDayOfSchool DATE, @FirstDayOfSchool DATE, @LastFridayOfMonth DATE, @CurrentDate DATE
+	--Descriptors Id
+	DECLARE @HolidayDescriptorId INT, @CalendarTypeDescriptorId INT, @InstructionalDayDescriptorId INT, @TeacherOnlyDayDescriptorId INT, @FallSemesterDescriptor INT, @SpringSemesterDescriptor INT
+
+	SELECT @CalendarTypeDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue='School' and Namespace = 'uri://ed-fi.org/CalendarTypeDescriptor'
+	SELECT @InstructionalDayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue='Instructional day' and Namespace = 'uri://ed-fi.org/CalendarEventDescriptor'
+	SELECT @HolidayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue='Holiday' and Namespace = 'uri://ed-fi.org/CalendarEventDescriptor'
+	SELECT @TeacherOnlyDayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue='Teacher only day' and Namespace = 'uri://ed-fi.org/CalendarEventDescriptor'
+	SELECT @FallSemesterDescriptor=DescriptorId FROM edfi.Descriptor WHERE CodeValue='Fall Semester' and Namespace = 'uri://ed-fi.org/TermDescriptor'												
+	SELECT @SpringSemesterDescriptor=DescriptorId FROM edfi.Descriptor WHERE CodeValue='Spring Semester' and Namespace = 'uri://ed-fi.org/TermDescriptor'
+
+	--- First day of school should be a weekday in mid August of the schoolYear passed in to the @SchoolYear .
+	DECLARE @PotencialStartDay VARCHAR(10) = CONCAT(@SchoolYear,'/', '08/15') 
+	SELECT @FirstDayOfSchool = DATEADD(DAY, CASE DATENAME(WEEKDAY, @PotencialStartDay) 
+											WHEN 'Saturday' THEN + 2 
+											WHEN 'Sunday' THEN + 1 
+											ELSE 0 END, @PotencialStartDay)
+						
+	--- Last day of school should be a weekday in the last week of May of the schoolYear+1
+	DECLARE @PotencialLastDayOfSchool VARCHAR(10) = CONCAT(@SchoolEndYear,'/', '05/31')
+	SELECT @LastDayOfSchool= DATEADD(DAY, CASE DATENAME(WEEKDAY, @PotencialLastDayOfSchool) 
+										  WHEN 'Saturday' THEN - 1 
+										  WHEN 'Sunday' THEN - 2 
+										  ELSE 0 END, @PotencialLastDayOfSchool)
+
+	---Declare a Table to insert holidays.
+	DECLARE @PublicHolidays TABLE (Holiday VARCHAR(50),Date_Observed DATETIME,DescriptorId INT)
+	---Get public holidays for year in context.
+	INSERT INTO @PublicHolidays Exec ParentPortal.publicHolidays @SchoolYear = @SchoolYear
+	DECLARE @CalendarCode VARCHAR(30) = CONCAT('CL-',@SchoolId, '-', @SchoolYear, '-', @SchoolEndYear) 
+	
+	-- Insert the record into calendar, calendarDate and CalendarDateCalendarEvent tables
+	IF NOT EXISTS (SELECT * FROM edfi.Calendar WHERE CalendarCode = @CalendarCode)
+		INSERT INTO edfi.Calendar(CalendarCode,SchoolId,SchoolYear,CalendarTypeDescriptorId)
+		VALUES(@CalendarCode,@SchoolId,@SchoolEndYear,@CalendarTypeDescriptorId)
+
+	SET @CurrentDate = @FirstDayOfSchool
+	DECLARE @DescriptorId INT
+	WHILE(@CurrentDate <= @LastDayOfSchool) BEGIN
+		--Skip if it is a weekend.
+		IF(ParentPortal.IsWeekend(@CurrentDate)=1)
+		BEGIN
+		  SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate) /*increment current date*/
+			CONTINUE
+		END
+
+		-- Find the right descriptor for the @CurrentDate
+		IF EXISTS (SELECT * FROM @PublicHolidays WHERE Date_Observed = @CurrentDate)
+			SELECT @DescriptorId=DescriptorId FROM @PublicHolidays WHERE Date_Observed = @CurrentDate
+		ELSE BEGIN
+			SELECT @LastFridayOfMonth = ParentPortal.GetDateByNthWeekday(@CurrentDate,5,'Friday') --Get the last friday of the month
+			IF(@LastFridayOfMonth = @CurrentDate)
+				SET @DescriptorId = @TeacherOnlyDayDescriptorId 
+			ELSE
+				SET @DescriptorId=@InstructionalDayDescriptorId
+		END
+
+		-- Insert the record into CalendarDate and CalendarDateCalendarEvent tables
+		IF NOT EXISTS (SELECT * FROM edfi.CalendarDate WHERE CalendarCode = @CalendarCode AND Date= @CurrentDate )
+			INSERT INTO edfi.CalendarDate(CalendarCode,Date,SchoolId,SchoolYear) VALUES(@CalendarCode,@CurrentDate,@SchoolId,@SchoolEndYear)
+		IF NOT EXISTS (SELECT * FROM edfi.CalendarDateCalendarEvent WHERE CalendarCode = @CalendarCode 
+																	  and CalendarEventDescriptorId= @DescriptorId
+																	  and Date=@CurrentDate and SchoolId=@SchoolId and SchoolYear =@SchoolYear)
+			INSERT INTO edfi.CalendarDateCalendarEvent(CalendarCode,CalendarEventDescriptorId,Date,SchoolId,SchoolYear)
+			VALUES(@CalendarCode,@DescriptorId,@CurrentDate,@SchoolId,@SchoolEndYear)
+
+	   SET @CurrentDate = DATEADD(DAY, 1,@CurrentDate) -- Increment current date
+	END
+	-- Update the students associated to that school to the new calendar
+	  Update edfi.StudentSchoolAssociation set CalendarCode = @CalendarCode WHERE SchoolId = @SchoolId
+	SELECT @CalendarCode
+END 
+GO
+
+
+
+CREATE OR ALTER PROCEDURE [ParentPortal].[CreateStudentAttendanceEvents]
+	@SchoolId INT, --255901044
+	@SchoolYear INT,--Start year
+	@StudentUSI INT--721
+AS
+BEGIN
+	--The School year should be Between @SchoolYear - @SchoolYear + 1, Example (2020 - 2021)
+	--Start year: @SchoolYear (2020)
+	--End year> @SchoolYear + 1 (2021)
+	--Set the schoolyear as the current one.
+	DECLARE @SchoolEndYear INT = @SchoolYear + 1
+
+	-- Descriptors Id
+	DECLARE @InstructionalDayDescriptorId INT, @ExcusedAbsencesDescriptorId INT, @UnexcusedAbsencesDescriptorId INT, @TardiesDescriptorId INT
+
+	-- Set descriptors
+	SELECT @ExcusedAbsencesDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue = 'Excused Absence' and Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor'
+	SELECT @UnexcusedAbsencesDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue = 'Unexcused Absence' and Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor'
+	SELECT @TardiesDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue = 'Tardy' and Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor'
+	SELECT @InstructionalDayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue='Instructional day' and Namespace = 'uri://ed-fi.org/CalendarEventDescriptor'
+	
+	-- Object to store Unexcused Absences, Excused Absences and Tardies.
+	DECLARE @AbsencesAndTardies TABLE (eventDate DATETIME, descriptorId INT, sessionName NVARCHAR(60), reason NVARCHAR(255))
+
+	--Initialize  Random @TOP (0-5)
+	DECLARE @TOP INT = ROUND(Rand()*(5),0)
+	
+	-- Excused Absences: Select 0 to 5 random dates from the calendar's instructional days.
+	INSERT INTO @AbsencesAndTardies
+		SELECT TOP (@TOP) Date, @ExcusedAbsencesDescriptorId, SessionName, 'Doctor Appointment'
+		FROM edfi.CalendarDateCalendarEvent cdce
+		INNER JOIN edfi.Session sess on cdce.Date>=sess.BeginDate and cdce.Date<=sess.EndDate
+		WHERE cdce.SchoolId=@SchoolId AND cdce.SchoolYear=@SchoolEndYear and cdce.CalendarEventDescriptorId=@InstructionalDayDescriptorId
+		ORDER BY NEWID()
+
+	-- Unexcused Absences: Select 0 to 5 random dates from the calendar's instructional days.
+	SET @TOP = ROUND(Rand()*(5),0)
+	INSERT INTO @AbsencesAndTardies
+		SELECT TOP (@TOP) Date, @UnexcusedAbsencesDescriptorId, SessionName, 'Absent unexcused' 
+		FROM edfi.CalendarDateCalendarEvent cdce
+		INNER JOIN edfi.Session sess on cdce.Date>=sess.BeginDate and cdce.Date<=sess.EndDate
+		WHERE cdce.SchoolId=@SchoolId AND cdce.SchoolYear=@SchoolEndYear and cdce.CalendarEventDescriptorId=@InstructionalDayDescriptorId
+			  AND Date NOT IN (SELECT eventDate FROM @AbsencesAndTardies) 
+		ORDER BY NEWID()
+
+	-- Tardies: Select 0 to 5 random dates from the calendar's instructional days.
+	SET @TOP = ROUND(Rand()*(5),0)
+	INSERT INTO @AbsencesAndTardies
+	SELECT TOP (@TOP) Date, @TardiesDescriptorId, SessionName, 'Tardy'
+		FROM edfi.CalendarDateCalendarEvent cdce
+		INNER JOIN edfi.Session sess on cdce.Date>=sess.BeginDate and cdce.Date<=sess.EndDate
+		WHERE cdce.SchoolId=@SchoolId AND cdce.SchoolYear=@SchoolEndYear and cdce.CalendarEventDescriptorId=@InstructionalDayDescriptorId
+			  AND Date NOT IN (SELECT eventDate FROM @AbsencesAndTardies) 
+		ORDER BY NEWID()
+
+	  --Before to insert new Student Events, delete the current students attendace events that are enrolled in that school.
+	  DELETE FROM edfi.StudentSchoolAttendanceEvent WHERE SchoolId = @SchoolId AND  SchoolYear = @SchoolEndYear AND StudentUSI = @StudentUSI
+	-- For debug purposes we list the potential attendance event.
+	--SELECT * FROM @AbsencesAndTardies;
+
+	-- Insert the students random attendance events:
+	INSERT INTO edfi.StudentSchoolAttendanceEvent (AttendanceEventCategoryDescriptorId,EventDate,SchoolId,SchoolYear,SessionName,StudentUSI,AttendanceEventReason)
+		SELECT descriptorId, eventDate, @SchoolId, @SchoolEndYear, sessionName, @StudentUSI, reason FROM @AbsencesAndTardies
+END
+GO
+
+--Descriptors variables
 
 --Gender Descriptors
 declare @femaleSexDescriptorId int;
@@ -43,8 +383,12 @@ select @parentUSI         = ParentUSI from edfi.Parent where FirstName = 'April'
 
 IF NOT EXISTS (SELECT 1 FROM edfi.StaffElectronicMail WHERE ElectronicMailAddress = 'fred.lloyd@toolwise.onmicrosoft.com')
 BEGIN
+	IF NOT EXISTS (SELECT 1 FROM edfi.ElectronicMailTypeDescriptor WHERE ElectronicMailTypeDescriptorId = 853)
+	BEGIN
+		insert into edfi.ElectronicMailTypeDescriptor(ElectronicMailTypeDescriptorId)values(853);
+	END
 	insert into edfi.StaffElectronicMail(ElectronicMailTypeDescriptorId, StaffUSI, ElectronicMailAddress)
-								  values(853, 9, 'fred.lloyd@toolwise.onmicrosoft.com');
+									  values(853, 9, 'fred.lloyd@toolwise.onmicrosoft.com');
 END
 
 update edfi.StaffEducationOrganizationAssignmentAssociation set StaffClassificationDescriptorId = @descriptorPrincial where StaffUSI = @principalStaffUSI
@@ -105,57 +449,6 @@ declare @disciplineDescriptor int
 declare @assessmentReportingMethodDescriptor int
 select @assessmentReportingMethodDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/AssessmentReportingMethodDescriptor' and CodeValue = 'Scale score'
 
-declare @absenceDescriptor int;
-declare @absenceExcused int;
-declare @absenceUnExcused int;
-declare @absenceTardy int;
-
-select @absenceExcused = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and CodeValue = 'Excused Absence'
-select @absenceTardy = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and CodeValue = 'Tardy'
-select @absenceUnExcused = DescriptorId from edfi.Descriptor where Namespace = 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and CodeValue = 'Unexcused Absence'
-select @absenceDescriptor = DescriptorId from edfi.Descriptor where Namespace like 'uri://ed-fi.org/AttendanceEventCategoryDescriptor' and Description = 'Unexcused Absence'
-
- ----INSERTING Tardies and excused absences
-
- insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
-values 
-(@absenceExcused, '2011-01-07',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'Dental appointment'),
-(@absenceExcused, '2011-01-11',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'Dental appointment'),
-(@absenceTardy, '2011-01-28',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceTardy, '2011-02-09',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceTardy, '2011-06-16',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceTardy, '2011-08-24',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,''),
-(@absenceTardy, '2011-12-01',@highSchoolId, 2011, '2010-2011 Spring Semester', @studentFemaleUSI ,'');
-
---Student MARSHALL Tardies
---select * from edfi.StudentSchoolAttendanceEvent where StudentUSI = 721
- insert into edfi.StudentSchoolAttendanceEvent(AttendanceEventCategoryDescriptorId, EventDate, SchoolId, SchoolYear, SessionName, StudentUSI, AttendanceEventReason)
-values 
-(@absenceTardy, '2011-01-10',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-02-14',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-04-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-05-23',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-06-20',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-
-(@absenceTardy, '2011-07-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-08-15',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-09-12',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-10-24',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-11-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceTardy, '2011-12-06',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-
-(@absenceExcused, '2011-01-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'Dental appointment'),
-(@absenceExcused, '2011-02-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'Dental appointment'),
-(@absenceExcused, '2011-03-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceExcused, '2011-04-12',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceExcused, '2011-05-07',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceExcused, '2011-06-11',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-
-(@absenceUnExcused, '2011-06-14',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,''),
-(@absenceUnExcused, '2011-03-15',@middleSchoolId, 2011, '2010-2011 Spring Semester', @studentMaleUSI ,'');
-
- 
-
 --Insert Student all about
 SET IDENTITY_INSERT [ParentPortal].[StudentAllAbout] ON
 INSERT [ParentPortal].[StudentAllAbout] ([StudentAllAboutId], [StudentUSI], [PrefferedName], [FunFact], [TypesOfBook], [FavoriteAnimal], [FavoriteThingToDo], [FavoriteSubjectSchool], [OneThingWant], [LearnToDo], [LearningThings], [DateCreated], [DateUpdated]) VALUES (1, 435, N'Hannah', N'I am funny', N'Sci-Fi', N'Dogs are cute', N'Reading', N'Math', N'Travel', N'Math', N'Yes', CAST(N'2021-02-24T17:49:04.427' AS DateTime), CAST(N'2021-02-24T17:49:04.427' AS DateTime))
@@ -214,19 +507,10 @@ select @gradeLevelDescriptor = DescriptorId from  edfi.Descriptor where Namespac
 select @2gradeLevelDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/GradeLevelDescriptor' and CodeValue = '2nd Grade'
 select @resultDatatypeTypeDescriptor = DescriptorId from  edfi.Descriptor where Namespace =  'uri://ed-fi.org/ResultDatatypeTypeDescriptor' and CodeValue = 'Integer'
 
-
-
-
-
-
 --  Homework
 declare @homeWorkDescriptor int;
 select @homeWorkDescriptor = DescriptorId from edfi.Descriptor where Namespace =  'uri://ed-fi.org/GradebookEntryTypeDescriptor' and Description = 'Homework'
 update edfi.Descriptor set CodeValue = 'HMWK' where DescriptorId = @homeWorkDescriptor;
-
-
-
-
 
 -- Adding students missing asignments
 insert into edfi.GradebookEntry(DateAssigned, GradebookEntryTitle, LocalCourseCode, SchoolId, SchoolYear, SectionIdentifier, SessionName, GradebookEntryTypeDescriptorId)
@@ -513,20 +797,13 @@ values(605255, 2, 207272, 1, 777779, 'Hello', '2011-04-2', 0);
 insert into ParentPortal.ChatLog(StudentUniqueId, SenderTypeId, SenderUniqueId, RecipientTypeId, RecipientUniqueId, EnglishMessage, DateSent, RecipientHasRead)
 values(605255, 2, 207272, 1, 777779, 'This is a message', '2011-04-3', 0);
 
-
 -- Adding Alerts
 insert into ParentPortal.AlertLog(SchoolYear, AlertTypeId, ParentUniqueId, StudentUniqueId, Value, [Read], UTCSentDate)
 values(2011, 1, 777779, 605255, 2, 0, '2011-05-20');
 insert into ParentPortal.AlertLog(SchoolYear, AlertTypeId, ParentUniqueId, StudentUniqueId, Value, [Read], UTCSentDate)
 values(2011, 1, 777779, 605541, 1, 0, '2011-05-10');
 
-
-
-
-
-
 -- Updating Grade Data for Students
-
 update edfi.Grade set NumericGradeEarned = 90 where StudentUSI = @studentFemaleUSI and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 1;
 update edfi.Grade set NumericGradeEarned = 91 where StudentUSI = @studentFemaleUSI and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 2;
 update edfi.Grade set NumericGradeEarned = 92 where StudentUSI = @studentFemaleUSI and LocalCourseCode = 'ENG-2' and  GradingPeriodSequence = 3;
@@ -627,10 +904,7 @@ update edfi.Grade set NumericGradeEarned = 63 where StudentUSI = @studentFemaleU
 update edfi.Grade set NumericGradeEarned = 64 where StudentUSI = @studentFemaleUSI and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 5;
 update edfi.Grade set NumericGradeEarned = 65 where StudentUSI = @studentFemaleUSI and LocalCourseCode = 'SS-06' and  GradingPeriodSequence = 6;
 
-
-
 --- Update CourseTitle to more descriptive definition
-
 update edfi.CourseOffering set LocalCourseTitle = 'Algebra 1' where CourseCode = 'ALG-1'
 update edfi.CourseOffering set LocalCourseTitle = 'Algebra 2' where CourseCode = 'ALG-2'
 update edfi.CourseOffering set LocalCourseTitle = 'Arts 1' where CourseCode = 'ART-01'
@@ -681,22 +955,13 @@ GO
 declare @studentMaleUSI AS int
 declare @studentFemaleUSI AS int
 
-
-
-
 select  @studentMaleUSI = StudentUSI from edfi.Student where FirstName = 'Marshall' and LastSurname = 'Terrell'
 select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hannah' and LastSurname = 'Terrell'
-
-
-
-
-
 
 INSERT INTO ParentPortal.StudentGoal 
 ([StudentUSI],[GoalType],[Goal],[GradeLevel],
  [DateGoalCreated],[DateScheduled],[DateCompleted],
  [Additional],[Completed],[DateCreated],[DateUpdated],[Labels])
-
 values
 (@studentFemaleUSI,'A', 'Decode most 2 syllable words','Tenth grade', GETDATE(), DATEADD(dd,31,GETDATE()),null,'','NA',GETDATE(),  GETDATE(),null),
 (@studentFemaleUSI,'C', 'SELF-MANAGEMENT: manage my emotions, thoughts, and behaviors effectively in different situations and to achieve goals.','Tengh grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA', GETDATE(), GETDATE(),null),
@@ -706,7 +971,6 @@ INSERT INTO ParentPortal.StudentGoal
 ([StudentUSI],[GoalType],[Goal],[GradeLevel],
  [DateGoalCreated],[DateScheduled],[DateCompleted],
  [Additional],[Completed],[DateCreated],[DateUpdated],[Labels])
-
 values
 (@studentMaleUSI,'A', 'Decode most 2 syllable words','Tenth grade', GETDATE(), DATEADD(dd,31,GETDATE()),null,'','NA',GETDATE(),  GETDATE(),null),
 (@studentMaleUSI,'C', 'SELF-MANAGEMENT: manage my emotions, thoughts, and behaviors effectively in different situations and to achieve goals.','Tengh grade', GETDATE(), dateadd(dd,31,getdate()),null,'','NA', GETDATE(), GETDATE(),null),
@@ -1056,9 +1320,6 @@ INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessment]
            ('AccessScores_2018','STAAR Writing','uri://ed-fi.org/Assessment/Assessment.xml',@AssesmentIdentifierMale2018,@studentMaleUSI,GETDATE())
 
 -- student assesment student objective score result
-
-
-
 
 INSERT INTO [edfi].[StudentAssessmentStudentObjectiveAssessmentScoreResult]
            ([AssessmentIdentifier],[AssessmentReportingMethodDescriptorId],[IdentificationCode],[Namespace]
@@ -1963,55 +2224,14 @@ select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hann
 declare @highSchoolId as int = 255901001
 declare @middleSchoolId as int =255901044
 
-declare @calendarType int;
-declare @nonintructionalday int;
+EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @highSchoolId, @SchoolYear = 2011, @IsCurrent = 1
+EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @middleSchoolId, @SchoolYear = 2011, @IsCurrent = 1
 
---select * FROM EDFI.Descriptor WHERE Namespace = 'uri://ed-fi.org/CalendarTypeDescriptor' and CodeValue = 'School' 
-select @calendarType = DescriptorId FROM EDFI.Descriptor WHERE Namespace = 'uri://ed-fi.org/CalendarTypeDescriptor' and CodeValue = 'School' 
-select @nonintructionalday =  DescriptorId FROM EDFI.Descriptor WHERE Namespace = 'uri://ed-fi.org/CalendarEventDescriptor' and CodeValue = 'Other' 
+ ----INSERTING Tardies, Unexcused absences and excused absences
+ EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @highSchoolId, @SchoolYear = 2011, @StudentUSI = @studentFemaleUSI
 
---Calendar for each school
-INSERT INTO EDFI.Calendar VALUES(@highSchoolId,@highSchoolId,2011,@calendarType,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.Calendar VALUES(@middleSchoolId,@middleSchoolId,2011,@calendarType,null,GETDATE(),GETDATE(),NEWID(),11815)
---Dates for each school
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20111124',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20111125',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110425',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110426',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110427',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110428',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@highSchoolId,'20110429',@highSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20111124',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20111125',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110425',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110426',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110427',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110428',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
-INSERT INTO EDFI.CalendarDate VALUES(@middleSchoolId,'20110429',@middleSchoolId,2011,null,GETDATE(),GETDATE(),NEWID(),11815)
---NonInstructionalDays for each school
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20111124',@highSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20111125',@highSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110425',@highSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110426',@highSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110427',@highSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110428',@highSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@highSchoolId,@nonintructionalday,'20110429',@highSchoolId,2011,GETDATE())
-
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20111124',@middleSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20111125',@middleSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110425',@middleSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110426',@middleSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110427',@middleSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110428',@middleSchoolId,2011,GETDATE())
-INSERT INTO EDFI.CalendarDateCalendarEvent VALUES(@middleSchoolId,@nonintructionalday,'20110429',@middleSchoolId,2011,GETDATE())
-
-
-
-
-
-
-
+--Student MARSHALL Tardies, Unexcused absences and excused absences
+ EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @middleSchoolId, @SchoolYear = 2011, @StudentUSI = @studentFemaleUSI 
 
 GO
 
