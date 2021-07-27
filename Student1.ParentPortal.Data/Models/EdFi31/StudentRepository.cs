@@ -1815,7 +1815,6 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 
             return ToUserProfileModel(edfiProfile);
         }
-
         public async Task<List<StudentCalendarDay>> GetStudentCalendarDays(int studentUsi)
         {
             var studentSchoolAssociation = await _edFiDb.StudentSchoolAssociations.FirstOrDefaultAsync(x => x.StudentUsi == studentUsi && x.ExitWithdrawDate == null);
@@ -1829,16 +1828,18 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
                                   where cd.SchoolId == studentSchoolAssociation.SchoolId
                                   select new
                                   {
+                                      Discriminator = cd.Discriminator,
                                       Date = cd.Date,
                                       EventName = ced != null ? ced.CodeValue : string.Empty,
                                       EventDescription = ced != null ? ced.CodeValue : string.Empty,
                                   }).ToListAsync();
 
-                return days.Select(x => new StudentCalendarDay
+                var selectedDays = days.Select(x => new StudentCalendarDay
                 {
                     Date = x.Date,
-                    Event = new StudentCalendarEvent { Name = x.EventName, Description = x.EventDescription }
+                    Event = new StudentCalendarEvent { Name = x.EventName, Description = string.Format("{0}{1}", x.EventDescription, x.Discriminator != null ? ": " + x.Discriminator : "") }
                 }).ToList();
+                return selectedDays;
             }
 
             return new List<StudentCalendarDay>();
