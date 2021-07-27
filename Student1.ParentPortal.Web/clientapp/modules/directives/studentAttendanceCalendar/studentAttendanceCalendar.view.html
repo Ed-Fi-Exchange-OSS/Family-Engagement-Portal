@@ -15,15 +15,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="week in ctrl.calendar.weeks">
-                    <td ng-repeat="day in week track by $index"
-                        ng-class="{ excused: ctrl.hasEvent(day.events, 4)
-                      , unexcused: ctrl.hasEvent(day.events, 8)
-                      , tardy: ctrl.hasEvent(day.events, 10)
-                      , noninstructional: ctrl.hasEvent(day.events, 'nonDay')
-                      , disabled: day.outOfSchoolYear
-                      , currentDay: day.isToday
-                    }"
-                        title="{{ctrl.getComments(day.events, [4,8,10,'nonDay','di'])}}">
+                    <td ng-repeat="day in week track by $index" class="{{day.class}}" title="{{day.eventTitle}}">
                         <span>{{day.day}}</span>
                     </td>
                 </tr>

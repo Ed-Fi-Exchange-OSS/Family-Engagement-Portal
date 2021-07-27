@@ -1,7 +1,7 @@
 ﻿.calendar-engagement {
     width: 100%;
-    padding:0.8rem;
-    min-width:100px;
+    padding: 0.8rem;
+    min-width: 100px;
 }
 
 .calendar-engagement-title th {
@@ -11,7 +11,6 @@
 }
 
 .calendar-engagement-sub-title th {
-
     color: #454545;
 }
 
@@ -24,7 +23,6 @@
 }
 
 .calendar-engagement th {
-    
 }
 
 
@@ -41,6 +39,16 @@
 .calendar-engagement td.tardy {
     background-color: #ffa000;
     color: white;
+}
+
+.calendar-engagement td.holiday {
+    background-color: #F1F8E9;
+    color: #757575;
+}
+
+.calendar-engagement td.teacherOnlyDays {
+    background-color: #E1F5FE;
+    color: #757575;
 }
 
 .calendar-engagement td.disabled {

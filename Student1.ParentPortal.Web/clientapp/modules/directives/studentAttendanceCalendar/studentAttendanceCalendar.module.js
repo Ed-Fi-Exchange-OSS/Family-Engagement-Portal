@@ -15,7 +15,7 @@ angular
                 var startDate = scope.model.date;
 
 
-               
+
                 ctrl.getFirstDayOfWeek = function (d) {
                     var date = new Date(d.valueOf());
                     // If Sunday then add 1 day
@@ -62,13 +62,18 @@ angular
                         for (var i = firstWeekDay.getDay() - 1; i < 5; i++) {
                             var date = new Date(startDate.getUTCFullYear(), startDate.getUTCMonth(), day);
                             // Dont paint if its next month.
-                            var outOfSchoolYear = ((schoolYearStartDay || 0) > day) || ((schoolYearStopDay || 9999) < day);
+                            var outOfSchoolYear = ((schoolYearStartDay || 0) > day);
+                            //var outOfSchoolYear = ((schoolYearStartDay || 0) > day) || ((schoolYearStopDay || 9999) < day);
+                            var isToday = areSameDay(date, new Date());
                             if (date.getMonth() == month) {
+                                var evet = ctrl.getDayEvents(date)
                                 week[i] = {
                                     day: date.getDate(),
-                                    events: ctrl.getDayEvents(date),
+                                    events: evet,
                                     outOfSchoolYear: outOfSchoolYear,
-                                    isToday: areSameDay(date, new Date())
+                                    isToday: isToday,
+                                    class: evet.length > 0 ? evet[0].class : isToday ? 'isToday' : outOfSchoolYear ? 'disabled' : '',
+                                    eventTitle: evet.length > 0 ? evet[0].eventTitle : ''
                                 };
                             }
                             day++;
@@ -97,7 +102,7 @@ angular
                     weeks: ctrl.getWeeks(startDate, scope.model.startDay, scope.model.stopDay)
                 };
 
-                
+
                 ctrl.hasEvent = function (events, id) {
                     if (!events || events.length == 0) { return false; }
                     return events.some(e => e.attendanceEvent.id == id);

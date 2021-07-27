@@ -396,7 +396,7 @@
     "gradeTypeSemesterDescriptor": "Semester", // 926
     "gradeTypeExamDescriptor": "Exam",
     "gradeTypeFinalDescriptor": "Final", // 925
-    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster", "GrandParent", "Father, step", "Mother, step", "Parent, step"],   
+    "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster", "GrandParent", "Father, step", "Mother, step", "Parent, step" ],
     "validCampusLeaderDescriptors": [ "Assistant Principal", "Counselor", "Principal", "School Administrator", "School Leader" ],
     "schoolGradingPeriodDescriptors": [
       "First Six Weeks",
@@ -427,8 +427,11 @@
     },
     //"instructionalDayDescriptorCodeValue": "101_Count as More Than Half Day - No Event",
     //"nonInstrunctionalDayDescriptorCodeValue": "101_Count as 0 - No Event"
+    //"nonInstrunctionalDayDescriptorCodeValue": "Other",
     "instructionalDayDescriptorCodeValue": "Instructional day",
-    "nonInstrunctionalDayDescriptorCodeValue": "Other"
+    "nonInstrunctionalDayDescriptorCodeValue": "Non-instructional day",
+    "holiDayDescriptorCodeValue": "Holiday",
+    "teacherOnlyDayDescriptorCodeValue": "Teacher only day"
   },
   "assessments": [
     {

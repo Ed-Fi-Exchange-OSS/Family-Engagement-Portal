@@ -444,6 +444,8 @@ namespace Student1.ParentPortal.Models.Student
         public List<StudentCalendarDay> Days { get => InstructionalDays.Concat(NonInstructionalDays).Concat(AttendanceEventDays).ToList(); }
         public List<StudentCalendarDay> InstructionalDays { get; set; }
         public List<StudentCalendarDay> NonInstructionalDays { get; set; }
+        public List<StudentCalendarDay> Holidays { get; set; }
+        public List<StudentCalendarDay> TeacherOnlyDays { get; set; }
         public List<StudentCalendarDay> AttendanceEventDays { get; set; }
         public DateTime StartDate { get => Days.Any() ? Days.Min(x => x.Date) : DateTime.Now; }
         public DateTime EndDate { get => Days.Any() ? Days.Max(x => x.Date) : DateTime.Now; }

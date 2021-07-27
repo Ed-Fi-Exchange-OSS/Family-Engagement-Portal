@@ -37,24 +37,23 @@ namespace Student1.ParentPortal.Resources.Services.Students
 
             var calendar = new StudentCalendar();
 
-            calendar.InstructionalDays = days.Where(x => x.Event.Description == descriptors.instructionalDayDescriptorCodeValue).ToList();
-            calendar.NonInstructionalDays = days.Where(x => x.Event.Description == descriptors.nonInstrunctionalDayDescriptorCodeValue).ToList();
-
+            calendar.InstructionalDays = days.Where(x => x.Event.Description.Contains(descriptors.instructionalDayDescriptorCodeValue)).ToList();
+            calendar.NonInstructionalDays = days.Where(x => x.Event.Description.Contains(descriptors.nonInstrunctionalDayDescriptorCodeValue)).ToList();
+            calendar.Holidays = days.Where(x => x.Event.Description.Contains(descriptors.holiDayDescriptorCodeValue)).ToList();
+            calendar.TeacherOnlyDays = days.Where(x => x.Event.Description.Contains(descriptors.teacherOnlyDayDescriptorCodeValue)).ToList();
             calendar.AttendanceEventDays = new List<StudentCalendarDay>();
             calendar.AttendanceEventDays.AddRange(studentAttendance.ExcusedAttendanceEvents.Select(x => new StudentCalendarDay
             {
                 Date = x.DateOfEvent,
-                Event = new StudentCalendarEvent { Name = x.EventCategory, Description = x.EventDescription }
+                Event = new StudentCalendarEvent { Name = x.EventCategory, Description = string.Format("{0}{1}", x.EventDescription, x.Reason != null ? ": " + x.Reason : "") }
 
             }).ToList());
-
             calendar.AttendanceEventDays.AddRange(studentAttendance.UnexcusedAttendanceEvents.Select(x => new StudentCalendarDay
             {
                 Date = x.DateOfEvent,
                 Event = new StudentCalendarEvent { Name = x.EventCategory, Description = x.EventDescription }
 
             }).ToList());
-
             calendar.AttendanceEventDays.AddRange(studentAttendance.TardyAttendanceEvents.Select(x => new StudentCalendarDay
             {
                 Date = x.DateOfEvent,
