@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Azure.Storage;
-using Microsoft.Azure.Storage.Blob;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
+using Azure.Storage.Sas;
 using Student1.ParentPortal.Resources.Providers.Configuration;
 using Student1.ParentPortal.Resources.Providers.Image;
 
@@ -44,51 +46,61 @@ namespace Student1.ParentPortal.Resources.Azure.Providers.Image
 
         private async Task<string> GetContainerSasUri(string containerName, string filename)
         {
-           
+
             var blobClient = GetCloudBlobClient();
 
             var blobReference = GetBlobReference(blobClient, containerName, filename);
             if (blobReference == null)
-                blobReference = await GetDefaultBlobReference(blobClient);
-           
+                blobReference = GetDefaultBlobReference(blobClient);
+
             //Set the expiry time and permissions for the container.
             //In this case no start time is specified, so the shared access signature becomes valid immediately.
-            var sasConstraints = new SharedAccessBlobPolicy
+
+            // we generate SAS builder
+            var sasBuilder = new BlobSasBuilder()
             {
-                SharedAccessExpiryTime = DateTimeOffset.UtcNow.AddDays(1),
-                Permissions = SharedAccessBlobPermissions.Read
+                BlobContainerName = containerName,
+                Resource = "c",
+                ExpiresOn = DateTimeOffset.UtcNow.AddDays(1)
             };
+
+            // we specify permissions to only read
+            sasBuilder.SetPermissions(BlobContainerSasPermissions.Read);
 
             //Generate the shared access signature on the container, setting the constraints directly on the signature.
             //var sasContainerToken = container.GetSharedAccessSignature(sasConstraints);
 
-            var sasBlobToken = blobReference.GetSharedAccessSignature(sasConstraints);
+            var sasBlobToken = blobReference.GenerateSasUri(sasBuilder);
 
             //Return the URI string for the container, including the SAS token.
-            return blobReference.Uri + sasBlobToken;
+            return blobReference.Uri + sasBlobToken.AbsoluteUri;
         }
 
-        private CloudBlobClient GetCloudBlobClient()
+        private BlobServiceClient GetCloudBlobClient()
         {
             //Parse the connection string and return a reference to the storage account.
-            var storageAccount = CloudStorageAccount.Parse(_applicationSettingsProvider.GetSetting("azure.storage.connectionString"));
             //Return the blob client object.
-            return storageAccount.CreateCloudBlobClient();
-        } 
-
-        private ICloudBlob GetBlobReference(CloudBlobClient blobClient, string containerName, string filename)
-        {
-            //Get a reference to a container to use for the sample code, and create it if it does not exist.
-            var container = blobClient.GetContainerReference(containerName);
-
-            var bloblist = container.ListBlobs(prefix: filename + ".").OfType<ICloudBlob>();
-            return bloblist.FirstOrDefault();
+            // can't create without the BlobContainerName Azure SDK
+            // reference 
+            return new BlobServiceClient(_applicationSettingsProvider.GetSetting("azure.storage.connectionString"));
         }
 
-        private async Task<ICloudBlob> GetDefaultBlobReference(CloudBlobClient blobClient)
+        private BlockBlobClient GetBlobReference(BlobServiceClient blobClient, string containerName, string filename)
         {
-            var container = blobClient.GetContainerReference(_applicationSettingsProvider.GetSetting("azure.default.image.container"));
-            return await container.GetBlobReferenceFromServerAsync(_applicationSettingsProvider.GetSetting("azure.default.image.file"));
+            //Get a reference to a container to use for the sample code, and create it if it does not exist.
+            var container = blobClient.GetBlobContainerClient(containerName);
+
+            container.CreateIfNotExists();
+
+            return container.GetBlobs(prefix: filename + ".")
+                .OfType<BlockBlobClient>()
+                .FirstOrDefault();
+        }
+
+        private BlockBlobClient GetDefaultBlobReference(BlobServiceClient blobClient)
+        {
+            var container = blobClient.GetBlobContainerClient(_applicationSettingsProvider.GetSetting("azure.default.image.container"));
+            return container.GetBlockBlobClient(_applicationSettingsProvider.GetSetting("azure.default.image.file"));
         }
 
 
@@ -104,11 +116,14 @@ namespace Student1.ParentPortal.Resources.Azure.Providers.Image
             if (oldBlobReference != null)
                 await oldBlobReference.DeleteAsync();
 
-            var container = blobClient.GetContainerReference(containerName);
+            var container = blobClient.GetBlobContainerClient(containerName);
 
-            var blobReference = container.GetBlockBlobReference(filename + GetFileExtension(contentType));
+            var blobReference = container.GetBlockBlobClient(filename + GetFileExtension(contentType));
 
-            await blobReference.UploadFromByteArrayAsync(image, 0, image.Length);
+            using (var stream = new MemoryStream(image, writable: false))
+            {
+                blobReference.Upload(stream);
+            }
         }
 
 
@@ -124,11 +139,14 @@ namespace Student1.ParentPortal.Resources.Azure.Providers.Image
             if (oldBlobReference != null)
                 await oldBlobReference.DeleteAsync();
 
-            var container = blobClient.GetContainerReference(containerName);
+            var container = blobClient.GetBlobContainerClient(containerName);
 
-            var blobReference = container.GetBlockBlobReference(filename + GetFileExtension(contentType));
+            var blobReference = container.GetBlockBlobClient(filename + GetFileExtension(contentType));
 
-            await blobReference.UploadFromByteArrayAsync(image, 0, image.Length);
+            using (var stream = new MemoryStream(image, writable: false))
+            {
+                blobReference.Upload(stream);
+            }
         }
 
         private string GetFileExtension(string contentType)
@@ -144,5 +162,5 @@ namespace Student1.ParentPortal.Resources.Azure.Providers.Image
                     throw new NotImplementedException($"ContentType {contentType} not Implemented.");
             }
         }
-}
+    }
 }
