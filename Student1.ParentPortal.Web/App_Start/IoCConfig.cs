@@ -79,11 +79,15 @@ namespace Student1.ParentPortal.Web.App_Start
 
         private static void RegisterRepositoriesByConvention<TMarker>(Container container, string databaseVersion)
         {
-            container.Register<EdFi25Context, EdFi25Context>(Lifestyle.Scoped);
+            // OBSOLETE: Will be removed in Dec 2021.
+            //container.Register<EdFi25Context, EdFi25Context>(Lifestyle.Scoped);
 
-            container.Register<EdFi26Context, EdFi26Context>(Lifestyle.Scoped);
+            // OBSOLETE: Will be removed in Dec 2021.
+            // container.Register<EdFi26Context, EdFi26Context>(Lifestyle.Scoped);
 
+            // TODO: Update all repos to use the abstraction interface and not the concrete class.
             container.Register<EdFi31Context, EdFi31Context>(Lifestyle.Scoped);
+            container.Register<IEdFi31Context, EdFi31Context>(Lifestyle.Scoped);
 
             var types = typeof(TMarker).Assembly.ExportedTypes;
 

@@ -398,6 +398,7 @@
     "gradeTypeFinalDescriptor": "Final", // 925
     "validParentDescriptors": [ "Father", "Mother", "Step", "Guardian", "Foster", "GrandParent", "Father, step", "Mother, step", "Parent, step" ],
     "validCampusLeaderDescriptors": [ "Assistant Principal", "Counselor", "Principal", "School Administrator", "School Leader" ],
+    "validStaffDescriptors": [ "Teacher" ],
     "schoolGradingPeriodDescriptors": [
       "First Six Weeks",
       "Second Six Weeks",

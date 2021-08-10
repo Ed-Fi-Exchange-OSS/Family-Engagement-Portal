@@ -10,6 +10,8 @@ namespace Student1.ParentPortal.Data.Models
     public interface IStaffRepository
     {
         Task<List<PersonIdentityModel>> GetStaffIdentityByEmailAsync(string email);
+
+        Task<List<PersonIdentityModel>> GetStaffIdentityByEmailAsync(string email, string[] validStaffDescriptors);
         Task<List<PersonIdentityModel>> GetStaffIdentityByProfileEmailAsync(string email);
         Task<List<PersonIdentityModel>> GetStaffIdentityByProfileEmailAsync(string email, string[] validStaffDescriptors);
         bool HasAccessToStudent(int staffUsi, int studentUsi);

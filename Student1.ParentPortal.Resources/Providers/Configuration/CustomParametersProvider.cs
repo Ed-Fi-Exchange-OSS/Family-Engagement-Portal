@@ -159,6 +159,7 @@ namespace Student1.ParentPortal.Resources.Providers.Configuration
         public string gradeTypeExamDescriptor { get; set; }
         public string gradeTypeFinalDescriptor { get; set; }
         public string[] validParentDescriptors { get; set; }
+        public string[] validStaffDescriptors { get; set; }
         public string [] validCampusLeaderDescriptors { get; set; }
         public string [] schoolGradingPeriodDescriptors { get; set; }
         public string [] examGradingPeriods { get; set; }

@@ -33,6 +33,26 @@ namespace Student1.ParentPortal.Data.Models.EdFi26
 
             return identity;
         }
+
+        public async Task<List<PersonIdentityModel>> GetStaffIdentityByEmailAsync(string email, string[] validStaffDescriptors)
+        {
+            var identity = await (from s in _edFiDb.Staffs
+                                                .Include(x => x.StaffEducationOrganizationAssignmentAssociations.Select(seoa => seoa.StaffClassificationDescriptor.Descriptor))
+                                  join sa in _edFiDb.StaffElectronicMails on s.StaffUsi equals sa.StaffUsi
+                                  where sa.ElectronicMailAddress == email &&
+                                             s.StaffEducationOrganizationAssignmentAssociations.Any(x => validStaffDescriptors.Contains(x.StaffClassificationDescriptor.Descriptor.CodeValue))
+                                  select new PersonIdentityModel
+                                  {
+                                      Usi = s.StaffUsi,
+                                      UniqueId = s.StaffUniqueId,
+                                      PersonTypeId = ChatLogPersonTypeEnum.Staff.Value,
+                                      FirstName = s.FirstName,
+                                      LastSurname = s.LastSurname,
+                                      Email = sa.ElectronicMailAddress
+                                  }).ToListAsync();
+
+            return identity;
+        }
         public async Task<List<PersonIdentityModel>> GetStaffIdentityByProfileEmailAsync(string email)
         {
             var identity = await (from s in _edFiDb.Staffs

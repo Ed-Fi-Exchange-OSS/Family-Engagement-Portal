@@ -10,8 +10,8 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 {
     public class AdminRepository : IAdminRepository
     {
-        private readonly EdFi31Context _edFiDb;
-        public AdminRepository(EdFi31Context edFiDb)
+        private readonly IEdFi31Context _edFiDb;
+        public AdminRepository(IEdFi31Context edFiDb)
         {
             _edFiDb = edFiDb;
         }

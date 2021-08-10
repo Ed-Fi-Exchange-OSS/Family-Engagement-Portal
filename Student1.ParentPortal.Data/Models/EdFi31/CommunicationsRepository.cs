@@ -13,9 +13,9 @@ namespace Student1.ParentPortal.Data.Models.EdFi31
 {
     public class CommunicationsRepository : ICommunicationsRepository
     {
-        private readonly EdFi31Context _edFiDb;
+        private readonly IEdFi31Context _edFiDb;
 
-        public CommunicationsRepository(EdFi31Context edFiDb)
+        public CommunicationsRepository(IEdFi31Context edFiDb)
         {
             _edFiDb = edFiDb;
         }
