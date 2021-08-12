@@ -66,7 +66,7 @@ END
 GO
 
 --Return a Holiday List
-CREATE OR ALTER PROCEDURE ParentPortal.publicHolidays
+CREATE OR ALTER PROCEDURE [ParentPortal].[publicHolidays]
   @SchoolYear INT
 AS
 BEGIN
@@ -117,7 +117,7 @@ BEGIN
 
 		WHILE (@StartOfSpringBreak <= @EndOfSpringBreak)
 		BEGIN
-			INSERT INTO @PublicHoliday SELECT 'Spring break', @StartOfSpringBreak, @NonInstructionalDayDescriptorId
+			INSERT INTO @PublicHoliday SELECT 'Spring break', @StartOfSpringBreak, @HolidayDescriptorId
 			SET @StartOfSpringBreak = DATEADD(DAY, 1, @StartOfSpringBreak) /*increment current date*/
 		END
 
@@ -158,7 +158,7 @@ BEGIN
 	
 		WHILE (@WeekStartDate <= @WeekEndDate)
 		BEGIN
-			INSERT INTO @PublicHoliday SELECT 'Thanksgiving Day', @WeekStartDate ,@NonInstructionalDayDescriptorId
+			INSERT INTO @PublicHoliday SELECT 'Thanksgiving Day', @WeekStartDate ,@HolidayDescriptorId
 			SET @WeekStartDate = DATEADD(DAY, 1, @WeekStartDate) /*increment current date*/
 		END
 
@@ -170,27 +170,29 @@ BEGIN
 
 		WHILE (@StartChristmasBreak <= @EndChristmasBreak)
 		BEGIN
-			INSERT INTO @PublicHoliday SELECT 'Christmas Vacations', @StartChristmasBreak ,@NonInstructionalDayDescriptorId
+			INSERT INTO @PublicHoliday SELECT 'Christmas Vacations', @StartChristmasBreak ,@HolidayDescriptorId
 			SET @StartChristmasBreak = DATEADD(DAY, 1, @StartChristmasBreak) /*increment current date*/
 		END
 		--full week from Christmas Day to new years day
 		SET @Year = @Year + 1 /*increment current year*/		
 	END
-	
+
 	SELECT * FROM @PublicHoliday WHERE Date_Observed between @FirstDayOfSchool and @LastDayOfSchool
 END 
 GO
 
-CREATE OR ALTER PROCEDURE ParentPortal.CreateSchoolCalendarMetadata
+
+
+CREATE OR ALTER PROCEDURE [ParentPortal].[CreateSchoolCalendarMetadata]
 	@SchoolId INT, --255901044
-	@SchoolYear INT,--Start year
+	@SchoolYear INT,
 	@IsCurrent BIT
 AS
 BEGIN
 	--Start year: @SchoolYear (2020)
 	--End year> @SchoolYear + 1 (2021)
-	DECLARE @SchoolEndYear INT = @SchoolYear + 1
-	
+	DECLARE @SchoolEndYear INT = @SchoolYear
+	SET @SchoolYear = @SchoolEndYear -1
 	--Set the schoolyear as the current one.
 	IF(@IsCurrent = 1)
 		EXEC edfi.SetCurrentSchoolYear @schoolYear = @SchoolEndYear
@@ -233,7 +235,7 @@ BEGIN
 		VALUES(@CalendarCode,@SchoolId,@SchoolEndYear,@CalendarTypeDescriptorId)
 
 	SET @CurrentDate = @FirstDayOfSchool
-	DECLARE @DescriptorId INT
+	DECLARE @DescriptorId INT,@Holiday VARCHAR(50)=''
 	WHILE(@CurrentDate <= @LastDayOfSchool) BEGIN
 		--Skip if it is a weekend.
 		IF(ParentPortal.IsWeekend(@CurrentDate)=1)
@@ -241,10 +243,10 @@ BEGIN
 		  SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate) /*increment current date*/
 			CONTINUE
 		END
-
+		SET @Holiday=''
 		-- Find the right descriptor for the @CurrentDate
 		IF EXISTS (SELECT * FROM @PublicHolidays WHERE Date_Observed = @CurrentDate)
-			SELECT @DescriptorId=DescriptorId FROM @PublicHolidays WHERE Date_Observed = @CurrentDate
+			SELECT @DescriptorId=DescriptorId,@Holiday=Holiday FROM @PublicHolidays WHERE Date_Observed = @CurrentDate
 		ELSE BEGIN
 			SELECT @LastFridayOfMonth = ParentPortal.GetDateByNthWeekday(@CurrentDate,5,'Friday') --Get the last friday of the month
 			IF(@LastFridayOfMonth = @CurrentDate)
@@ -255,7 +257,7 @@ BEGIN
 
 		-- Insert the record into CalendarDate and CalendarDateCalendarEvent tables
 		IF NOT EXISTS (SELECT * FROM edfi.CalendarDate WHERE CalendarCode = @CalendarCode AND Date= @CurrentDate )
-			INSERT INTO edfi.CalendarDate(CalendarCode,Date,SchoolId,SchoolYear) VALUES(@CalendarCode,@CurrentDate,@SchoolId,@SchoolEndYear)
+			INSERT INTO edfi.CalendarDate(CalendarCode,Date,SchoolId,SchoolYear,Discriminator) VALUES(@CalendarCode,@CurrentDate,@SchoolId,@SchoolEndYear,@Holiday)
 		IF NOT EXISTS (SELECT * FROM edfi.CalendarDateCalendarEvent WHERE CalendarCode = @CalendarCode 
 																	  and CalendarEventDescriptorId= @DescriptorId
 																	  and Date=@CurrentDate and SchoolId=@SchoolId and SchoolYear =@SchoolYear)
@@ -264,26 +266,37 @@ BEGIN
 
 	   SET @CurrentDate = DATEADD(DAY, 1,@CurrentDate) -- Increment current date
 	END
+
+	SET @CurrentDate = DATEADD(MONTH, 1,@CurrentDate) 
+
+		-- Insert the record into CalendarDate and CalendarDateCalendarEvent tables
+		
+	DECLARE @NonInstructionalDayDescriptorId INT
+	SELECT @NonInstructionalDayDescriptorId=DescriptorId FROM edfi.Descriptor WHERE CodeValue = 'Non-instructional day' and Namespace='uri://ed-fi.org/CalendarEventDescriptor'
+
+	IF NOT EXISTS (SELECT * FROM edfi.CalendarDate WHERE CalendarCode = @CalendarCode AND Date= @CurrentDate )
+		INSERT INTO edfi.CalendarDate(CalendarCode,Date,SchoolId,SchoolYear,Discriminator) VALUES(@CalendarCode,@CurrentDate,@SchoolId,@SchoolEndYear,@Holiday)
+	IF NOT EXISTS (SELECT * FROM edfi.CalendarDateCalendarEvent WHERE CalendarCode = @CalendarCode 
+																	and CalendarEventDescriptorId= @NonInstructionalDayDescriptorId
+																	and Date=@CurrentDate and SchoolId=@SchoolId and SchoolYear =@SchoolYear)
+		INSERT INTO edfi.CalendarDateCalendarEvent(CalendarCode,CalendarEventDescriptorId,Date,SchoolId,SchoolYear)
+			   VALUES(@CalendarCode,@NonInstructionalDayDescriptorId,@CurrentDate,@SchoolId,@SchoolEndYear)
+
 	-- Update the students associated to that school to the new calendar
 	  Update edfi.StudentSchoolAssociation set CalendarCode = @CalendarCode WHERE SchoolId = @SchoolId
 	SELECT @CalendarCode
 END 
 GO
 
-
-
 CREATE OR ALTER PROCEDURE [ParentPortal].[CreateStudentAttendanceEvents]
 	@SchoolId INT, --255901044
-	@SchoolYear INT,--Start year
+	@SchoolYear INT,--End year
 	@StudentUSI INT--721
 AS
 BEGIN
-	--The School year should be Between @SchoolYear - @SchoolYear + 1, Example (2020 - 2021)
-	--Start year: @SchoolYear (2020)
-	--End year> @SchoolYear + 1 (2021)
-	--Set the schoolyear as the current one.
-	DECLARE @SchoolEndYear INT = @SchoolYear + 1
 
+	DECLARE @SchoolEndYear INT = @SchoolYear
+	SET @SchoolYear = @SchoolEndYear -1
 	-- Descriptors Id
 	DECLARE @InstructionalDayDescriptorId INT, @ExcusedAbsencesDescriptorId INT, @UnexcusedAbsencesDescriptorId INT, @TardiesDescriptorId INT
 
@@ -338,6 +351,9 @@ BEGIN
 END
 GO
 
+
+
+
 --Descriptors variables
 
 --Gender Descriptors
@@ -383,12 +399,8 @@ select @parentUSI         = ParentUSI from edfi.Parent where FirstName = 'April'
 
 IF NOT EXISTS (SELECT 1 FROM edfi.StaffElectronicMail WHERE ElectronicMailAddress = 'fred.lloyd@toolwise.onmicrosoft.com')
 BEGIN
-	IF NOT EXISTS (SELECT 1 FROM edfi.ElectronicMailTypeDescriptor WHERE ElectronicMailTypeDescriptorId = 853)
-	BEGIN
-		insert into edfi.ElectronicMailTypeDescriptor(ElectronicMailTypeDescriptorId)values(853);
-	END
 	insert into edfi.StaffElectronicMail(ElectronicMailTypeDescriptorId, StaffUSI, ElectronicMailAddress)
-									  values(853, 9, 'fred.lloyd@toolwise.onmicrosoft.com');
+								  values(853, 9, 'fred.lloyd@toolwise.onmicrosoft.com');
 END
 
 update edfi.StaffEducationOrganizationAssignmentAssociation set StaffClassificationDescriptorId = @descriptorPrincial where StaffUSI = @principalStaffUSI
@@ -2223,15 +2235,15 @@ select  @studentFemaleUSI = StudentUSI from edfi.Student where FirstName = 'Hann
 
 declare @highSchoolId as int = 255901001
 declare @middleSchoolId as int =255901044
--- Insert Calendar event: School Year 2010-2011
-EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @highSchoolId, @SchoolYear = 2010, @IsCurrent = 1
-EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @middleSchoolId, @SchoolYear = 2010, @IsCurrent = 1
 
- ----Insert Tardies, Unexcused absences and excused absences
- EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @highSchoolId, @SchoolYear = 2010, @StudentUSI = @studentFemaleUSI
+EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @highSchoolId, @SchoolYear = 2011, @IsCurrent = 1
+EXEC ParentPortal.CreateSchoolCalendarMetadata @SchoolId = @middleSchoolId, @SchoolYear = 2011, @IsCurrent = 1
+
+ ----INSERTING Tardies, Unexcused absences and excused absences
+ EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @highSchoolId, @SchoolYear = 2011, @StudentUSI = @studentFemaleUSI
 
 --Student MARSHALL Tardies, Unexcused absences and excused absences
- EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @middleSchoolId, @SchoolYear = 2010, @StudentUSI = @studentFemaleUSI 
+ EXEC ParentPortal.CreateStudentAttendanceEvents @SchoolId = @middleSchoolId, @SchoolYear = 2011, @StudentUSI = @studentMaleUSI 
 
 GO
 

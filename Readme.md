@@ -52,18 +52,32 @@ We tried to make the setup and deploy of this web application as easy as possibl
 ### Prerequisites ###
 
 * Install Visual Studio Community Edition (https://visualstudio.microsoft.com/downloads/)
-* Install MsSQL Developer Edition (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-* Install SQL Server Management Studio (https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
-* Download and restore Ed-Fi ODS s3v5.1.0 database
-  * Download  from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0
+* Select datastore (Sql/Postgres)
+  * If using Sql: 
+  	* Install MsSQL Developer Edition (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+  	* Install SQL Server Management Studio (https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+  	* Download and restore Ed-Fi ODS s3v5.1.0 database from here: https://www.myget.org/F/ed-fi/api/v2/package/EdFi.Suite3.Ods.Populated.Template/5.1.0
+  * If using Postgres: 
+ 	* Install NugetCli and add it to the path environment variables	 
+  	* Install PostgreSql (https://www.postgresql.org/download/)
+  	* Install any Postgresql management tool, we used the following one (https://www.pgadmin.org/)
+  	* Download and restore Ed-Fi ODS v5.3.91 Database using the nuget cli, running this command: 
+  		* nuget install EdFi.Suite3.Ods.Populated.Template.PostgreSQL -source https://pkgs.dev.azure.com/ed-fi-alliance/Ed-Fi-Alliance-OSS/_packaging/EdFi/nuget/v3/index.json  -version 5.3.91
 * Download the code (https://github.com/Ed-Fi-Exchange-OSS/Family-Engagement-Portal)
 * Open code with Visual Studio Community Edition
-* Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
-    * Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/"
-      * 1CreateParentPortalSupportingDatabaseSchema.sql
-      * 2ODSExtensions.sql
-      * 3StudentDetails.sql
-      * 4SampleDataDemo.sql (For Demo Only)
+* Go to the Web.config file inside the project root folder "~/Student1.ParentPortal.Web" and choose your database provider (Sql/Postgres)
+  * If using Sql: Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
+  	* Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/SQLServer/"
+      	  * 1CreateParentPortalSupportingDatabaseSchema.sql
+          * 2ODSExtensions.sql
+          * 3StudentDetails.sql
+          * 4SampleDataDemo.sql (For Demo Only)
+  * If using Postgres: Open pgAdmin or Psql and run the following scripts in the order that they are listed to configure the Database.
+  	* Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/PostgreSQL/"
+      	  * 1CreateParentPortalSupportingDatabaseSchema-PostgreSQL.sql
+          * 2ODSExtensions-PostgreSQL.sql
+          * 3StudentDetails-PostgreSQL.sql
+          * 4SampleDataDemo-PostgreSQL.sql (For Demo Only)
 
 * Compile project and Run it.
 

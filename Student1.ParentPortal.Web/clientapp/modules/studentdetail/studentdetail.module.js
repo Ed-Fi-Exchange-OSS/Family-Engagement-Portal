@@ -24,9 +24,6 @@
                 }],
                 studentDetailFeatures: ['api', function (api) {
                     return api.admin.getStudentDetailFeatures();
-                }],
-                staarHistory: ['$stateParams', 'api', function ($stateParams, api) {
-                    return api.students.getStudentStaarAssessmentHistory($stateParams.studentId);
                 }]
             }
         });
@@ -38,8 +35,7 @@
             anchor: "<",
             studentIds: "<",
             currentStudent: "<",
-            studentDetailFeatures: "<",
-            staarHistory: "<"
+            studentDetailFeatures: "<"
         }, // One way data binding.
         templateUrl: 'clientapp/modules/studentdetail/studentdetail.view.html',
         controllerAs: 'ctrl',
@@ -105,7 +101,7 @@
                     return ctrl.studentIds[ctrl.currentPos + 1];
                 };
 
-               
+
                 ctrl.findWorstAbsencePerformanceLevelInterpretation = function () {
                     var interpretations = ['bad', 'warning']; // The Client didn't need the last indicator for this section.
                     var worstInterpretation = "";
@@ -141,11 +137,22 @@
                     model.studentCalendar.endDate = new Date(model.studentCalendar.endDate);
 
                     model.studentCalendar.days.forEach(d => d.date = new Date(d.date));
-                    model.studentCalendar.nonInstructionalDays.forEach(d => d.date = new Date(d.date));
                     model.studentCalendar.instructionalDays.forEach(d => d.date = new Date(d.date));
                     model.studentCalendar.attendanceEventDays.forEach(d => d.date = new Date(d.date));
+                    model.studentCalendar.holidays.forEach(d => d.date = new Date(d.date));
+                    model.studentCalendar.teacherOnlyDays.forEach(d => d.date = new Date(d.date));
                 };
+                ctrl.getEventClass = function (Event) {
 
+                    //var outOfSchoolYear = ((scope.model.startDay || 0) > day) || ((scope.model.stopDay || 9999) < day);
+                    //var isToday = areSameDay(date, new Date());
+
+                    return Event.includes("Holiday") ? 'holiday'
+                        : Event.includes("Teacher") ? 'teacherOnlyDays'
+                            : Event.includes("Excused") && !Event.includes("Unexcused") ? 'excused'
+                                : Event.includes("Tardy") ? 'tardy'
+                                    : Event.includes("Unexcused") ? 'unexcused' : '';
+                };
                 // Returns full months' list with the attendance events assigned
                 ctrl.calculateCalendar = function (calendar) {
                     var attMonths = ctrl.model.attendanceEventsByMonth;
@@ -177,28 +184,49 @@
                         //} else {
                         nm.events = [];
                         //}
-
-                        // Non instructional days
-                        let nonInstructional = calendar.nonInstructionalDays
+                        // Holidays
+                        let holiDays = calendar.holidays
                             .filter(nid => nid.date.getUTCFullYear() == dMonth.getUTCFullYear()
                                 && nid.date.getUTCMonth() == dMonth.getUTCMonth())
                             .map(nid => {
                                 return {
                                     date: nid.date,
                                     attendanceEvent: {
-                                        id: 'nonDay',
-                                        description: 'Non Instructional Day'
+                                        id: 'holiDays',
+                                        description: nid.event.name
                                     },
-                                    comments: nid.event.description
+                                    comments: nid.event.description,
+                                    class: ctrl.getEventClass(nid.event.description),
+                                    eventTitle: nid.event.description,
                                 }
                             });
 
-                        if (nonInstructional.length > 0)
-                            Array.prototype.push.apply(nm.events, nonInstructional);
+                        if (holiDays.length > 0)
+                            Array.prototype.push.apply(nm.events, holiDays);
 
-                        // Excused Attendance Events
-                        let excusedAttendaceEvents = calendar.attendanceEventDays
-                            .filter(nid => nid.event.name.includes("Excused") && nid.date.getUTCFullYear() == dMonth.getUTCFullYear()
+                        // teacherOnlyDays
+                        let teacherOnlyDays = calendar.teacherOnlyDays
+                            .filter(nid => nid.date.getUTCFullYear() == dMonth.getUTCFullYear()
+                                && nid.date.getUTCMonth() == dMonth.getUTCMonth())
+                            .map(nid => {
+                                return {
+                                    date: nid.date,
+                                    attendanceEvent: {
+                                        id: 'teacherOnlyDays',
+                                        description: nid.event.name
+                                    },
+                                    comments: nid.event.description,
+                                    class: ctrl.getEventClass(nid.event.description),
+                                    eventTitle: nid.event.name,
+                                }
+                            });
+
+                        if (teacherOnlyDays.length > 0)
+                            Array.prototype.push.apply(nm.events, teacherOnlyDays);
+
+                        // attendance Event Days
+                        let attendanceEventDays = calendar.attendanceEventDays
+                            .filter(nid => nid.date.getUTCFullYear() == dMonth.getUTCFullYear()
                                 && nid.date.getUTCMonth() == dMonth.getUTCMonth())
                             .map(nid => {
                                 return {
@@ -207,48 +235,14 @@
                                         id: 4,
                                         description: nid.event.name
                                     },
-                                    comments: nid.event.description
+                                    comments: nid.event.description,
+                                    class: ctrl.getEventClass(nid.event.description),
+                                    eventTitle: nid.event.description
                                 }
                             });
 
-                        if (excusedAttendaceEvents.length > 0)
-                            Array.prototype.push.apply(nm.events, excusedAttendaceEvents);
-
-                        // Unexcused Attendance Events
-                        let unexcusedAttendaceEvents = calendar.attendanceEventDays
-                            .filter(nid => nid.event.name.includes("Unexcused") && nid.date.getUTCFullYear() == dMonth.getUTCFullYear()
-                                && nid.date.getUTCMonth() == dMonth.getUTCMonth())
-                            .map(nid => {
-                                return {
-                                    date: nid.date,
-                                    attendanceEvent: {
-                                        id: 8,
-                                        description: nid.event.name
-                                    },
-                                    comments: nid.event.description
-                                }
-                            });
-
-                        if (unexcusedAttendaceEvents.length > 0)
-                            Array.prototype.push.apply(nm.events, unexcusedAttendaceEvents);
-
-                        // Tardy Attendance Events
-                        let tardyAttendaceEvents = calendar.attendanceEventDays
-                            .filter(nid => nid.event.name.includes("Tardy") && nid.date.getUTCFullYear() == dMonth.getUTCFullYear()
-                                && nid.date.getUTCMonth() == dMonth.getUTCMonth())
-                            .map(nid => {
-                                return {
-                                    date: nid.date,
-                                    attendanceEvent: {
-                                        id: 10,
-                                        description: nid.event.name
-                                    },
-                                    comments: nid.event.description
-                                }
-                            });
-
-                        if (tardyAttendaceEvents.length > 0)
-                            Array.prototype.push.apply(nm.events, tardyAttendaceEvents);
+                        if (attendanceEventDays.length > 0)
+                            Array.prototype.push.apply(nm.events, attendanceEventDays);
 
                         nm.events = nm.events.sort((a, b) => {
                             return (a.date.getTime() > b.date.getTime())
@@ -287,7 +281,7 @@
                     api.students.getStudentAttendance(ctrl.currentStudent).then(function (data) {
 
                         ctrl.model.attendance = data;
-                        
+
                         ctrl.attendanceIndicatorCategories = [
                             {
                                 tooltip: "Unexcused Absences",
@@ -309,7 +303,7 @@
                             }
 
                         ];
-                       
+
                         ctrl.absentInterpretation = ctrl.findWorstAbsencePerformanceLevelInterpretation();
                     });
                     api.students.getStudentBehavior(ctrl.currentStudent).then(function (data) {
@@ -330,7 +324,7 @@
                         }
                         ctrl.behaviorIndicatorCategories.push(indicatorSuspensions);
                         ctrl.behaviorIndicatorCategories.push(indicatorReferrals);
-                       
+
                     });
                     api.students.getStudentCourseGrades(ctrl.currentStudent).then(function (data) {
                         ctrl.model.courseGrades = data;
@@ -402,7 +396,7 @@
                         //ctrl.accessSpeaking = ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Speaking'));
                         //ctrl.accessWriting = ctrl.accessAssessments.filter(x => x.reportingMethodCodeValue.includes('Writing'));
 
-                        
+
 
                         //ctrl.model.assessment.starAssessments[0].interpretation = ctrl.model.assessment.assessmentIndicators[1].interpretation;
                         //ctrl.model.assessment.starAssessments[1].interpretation = ctrl.model.assessment.assessmentIndicators[2].interpretation;
@@ -425,7 +419,7 @@
                             ctrl.starIndicatorCategories.push(indicator);
                             ctrl.starGeneralIndicator = ctrl.findWorstStarPerformanceLevelInterpretation();
                         });
-                        
+
                         if (ctrl.model.gradeLevel != 'First grade' && ctrl.model.gradeLevel != 'Second grade' && ctrl.model.gradeLevel != 'Kindergarten') {
 
                             for (let i = 0; i < ctrl.model.assessment.starAssessments.length; i++) {
@@ -436,15 +430,13 @@
                             }
 
                             for (let i = 0; i < ctrl.starIndicatorCategories.length; i++) {
-                                const starIndicatorIsNotNull = ctrl.starIndicatorCategories[i].textDisplay != null;
-                                if (starIndicatorIsNotNull) {
-                                    const isTextFound = ctrl.starIndicatorCategories[i].textDisplay.indexOf('STAR EL') >= 0;
-                                    if (isTextFound) {
-                                        ctrl.starIndicatorCategories.splice(i, 1);
-                                        break;
-                                    }
+                                if (ctrl.starIndicatorCategories[i].textDisplay.indexOf('STAR EL') >= 0) {
+                                    ctrl.starIndicatorCategories.splice(i, 1);
+                                    break;
                                 }
                             }
+
+
                         }
 
                     });

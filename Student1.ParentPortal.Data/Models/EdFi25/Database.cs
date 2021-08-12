@@ -6622,7 +6622,7 @@ namespace Student1.ParentPortal.Data.Models.EdFi25
         public System.DateTime CreateDate { get; set; } // CreateDate
         public System.DateTime LastModifiedDate { get; set; } // LastModifiedDate
         public System.Guid Id { get; set; } // Id
-
+        public string Discriminator { get; set; } // Discriminator (length: 128)
         // Reverse navigation
 
         /// <summary>

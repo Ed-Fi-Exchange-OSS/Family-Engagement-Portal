@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student1.ParentPortal.Web", "Student1.ParentPortal.Web\Student1.ParentPortal.Web.csproj", "{CC99D6E0-0C81-40ED-870B-89CFCAD6146A}"
 EndProject
@@ -19,6 +19,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student1.ParentPortal.Models", "Student1.ParentPortal.Models\Student1.ParentPortal.Models.csproj", "{CAECC2A8-96CD-4A7F-9085-ABC5A98FEEF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student1.ParentPortal.Resources.Azure", "Student1.ParentPortal.Resources.Azure\Student1.ParentPortal.Resources.Azure.csproj", "{E9AA4C1C-FCC4-4242-9B39-9CBE61ACF05D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACCD04A3-2C2C-4404-AD74-75816BB19B1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student1.ParentPortal.Data.Tests", "Student1.ParentPortal.Data.Tests\Student1.ParentPortal.Data.Tests.csproj", "{AF257D43-6FE6-479E-A9AD-9ADB8BA4399E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student1.ParentPortal.Resources.Tests", "Student1.ParentPortal.Resources.Tests\Student1.ParentPortal.Resources.Tests.csproj", "{49251607-A427-407D-915B-7A1E53F0CB1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,9 +56,21 @@ Global
 		{E9AA4C1C-FCC4-4242-9B39-9CBE61ACF05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9AA4C1C-FCC4-4242-9B39-9CBE61ACF05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9AA4C1C-FCC4-4242-9B39-9CBE61ACF05D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF257D43-6FE6-479E-A9AD-9ADB8BA4399E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF257D43-6FE6-479E-A9AD-9ADB8BA4399E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF257D43-6FE6-479E-A9AD-9ADB8BA4399E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF257D43-6FE6-479E-A9AD-9ADB8BA4399E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49251607-A427-407D-915B-7A1E53F0CB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49251607-A427-407D-915B-7A1E53F0CB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49251607-A427-407D-915B-7A1E53F0CB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49251607-A427-407D-915B-7A1E53F0CB1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF257D43-6FE6-479E-A9AD-9ADB8BA4399E} = {ACCD04A3-2C2C-4404-AD74-75816BB19B1D}
+		{49251607-A427-407D-915B-7A1E53F0CB1D} = {ACCD04A3-2C2C-4404-AD74-75816BB19B1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CDB75C9C-C06B-4DBF-8EA6-3E628201E401}
