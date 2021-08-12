@@ -72,7 +72,7 @@ We tried to make the setup and deploy of this web application as easy as possibl
           * 2ODSExtensions.sql
           * 3StudentDetails.sql
           * 4SampleDataDemo.sql (For Demo Only)
-  * If using Postgres: Open SQL Server Management Studio and run the following scripts in the order that they are listed to configure the Database.
+  * If using Postgres: Open pgAdmin or Psql and run the following scripts in the order that they are listed to configure the Database.
   	* Scripts are located at the following location "~/Student1.ParentPortal.Data/Scripts/edFi31/PostgreSQL/"
       	  * 1CreateParentPortalSupportingDatabaseSchema-PostgreSQL.sql
           * 2ODSExtensions-PostgreSQL.sql
