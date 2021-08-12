@@ -4,13 +4,10 @@ BEGIN
     /* working without alters o drops */
 
     CREATE SCHEMA IF NOT EXISTS Extension;
-    
-    ALTER TABLE Extension.StaffBiography ALTER COLUMN FK_StaffBiography_StaffUniqueId DROP NOT NULL;
-    
-    -- IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id) = 'extension' AND OBJECT_NAME(object_id) = 'StaffBiography')
-    --    DROP TABLE extension.StaffBiography;
-    
-    DROP TABLE IF EXISTS Extension.StaffBiography; -- throws issue
+
+    ALTER TABLE IF EXISTS Extension.StaffBiography DROP CONSTRAINT IF EXISTS FK_StaffBiography_StaffUniqueId;
+
+    DROP TABLE IF EXISTS Extension.StaffBiography;
 
     CREATE TABLE IF NOT EXISTS Extension.StaffBiography(
         StaffUniqueId VARCHAR(32) PRIMARY KEY,
@@ -23,7 +20,7 @@ BEGIN
         CONSTRAINT FK_StaffBiography_StaffUniqueId FOREIGN KEY (StaffUniqueId) REFERENCES edfi.Staff (StaffUniqueId)
     );
 
-    ALTER TABLE Extension.ParentBiography ALTER COLUMN FK_ParentBiography_ParentUniqueId DROP NOT NULL;
+    ALTER TABLE IF EXISTS Extension.ParentBiography DROP CONSTRAINT IF EXISTS FK_ParentBiography_ParentUniqueId;
 
     CREATE TABLE IF NOT EXISTS Extension.ParentBiography(
         ParentUniqueId VARCHAR(32) PRIMARY KEY,
@@ -36,9 +33,9 @@ BEGIN
         CONSTRAINT FK_ParentBiography_ParentUniqueId FOREIGN KEY (ParentUniqueId) REFERENCES edfi.Parent (ParentUniqueId)
     );
 
-    ALTER TABLE IF EXISTS Extension.StudentGraduationReadiness ALTER COLUMN FK_StudentGraduationReadiness_StudentAcademicRecord DROP NOT NULL; -- throws issue
+    ALTER TABLE IF EXISTS Extension.StudentGraduationReadiness DROP CONSTRAINT IF EXISTS FK_StudentGraduationReadiness_StudentAcademicRecord;
 
-    ALTER TABLE IF EXISTS Extension.StudentGraduationReadiness ALTER COLUMN FK_StudentGraduationReadiness_Student DROP NOT NULL; -- throws issue
+    ALTER TABLE IF EXISTS Extension.StudentGraduationReadiness DROP CONSTRAINT IF EXISTS FK_StudentGraduationReadiness_Student;
 
     DROP TABLE IF EXISTS Extension.StudentGraduationReadiness;
 
